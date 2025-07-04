@@ -61,13 +61,34 @@ export async function updateToken(){
 
 export async function syncUser(){
     const token = userDeviceStore.token
-    return OMSAuthsAPI.syncUser(token).then((res: LogInResParams): string => {
+    return OMSAuthsAPI.syncUser(token).then(async (res: LogInResParams): Promise<string> => {
         if (res.errno === '00000') {
             userInfoStore.setUserInfo(res)
-
             return res.errno
         } else {
-            return res.errno
+            if (res.errno === '99005') {
+                const refreshTokenResult = await updateToken().then()
+                if (refreshTokenResult === '00000') {
+                    const refreshToken = userDeviceStore.token
+                    return OMSAuthsAPI.syncUser(refreshToken).then((refreshRes: LogInResParams): string => {
+                        if (refreshRes.errno === '00000') {
+                            userInfoStore.setUserInfo(refreshRes)
+                        } else {
+                            userInfoStore.clearUserInfo()
+                            userDeviceStore.clearDeviceInfo()
+                        }
+                        return refreshRes.errno
+                    })
+                } else {
+                    userInfoStore.clearUserInfo()
+                    userDeviceStore.clearDeviceInfo()
+                    return refreshTokenResult
+                }
+            } else {
+                userInfoStore.clearUserInfo()
+                userDeviceStore.clearDeviceInfo()
+                return res.errno
+            }
         }
     })
 }

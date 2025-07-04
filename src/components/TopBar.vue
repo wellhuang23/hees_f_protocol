@@ -37,12 +37,20 @@ const onSyncUser = async () => { // Changed to async as validate returns a Promi
       message: '已將權限更新至最新狀態',
       type: 'success'
     })
+  } else if (errno === '02005') {
+    ElNotification({
+      title: '通知',
+      message: '訂閱已過期，請洽系統管理員',
+      type: 'error'
+    })
+    await router.push('/logIn')
   } else {
     ElNotification({
       title: '通知',
-      message: '更新權限時造成錯誤，請重新登入，並聯繫系統管理員',
+      message: '更新權限時造成錯誤，請洽系統管理員',
       type: 'error'
     })
+    await router.push('/logIn')
   }
 }
 </script>

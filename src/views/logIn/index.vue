@@ -100,6 +100,12 @@ const onSubmit = async () => { // Changed to async as validate returns a Promise
             message: '密碼輸入錯誤',
             type: 'error'
           })
+        } else if (result === '02005') {
+          ElNotification({
+            title: '通知',
+            message: '訂閱已過期，請洽系統管理員',
+            type: 'error'
+          })
         } else {
           ElNotification({
             title: '通知',
