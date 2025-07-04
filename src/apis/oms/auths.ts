@@ -108,6 +108,41 @@ class OMSAuthsAPI {
             }
         });
     }
+
+    // API for Syncing User Latest Basic Information & Permission Codes
+    async syncUser(token: string): Promise<GeneralResParam> {
+        return request<any, any>({
+            url: AUTH_API + '/user/sync',
+            method: 'GET',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            }
+        }).then((response): LogInResParams => {
+            if (response.data.errno === '00000') {
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                    token: response.data.token,
+                    deviceNo: response.data.device_no,
+                    groupId: convertToNumber(response.data.group_id),
+                    comId: convertToNumber(response.data.com_id),
+                    userId: convertToNumber(response.data.user_id),
+                    userNo: response.data.user_no,
+                    userStName: response.data.user_st_name,
+                    userType: convertToNumber(response.data.user_type),
+                    per1000: response.data.per_1000 || [],
+                    per0100: response.data.per_0100 || [],
+                    per0010: response.data.per_0010 || [],
+                    per0001: response.data.per_0001 || [],
+                }
+            } else {
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                }
+            }
+        });
+    }
 }
 
 export default new OMSAuthsAPI();

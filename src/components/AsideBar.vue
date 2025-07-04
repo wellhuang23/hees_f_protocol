@@ -6,7 +6,9 @@
   <div class="asides">
     <h2>
       <!--        <img src="@/assets/hees_logo_white_nb.png" alt="Logo" class="hees-logo">-->
-      HEEs
+      <router-link to="/main/dashboard" class="white-link">
+        HEEs
+      </router-link>
     </h2>
     <el-menu
         router
@@ -53,6 +55,12 @@
     text-align: center;
     height: 70px;
     line-height: 70px;
+    color: white;
+
+    .white-link {
+      color: white;
+      text-decoration: none;
+    }
   }
 }
 </style>
