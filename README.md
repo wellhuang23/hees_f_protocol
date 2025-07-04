@@ -6,6 +6,16 @@ User Protocol Website of HEEs
 
 This Repository is a Frontend Development Repository for HEEs.
 
+## Repository Require
+
+- Node : v24.3.0
+- Vite : 7.0.0
+- Vue : 3.5.17
+- Vue-Router : 4.5.1
+- Element-Plus : 2.10.2
+- Pinia : 3.0.3
+- Axios : 1.10.0
+
 ## Repository Structure
 ```
 hees_f_protocol
@@ -16,6 +26,7 @@ hees_f_protocol
     ├── components                      # General Components
     ├── global                          # Global
     ├── interfaces                      # Interface Objects
+    ├── lang                            # Language Setting for i18n
     ├── router
     ├── services                        # Functions in Project
     ├── stores                          # Data Status Management

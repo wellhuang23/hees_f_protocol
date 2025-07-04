@@ -58,7 +58,6 @@ const onSyncUser = async () => { // Changed to async as validate returns a Promi
 <template>
   <div class="top">
     <el-menu
-        router
         :ellipsis="false"
         mode="horizontal"
         background-color="#142334"
@@ -71,8 +70,8 @@ const onSyncUser = async () => { // Changed to async as validate returns a Promi
           <span>{{ userInfoStore.userStName }}</span>
         </template>
         <el-menu-item index="1_1">個人資訊</el-menu-item>
-        <el-menu-item @click="onSyncUser">權限同步</el-menu-item>
-        <el-menu-item @click="onLogOut">登出</el-menu-item>
+        <el-menu-item index="1_2" @click="onSyncUser">權限同步</el-menu-item>
+        <el-menu-item index="1_3" @click="onLogOut">登出</el-menu-item>
       </el-sub-menu>
     </el-menu>
   </div>
