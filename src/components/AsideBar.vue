@@ -6,7 +6,9 @@
   <div class="asides">
     <h2>
       <!--        <img src="@/assets/hees_logo_white_nb.png" alt="Logo" class="hees-logo">-->
-      HEEs
+      <router-link to="/main/dashboard" class="white-link">
+        HEEs
+      </router-link>
     </h2>
     <el-menu
         router
@@ -18,7 +20,7 @@
     >
       <el-sub-menu index="1">
         <template #title>
-          <el-icon><Setting /></el-icon>
+          <img src="/src/assets/icons/solid/gear.svg" alt="system" class="system" style="width: 20px; height: 20px; margin-right: 8px;"/>
           <span>系統管理</span>
         </template>
         <el-menu-item index="/main/sys/perControl">系統權限</el-menu-item>
@@ -53,6 +55,16 @@
     text-align: center;
     height: 70px;
     line-height: 70px;
+    color: white;
+
+    .white-link {
+      color: white;
+      text-decoration: none;
+    }
+  }
+
+  .system {
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
   }
 }
 </style>

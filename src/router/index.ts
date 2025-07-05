@@ -53,7 +53,7 @@ const routes = [
                 path: 'sys/perControl',
                 meta: {
                     title: '系統權限',
-                    perCodes: ['func-001-0100', 'func-002-0100']
+                    perCodes: ['sys-001-0100', 'sys-002-0100']
                 },
                 component: () => import('@/views/sysControl/SysPerControl.vue'),
             },
@@ -61,7 +61,7 @@ const routes = [
                 path: 'sys/logs',
                 meta: {
                     title: '系統日誌',
-                    perCodes: ['func-005-0100']
+                    perCodes: ['sys-003-0100']
                 },
                 component: () => import('@/views/sysControl/SysLogs.vue'),
             },
@@ -69,7 +69,7 @@ const routes = [
                 path: 'sys/subs',
                 meta: {
                     title: '訂閱管理',
-                    perCodes: ['func-008-0100']
+                    perCodes: ['sys-005-0100']
                 },
                 component: () => import('@/views/sysControl/Subscriptions.vue'),
             },
@@ -77,7 +77,7 @@ const routes = [
                 path: 'sys/cusServices',
                 meta: {
                     title: '客戶服務',
-                    perCodes: ['func-009-0100']
+                    perCodes: ['sys-007-0100']
                 },
                 component: () => import('@/views/sysControl/CusServices.vue'),
             },
@@ -85,7 +85,7 @@ const routes = [
                 path: 'sys/updateCal',
                 meta: {
                     title: '日曆更新',
-                    perCodes: ['func-006-0100']
+                    perCodes: ['sys-004-0100']
                 },
                 component: () => import('@/views/sysControl/UpdateCal.vue'),
             },
@@ -93,7 +93,7 @@ const routes = [
                 path: 'sys/notifications',
                 meta: {
                     title: '系統公告',
-                    perCodes: ['func-007-0100']
+                    perCodes: ['sys-006-0100']
                 },
                 component: () => import('@/views/sysControl/SysNotifications.vue'),
             }
