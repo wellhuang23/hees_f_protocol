@@ -52,5 +52,21 @@
     "year": "2025",
     "owner": "Well Huang",
     "content": "All Rights Reserved."
+  },
+  "errorPage": {
+    "401": {
+      "title": "No Permission",
+      "content1": "You don't have Permission to review this page for now. ",
+      "content2": "If you need to review content in this page, ",
+      "content3": "Please contact Manager in your company.",
+      "content4": "Thank You."
+    },
+    "404": {
+      "title": "Page Not Exits",
+      "content1": "The Page you try to review is not exist.",
+      "content2": "If you need to review content in this page, ",
+      "content3": "Please contact System Manager.",
+      "content4": "Thank You."
+    }
   }
 }

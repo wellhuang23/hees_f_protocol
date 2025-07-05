@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 </script>
 
 <template>
@@ -10,16 +12,16 @@
     <div class="bullshit">
       <div class="bullshit__oops">OOPS!</div>
       <div class="bullshit__headline">
-        權限不足
+        {{ t('errorPage.401.title') }}
       </div>
       <div class="bullshit__info">
-        您目前沒有瀏覽該頁面的權限，
+        {{ t('errorPage.401.content1') }}
         <br>
-        若有相關需求，
+        {{ t('errorPage.401.content2') }}
         <br>
-        請洽貴單位相關人員，
+        {{ t('errorPage.401.content3') }}
         <br>
-        謝謝。
+        {{ t('errorPage.401.content4') }}
       </div>
     </div>
   </div>
