@@ -4,6 +4,7 @@ import type {
   FormInstance,
   FormRules
 } from 'element-plus'
+import BottomSign from '@/components/BottomSign.vue'
 
 // Import icons
 import { OfficeBuilding, User, Lock } from '@element-plus/icons-vue'
@@ -202,6 +203,9 @@ const onSubmit = async () => { // Changed to async as validate returns a Promise
       </el-form-item>
     </el-form>
   </div>
+  <div>
+    <bottom-sign />
+  </div>
 </template>
 
 <style scoped lang="scss">
@@ -220,14 +224,7 @@ const onSubmit = async () => { // Changed to async as validate returns a Promise
     right: 10px;
     .el-menu {
       border-bottom: none;
-      .globe {
         filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
-      }
-      .hide-arrow .el-sub-menu__icon-arrow {
-        display: none;
-      }
-      .el-sub-menu.is-active .el-sub-menu__title {
-        border-bottom-color: transparent !important;
       }
     }
   }
@@ -248,5 +245,4 @@ const onSubmit = async () => { // Changed to async as validate returns a Promise
       justify-content: center;
     }
   }
-}
 </style>
