@@ -31,5 +31,20 @@
     "updatePerSuccessMsg": "已將權限更新至最新狀態",
     "updatePerErrorMsg": "更新權限時造成錯誤，請洽系統管理員",
     "systemErrorMsg": "系統錯誤，請洽系統管理員"
+  },
+  "pageTitle": {
+    "logIn": "登入",
+    "notExist": "頁面不存在",
+    "noPermission": "權限不足",
+    "dashboard": "儀表板",
+    "sysPermissions": "系統權限",
+    "sysLogs": "系統日誌",
+    "subManage": "訂閱管理",
+    "cusServices": "客戶服務",
+    "calendarUpdate": "更新行事曆",
+    "sysNotification": "系統公告"
+  },
+  "asideBarCategory": {
+    "sysManage": "系統管理"
   }
 }

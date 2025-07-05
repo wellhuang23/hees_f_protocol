@@ -1,0 +1,50 @@
+[
+  {
+    "path": "sys/perControl",
+    "meta": {
+      "title": "pageTitle.sysPermissions",
+      "perCodes": ["sys-001-0100", "sys-002-0100"]
+    },
+    "component": "sysControl/SysPerControl"
+  },
+  {
+    "path": "sys/logs",
+    "meta": {
+      "title": "pageTitle.sysLogs",
+      "perCodes": ["sys-003-0100"]
+    },
+    "component": "sysControl/SysLogs"
+  },
+  {
+    "path": "sys/subs",
+    "meta": {
+      "title": "pageTitle.subManage",
+      "perCodes": ["sys-005-0100"]
+    },
+    "component": "sysControl/Subscriptions"
+  },
+  {
+    "path": "sys/cusServices",
+    "meta": {
+      "title": "pageTitle.cusServices",
+      "perCodes": ["sys-007-0100"]
+    },
+    "component": "sysControl/CusServices"
+  },
+  {
+    "path": "sys/updateCal",
+    "meta": {
+      "title": "pageTitle.calendarUpdate",
+      "perCodes": ["sys-004-0100"]
+    },
+    "component": "sysControl/UpdateCal"
+  },
+  {
+    "path": "sys/notifications",
+    "meta": {
+      "title": "pageTitle.sysNotification",
+      "perCodes": ["sys-006-0100"]
+    },
+    "component": "sysControl/SysNotifications"
+  }
+]

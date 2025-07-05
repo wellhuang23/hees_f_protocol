@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { usePersonalSetting } from '@/stores'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 
 const personalSetting = usePersonalSetting()
 </script>
@@ -24,14 +27,14 @@ const personalSetting = usePersonalSetting()
       <el-sub-menu index="1">
         <template #title>
           <img src="/src/assets/icons/solid/gear.svg" alt="system" class="system" style="width: 20px; height: 20px; margin-right: 8px;"/>
-          <span v-if="!personalSetting.isAsideCollapsed">系統管理</span>
+          <span v-if="!personalSetting.isAsideCollapsed">{{ t('asideBarCategory.sysManage') }}</span>
         </template>
-        <el-menu-item index="/main/sys/perControl">系統權限</el-menu-item>
-        <el-menu-item index="/main/sys/logs">系統日誌</el-menu-item>
-        <el-menu-item index="/main/sys/subs">訂閱管理</el-menu-item>
-        <el-menu-item index="/main/sys/cusServices">客戶服務</el-menu-item>
-        <el-menu-item index="/main/sys/updateCal">日曆更新</el-menu-item>
-        <el-menu-item index="/main/sys/notifications">系統公告</el-menu-item>
+        <el-menu-item index="/main/sys/perControl">{{ t('pageTitle.sysPermissions') }}</el-menu-item>
+        <el-menu-item index="/main/sys/logs">{{ t('pageTitle.sysLogs') }}</el-menu-item>
+        <el-menu-item index="/main/sys/subs">{{ t('pageTitle.subManage') }}</el-menu-item>
+        <el-menu-item index="/main/sys/cusServices">{{ t('pageTitle.cusServices') }}</el-menu-item>
+        <el-menu-item index="/main/sys/updateCal">{{ t('pageTitle.calendarUpdate') }}</el-menu-item>
+        <el-menu-item index="/main/sys/notifications">{{ t('pageTitle.sysNotification') }}</el-menu-item>
       </el-sub-menu>
     </el-menu>
   </div>
