@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { usePersonalSetting } from '@/stores'
 import { useI18n } from 'vue-i18n'
+import { getAsideBarItems } from '@/services/general/AsideBarItems'
 
 const { t } = useI18n()
 
 const personalSetting = usePersonalSetting()
+const asideBarItems = getAsideBarItems()
 </script>
 
 <template>
@@ -24,17 +26,14 @@ const personalSetting = usePersonalSetting()
         default-active="2"
         text-color="#fff"
     >
-      <el-sub-menu index="1">
+      <el-sub-menu v-for="item in asideBarItems" :index="item.index">
         <template #title>
-          <img src="/src/assets/icons/solid/gear.svg" alt="system" class="system" style="width: 20px; height: 20px; margin-right: 8px;"/>
-          <span v-if="!personalSetting.isAsideCollapsed">{{ t('asideBarCategory.sysManage') }}</span>
+          <img :src=item.icon alt="asideBarIcon" class="asideBarIcon" style="width: 20px; height: 20px; margin-right: 8px;"/>
+          <span v-if="!personalSetting.isAsideCollapsed">{{ t(item.title) }}</span>
         </template>
-        <el-menu-item index="/main/sys/perControl">{{ t('pageTitle.sysPermissions') }}</el-menu-item>
-        <el-menu-item index="/main/sys/logs">{{ t('pageTitle.sysLogs') }}</el-menu-item>
-        <el-menu-item index="/main/sys/subs">{{ t('pageTitle.subManage') }}</el-menu-item>
-        <el-menu-item index="/main/sys/cusServices">{{ t('pageTitle.cusServices') }}</el-menu-item>
-        <el-menu-item index="/main/sys/updateCal">{{ t('pageTitle.calendarUpdate') }}</el-menu-item>
-        <el-menu-item index="/main/sys/notifications">{{ t('pageTitle.sysNotification') }}</el-menu-item>
+        <el-menu-item v-for="subItem in item.children" :index="subItem.index">
+          {{ t(subItem.title) }}
+        </el-menu-item>
       </el-sub-menu>
     </el-menu>
   </div>
@@ -73,7 +72,7 @@ const personalSetting = usePersonalSetting()
     }
   }
 
-  .system {
+  .asideBarIcon {
     filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
   }
 }

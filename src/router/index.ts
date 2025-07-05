@@ -13,7 +13,7 @@ import routerItems from '@/router/commons/asideBarItems.json'
 import { localCache } from '@/utils/storages.ts'
 import { USER_INFO } from '@/global/contstants.ts'
 
-const per_0100 = localCache.getCache(USER_INFO)?.per0100 ?? [] as string[]
+const per0100 = localCache.getCache(USER_INFO)?.per0100 ?? [] as string[]
 const modules = import.meta.glob('/src/views/**/**.vue')
 
 function loadRouteItems() {
@@ -22,7 +22,7 @@ function loadRouteItems() {
     for (const item of routerItems) {
         for (const perCode of item.meta.perCodes) {
             if (!appendedPath.includes(item.path)) {
-                if (per_0100.includes(perCode)) {
+                if (per0100.includes(perCode)) {
                     routes.push({
                         path: item.path,
                         meta: {
@@ -86,7 +86,6 @@ const routes = [
         ]
     },
 ]
-console.log(routes)
 
 const  router = createRouter({
     history: createWebHashHistory(),
