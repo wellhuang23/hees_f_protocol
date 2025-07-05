@@ -46,5 +46,11 @@
   },
   "asideBarCategory": {
     "sysManage": "系統管理"
+  },
+  "copyright": {
+    "title": "版權所有",
+    "year": "2025",
+    "owner": "Well Huang",
+    "content": "保留所有權利."
   }
 }

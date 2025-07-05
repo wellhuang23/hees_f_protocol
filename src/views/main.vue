@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import AsideBar from '@/components/AsideBar.vue'
 import TopBar from '@/components/TopBar.vue'
+import BottomSign from '@/components/BottomSign.vue'
 </script>
 
 <template>
@@ -11,6 +12,7 @@ import TopBar from '@/components/TopBar.vue'
       <div class="content">
         <router-view></router-view>
       </div>
+      <bottom-sign />
     </div>
   </div>
 </template>

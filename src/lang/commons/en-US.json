@@ -46,5 +46,11 @@
   },
   "asideBarCategory": {
     "sysManage": "System Manage"
+  },
+  "copyright": {
+    "title": "Copyright",
+    "year": "2025",
+    "owner": "Well Huang",
+    "content": "All Rights Reserved."
   }
 }
