@@ -20,7 +20,7 @@ import BottomSign from '@/components/BottomSign.vue'
 <style scoped lang="scss">
 .main {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
 
   display: flex;
 
@@ -31,6 +31,7 @@ import BottomSign from '@/components/BottomSign.vue'
 
     .content {
       flex: 1;
+      margin: 20px;
     }
   }
 }
