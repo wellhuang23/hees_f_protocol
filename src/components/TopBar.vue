@@ -5,12 +5,13 @@ import {
 } from '@/services'
 import { ElNotification } from 'element-plus'
 import {useRouter} from 'vue-router'
-import { useUserInfoStore } from '@/stores'
+import { useUserInfoStore, usePersonalSetting } from '@/stores'
 import { changeLanguage } from '@/services/general/changeLang'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
 const userInfoStore = useUserInfoStore()
+const personalSetting = usePersonalSetting()
 
 const router = useRouter()
 
@@ -64,10 +65,17 @@ const onSyncUser = async () => { // Changed to async as validate returns a Promi
     await router.push('/logIn')
   }
 }
+
+const onToggleAside = () => {
+  personalSetting.toggleAside()
+}
 </script>
 
 <template>
   <div class="top">
+    <div class="left-menu">
+      <img src="/src/assets/icons/solid/bars.svg" alt="menu" class="menu-icon" @click="onToggleAside"/>
+    </div>
     <el-menu
         :ellipsis="false"
         mode="horizontal"
@@ -103,7 +111,18 @@ const onSyncUser = async () => { // Changed to async as validate returns a Promi
   color: white;
 
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
+
+  .left-menu {
+    padding-left: 20px;
+    .menu-icon {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
+    }
+  }
 
   .el-menu {
     border-bottom: none;

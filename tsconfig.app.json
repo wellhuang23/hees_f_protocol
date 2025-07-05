@@ -13,7 +13,8 @@
     "baseUrl": ".", // This is important for path mapping to work
     "paths": {
       "@/*": ["./src/*"] // This maps @/ to ./src/
-    }
+    },
+    "types": ["vite/client"]
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "src/types/**/*.ts"]
 }
