@@ -1,17 +1,20 @@
 <script setup lang="ts">
+import { usePersonalSetting } from '@/stores'
 
+const personalSetting = usePersonalSetting()
 </script>
 
 <template>
-  <div class="asides">
+  <div class="asides" :class="{ 'collapsed': personalSetting.isAsideCollapsed }">
     <h2>
-      <!--        <img src="@/assets/hees_logo_white_nb.png" alt="Logo" class="hees-logo">-->
       <router-link to="/main/dashboard" class="white-link">
-        HEEs
+        <span v-if="!personalSetting.isAsideCollapsed">HEEs</span>
+        <img v-else src="/src/assets/logos/hees_logo_white_nb.png" alt="Logo" class="hees-logo-collapsed" />
       </router-link>
     </h2>
     <el-menu
         router
+        :collapse="personalSetting.isAsideCollapsed"
         active-text-color="#ffd04b"
         background-color="#142334"
         class="el-menu-vertical-demo"
@@ -21,7 +24,7 @@
       <el-sub-menu index="1">
         <template #title>
           <img src="/src/assets/icons/solid/gear.svg" alt="system" class="system" style="width: 20px; height: 20px; margin-right: 8px;"/>
-          <span>系統管理</span>
+          <span v-if="!personalSetting.isAsideCollapsed">系統管理</span>
         </template>
         <el-menu-item index="/main/sys/perControl">系統權限</el-menu-item>
         <el-menu-item index="/main/sys/logs">系統日誌</el-menu-item>
@@ -39,16 +42,15 @@
   width: 200px;
   background-color: #142334;
   color: white;
+  transition: width 0.3s;
+
+  &.collapsed {
+    width: 64px;
+  }
 
   .el-menu {
     border-right: none;
   }
-
-  //.hees-logo {
-  //  height: 1em;
-  //  vertical-align: middle;
-  //  margin-right: 5px;
-  //}
 
   h2 {
     font-size: 30px;
@@ -60,6 +62,11 @@
     .white-link {
       color: white;
       text-decoration: none;
+    }
+
+    .hees-logo-collapsed {
+      width: 40px;
+      vertical-align: middle;
     }
   }
 
