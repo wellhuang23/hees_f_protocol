@@ -8,6 +8,39 @@ import {
     checkLogIn,
     checkPermission
 } from '@/utils/permissions'
+import { i18n } from '@/lang'
+import routerItems from '@/router/commons/asideBarItems.json'
+import { localCache } from '@/utils/storages.ts'
+import { USER_INFO } from '@/global/contstants.ts'
+
+const per0100 = localCache.getCache(USER_INFO)?.per0100 ?? [] as string[]
+const modules = import.meta.glob('/src/views/**/**.vue')
+
+function loadRouteItems() {
+    let routes = []
+    let appendedPath: string[] = []
+    for (const item of routerItems) {
+        for (const perCode of item.meta.perCodes) {
+            if (!appendedPath.includes(item.path)) {
+                if (per0100.includes(perCode)) {
+                    routes.push({
+                        path: item.path,
+                        meta: {
+                            title: item.meta.title,
+                            perCodes: item.meta.perCodes,
+                        },
+                        component: modules[`/src/views/${item.component}.vue`]
+                    })
+
+                    appendedPath.push(item.path)
+                }
+            }
+        }
+    }
+    return routes
+}
+
+const dRoutes = loadRouteItems()
 
 const routes = [
     {
@@ -17,7 +50,7 @@ const routes = [
     {
         path: '/logIn',
         meta: {
-            title: '登入'
+            title: 'pageTitle.logIn'
         },
         component: () => import('@/views/logIn/index.vue')
     },
@@ -31,72 +64,25 @@ const routes = [
             {
                 path: '404',
                 meta: {
-                    title: '頁面不存在'
+                    title: 'pageTitle.notExist'
                 },
                 component: () => import('@/views/excepts/NotFound.vue'),
             },
             {
                 path: '401',
                 meta: {
-                    title: '權限不足'
+                    title: 'pageTitle.noPermission'
                 },
                 component: () => import('@/views/excepts/NoPermission.vue'),
             },
             {
                 path: 'dashboard',
                 meta: {
-                    title: '儀表板'
+                    title: 'pageTitle.dashboard'
                 },
                 component: () => import('@/views/dashboard/index.vue'),
             },
-            {
-                path: 'sys/perControl',
-                meta: {
-                    title: '系統權限',
-                    perCodes: ['sys-001-0100', 'sys-002-0100']
-                },
-                component: () => import('@/views/sysControl/SysPerControl.vue'),
-            },
-            {
-                path: 'sys/logs',
-                meta: {
-                    title: '系統日誌',
-                    perCodes: ['sys-003-0100']
-                },
-                component: () => import('@/views/sysControl/SysLogs.vue'),
-            },
-            {
-                path: 'sys/subs',
-                meta: {
-                    title: '訂閱管理',
-                    perCodes: ['sys-005-0100']
-                },
-                component: () => import('@/views/sysControl/Subscriptions.vue'),
-            },
-            {
-                path: 'sys/cusServices',
-                meta: {
-                    title: '客戶服務',
-                    perCodes: ['sys-007-0100']
-                },
-                component: () => import('@/views/sysControl/CusServices.vue'),
-            },
-            {
-                path: 'sys/updateCal',
-                meta: {
-                    title: '日曆更新',
-                    perCodes: ['sys-004-0100']
-                },
-                component: () => import('@/views/sysControl/UpdateCal.vue'),
-            },
-            {
-                path: 'sys/notifications',
-                meta: {
-                    title: '系統公告',
-                    perCodes: ['sys-006-0100']
-                },
-                component: () => import('@/views/sysControl/SysNotifications.vue'),
-            }
+            ...dRoutes
         ]
     },
 ]
@@ -122,7 +108,8 @@ router.beforeEach((to, _from, next) => {
 
 router.afterEach((to) => {
     const website = 'HEEs'
-    document.title = website + ' | ' + to.meta.title
+    const titleKey = to.meta.title as string
+    document.title = website + ' | ' + i18n.global.t(titleKey)
     NProgress.done()
 })
 

@@ -31,5 +31,20 @@
     "updatePerSuccessMsg": "Update Permissions to the Latest Already",
     "updatePerErrorMsg": "Error Occur when Update Permissions, Please Contact System Manager",
     "systemErrorMsg": "System Error, Please Contact System Manager"
+  },
+  "pageTitle": {
+    "logIn": "Log In",
+    "notExist": "Page Not Exist",
+    "noPermission": "No Permission",
+    "dashboard": "Dashboard",
+    "sysPermissions": "System Permission",
+    "sysLogs": "System Logs",
+    "subManage": "Subscriptions",
+    "cusServices": "Customer Services",
+    "calendarUpdate": "Update Calendar",
+    "sysNotification": "System Notification"
+  },
+  "asideBarCategory": {
+    "sysManage": "System Manage"
   }
 }

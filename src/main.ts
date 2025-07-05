@@ -9,8 +9,8 @@ import { i18n } from '@/lang'
 
 const app = createApp(App)
 app.use(pinia)
-app.use(router)
 app.use(i18n)
+app.use(router)
 
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component)
