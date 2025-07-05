@@ -20,7 +20,7 @@
     >
       <el-sub-menu index="1">
         <template #title>
-          <el-icon><Setting /></el-icon>
+          <img src="/src/assets/icons/solid/gear.svg" alt="system" class="system" style="width: 20px; height: 20px; margin-right: 8px;"/>
           <span>系統管理</span>
         </template>
         <el-menu-item index="/main/sys/perControl">系統權限</el-menu-item>
@@ -61,6 +61,10 @@
       color: white;
       text-decoration: none;
     }
+  }
+
+  .system {
+    filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
   }
 }
 </style>

@@ -1,0 +1,35 @@
+{
+  "logInPage": {
+    "title": "Welcome to HEEs",
+    "hintComTaxNo": "Please Input Company Tax No.",
+    "hintUser": "Please Input Log In Email",
+    "hintPwd": "Please Input Log In Password",
+    "submitBtn": "Log In",
+    "errHintComTaxNo": "Please Input Correct Company Tax No. (8 Digits)",
+    "errHintUser": "Please Input correct Email (例如: your@example.com)",
+    "errHintPwd": "Please Input Correct Password"
+  },
+  "topBar": {
+    "profile": "Profile",
+    "syncPermission": "Sync Permissions",
+    "logOut": "Log Out",
+    "language": "English"
+  },
+  "notice": {
+    "noticeTitle": "Notice",
+    "logInSuccessMsg": "Log In Successfully",
+    "logInNoUserMsg": "Found No User by This Email",
+    "logInWrongPwdMsg": "Wrong Password",
+    "logInSubExpireMsg": "Subscription is Expire, Please Contact System Manager",
+    "logInValidateErrorMsg": "Error Occur when Validating, Please Contact System Manager",
+    "welcomeMsg": "Welcome Back to HEEs",
+    "registerExpireMsg": "Device Register Expire, Please Log In Again",
+    "subExpireMsg": "Subscription Expire, Please Contact System Manger",
+    "initDataErrorMsg": "Some Error Occur in Log In Data, Please Log In Again",
+    "logOutSuccessMsg": "Log Out Successfully",
+    "logOutErrorMsg": "Error Occur when Log Out, Empty Local Data Already, Please Contact System Manager",
+    "updatePerSuccessMsg": "Update Permissions to the Latest Already",
+    "updatePerErrorMsg": "Error Occur when Update Permissions, Please Contact System Manager",
+    "systemErrorMsg": "System Error, Please Contact System Manager"
+  }
+}
