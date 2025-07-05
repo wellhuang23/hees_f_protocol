@@ -9,7 +9,7 @@ import {
     DEVICE_INFO
 } from '@/global/contstants'
 
-const userUserInfoStore = defineStore(USER_INFO, {
+const useUserInfoStore = defineStore(USER_INFO, {
     state:() => ({
         groupId: localCache.getCache(USER_INFO)?.groupId ?? -1,
         comId: localCache.getCache(USER_INFO)?.comId ?? -1,
@@ -17,7 +17,10 @@ const userUserInfoStore = defineStore(USER_INFO, {
         userNo: localCache.getCache(USER_INFO)?.userNo ?? '',
         userStName: localCache.getCache(USER_INFO)?.userStName ?? '',
         userType: localCache.getCache(USER_INFO)?.userType ?? -1,
+        per1000: localCache.getCache(USER_INFO)?.per0100 ?? [] as string[],
         per0100: localCache.getCache(USER_INFO)?.per0100 ?? [] as string[],
+        per0010: localCache.getCache(USER_INFO)?.per0100 ?? [] as string[],
+        per0001: localCache.getCache(USER_INFO)?.per0100 ?? [] as string[],
     }),
     actions: {
         setUserInfo(logInfo: LogInResParams) {
@@ -27,7 +30,10 @@ const userUserInfoStore = defineStore(USER_INFO, {
             this.userNo = logInfo.userNo ?? ''
             this.userStName = logInfo.userStName ?? ''
             this.userType = logInfo.userType ?? -1
+            this.per1000 = logInfo.per1000 ?? []
             this.per0100 = logInfo.per0100 ?? []
+            this.per0010 = logInfo.per0010 ?? []
+            this.per0001 = logInfo.per0001 ?? []
 
             localCache.setCache(USER_INFO, {
                 groupId: logInfo.groupId ?? -1,
@@ -36,7 +42,10 @@ const userUserInfoStore = defineStore(USER_INFO, {
                 userNo: logInfo.userNo ?? '',
                 userStName: logInfo.userStName ?? '',
                 userType: logInfo.userType ?? -1,
+                per1000: logInfo.per1000 ?? [],
                 per0100: logInfo.per0100 ?? [],
+                per0010: logInfo.per0010 ?? [],
+                per0001: logInfo.per0001 ?? [],
             })
         },
 
@@ -47,7 +56,10 @@ const userUserInfoStore = defineStore(USER_INFO, {
             this.userNo = ''
             this.userStName = ''
             this.userType = -1
+            this.per1000 = []
             this.per0100 = []
+            this.per0010 = []
+            this.per0001 = []
 
             localCache.removeCache(USER_INFO)
         }
@@ -88,4 +100,4 @@ const useDeviceInfoStore = defineStore(DEVICE_INFO, {
     }
 })
 
-export { userUserInfoStore, useDeviceInfoStore }
+export { useUserInfoStore, useDeviceInfoStore }

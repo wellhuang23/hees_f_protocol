@@ -6,12 +6,12 @@ import type {
     GenTokenResParams
 } from '@/interfaces'
 import {
-    userUserInfoStore,
+    useUserInfoStore,
     useDeviceInfoStore
 } from '@/stores';
 
 
-const userInfoStore = userUserInfoStore()
+const userInfoStore = useUserInfoStore()
 const userDeviceStore = useDeviceInfoStore()
 
 export async function logInAction(logInInfo: LogInReqParams){
@@ -55,6 +55,40 @@ export async function updateToken(){
             userDeviceStore.setToken(res)
 
             return res.errno
+        }
+    })
+}
+
+export async function syncUser(){
+    const token = userDeviceStore.token
+    return OMSAuthsAPI.syncUser(token).then(async (res: LogInResParams): Promise<string> => {
+        if (res.errno === '00000') {
+            userInfoStore.setUserInfo(res)
+            return res.errno
+        } else {
+            if (res.errno === '99005') {
+                const refreshTokenResult = await updateToken().then()
+                if (refreshTokenResult === '00000') {
+                    const refreshToken = userDeviceStore.token
+                    return OMSAuthsAPI.syncUser(refreshToken).then((refreshRes: LogInResParams): string => {
+                        if (refreshRes.errno === '00000') {
+                            userInfoStore.setUserInfo(refreshRes)
+                        } else {
+                            userInfoStore.clearUserInfo()
+                            userDeviceStore.clearDeviceInfo()
+                        }
+                        return refreshRes.errno
+                    })
+                } else {
+                    userInfoStore.clearUserInfo()
+                    userDeviceStore.clearDeviceInfo()
+                    return refreshTokenResult
+                }
+            } else {
+                userInfoStore.clearUserInfo()
+                userDeviceStore.clearDeviceInfo()
+                return res.errno
+            }
         }
     })
 }
