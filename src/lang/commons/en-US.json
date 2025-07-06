@@ -89,6 +89,13 @@
     "notSelected": "Not Selected",
     "status": "Status"
   },
+  "sysLogs": {
+    "system": "Select Server",
+    "orgManage": "Organization Manage(OMS)",
+    "startTime": "Start Time",
+    "endTime": "End Time",
+    "searchButton": "Search"
+  },
   "general": {
     "confirm": "Confirm",
     "cancel": "Cancel"

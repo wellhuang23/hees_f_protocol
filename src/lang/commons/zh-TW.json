@@ -89,6 +89,13 @@
     "notSelected": "未選擇",
     "status": "狀態"
   },
+  "sysLogs": {
+    "system": "選擇服務器",
+    "orgManage": "組織管理(OMS)",
+    "startTime": "開始時間",
+    "endTime": "結束時間",
+    "searchButton": "查詢"
+  },
   "general": {
     "confirm": "確認",
     "cancel": "取消"
