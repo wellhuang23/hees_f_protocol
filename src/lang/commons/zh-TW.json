@@ -68,5 +68,16 @@
       "content3": "請洽系統管理員，",
       "content4": "謝謝。"
     }
+  },
+  "sysPerControl": {
+    "roles": {
+      "roles": "角色權限",
+      "roleName": "角色名稱",
+      "roleDesc": "角色描述",
+      "permissionHint": " 的權限：",
+      "perName": "權限名稱",
+      "perDesc": "權限描述",
+      "perCode": "權限代號"
+    }
   }
 }

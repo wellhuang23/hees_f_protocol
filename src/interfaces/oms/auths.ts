@@ -53,3 +53,48 @@ export interface GenTokenResParams extends GeneralResParam {
     // Token
     token?: string;
 }
+
+export interface SysPermission {
+    // System Permission ID
+    sysPerId?: number;
+
+    // System Permission No.
+    sysPerNo: string;
+
+    // System Permission Name
+    sysPerName: string;
+
+    // System Permission Description
+    sysPerDesc: string;
+
+    // System Permission Name in English
+    sysPerEngName: string;
+
+    // System Permission Description in English
+    sysPerEngDesc: string;
+}
+
+export interface SysRole {
+    // System Role ID
+    sysRoleId?: number;
+
+    // System Role Name
+    sysRoleName: string;
+
+    // System Role Description
+    sysRoleDesc: string;
+
+    // System Role Name in English
+    sysRoleEngName: string;
+
+    // System Role Description in English
+    sysRoleEngDesc: string;
+
+    // System Permission in the Role
+    sysPermissions: SysPermission[];
+}
+
+export interface GetSysRoleResParams extends GeneralResParam {
+    // System Roles
+    sysRoles: SysRole[];
+}

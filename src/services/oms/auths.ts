@@ -3,16 +3,19 @@ import type {
     GeneralResParam,
     LogInReqParams,
     LogInResParams,
-    GenTokenResParams
+    GenTokenResParams,
+    GetSysRoleResParams
 } from '@/interfaces'
 import {
     useUserInfoStore,
-    useDeviceInfoStore
-} from '@/stores';
+    useDeviceInfoStore,
+    useSysPerRoleStore
+} from '@/stores'
 
 
 const userInfoStore = useUserInfoStore()
 const userDeviceStore = useDeviceInfoStore()
+const sysPerRoleStore = useSysPerRoleStore()
 
 export async function logInAction(logInInfo: LogInReqParams){
     return OMSAuthsAPI.logIn(logInInfo).then((res: LogInResParams): string => {
@@ -91,4 +94,25 @@ export async function syncUser(){
             }
         }
     })
+}
+
+export async function getSysRole() {
+    const token = userDeviceStore.token
+    if (sysPerRoleStore.sysRoles.length === 0) {
+        return OMSAuthsAPI.getSysPerRoles(token).then(async (res: GetSysRoleResParams)=> {
+            if (res.errno === '00000') {
+                sysPerRoleStore.setSysRole(res.sysRoles)
+            } else {
+                if (res.errno === '99005') {
+                    const refreshTokenResult = await updateToken().then()
+                    if (refreshTokenResult === '00000') {
+                        const refreshToken = userDeviceStore.token
+                        return OMSAuthsAPI.getSysPerRoles(refreshToken).then((refreshRes: GetSysRoleResParams) => {
+                            sysPerRoleStore.setSysRole(refreshRes.sysRoles)
+                        })
+                    }
+                }
+            }
+        })
+    }
 }

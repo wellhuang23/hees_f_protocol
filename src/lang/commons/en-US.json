@@ -68,5 +68,16 @@
       "content3": "Please contact System Manager.",
       "content4": "Thank You."
     }
+  },
+  "sysPerControl": {
+    "roles": {
+      "roles": "Roles",
+      "roleName": "Role Name",
+      "roleDesc": "Role Description",
+      "permissionHint": "Permissions of ",
+      "perName": "Permission Name",
+      "perDesc": "Permission Description",
+      "perCode": "Permission Code"
+    }
   }
 }

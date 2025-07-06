@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import AsideBar from '@/components/AsideBar.vue'
-import TopBar from '@/components/TopBar.vue'
-import BottomSign from '@/components/BottomSign.vue'
+import AsideBar from '@/components/general/AsideBar.vue'
+import TopBar from '@/components/general/TopBar.vue'
+import BottomSign from '@/components/general/BottomSign.vue'
 </script>
 
 <template>

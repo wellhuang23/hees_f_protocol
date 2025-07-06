@@ -8,21 +8,23 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    AsideBar: typeof import('./src/components/AsideBar.vue')['default']
-    BottomSign: typeof import('./src/components/BottomSign.vue')['default']
+    AsideBar: typeof import('./src/components/general/AsideBar.vue')['default']
+    BottomSign: typeof import('./src/components/general/BottomSign.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
-    ElCol: typeof import('element-plus/es')['ElCol']
     ElForm: typeof import('element-plus/es')['ElForm']
     ElFormItem: typeof import('element-plus/es')['ElFormItem']
     ElIcon: typeof import('element-plus/es')['ElIcon']
     ElInput: typeof import('element-plus/es')['ElInput']
     ElMenu: typeof import('element-plus/es')['ElMenu']
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
-    ElMenuItemGroup: typeof import('element-plus/es')['ElMenuItemGroup']
-    ElRow: typeof import('element-plus/es')['ElRow']
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
+    ElTable: typeof import('element-plus/es')['ElTable']
+    ElTableColumn: typeof import('element-plus/es')['ElTableColumn']
+    ElTabPane: typeof import('element-plus/es')['ElTabPane']
+    ElTabs: typeof import('element-plus/es')['ElTabs']
+    Roles: typeof import('./src/components/sysControl/Roles.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    TopBar: typeof import('./src/components/TopBar.vue')['default']
+    TopBar: typeof import('./src/components/general/TopBar.vue')['default']
   }
 }

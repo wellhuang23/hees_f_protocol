@@ -1,12 +1,15 @@
 import { defineStore } from 'pinia'
 import { localCache } from '@/utils/storages'
+import { sessionCache } from '@/utils/storages'
 import type {
     LogInResParams,
-    GenTokenResParams
+    GenTokenResParams,
+    SysRole,
 } from '@/interfaces'
 import {
     USER_INFO,
-    DEVICE_INFO
+    DEVICE_INFO,
+    SYS_PER_ROLE
 } from '@/global/contstants'
 
 const useUserInfoStore = defineStore(USER_INFO, {
@@ -100,4 +103,34 @@ const useDeviceInfoStore = defineStore(DEVICE_INFO, {
     }
 })
 
-export { useUserInfoStore, useDeviceInfoStore }
+const useSysPerRoleStore = defineStore(SYS_PER_ROLE, {
+    state:() => ({
+        sysRoles: sessionCache.getCache(SYS_PER_ROLE)?.sysRoles ?? [] as SysRole[],
+    }),
+    actions: {
+        setSysRole(sysRoles: SysRole[]) {
+            const data: SysRole[] = []
+            for (const sysRole of sysRoles) {
+                data.push({
+                    sysRoleId: sysRole.sysRoleId,
+                    sysRoleName: sysRole.sysRoleName,
+                    sysRoleDesc: sysRole.sysRoleDesc,
+                    sysRoleEngName: sysRole.sysRoleEngName,
+                    sysRoleEngDesc: sysRole.sysRoleEngDesc,
+                    sysPermissions: sysRole.sysPermissions
+                })
+            }
+            this.sysRoles = data
+
+            sessionCache.setCache(SYS_PER_ROLE, {
+                sysRoles: data
+            })
+        }
+    }
+})
+
+export {
+    useUserInfoStore,
+    useDeviceInfoStore,
+    useSysPerRoleStore
+}
