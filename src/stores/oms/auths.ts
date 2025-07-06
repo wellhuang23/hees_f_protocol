@@ -1,12 +1,16 @@
 import { defineStore } from 'pinia'
 import { localCache } from '@/utils/storages'
+import { sessionCache } from '@/utils/storages'
 import type {
     LogInResParams,
-    GenTokenResParams
+    GenTokenResParams,
+    SysRole,
+    SysRoleUsers, SysRoleUser,
 } from '@/interfaces'
 import {
     USER_INFO,
-    DEVICE_INFO
+    DEVICE_INFO,
+    SYS_PER_ROLE
 } from '@/global/contstants'
 
 const useUserInfoStore = defineStore(USER_INFO, {
@@ -17,10 +21,10 @@ const useUserInfoStore = defineStore(USER_INFO, {
         userNo: localCache.getCache(USER_INFO)?.userNo ?? '',
         userStName: localCache.getCache(USER_INFO)?.userStName ?? '',
         userType: localCache.getCache(USER_INFO)?.userType ?? -1,
-        per1000: localCache.getCache(USER_INFO)?.per0100 ?? [] as string[],
+        per1000: localCache.getCache(USER_INFO)?.per1000 ?? [] as string[],
         per0100: localCache.getCache(USER_INFO)?.per0100 ?? [] as string[],
-        per0010: localCache.getCache(USER_INFO)?.per0100 ?? [] as string[],
-        per0001: localCache.getCache(USER_INFO)?.per0100 ?? [] as string[],
+        per0010: localCache.getCache(USER_INFO)?.per0010 ?? [] as string[],
+        per0001: localCache.getCache(USER_INFO)?.per0001 ?? [] as string[],
     }),
     actions: {
         setUserInfo(logInfo: LogInResParams) {
@@ -100,4 +104,75 @@ const useDeviceInfoStore = defineStore(DEVICE_INFO, {
     }
 })
 
-export { useUserInfoStore, useDeviceInfoStore }
+const useSysPerRoleStore = defineStore(SYS_PER_ROLE, {
+    state:() => ({
+        sysRoles: sessionCache.getCache(SYS_PER_ROLE)?.sysRoles ?? [] as SysRole[],
+        sysRoleUsers: sessionCache.getCache(SYS_PER_ROLE)?.sysRoleUsers ?? [] as SysRoleUsers[],
+        sysUsers: sessionCache.getCache(SYS_PER_ROLE)?.sysUsers ?? [] as SysRoleUser[],
+    }),
+    actions: {
+        setSysRole(sysRoles: SysRole[]) {
+            const data: SysRole[] = []
+            for (const sysRole of sysRoles) {
+                data.push({
+                    sysRoleId: sysRole.sysRoleId,
+                    sysRoleName: sysRole.sysRoleName,
+                    sysRoleDesc: sysRole.sysRoleDesc,
+                    sysRoleEngName: sysRole.sysRoleEngName,
+                    sysRoleEngDesc: sysRole.sysRoleEngDesc,
+                    sysPermissions: sysRole.sysPermissions
+                })
+            }
+            this.sysRoles = data
+
+            sessionCache.setCache(SYS_PER_ROLE, {
+                sysRoles: data,
+                sysRoleUsers: this.sysRoleUsers,
+                sysUsers: this.sysUsers,
+            })
+        },
+
+        setSysRoleUsers(sysRoleUsers: SysRoleUsers[]) {
+            const data: SysRoleUsers[] = []
+            for (const sysRoleUser of sysRoleUsers) {
+                data.push({
+                    sysRoleId: sysRoleUser.sysRoleId,
+                    sysRoleName: sysRoleUser.sysRoleName,
+                    sysRoleEngName: sysRoleUser.sysRoleEngName,
+                    sysRoleUsers: sysRoleUser.sysRoleUsers
+                })
+            }
+            this.sysRoleUsers = data
+
+            sessionCache.setCache(SYS_PER_ROLE, {
+                sysRoles: this.sysRoles,
+                sysRoleUsers: data,
+                sysUsers: this.sysUsers,
+            })
+        },
+
+        setSysUsers(sysUsers: SysRoleUser[]) {
+            const data: SysRoleUser[] = []
+            for (const sysUser of sysUsers) {
+                data.push({
+                    userId: sysUser.userId,
+                    userNo: sysUser.userNo,
+                    userStName: sysUser.userStName,
+                })
+            }
+            this.sysUsers = data
+
+            sessionCache.setCache(SYS_PER_ROLE, {
+                sysRoles: this.sysRoles,
+                sysRoleUsers: this.sysRoleUsers,
+                sysUsers: data
+            })
+        }
+    }
+})
+
+export {
+    useUserInfoStore,
+    useDeviceInfoStore,
+    useSysPerRoleStore
+}

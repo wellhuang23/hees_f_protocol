@@ -30,6 +30,8 @@
     "logOutErrorMsg": "Error Occur when Log Out, Empty Local Data Already, Please Contact System Manager",
     "updatePerSuccessMsg": "Update Permissions to the Latest Already",
     "updatePerErrorMsg": "Error Occur when Update Permissions, Please Contact System Manager",
+    "updateSysPerRoleUsersSuccessMsg": "Update Users in System Permission Role Successfully",
+    "updateSysPerRoleUsersFailMsg": "Update Users in System Permission Role Fail, Please Contact System Manager",
     "systemErrorMsg": "System Error, Please Contact System Manager"
   },
   "pageTitle": {
@@ -52,5 +54,43 @@
     "year": "2025",
     "owner": "Well Huang",
     "content": "All Rights Reserved."
+  },
+  "errorPage": {
+    "401": {
+      "title": "No Permission",
+      "content1": "You don't have Permission to review this page for now. ",
+      "content2": "If you need to review content in this page, ",
+      "content3": "Please contact Manager in your company.",
+      "content4": "Thank You."
+    },
+    "404": {
+      "title": "Page Not Exits",
+      "content1": "The Page you try to review is not exist.",
+      "content2": "If you need to review content in this page, ",
+      "content3": "Please contact System Manager.",
+      "content4": "Thank You."
+    }
+  },
+  "sysPerControl": {
+    "roles": "Roles",
+    "roleName": "Role Name",
+    "roleDesc": "Role Description",
+    "permissionHint": "Permissions of ",
+    "perName": "Permission Name",
+    "perDesc": "Permission Description",
+    "perCode": "Permission Code",
+    "users": "Users",
+    "viewUsers": "View Users",
+    "userList": "User List",
+    "userNo": "User No.",
+    "userStName": "User Name",
+    "editMembers": "Edit Members",
+    "selected": "Selected",
+    "notSelected": "Not Selected",
+    "status": "Status"
+  },
+  "general": {
+    "confirm": "Confirm",
+    "cancel": "Cancel"
   }
 }

@@ -4,8 +4,7 @@ import type {
   FormInstance,
   FormRules
 } from 'element-plus'
-import BottomSign from '@/components/BottomSign.vue'
-
+import BottomSign from '@/components/general/BottomSign.vue'
 // Import icons
 import { OfficeBuilding, User, Lock } from '@element-plus/icons-vue'
 import { logInAction } from '@/services'

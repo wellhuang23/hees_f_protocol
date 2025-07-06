@@ -3,7 +3,7 @@
     "path": "sys/perControl",
     "meta": {
       "title": "pageTitle.sysPermissions",
-      "perCodes": ["sys-001-0100", "sys-002-0100"]
+      "perCodes": ["sys-001-0100"]
     },
     "component": "sysControl/SysPerControl"
   },

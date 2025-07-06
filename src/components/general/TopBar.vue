@@ -6,7 +6,7 @@ import {
 import { ElNotification } from 'element-plus'
 import {useRouter} from 'vue-router'
 import { useUserInfoStore, usePersonalSetting } from '@/stores'
-import { changeLanguage } from '@/services/general/changeLang'
+import { changeLanguage } from '@/services/general/changeLang.ts'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
