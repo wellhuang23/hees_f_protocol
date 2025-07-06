@@ -25,7 +25,7 @@ class OMSBasesAPI {
     }
 
     // API for Getting Logs in OMS Services
-    async getLogs(data: GetLogsReqParams): Promise<GetLogsResParams> {
+    async getLogs(data: GetLogsReqParams, token: string): Promise<GetLogsResParams> {
         const params = {
             'log_start_time': data.logStartTime,
             'log_end_time': data.logEndTime,
@@ -34,6 +34,9 @@ class OMSBasesAPI {
         return request<any, any>({
             url: BASE_API + '/logs/get',
             method: 'GET',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
             params: params
         }).then((response): GetLogsResParams => {
             if (response.data.errno === '00000') {
