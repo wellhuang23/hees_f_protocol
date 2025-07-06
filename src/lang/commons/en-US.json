@@ -70,14 +70,12 @@
     }
   },
   "sysPerControl": {
-    "roles": {
-      "roles": "Roles",
-      "roleName": "Role Name",
-      "roleDesc": "Role Description",
-      "permissionHint": "Permissions of ",
-      "perName": "Permission Name",
-      "perDesc": "Permission Description",
-      "perCode": "Permission Code"
-    }
+    "roles": "Roles",
+    "roleName": "Role Name",
+    "roleDesc": "Role Description",
+    "permissionHint": "Permissions of ",
+    "perName": "Permission Name",
+    "perDesc": "Permission Description",
+    "perCode": "Permission Code"
   }
 }
