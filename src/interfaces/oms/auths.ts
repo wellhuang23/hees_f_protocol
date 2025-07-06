@@ -103,6 +103,9 @@ export interface SysRoleUser {
     // User ID in the System Permission Role
     userId?: number;
 
+    // User No. in the System Permission Role
+    userNo: string;
+
     // User Short Name in theSystem Permission Role
     userStName: string;
 }

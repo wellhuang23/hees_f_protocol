@@ -21,10 +21,10 @@ const useUserInfoStore = defineStore(USER_INFO, {
         userNo: localCache.getCache(USER_INFO)?.userNo ?? '',
         userStName: localCache.getCache(USER_INFO)?.userStName ?? '',
         userType: localCache.getCache(USER_INFO)?.userType ?? -1,
-        per1000: localCache.getCache(USER_INFO)?.per0100 ?? [] as string[],
+        per1000: localCache.getCache(USER_INFO)?.per1000 ?? [] as string[],
         per0100: localCache.getCache(USER_INFO)?.per0100 ?? [] as string[],
-        per0010: localCache.getCache(USER_INFO)?.per0100 ?? [] as string[],
-        per0001: localCache.getCache(USER_INFO)?.per0100 ?? [] as string[],
+        per0010: localCache.getCache(USER_INFO)?.per0010 ?? [] as string[],
+        per0001: localCache.getCache(USER_INFO)?.per0001 ?? [] as string[],
     }),
     actions: {
         setUserInfo(logInfo: LogInResParams) {

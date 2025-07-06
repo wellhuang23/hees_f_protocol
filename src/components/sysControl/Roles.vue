@@ -1,16 +1,26 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useSysPerRoleStore } from '@/stores'
-import type { SysRole } from '@/interfaces'
+import { useSysPerRoleStore, useUserInfoStore } from '@/stores'
+import type { SysRole, SysRoleUser, SysRoleUsers } from '@/interfaces'
 import { useI18n } from 'vue-i18n'
+import RoleUsers from './RoleUsers.vue'
 
 const { t, locale } = useI18n()
 
 const sysPerRoleStore = useSysPerRoleStore()
-const { sysRoles } = storeToRefs(sysPerRoleStore)
+const { sysRoles, sysRoleUsers } = storeToRefs(sysPerRoleStore)
+const userInfoStore = useUserInfoStore()
+const { per0100, per0010 } = storeToRefs(userInfoStore)
+
+const canViewUsers = computed(() => per0100.value.includes('sys-002-0100'))
+const canEditUsers = computed(() => per0010.value.includes('sys-002-0010'))
+const usersColumnWidth = computed(() => (locale.value === 'en-US' ? 150 : 120))
 
 const expandedRowKeys = ref<string[]>([])
+const drawerVisible = ref(false)
+const selectedRoleUsers = ref<SysRoleUser[]>([])
+const selectedRoleName = ref('')
 
 // Get unique key for each row
 const getRowKey = (row: SysRole) => {
@@ -27,6 +37,13 @@ const handleRowClick = (row: SysRole) => {
     // Otherwise, expand the clicked row.
     expandedRowKeys.value = [rowKey]
   }
+}
+
+const showUsers = (row: SysRole) => {
+  const roleUsers = sysRoleUsers.value.find((role: SysRoleUsers) => role.sysRoleId === row.sysRoleId)
+  selectedRoleUsers.value = roleUsers ? roleUsers.sysRoleUsers : []
+  selectedRoleName.value = locale.value === 'zh-TW' ? row.sysRoleName : row.sysRoleEngName
+  drawerVisible.value = true
 }
 
 const tableColumns = computed(() => {
@@ -105,7 +122,20 @@ const getRoleName = (row: any) => {
         </span>
       </template>
     </el-table-column>
+    <el-table-column v-if="canViewUsers" :label="t('sysPerControl.users')" :width="usersColumnWidth">
+      <template #default="scope">
+        <el-button @click.stop="showUsers(scope.row)" type="primary" link>
+          {{ t('sysPerControl.viewUsers') }}
+        </el-button>
+      </template>
+    </el-table-column>
   </el-table>
+  <role-users
+    v-model="drawerVisible"
+    :role-name="selectedRoleName"
+    :users="selectedRoleUsers"
+    :can-edit="canEditUsers"
+  />
 </template>
 
 <style scoped lang="scss">

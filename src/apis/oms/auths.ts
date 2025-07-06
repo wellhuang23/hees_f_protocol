@@ -215,6 +215,7 @@ class OMSAuthsAPI {
                     for (const user of role.users) {
                         sysRoleUsers.push({
                             userId: convertToNumber(user.user_id),
+                            userNo: user.user_no,
                             userStName: user.user_st_name,
                         })
                     }

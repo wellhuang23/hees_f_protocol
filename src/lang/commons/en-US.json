@@ -76,6 +76,12 @@
     "permissionHint": "Permissions of ",
     "perName": "Permission Name",
     "perDesc": "Permission Description",
-    "perCode": "Permission Code"
+    "perCode": "Permission Code",
+    "users": "Members",
+    "viewUsers": "View Members",
+    "userList": "Member List",
+    "userNo": "User No.",
+    "userStName": "User Name",
+    "editMembers": "Edit Members"
   }
 }
