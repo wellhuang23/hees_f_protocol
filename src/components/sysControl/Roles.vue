@@ -19,8 +19,7 @@ const usersColumnWidth = computed(() => (locale.value === 'en-US' ? 150 : 120))
 
 const expandedRowKeys = ref<string[]>([])
 const drawerVisible = ref(false)
-const selectedRoleUsers = ref<SysRoleUser[]>([])
-const selectedRoleName = ref('')
+const selectedRole = ref<SysRole | null>(null)
 
 // Get unique key for each row
 const getRowKey = (row: SysRole) => {
@@ -40,9 +39,7 @@ const handleRowClick = (row: SysRole) => {
 }
 
 const showUsers = (row: SysRole) => {
-  const roleUsers = sysRoleUsers.value.find((role: SysRoleUsers) => role.sysRoleId === row.sysRoleId)
-  selectedRoleUsers.value = roleUsers ? roleUsers.sysRoleUsers : []
-  selectedRoleName.value = locale.value === 'zh-TW' ? row.sysRoleName : row.sysRoleEngName
+  selectedRole.value = row
   drawerVisible.value = true
 }
 
@@ -131,9 +128,9 @@ const getRoleName = (row: any) => {
     </el-table-column>
   </el-table>
   <role-users
+    v-if="selectedRole"
     v-model="drawerVisible"
-    :role-name="selectedRoleName"
-    :users="selectedRoleUsers"
+    :role="selectedRole"
     :can-edit="canEditUsers"
   />
 </template>

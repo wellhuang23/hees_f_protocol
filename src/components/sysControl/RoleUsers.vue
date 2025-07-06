@@ -1,20 +1,38 @@
 <script setup lang="ts">
+import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import type { SysRoleUser } from '@/interfaces'
+import type { SysRole, SysRoleUser } from '@/interfaces'
+import AsignUsers from './AssignUsers.vue'
+import { useSysPerRoleStore } from '@/stores'
+import { storeToRefs } from 'pinia'
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
 
-defineProps<{
+const props = defineProps<{
   modelValue: boolean
-  roleName: string
-  users: SysRoleUser[]
+  role: SysRole
   canEdit: boolean
 }>()
 
 const emit = defineEmits(['update:modelValue'])
 
+const sysPerRoleStore = useSysPerRoleStore()
+const { sysRoleUsers } = storeToRefs(sysPerRoleStore)
+
+const dialogVisible = ref(false)
+
+const roleName = computed(() => (locale.value === 'zh-TW' ? props.role.sysRoleName : props.role.sysRoleEngName))
+const users = computed(() => {
+  const roleUsersData = sysRoleUsers.value.find(role => role.sysRoleId === props.role.sysRoleId)
+  return roleUsersData ? roleUsersData.sysRoleUsers : []
+})
+
 const handleClose = () => {
   emit('update:modelValue', false)
+}
+
+const openDialog = () => {
+  dialogVisible.value = true
 }
 </script>
 
@@ -34,10 +52,15 @@ const handleClose = () => {
         </el-table>
       </div>
       <div v-if="canEdit" class="footer-button">
-        <el-button type="primary">{{ t('sysPerControl.editMembers') }}</el-button>
+        <el-button type="primary" @click="openDialog">{{ t('sysPerControl.editMembers') }}</el-button>
       </div>
     </div>
   </el-drawer>
+  <asign-users
+    v-model="dialogVisible"
+    :role="role"
+    :users="users"
+  />
 </template>
 
 <style scoped lang="scss">

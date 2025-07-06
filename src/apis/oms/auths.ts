@@ -10,6 +10,8 @@ import type {
     GetSysRoleUsersResParams,
     SysRoleUser,
     SysRoleUsers,
+    GetSysUsersResParams,
+    AssignUserSysPerRoleReqParams,
 } from '@/interfaces'
 import request from '@/utils/requests'
 import { convertToNumber } from '@/utils/conNumber'
@@ -199,7 +201,7 @@ class OMSAuthsAPI {
         });
     }
 
-    // API for Getting System Permission Roles
+    // API for Getting Users in  System Permission Roles
     async getSysPerRoleUsers(token: string): Promise<GetSysRoleUsersResParams> {
         return request<any, any>({
             url: AUTH_API + '/sys/per/role/users',
@@ -239,6 +241,62 @@ class OMSAuthsAPI {
                     desc: response.data.desc,
                     sysRoleUsers: []
                 }
+            }
+        });
+    }
+
+    // API for Getting Users in  System Permission Roles
+    async getSysUsers(token: string): Promise<GetSysUsersResParams> {
+        return request<any, any>({
+            url: AUTH_API + '/sys/users',
+            method: 'GET',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            }
+        }).then((response): GetSysUsersResParams => {
+            if (response.data.errno === '00000') {
+                const users: SysRoleUser[] = []
+                for (const user of response.data.data) {
+                    users.push({
+                        userId: convertToNumber(user.user_id),
+                        userNo: user.user_no,
+                        userStName: user.user_st_name,
+                    })
+                }
+
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                    sysUsers: users
+                }
+            } else {
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                    sysUsers: []
+                }
+            }
+        });
+    }
+
+    // API for Assigning User to System Permission Role
+    async assignUserSysPerRole(data: AssignUserSysPerRoleReqParams, token: string): Promise<GeneralResParam> {
+        const params = {
+            'def_role_id': data.sysRoleId,
+            'user_ids': data.userIds,
+        }
+
+        return request<any, any>({
+            url: AUTH_API + '/sys/per/role/assign',
+            method: 'POST',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            data: params,
+        }).then((response): GeneralResParam => {
+            return {
+                errno: response.data.errno,
+                desc: response.data.desc,
             }
         });
     }

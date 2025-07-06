@@ -9,8 +9,11 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     AsideBar: typeof import('./src/components/general/AsideBar.vue')['default']
+    AsignUsers: typeof import('./src/components/sysControl/AsignUsers.vue')['default']
+    AssignUsers: typeof import('./src/components/sysControl/AssignUsers.vue')['default']
     BottomSign: typeof import('./src/components/general/BottomSign.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElDialog: typeof import('element-plus/es')['ElDialog']
     ElDrawer: typeof import('element-plus/es')['ElDrawer']
     ElForm: typeof import('element-plus/es')['ElForm']
     ElFormItem: typeof import('element-plus/es')['ElFormItem']

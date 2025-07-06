@@ -2,12 +2,18 @@
 import Roles from '@/components/sysControl/Roles.vue'
 import { onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
-import { getSysRole, getSysRoleUsers } from '@/services'
+import {
+  getSysRole,
+  getSysRoleUsers,
+  getSysUsers,
+} from '@/services'
 import { useSysPerRoleStore } from '@/stores'
+import RotateIcon from '@/assets/icons/solid/rotate.svg'
 
 const sysPerRoleStore = useSysPerRoleStore()
 const { sysRoles } = storeToRefs( sysPerRoleStore )
 const { sysRoleUsers } = storeToRefs( sysPerRoleStore )
+const { sysUsers } = storeToRefs( sysPerRoleStore )
 
 onMounted(async () => {
   if (sysRoles.value.length === 0) {
@@ -16,16 +22,44 @@ onMounted(async () => {
   if (sysRoleUsers.value.length === 0) {
     await getSysRoleUsers();
   }
+
+  if (sysUsers.value.length === 0) {
+    await getSysUsers();
+  }
 })
+
+const handleRefresh = async () => {
+  await getSysRole()
+  await getSysRoleUsers()
+  await getSysUsers()
+  location.reload()
+}
 </script>
 
 <template>
   <div class="sys_per_control">
+    <div class="refresh-button-container">
+      <el-button class="refresh-button" @click="handleRefresh">
+        <img :src="RotateIcon" alt="Refresh" style="width: 1em; height: 1em;" />
+      </el-button>
+    </div>
     <roles />
   </div>
 </template>
 
 <style scoped lang="scss">
+.sys_per_control {
+  /* No longer relative positioning needed here for button */
+}
 
+.refresh-button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px; /* Add some space below the button */
+}
+
+.refresh-button {
+  /* No absolute positioning */
+}
 </style>
 

@@ -6,10 +6,13 @@ import type {
 export interface LogInReqParams {
     // Company Tax No.
     comTaxNo: string;
+
     // User
     user: string;
+
     // Password
     pwd: string;
+
     // Device Type
     deviceType: number;
 }
@@ -18,26 +21,37 @@ export interface LogInReqParams {
 export interface LogInResParams extends GeneralResParam {
     // Token
     token?: string;
+
     // Device No.
     deviceNo?: string;
+
     // Group ID
     groupId?: number;
+
     // Company ID
     comId?: number;
+
     // User ID
     userId?: number;
+
     // User No.
     userNo?: string;
+
     // User Short Name
     userStName?: string;
+
     // User Type
     userType?: number;
+
     // Create Permission Codes
     per1000?: string[];
+
     // Read Permission Codes
     per0100?: string[];
+
     // Update Permission Codes
     per0010?: string[];
+
     // Delete Permission Codes
     per0001?: string[];
 }
@@ -94,6 +108,7 @@ export interface SysRole {
     sysPermissions: SysPermission[];
 }
 
+// Get System Permission Roles with Permissions
 export interface GetSysRoleResParams extends GeneralResParam {
     // System Roles
     sysRoles: SysRole[];
@@ -124,7 +139,23 @@ export interface SysRoleUsers {
     sysRoleUsers: SysRoleUser[];
 }
 
+// Get System Users in System Permission Roles
 export interface GetSysRoleUsersResParams extends GeneralResParam {
     // System Roles
     sysRoleUsers: SysRoleUsers[];
+}
+
+// Get System User Response Parameters
+export interface GetSysUsersResParams extends GeneralResParam {
+    // Users in HEEs Development Organization
+    sysUsers: SysRoleUser[];
+}
+
+// Assign User to System Permission Role Request Parameters
+export interface AssignUserSysPerRoleReqParams {
+    // System Permission ID
+    sysRoleId: number;
+
+    // User ID List
+    userIds: number[];
 }

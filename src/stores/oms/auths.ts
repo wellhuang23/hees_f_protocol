@@ -5,7 +5,7 @@ import type {
     LogInResParams,
     GenTokenResParams,
     SysRole,
-    SysRoleUsers,
+    SysRoleUsers, SysRoleUser,
 } from '@/interfaces'
 import {
     USER_INFO,
@@ -108,6 +108,7 @@ const useSysPerRoleStore = defineStore(SYS_PER_ROLE, {
     state:() => ({
         sysRoles: sessionCache.getCache(SYS_PER_ROLE)?.sysRoles ?? [] as SysRole[],
         sysRoleUsers: sessionCache.getCache(SYS_PER_ROLE)?.sysRoleUsers ?? [] as SysRoleUsers[],
+        sysUsers: sessionCache.getCache(SYS_PER_ROLE)?.sysUsers ?? [] as SysRoleUser[],
     }),
     actions: {
         setSysRole(sysRoles: SysRole[]) {
@@ -126,7 +127,8 @@ const useSysPerRoleStore = defineStore(SYS_PER_ROLE, {
 
             sessionCache.setCache(SYS_PER_ROLE, {
                 sysRoles: data,
-                sysRoleUsers: this.sysRoleUsers
+                sysRoleUsers: this.sysRoleUsers,
+                sysUsers: this.sysUsers,
             })
         },
 
@@ -144,7 +146,26 @@ const useSysPerRoleStore = defineStore(SYS_PER_ROLE, {
 
             sessionCache.setCache(SYS_PER_ROLE, {
                 sysRoles: this.sysRoles,
-                sysRoleUsers: data
+                sysRoleUsers: data,
+                sysUsers: this.sysUsers,
+            })
+        },
+
+        setSysUsers(sysUsers: SysRoleUser[]) {
+            const data: SysRoleUser[] = []
+            for (const sysUser of sysUsers) {
+                data.push({
+                    userId: sysUser.userId,
+                    userNo: sysUser.userNo,
+                    userStName: sysUser.userStName,
+                })
+            }
+            this.sysUsers = data
+
+            sessionCache.setCache(SYS_PER_ROLE, {
+                sysRoles: this.sysRoles,
+                sysRoleUsers: this.sysRoleUsers,
+                sysUsers: data
             })
         }
     }

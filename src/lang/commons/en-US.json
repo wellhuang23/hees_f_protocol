@@ -30,6 +30,8 @@
     "logOutErrorMsg": "Error Occur when Log Out, Empty Local Data Already, Please Contact System Manager",
     "updatePerSuccessMsg": "Update Permissions to the Latest Already",
     "updatePerErrorMsg": "Error Occur when Update Permissions, Please Contact System Manager",
+    "updateSysPerRoleUsersSuccessMsg": "Update Users in System Permission Role Successfully",
+    "updateSysPerRoleUsersFailMsg": "Update Users in System Permission Role Fail, Please Contact System Manager",
     "systemErrorMsg": "System Error, Please Contact System Manager"
   },
   "pageTitle": {
@@ -77,11 +79,18 @@
     "perName": "Permission Name",
     "perDesc": "Permission Description",
     "perCode": "Permission Code",
-    "users": "Members",
-    "viewUsers": "View Members",
-    "userList": "Member List",
+    "users": "Users",
+    "viewUsers": "View Users",
+    "userList": "User List",
     "userNo": "User No.",
     "userStName": "User Name",
-    "editMembers": "Edit Members"
+    "editMembers": "Edit Members",
+    "selected": "Selected",
+    "notSelected": "Not Selected",
+    "status": "Status"
+  },
+  "general": {
+    "confirm": "Confirm",
+    "cancel": "Cancel"
   }
 }
