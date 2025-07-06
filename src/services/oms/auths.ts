@@ -3,16 +3,22 @@ import type {
     GeneralResParam,
     LogInReqParams,
     LogInResParams,
-    GenTokenResParams
+    GenTokenResParams,
+    GetSysRoleResParams,
+    GetSysRoleUsersResParams,
+    GetSysUsersResParams,
+    AssignUserSysPerRoleReqParams,
 } from '@/interfaces'
 import {
     useUserInfoStore,
-    useDeviceInfoStore
-} from '@/stores';
+    useDeviceInfoStore,
+    useSysPerRoleStore
+} from '@/stores'
 
 
 const userInfoStore = useUserInfoStore()
 const userDeviceStore = useDeviceInfoStore()
+const sysPerRoleStore = useSysPerRoleStore()
 
 export async function logInAction(logInInfo: LogInReqParams){
     return OMSAuthsAPI.logIn(logInInfo).then((res: LogInResParams): string => {
@@ -90,5 +96,84 @@ export async function syncUser(){
                 return res.errno
             }
         }
+    })
+}
+
+export async function getSysRole() {
+    const token = userDeviceStore.token
+    return OMSAuthsAPI.getSysPerRoles(token).then(async (res: GetSysRoleResParams)=> {
+        if (res.errno === '00000') {
+            sysPerRoleStore.setSysRole(res.sysRoles)
+        } else {
+            if (res.errno === '99005') {
+                const refreshTokenResult = await updateToken().then()
+                if (refreshTokenResult === '00000') {
+                    const refreshToken = userDeviceStore.token
+                    return OMSAuthsAPI.getSysPerRoles(refreshToken).then((refreshRes: GetSysRoleResParams) => {
+                        sysPerRoleStore.setSysRole(refreshRes.sysRoles)
+                    })
+                }
+            }
+        }
+    })
+}
+
+export async function getSysRoleUsers() {
+    const token = userDeviceStore.token
+    return OMSAuthsAPI.getSysPerRoleUsers(token).then(async (res: GetSysRoleUsersResParams)=> {
+        if (res.errno === '00000') {
+            sysPerRoleStore.setSysRoleUsers(res.sysRoleUsers)
+        } else {
+            if (res.errno === '99005') {
+                const refreshTokenResult = await updateToken().then()
+                if (refreshTokenResult === '00000') {
+                    const refreshToken = userDeviceStore.token
+                    return OMSAuthsAPI.getSysPerRoleUsers(refreshToken).then((refreshRes: GetSysRoleUsersResParams) => {
+                        sysPerRoleStore.setSysRoleUsers(refreshRes.sysRoleUsers)
+                    })
+                }
+            }
+        }
+    })
+}
+
+export async function getSysUsers() {
+    const token = userDeviceStore.token
+    return OMSAuthsAPI.getSysUsers(token).then(async (res: GetSysUsersResParams)=> {
+        if (res.errno === '00000') {
+            sysPerRoleStore.setSysUsers(res.sysUsers)
+        } else {
+            if (res.errno === '99005') {
+                const refreshTokenResult = await updateToken().then()
+                if (refreshTokenResult === '00000') {
+                    const refreshToken = userDeviceStore.token
+                    return OMSAuthsAPI.getSysUsers(refreshToken).then((refreshRes: GetSysUsersResParams) => {
+                        sysPerRoleStore.setSysUsers(refreshRes.sysUsers)
+                    })
+                }
+            }
+        }
+    })
+}
+
+export async function assignUsersSysPerRole(assignUsersParams: AssignUserSysPerRoleReqParams) {
+    const token = userDeviceStore.token
+    return OMSAuthsAPI.assignUserSysPerRole(assignUsersParams, token).then(async (res: GeneralResParam)=> {
+        if (res.errno === '00000') {
+            return res.errno
+        } else {
+            if (res.errno === '99005') {
+                const refreshTokenResult = await updateToken().then()
+                if (refreshTokenResult === '00000') {
+                    const refreshToken = userDeviceStore.token
+                    return OMSAuthsAPI.assignUserSysPerRole(
+                        assignUsersParams,
+                        refreshToken).then((refreshRes: GeneralResParam) => {
+                            return refreshRes.errno
+                    })
+                }
+            }
+        }
+        return res.errno
     })
 }

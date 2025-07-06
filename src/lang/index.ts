@@ -12,7 +12,8 @@ const i18n = createI18n({
     messages: {
         'zh-TW': zhTwMsg,
         'en-US': enUsMsg
-    }
+    },
+    legacy: false
 })
 
 export { i18n }

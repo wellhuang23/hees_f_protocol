@@ -3,7 +3,15 @@ import type {
     LogInReqParams,
     LogInResParams,
     GenTokenReqParams,
-    GenTokenResParams
+    GenTokenResParams,
+    GetSysRoleResParams,
+    SysRole,
+    SysPermission,
+    GetSysRoleUsersResParams,
+    SysRoleUser,
+    SysRoleUsers,
+    GetSysUsersResParams,
+    AssignUserSysPerRoleReqParams,
 } from '@/interfaces'
 import request from '@/utils/requests'
 import { convertToNumber } from '@/utils/conNumber'
@@ -140,6 +148,155 @@ class OMSAuthsAPI {
                     errno: response.data.errno,
                     desc: response.data.desc,
                 }
+            }
+        });
+    }
+
+    // API for Getting System Permission Roles
+    async getSysPerRoles(token: string): Promise<GetSysRoleResParams> {
+        return request<any, any>({
+            url: AUTH_API + '/sys/per/roles',
+            method: 'GET',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            }
+        }).then((response): GetSysRoleResParams => {
+            if (response.data.errno === '00000') {
+                const roles: SysRole[] = []
+                for (const role of response.data.data) {
+                    const sysPermissions: SysPermission[] = []
+                    for (const per of role.permissions) {
+                        sysPermissions.push({
+                            sysPerId: convertToNumber(per.sys_per_id),
+                            sysPerNo: per.sys_per_no,
+                            sysPerName: per.sys_per_name,
+                            sysPerDesc: per.sys_per_desc,
+                            sysPerEngName: per.sys_per_eng_name,
+                            sysPerEngDesc: per.sys_per_eng_desc,
+                        })
+                    }
+
+                    roles.push({
+                        sysRoleId: convertToNumber(role.def_role_id),
+                        sysRoleName: role.def_role_name,
+                        sysRoleDesc: role.def_role_desc,
+                        sysRoleEngName: role.def_role_eng_name,
+                        sysRoleEngDesc: role.def_role_eng_desc,
+                        sysPermissions: sysPermissions
+                    })
+                }
+
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                    sysRoles: roles
+                }
+            } else {
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                    sysRoles: []
+                }
+            }
+        });
+    }
+
+    // API for Getting Users in  System Permission Roles
+    async getSysPerRoleUsers(token: string): Promise<GetSysRoleUsersResParams> {
+        return request<any, any>({
+            url: AUTH_API + '/sys/per/role/users',
+            method: 'GET',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            }
+        }).then((response): GetSysRoleUsersResParams => {
+            if (response.data.errno === '00000') {
+                const roles: SysRoleUsers[] = []
+                for (const role of response.data.data) {
+                    const sysRoleUsers: SysRoleUser[] = []
+                    for (const user of role.users) {
+                        sysRoleUsers.push({
+                            userId: convertToNumber(user.user_id),
+                            userNo: user.user_no,
+                            userStName: user.user_st_name,
+                        })
+                    }
+
+                    roles.push({
+                        sysRoleId: convertToNumber(role.def_role_id),
+                        sysRoleName: role.def_role_name,
+                        sysRoleEngName: role.def_role_eng_name,
+                        sysRoleUsers: sysRoleUsers
+                    })
+                }
+
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                    sysRoleUsers: roles
+                }
+            } else {
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                    sysRoleUsers: []
+                }
+            }
+        });
+    }
+
+    // API for Getting Users in  System Permission Roles
+    async getSysUsers(token: string): Promise<GetSysUsersResParams> {
+        return request<any, any>({
+            url: AUTH_API + '/sys/users',
+            method: 'GET',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            }
+        }).then((response): GetSysUsersResParams => {
+            if (response.data.errno === '00000') {
+                const users: SysRoleUser[] = []
+                for (const user of response.data.data) {
+                    users.push({
+                        userId: convertToNumber(user.user_id),
+                        userNo: user.user_no,
+                        userStName: user.user_st_name,
+                    })
+                }
+
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                    sysUsers: users
+                }
+            } else {
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                    sysUsers: []
+                }
+            }
+        });
+    }
+
+    // API for Assigning User to System Permission Role
+    async assignUserSysPerRole(data: AssignUserSysPerRoleReqParams, token: string): Promise<GeneralResParam> {
+        const params = {
+            'def_role_id': data.sysRoleId,
+            'user_ids': data.userIds,
+        }
+
+        return request<any, any>({
+            url: AUTH_API + '/sys/per/role/assign',
+            method: 'POST',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            data: params,
+        }).then((response): GeneralResParam => {
+            return {
+                errno: response.data.errno,
+                desc: response.data.desc,
             }
         });
     }

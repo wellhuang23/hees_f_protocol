@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { usePersonalSetting } from '@/stores'
 import { useI18n } from 'vue-i18n'
-import { getAsideBarItems } from '@/services/general/AsideBarItems'
+import { getAsideBarItems } from '@/services/general/AsideBarItems.ts'
 
 const { t } = useI18n()
 

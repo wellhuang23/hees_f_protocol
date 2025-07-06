@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import AsideBar from '@/components/AsideBar.vue'
-import TopBar from '@/components/TopBar.vue'
+import AsideBar from '@/components/general/AsideBar.vue'
+import TopBar from '@/components/general/TopBar.vue'
+import BottomSign from '@/components/general/BottomSign.vue'
 </script>
 
 <template>
@@ -11,6 +12,7 @@ import TopBar from '@/components/TopBar.vue'
       <div class="content">
         <router-view></router-view>
       </div>
+      <bottom-sign />
     </div>
   </div>
 </template>
@@ -18,7 +20,7 @@ import TopBar from '@/components/TopBar.vue'
 <style scoped lang="scss">
 .main {
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
 
   display: flex;
 
@@ -29,6 +31,7 @@ import TopBar from '@/components/TopBar.vue'
 
     .content {
       flex: 1;
+      margin: 20px;
     }
   }
 }

@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 </script>
 
 <template>
@@ -10,16 +12,16 @@
     <div class="bullshit">
       <div class="bullshit__oops">OOPS!</div>
       <div class="bullshit__headline">
-        頁面目前不存在
+        {{ t('errorPage.404.title') }}
       </div>
       <div class="bullshit__info">
-        您所要前往的頁面目前不存在，
+        {{ t('errorPage.404.content1') }}
         <br>
-        若有相關需求，
+        {{ t('errorPage.404.content2') }}
         <br>
-        請洽系統管理員，
+        {{ t('errorPage.404.content3') }}
         <br>
-        謝謝。
+        {{ t('errorPage.404.content4') }}
       </div>
     </div>
   </div>

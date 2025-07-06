@@ -6,7 +6,7 @@ import {
 import { ElNotification } from 'element-plus'
 import {useRouter} from 'vue-router'
 import { useUserInfoStore, usePersonalSetting } from '@/stores'
-import { changeLanguage } from '@/services/general/changeLang'
+import { changeLanguage } from '@/services/general/changeLang.ts'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
@@ -133,14 +133,6 @@ const onToggleAside = () => {
 
     .user {
       filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
-    }
-
-    .hide-arrow .el-sub-menu__icon-arrow {
-      display: none;
-    }
-
-    .el-sub-menu.is-active .el-sub-menu__title {
-      border-bottom-color: transparent !important;
     }
   }
 }
