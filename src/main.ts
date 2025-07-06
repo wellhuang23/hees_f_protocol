@@ -16,7 +16,6 @@ app.use(router)
 // Ensure i18n locale is set from personal setting after pinia is available
 const personalSettingStore = usePersonalSetting()
 i18n.global.locale.value = personalSettingStore.locale
-console.log('Type of i18n.global.locale in main.ts:', typeof i18n.global.locale, i18n.global.locale)
 
 for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
     app.component(key, component)

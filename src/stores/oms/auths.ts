@@ -5,6 +5,7 @@ import type {
     LogInResParams,
     GenTokenResParams,
     SysRole,
+    SysRoleUsers,
 } from '@/interfaces'
 import {
     USER_INFO,
@@ -106,6 +107,7 @@ const useDeviceInfoStore = defineStore(DEVICE_INFO, {
 const useSysPerRoleStore = defineStore(SYS_PER_ROLE, {
     state:() => ({
         sysRoles: sessionCache.getCache(SYS_PER_ROLE)?.sysRoles ?? [] as SysRole[],
+        sysRoleUsers: sessionCache.getCache(SYS_PER_ROLE)?.sysRoleUsers ?? [] as SysRoleUsers[],
     }),
     actions: {
         setSysRole(sysRoles: SysRole[]) {
@@ -123,7 +125,26 @@ const useSysPerRoleStore = defineStore(SYS_PER_ROLE, {
             this.sysRoles = data
 
             sessionCache.setCache(SYS_PER_ROLE, {
-                sysRoles: data
+                sysRoles: data,
+                sysRoleUsers: this.sysRoleUsers
+            })
+        },
+
+        setSysRoleUsers(sysRoleUsers: SysRoleUsers[]) {
+            const data: SysRoleUsers[] = []
+            for (const sysRoleUser of sysRoleUsers) {
+                data.push({
+                    sysRoleId: sysRoleUser.sysRoleId,
+                    sysRoleName: sysRoleUser.sysRoleName,
+                    sysRoleEngName: sysRoleUser.sysRoleEngName,
+                    sysRoleUsers: sysRoleUser.sysRoleUsers
+                })
+            }
+            this.sysRoleUsers = data
+
+            sessionCache.setCache(SYS_PER_ROLE, {
+                sysRoles: this.sysRoles,
+                sysRoleUsers: data
             })
         }
     }

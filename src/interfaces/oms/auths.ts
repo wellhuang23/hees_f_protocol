@@ -98,3 +98,30 @@ export interface GetSysRoleResParams extends GeneralResParam {
     // System Roles
     sysRoles: SysRole[];
 }
+
+export interface SysRoleUser {
+    // User ID in the System Permission Role
+    userId?: number;
+
+    // User Short Name in theSystem Permission Role
+    userStName: string;
+}
+
+export interface SysRoleUsers {
+    // System Role ID
+    sysRoleId?: number;
+
+    // System Role Name
+    sysRoleName: string;
+
+    // System Role Name in English
+    sysRoleEngName: string;
+
+    // User List in the Role
+    sysRoleUsers: SysRoleUser[];
+}
+
+export interface GetSysRoleUsersResParams extends GeneralResParam {
+    // System Roles
+    sysRoleUsers: SysRoleUsers[];
+}

@@ -6,7 +6,10 @@ import type {
     GenTokenResParams,
     GetSysRoleResParams,
     SysRole,
-    SysPermission
+    SysPermission,
+    GetSysRoleUsersResParams,
+    SysRoleUser,
+    SysRoleUsers,
 } from '@/interfaces'
 import request from '@/utils/requests'
 import { convertToNumber } from '@/utils/conNumber'
@@ -191,6 +194,49 @@ class OMSAuthsAPI {
                     errno: response.data.errno,
                     desc: response.data.desc,
                     sysRoles: []
+                }
+            }
+        });
+    }
+
+    // API for Getting System Permission Roles
+    async getSysPerRoleUsers(token: string): Promise<GetSysRoleUsersResParams> {
+        return request<any, any>({
+            url: AUTH_API + '/sys/per/role/users',
+            method: 'GET',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            }
+        }).then((response): GetSysRoleUsersResParams => {
+            if (response.data.errno === '00000') {
+                const roles: SysRoleUsers[] = []
+                for (const role of response.data.data) {
+                    const sysRoleUsers: SysRoleUser[] = []
+                    for (const user of role.users) {
+                        sysRoleUsers.push({
+                            userId: convertToNumber(user.user_id),
+                            userStName: user.user_st_name,
+                        })
+                    }
+
+                    roles.push({
+                        sysRoleId: convertToNumber(role.def_role_id),
+                        sysRoleName: role.def_role_name,
+                        sysRoleEngName: role.def_role_eng_name,
+                        sysRoleUsers: sysRoleUsers
+                    })
+                }
+
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                    sysRoleUsers: roles
+                }
+            } else {
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                    sysRoleUsers: []
                 }
             }
         });

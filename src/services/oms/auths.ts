@@ -4,7 +4,8 @@ import type {
     LogInReqParams,
     LogInResParams,
     GenTokenResParams,
-    GetSysRoleResParams
+    GetSysRoleResParams,
+    GetSysRoleUsersResParams,
 } from '@/interfaces'
 import {
     useUserInfoStore,
@@ -109,6 +110,27 @@ export async function getSysRole() {
                         const refreshToken = userDeviceStore.token
                         return OMSAuthsAPI.getSysPerRoles(refreshToken).then((refreshRes: GetSysRoleResParams) => {
                             sysPerRoleStore.setSysRole(refreshRes.sysRoles)
+                        })
+                    }
+                }
+            }
+        })
+    }
+}
+
+export async function getSysRoleUsers() {
+    const token = userDeviceStore.token
+    if (sysPerRoleStore.sysRoleUsers.length === 0) {
+        return OMSAuthsAPI.getSysPerRoleUsers(token).then(async (res: GetSysRoleUsersResParams)=> {
+            if (res.errno === '00000') {
+                sysPerRoleStore.setSysRoleUsers(res.sysRoleUsers)
+            } else {
+                if (res.errno === '99005') {
+                    const refreshTokenResult = await updateToken().then()
+                    if (refreshTokenResult === '00000') {
+                        const refreshToken = userDeviceStore.token
+                        return OMSAuthsAPI.getSysPerRoleUsers(refreshToken).then((refreshRes: GetSysRoleUsersResParams) => {
+                            sysPerRoleStore.setSysRoleUsers(refreshRes.sysRoleUsers)
                         })
                     }
                 }

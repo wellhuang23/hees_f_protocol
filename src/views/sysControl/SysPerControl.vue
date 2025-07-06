@@ -1,18 +1,27 @@
 <script setup lang="ts">
 import Roles from '@/components/sysControl/Roles.vue'
-import {ref} from 'vue'
+import { onMounted } from 'vue'
+import { storeToRefs } from 'pinia'
+import { getSysRole, getSysRoleUsers } from '@/services'
+import { useSysPerRoleStore } from '@/stores'
 
-const activeTab = ref('roles')
+const sysPerRoleStore = useSysPerRoleStore()
+const { sysRoles } = storeToRefs( sysPerRoleStore )
+const { sysRoleUsers } = storeToRefs( sysPerRoleStore )
+
+onMounted(async () => {
+  if (sysRoles.value.length === 0) {
+    await getSysRole()
+  }
+  if (sysRoleUsers.value.length === 0) {
+    await getSysRoleUsers();
+  }
+})
 </script>
 
 <template>
   <div class="sys_per_control">
-    <el-tabs v-model="activeTab">
-      <roles />
-      <el-tab-pane label="角色成員" name="members">
-        <p>角色成員內容</p>
-      </el-tab-pane>
-    </el-tabs>
+    <roles />
   </div>
 </template>
 
