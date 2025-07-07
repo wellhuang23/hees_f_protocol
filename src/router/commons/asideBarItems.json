@@ -34,7 +34,7 @@
   {
     "path": "sys/updateCal",
     "meta": {
-      "title": "pageTitle.calendarUpdate",
+      "title": "pageTitle.calendar",
       "perCodes": ["sys-004-0100"]
     },
     "component": "sysControl/UpdateCal"
