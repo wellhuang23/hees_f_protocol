@@ -41,6 +41,7 @@ class OMSBasesAPI {
         }).then((response): GetLogsResParams => {
             if (response.data.errno === '00000') {
                 const logs: LogInfo[] = [];
+                let logId: number = 1
                 for (let log of response.data.data) {
                     const executions:ExecutionInfo[] = [];
                     for (let execution of log.executions) {
@@ -54,6 +55,7 @@ class OMSBasesAPI {
                     }
 
                     logs.push({
+                        logId: logId,
                         level: log.level,
                         errno: log.errno,
                         desc: log.desc,
@@ -64,8 +66,16 @@ class OMSBasesAPI {
                         endTime: log.end_time,
                         durationTime: (convertToNumber(log.duration_time) ?? 0),
                         exception: log.exception,
+                        opeUserId: (convertToNumber(log.ope_user_id) ?? 0),
+                        opeUserStName: log.ope_user_st_name,
+                        opeUserType: (convertToNumber(log.ope_user_type) ?? 2),
+                        opeUserTypeName: log.ope_user_type_name,
+                        opeUserComStName: log.ope_user_com_st_name,
+                        opeUserGroupName: log.ope_user_group_name,
                         executions: executions,
                     })
+
+                    logId ++
                 }
 
                 return {

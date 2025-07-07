@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { getOmsServerLogs } from '@/services'
+import { ElNotification } from 'element-plus'
 
 const { t } = useI18n()
 
@@ -10,10 +11,37 @@ const startTime = ref<string | null>(null)
 const endTime = ref<string | null>(null)
 
 const handleSearch = async () => {
+  let getLogsErrno = '99999'
   if (selectedModule.value === 'OMS') {
-    await getOmsServerLogs({
+    getLogsErrno = await getOmsServerLogs({
       logStartTime: startTime.value as string,
       logEndTime: endTime.value as string,
+    })
+  }
+
+  if (getLogsErrno === '00000') {
+    ElNotification({
+      title: t('notice.noticeTitle'),
+      message: t('notice.getSysLogsSuccessMsg'),
+      type: 'success'
+    })
+  } else if (['99001', '99002', '99003'].includes(getLogsErrno)) {
+    ElNotification({
+      title: t('notice.noticeTitle'),
+      message: t('notice.getSysLogsTimeErrorMsg'),
+      type: 'error'
+    })
+  } else if (getLogsErrno === '99006') {
+    ElNotification({
+      title: t('notice.noticeTitle'),
+      message: t('notice.getSysLogsPerErrorMsg'),
+      type: 'error'
+    })
+  } else {
+    ElNotification({
+      title: t('notice.noticeTitle'),
+      message: t('notice.getSysLogsErrorMsg'),
+      type: 'error'
     })
   }
 }

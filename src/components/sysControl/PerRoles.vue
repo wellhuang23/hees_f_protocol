@@ -2,14 +2,14 @@
 import { computed, ref } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useSysPerRoleStore, useUserInfoStore } from '@/stores'
-import type { SysRole, SysRoleUser, SysRoleUsers } from '@/interfaces'
+import type { SysRole } from '@/interfaces'
 import { useI18n } from 'vue-i18n'
 import RoleUsers from './PerRoleUsers.vue'
 
 const { t, locale } = useI18n()
 
 const sysPerRoleStore = useSysPerRoleStore()
-const { sysRoles, sysRoleUsers } = storeToRefs(sysPerRoleStore)
+const { sysRoles } = storeToRefs(sysPerRoleStore)
 const userInfoStore = useUserInfoStore()
 const { per0100, per0010 } = storeToRefs(userInfoStore)
 
