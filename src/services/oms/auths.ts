@@ -17,14 +17,14 @@ import {
 
 
 const userInfoStore = useUserInfoStore()
-const userDeviceStore = useDeviceInfoStore()
+const deviceStore = useDeviceInfoStore()
 const sysPerRoleStore = useSysPerRoleStore()
 
 export async function logInAction(logInInfo: LogInReqParams){
     return OMSAuthsAPI.logIn(logInInfo).then((res: LogInResParams): string => {
         if (res.errno === '00000') {
             userInfoStore.setUserInfo(res)
-            userDeviceStore.setDeviceInfo(res)
+            deviceStore.setDeviceInfo(res)
 
             return res.errno
         } else {
@@ -34,11 +34,11 @@ export async function logInAction(logInInfo: LogInReqParams){
 }
 
 export async function logOutAction(){
-    const token = userDeviceStore.token
+    const token = deviceStore.token
     return OMSAuthsAPI.logOut(token).then((res: GeneralResParam): string => {
         if (res.errno === '00000') {
             userInfoStore.clearUserInfo()
-            userDeviceStore.clearDeviceInfo()
+            deviceStore.clearDeviceInfo()
 
             return res.errno
         } else {
@@ -48,17 +48,17 @@ export async function logOutAction(){
 }
 
 export async function updateToken(){
-    const deviceNo = userDeviceStore.deviceNo
+    const deviceNo = deviceStore.deviceNo
     return OMSAuthsAPI.genToken({
         deviceNo: deviceNo
     }).then((res: GenTokenResParams): string => {
         if (res.errno !== '00000') {
             userInfoStore.clearUserInfo()
-            userDeviceStore.clearDeviceInfo()
+            deviceStore.clearDeviceInfo()
 
             return res.errno
         } else {
-            userDeviceStore.setToken(res)
+            deviceStore.setToken(res)
 
             return res.errno
         }
@@ -66,7 +66,7 @@ export async function updateToken(){
 }
 
 export async function syncUser(){
-    const token = userDeviceStore.token
+    const token = deviceStore.token
     return OMSAuthsAPI.syncUser(token).then(async (res: LogInResParams): Promise<string> => {
         if (res.errno === '00000') {
             userInfoStore.setUserInfo(res)
@@ -75,24 +75,24 @@ export async function syncUser(){
             if (res.errno === '99005') {
                 const refreshTokenResult = await updateToken().then()
                 if (refreshTokenResult === '00000') {
-                    const refreshToken = userDeviceStore.token
+                    const refreshToken = deviceStore.token
                     return OMSAuthsAPI.syncUser(refreshToken).then((refreshRes: LogInResParams): string => {
                         if (refreshRes.errno === '00000') {
                             userInfoStore.setUserInfo(refreshRes)
                         } else {
                             userInfoStore.clearUserInfo()
-                            userDeviceStore.clearDeviceInfo()
+                            deviceStore.clearDeviceInfo()
                         }
                         return refreshRes.errno
                     })
                 } else {
                     userInfoStore.clearUserInfo()
-                    userDeviceStore.clearDeviceInfo()
+                    deviceStore.clearDeviceInfo()
                     return refreshTokenResult
                 }
             } else {
                 userInfoStore.clearUserInfo()
-                userDeviceStore.clearDeviceInfo()
+                deviceStore.clearDeviceInfo()
                 return res.errno
             }
         }
@@ -100,7 +100,7 @@ export async function syncUser(){
 }
 
 export async function getSysRole() {
-    const token = userDeviceStore.token
+    const token = deviceStore.token
     return OMSAuthsAPI.getSysPerRoles(token).then(async (res: GetSysRoleResParams)=> {
         if (res.errno === '00000') {
             sysPerRoleStore.setSysRole(res.sysRoles)
@@ -108,7 +108,7 @@ export async function getSysRole() {
             if (res.errno === '99005') {
                 const refreshTokenResult = await updateToken().then()
                 if (refreshTokenResult === '00000') {
-                    const refreshToken = userDeviceStore.token
+                    const refreshToken = deviceStore.token
                     return OMSAuthsAPI.getSysPerRoles(refreshToken).then((refreshRes: GetSysRoleResParams) => {
                         sysPerRoleStore.setSysRole(refreshRes.sysRoles)
                     })
@@ -119,7 +119,7 @@ export async function getSysRole() {
 }
 
 export async function getSysRoleUsers() {
-    const token = userDeviceStore.token
+    const token = deviceStore.token
     return OMSAuthsAPI.getSysPerRoleUsers(token).then(async (res: GetSysRoleUsersResParams)=> {
         if (res.errno === '00000') {
             sysPerRoleStore.setSysRoleUsers(res.sysRoleUsers)
@@ -127,7 +127,7 @@ export async function getSysRoleUsers() {
             if (res.errno === '99005') {
                 const refreshTokenResult = await updateToken().then()
                 if (refreshTokenResult === '00000') {
-                    const refreshToken = userDeviceStore.token
+                    const refreshToken = deviceStore.token
                     return OMSAuthsAPI.getSysPerRoleUsers(refreshToken).then((refreshRes: GetSysRoleUsersResParams) => {
                         sysPerRoleStore.setSysRoleUsers(refreshRes.sysRoleUsers)
                     })
@@ -138,7 +138,7 @@ export async function getSysRoleUsers() {
 }
 
 export async function getSysUsers() {
-    const token = userDeviceStore.token
+    const token = deviceStore.token
     return OMSAuthsAPI.getSysUsers(token).then(async (res: GetSysUsersResParams)=> {
         if (res.errno === '00000') {
             sysPerRoleStore.setSysUsers(res.sysUsers)
@@ -146,7 +146,7 @@ export async function getSysUsers() {
             if (res.errno === '99005') {
                 const refreshTokenResult = await updateToken().then()
                 if (refreshTokenResult === '00000') {
-                    const refreshToken = userDeviceStore.token
+                    const refreshToken = deviceStore.token
                     return OMSAuthsAPI.getSysUsers(refreshToken).then((refreshRes: GetSysUsersResParams) => {
                         sysPerRoleStore.setSysUsers(refreshRes.sysUsers)
                     })
@@ -157,7 +157,7 @@ export async function getSysUsers() {
 }
 
 export async function assignUsersSysPerRole(assignUsersParams: AssignUserSysPerRoleReqParams) {
-    const token = userDeviceStore.token
+    const token = deviceStore.token
     return OMSAuthsAPI.assignUserSysPerRole(assignUsersParams, token).then(async (res: GeneralResParam)=> {
         if (res.errno === '00000') {
             return res.errno
@@ -165,7 +165,7 @@ export async function assignUsersSysPerRole(assignUsersParams: AssignUserSysPerR
             if (res.errno === '99005') {
                 const refreshTokenResult = await updateToken().then()
                 if (refreshTokenResult === '00000') {
-                    const refreshToken = userDeviceStore.token
+                    const refreshToken = deviceStore.token
                     return OMSAuthsAPI.assignUserSysPerRole(
                         assignUsersParams,
                         refreshToken).then((refreshRes: GeneralResParam) => {

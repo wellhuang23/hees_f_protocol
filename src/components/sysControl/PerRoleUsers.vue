@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import type { SysRole, SysRoleUser } from '@/interfaces'
-import AsignUsers from './AssignUsers.vue'
+import type { SysRole } from '@/interfaces'
+import AssignUsers from './PerAssignUsers.vue'
 import { useSysPerRoleStore } from '@/stores'
 import { storeToRefs } from 'pinia'
 
@@ -56,7 +56,7 @@ const openDialog = () => {
       </div>
     </div>
   </el-drawer>
-  <asign-users
+  <assign-users
     v-model="dialogVisible"
     :role="role"
     :users="users"

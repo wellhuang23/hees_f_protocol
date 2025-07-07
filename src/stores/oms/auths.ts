@@ -5,7 +5,8 @@ import type {
     LogInResParams,
     GenTokenResParams,
     SysRole,
-    SysRoleUsers, SysRoleUser,
+    SysRoleUsers,
+    SysRoleUser,
 } from '@/interfaces'
 import {
     USER_INFO,

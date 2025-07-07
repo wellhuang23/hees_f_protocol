@@ -32,6 +32,10 @@
     "updatePerErrorMsg": "更新權限時造成錯誤，請洽系統管理員",
     "updateSysPerRoleUsersSuccessMsg": "更新角色內成員成功",
     "updateSysPerRoleUsersFailMsg": "更新角色內成員失敗，請洽系統管理員",
+    "getSysLogsSuccessMsg": "取得系統日誌成功",
+    "getSysLogsTimeErrorMsg": "請輸入開始時間及結束時間",
+    "getSysLogsPerErrorMsg": "目前暫無查閱系統日誌的權限",
+    "getSysLogsErrorMsg": "取得系統日誌發生錯誤，請洽系統管理員",
     "systemErrorMsg": "系統錯誤，請洽系統管理員"
   },
   "pageTitle": {
@@ -88,6 +92,27 @@
     "selected": "已選擇",
     "notSelected": "未選擇",
     "status": "狀態"
+  },
+  "sysLogs": {
+    "system": "選擇服務器",
+    "orgManage": "組織管理(OMS)",
+    "startTime": "開始時間",
+    "endTime": "結束時間",
+    "searchButton": "查詢",
+    "level": "程度",
+    "errorNo": "錯誤代號",
+    "apiMethod": "API Method",
+    "apiPath": "API 路徑",
+    "operator": "操作者",
+    "desc": "API 描述",
+    "executionTime": "執行時間",
+    "operatorType": "操作者類別",
+    "company": "公司",
+    "group": "集團",
+    "status": "狀態",
+    "function": "Function",
+    "model": "Model",
+    "exception": "錯誤描述"
   },
   "general": {
     "confirm": "確認",
