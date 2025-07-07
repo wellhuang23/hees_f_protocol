@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Roles from '@/components/sysControl/Roles.vue'
+import Roles from '@/components/sysControl/PerRoles.vue'
 import { onMounted } from 'vue'
 import { storeToRefs } from 'pinia'
 import {

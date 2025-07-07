@@ -32,6 +32,10 @@
     "updatePerErrorMsg": "Error Occur when Update Permissions, Please Contact System Manager",
     "updateSysPerRoleUsersSuccessMsg": "Update Users in System Permission Role Successfully",
     "updateSysPerRoleUsersFailMsg": "Update Users in System Permission Role Fail, Please Contact System Manager",
+    "getSysLogsSuccessMsg": "Request System Logs Successfully",
+    "getSysLogsTimeErrorMsg": "Please Input Start Time & End Time",
+    "getSysLogsPerErrorMsg": "You Don't have Permission to Search Server Logs",
+    "getSysLogsErrorMsg": "Request System Logs Fail, Please Contact System Manager",
     "systemErrorMsg": "System Error, Please Contact System Manager"
   },
   "pageTitle": {
@@ -88,6 +92,27 @@
     "selected": "Selected",
     "notSelected": "Not Selected",
     "status": "Status"
+  },
+  "sysLogs": {
+    "system": "Select Server",
+    "orgManage": "Organization Manage(OMS)",
+    "startTime": "Start Time",
+    "endTime": "End Time",
+    "searchButton": "Search",
+    "level": "LEVEL",
+    "errorNo": "Error No.",
+    "apiMethod": "API Method",
+    "apiPath": "API Path",
+    "operator": "Operator",
+    "desc": "Description",
+    "executionTime": "Execution Time",
+    "operatorType": "Operator Type",
+    "company": "Company",
+    "group": "Group",
+    "status": "Status",
+    "function": "Function",
+    "model": "Model",
+    "exception": "Exception"
   },
   "general": {
     "confirm": "Confirm",
