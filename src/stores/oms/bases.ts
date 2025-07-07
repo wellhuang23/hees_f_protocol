@@ -14,13 +14,11 @@ const useOmsServerLogsStore = defineStore(OMS_SERVER_LOGS, {
     actions: {
         setOmsServerLogs(omsServerLogs: GetLogsResParams) {
             const logs: LogInfo[] = []
-            console.log(omsServerLogs)
             if (omsServerLogs.errno === '00000') {
                 for (const log of omsServerLogs.data ?? []) {
                     logs.push(log)
                 }
             }
-            console.log(logs)
 
             this.omsServerLogs = logs
         },

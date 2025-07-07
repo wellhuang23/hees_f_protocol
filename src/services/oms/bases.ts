@@ -15,7 +15,6 @@ const omsServerLogsStore = useOmsServerLogsStore()
 export async function getOmsServerLogs(getLogsReqParams: GetLogsReqParams) {
     const token = deviceStore.token
     return OMSBasesAPI.getLogs(getLogsReqParams, token).then(async (res: GetLogsResParams)=> {
-        console.log(res.errno)
         if (res.errno === '99005') {
             const refreshTokenResult = await updateToken().then()
             if (refreshTokenResult === '00000') {
@@ -28,7 +27,6 @@ export async function getOmsServerLogs(getLogsReqParams: GetLogsReqParams) {
                 })
             }
         } else {
-            console.error(res.errno)
             omsServerLogsStore.setOmsServerLogs(res)
             return res.errno
         }
