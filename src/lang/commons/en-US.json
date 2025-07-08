@@ -114,6 +114,15 @@
     "model": "Model",
     "exception": "Exception"
   },
+  "subList": {
+    "groupName": "Group Name",
+    "comTaxNo": "Tax No.",
+    "comName": "Company Name",
+    "subNo": "Subscription No.",
+    "subName": "Subscription Name",
+    "subStartDate": "Start Date",
+    "subEndDate": "End Date"
+  },
   "general": {
     "confirm": "Confirm",
     "cancel": "Cancel"

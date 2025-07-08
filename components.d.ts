@@ -39,6 +39,10 @@ declare module 'vue' {
     RoleUsers: typeof import('./src/components/sysControl/PerRoleUsers.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SubList: typeof import('./src/components/sysControl/SubList.vue')['default']
     TopBar: typeof import('./src/components/general/TopBar.vue')['default']
+  }
+  export interface GlobalDirectives {
+    vLoading: typeof import('element-plus/es')['ElLoadingDirective']
   }
 }

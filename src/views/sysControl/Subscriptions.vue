@@ -1,9 +1,9 @@
 <script setup lang="ts">
-
+import SubList from '@/components/sysControl/SubList.vue'
 </script>
 
 <template>
-  <div class="subscriptions">SUBSCRIPTIONS</div>
+  <sub-list />
 </template>
 
 <style scoped lang="scss">
