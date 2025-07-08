@@ -2,14 +2,19 @@
 import { ref, onMounted, computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
+import SubAddNewGroup from './SubAddNewGroup.vue'
 import { useSubItemsStore } from '@/stores/oms/orgs'
 import { getAllGroupSubs } from '@/services/oms/orgs'
+import { getAllSubItems } from '@/services/oms/orgs'
 import type { GroupCompanies, ComSubs } from '@/interfaces'
 
 const { t, locale } = useI18n()
 
 const subItemsStore = useSubItemsStore()
+const { subItems } = storeToRefs(subItemsStore)
 const { groupSubs } = storeToRefs(subItemsStore)
+
+const showAddGroupDialog = ref(false)
 
 const loading = ref(false)
 const expandedGroupRowKeys = ref<string[]>([])
@@ -83,19 +88,32 @@ const subTableColumns = computed(() => [
 ])
 
 // --- Data Loading ---
-const loadData = async () => {
+const loadGroupData = async () => {
   if (groupSubs.value.length > 0) return
   loading.value = true
   await getAllGroupSubs()
   loading.value = false
 }
 
+const loadSubItemsData = async () => {
+  if (subItems.value.length > 0) return
+  loading.value = true
+  await getAllSubItems()
+  loading.value = false
+}
+
 onMounted(() => {
-  loadData()
+  loadGroupData()
+  loadSubItemsData()
 })
 </script>
 
 <template>
+  <div class="sub-list-container">
+    <div class="header-container">
+      <el-button type="success" class="add-button" @click="showAddGroupDialog = true">{{ t('subList.add') }}</el-button>
+    </div>
+    <SubAddNewGroup v-if="showAddGroupDialog" v-model="showAddGroupDialog" />
   <el-table
     :data="groupSubs"
     stripe
@@ -166,9 +184,18 @@ onMounted(() => {
       :label="column.label"
     />
   </el-table>
+  </div>
 </template>
 
 <style scoped lang="scss">
+.sub-list-container {
+  .header-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+  }
+}
+
 .details-wrapper {
   padding: 10px 20px 10px 48px;
   background-color: #f5f7fa;

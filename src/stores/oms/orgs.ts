@@ -43,7 +43,7 @@ const useSubItemsStore = defineStore(SUB_ITEMS, {
                     comSubs: group.comSubs,
                 })
             }
-            this.subItems = data
+            this.groupSubs = data
 
             sessionCache.setCache(SUB_ITEMS, {
                 subItems: this.subItems,

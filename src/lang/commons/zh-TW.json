@@ -24,7 +24,7 @@
     "logInValidateErrorMsg": "驗證時發生錯誤，請聯繫系統管理員",
     "welcomeMsg": "歡迎回來 HEEs",
     "registerExpireMsg": "裝置註冊已過期，請重新登入",
-    "subExpireMsg": "訂閱已過期，請聯繫系統管理員",
+    "subExpireMsg": "訂閱已到期，請聯繫系統管理員",
     "initDataErrorMsg": "登入資料發生錯誤，請重新登入",
     "logOutSuccessMsg": "登出成功",
     "logOutErrorMsg": "登出時發生錯誤，已清空本地資料，請聯繫系統管理員",
@@ -36,6 +36,12 @@
     "getSysLogsTimeErrorMsg": "請輸入開始時間與結束時間",
     "getSysLogsPerErrorMsg": "您沒有權限查詢伺服器日誌",
     "getSysLogsErrorMsg": "查詢系統日誌失敗，請聯繫系統管理員",
+    "createNewGroupSuccessMsg": "新增集團成功",
+    "createNewGroupFormatErrorMsg": "請確認輸入資料",
+    "createNewGroupNoPerErrorMsg": "您沒有新增集團的權限，請洽系統管理員",
+    "createNewGroupDupComTaxNoErrorMsg": "公司統一編號目前已存在",
+    "createNewGroupComTaxNoErrorMsg": "公司統一編號不合規範",
+    "createNewGroupComErrorMsg": "新增集團發生錯誤，請洽系統管理員",
     "systemErrorMsg": "系統錯誤，請聯繫系統管理員"
   },
   "pageTitle": {
@@ -121,11 +127,48 @@
     "subNo": "訂閱代號",
     "subName": "訂閱名稱",
     "subStartDate": "開始日期",
-    "subEndDate": "結束日期"
+    "subEndDate": "結束日期",
+    "add": "建立"
+  },
+  "subAddNewGroup": {
+    "title": "新增集團",
+    "groupName": "集團名稱",
+    "comTaxNo": "公司統編",
+    "comName": "公司名稱",
+    "comStName": "公司簡稱",
+    "comEngName": "公司英文名稱",
+    "add": "建立",
+    "startDate": "開始日期",
+    "endDate": "結束日期",
+    "rules": {
+      "groupName": {
+        "required": "請輸入集團名稱",
+        "length": "長度必須介於 1 到 30 個字元之間"
+      },
+      "comName": {
+        "required": "請輸入公司名稱",
+        "length": "長度必須介於 1 到 30 個字元之間"
+      },
+      "comTaxNo": {
+        "required": "請輸入公司統編",
+        "length": "長度必須是 8 個字元"
+      },
+      "comStName": {
+        "required": "請輸入公司簡稱",
+        "length": "長度必須介於 1 到 10 個字元之間"
+      },
+      "comEngName": {
+        "required": "請輸入公司英文名稱",
+        "length": "長度必須介於 1 到 100 個字元之間"
+      },
+      "date": {
+        "startBeforeEnd": "開始日期不能晚於結束日期",
+        "endAfterToday": "結束日期不能早於今天"
+      }
+    }
   },
   "general": {
     "confirm": "確認",
     "cancel": "取消"
   }
 }
-

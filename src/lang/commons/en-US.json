@@ -36,6 +36,12 @@
     "getSysLogsTimeErrorMsg": "Please Input Start Time & End Time",
     "getSysLogsPerErrorMsg": "You Don't have Permission to Search Server Logs",
     "getSysLogsErrorMsg": "Request System Logs Fail, Please Contact System Manager",
+    "createNewGroupSuccessMsg": "Create New Group Successfully",
+    "createNewGroupFormatErrorMsg": "Please Confirm Input Data",
+    "createNewGroupNoPerErrorMsg": "You don't Have Permission to Add New Group, Please Contact System Manager",
+    "createNewGroupDupComTaxNoErrorMsg": "Company Tax No. Already Exist",
+    "createNewGroupComTaxNoErrorMsg": "Company Tax No. is Invalid",
+    "createNewGroupComErrorMsg": "Error Occur when Creating New Group, Please Contact System Manager",
     "systemErrorMsg": "System Error, Please Contact System Manager"
   },
   "pageTitle": {
@@ -121,7 +127,45 @@
     "subNo": "Subscription No.",
     "subName": "Subscription Name",
     "subStartDate": "Start Date",
-    "subEndDate": "End Date"
+    "subEndDate": "End Date",
+    "add": "Add"
+  },
+  "subAddNewGroup": {
+    "title": "Add New Group",
+    "groupName": "Group Name",
+    "comTaxNo": "Company Tax No.",
+    "comName": "Company Name",
+    "comStName": "Company Short Name",
+    "comEngName": "Company English Name",
+    "add": "Add",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "rules": {
+      "groupName": {
+        "required": "Please input group name",
+        "length": "Length must be between 1 and 30 characters"
+      },
+      "comName": {
+        "required": "Please input company name",
+        "length": "Length must be between 1 and 30 characters"
+      },
+      "comTaxNo": {
+        "required": "Please input company tax number",
+        "length": "Length must be 8 characters"
+      },
+      "comStName": {
+        "required": "Please input company short name",
+        "length": "Length must be between 1 and 10 characters"
+      },
+      "comEngName": {
+        "required": "Please input company english name",
+        "length": "Length must be between 1 and 100 characters"
+      },
+      "date": {
+        "startBeforeEnd": "Start date cannot be later than end date",
+        "endAfterToday": "End date cannot be earlier than today"
+      }
+    }
   },
   "general": {
     "confirm": "Confirm",
