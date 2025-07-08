@@ -1,5 +1,5 @@
-import {localCache} from '@/utils/storages.ts'
-import {USER_INFO} from '@/global/contstants.ts'
+import { useUserInfoStore } from '@/stores'
+import { storeToRefs } from 'pinia'
 import routerItems from '@/router/commons/asideBarItems.json'
 
 interface AsideBarItem {
@@ -7,9 +7,10 @@ interface AsideBarItem {
     index: string;
 }
 
-const per0100 = localCache.getCache(USER_INFO)?.per0100 ?? [] as string[]
-
 export function getAsideBarItems() {
+    const userInfoStore = useUserInfoStore()
+    const { per0100 } = storeToRefs(userInfoStore)
+
     const sysItem: {
         index: string,
         title: string,
@@ -25,7 +26,7 @@ export function getAsideBarItems() {
     for (const item of routerItems) {
         for (const perCode of item.meta.perCodes) {
             if (!appendedItemTitle.includes(item.meta.title)) {
-                if (per0100.includes(perCode)) {
+                if (per0100.value.includes(perCode)) {
                     sysItem.children.push({
                         title: item.meta.title,
                         index: `/main/${item.path}`,

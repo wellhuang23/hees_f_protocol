@@ -12,13 +12,15 @@ import type {
 import {
     useUserInfoStore,
     useDeviceInfoStore,
-    useSysPerRoleStore
+    useSysPerRoleStore,
+    useSubItemsStore,
 } from '@/stores'
 
 
 const userInfoStore = useUserInfoStore()
 const deviceStore = useDeviceInfoStore()
 const sysPerRoleStore = useSysPerRoleStore()
+const subItemsStore = useSubItemsStore()
 
 export async function logInAction(logInInfo: LogInReqParams){
     return OMSAuthsAPI.logIn(logInInfo).then((res: LogInResParams): string => {
@@ -39,6 +41,7 @@ export async function logOutAction(){
         if (res.errno === '00000') {
             userInfoStore.clearUserInfo()
             deviceStore.clearDeviceInfo()
+            subItemsStore.clearSubItems()
 
             return res.errno
         } else {

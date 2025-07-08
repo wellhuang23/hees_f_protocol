@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import { usePersonalSetting } from '@/stores'
 import { useI18n } from 'vue-i18n'
 import { getAsideBarItems } from '@/services/general/AsideBarItems.ts'
@@ -6,7 +7,7 @@ import { getAsideBarItems } from '@/services/general/AsideBarItems.ts'
 const { t } = useI18n()
 
 const personalSetting = usePersonalSetting()
-const asideBarItems = getAsideBarItems()
+const asideBarItems = computed(() => getAsideBarItems())
 </script>
 
 <template>
