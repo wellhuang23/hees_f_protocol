@@ -112,7 +112,7 @@ export async function changeGroupAdminPwd(changeParams: ChangeGroupAdminPwdReqPa
                     const refreshToken = deviceStore.token
                     return OMSOrgsAPI.changeGroupAdminPwd(
                         changeParams,
-                        refreshToken).then((refreshRes: CreateComSubsResParams) => {
+                        refreshToken).then((refreshRes: ChangeGroupAdminPwdResParams) => {
                         return refreshRes
                     })
                 }

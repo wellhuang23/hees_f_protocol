@@ -48,6 +48,9 @@
     "createNewCompanyDupComTaxNoErrorMsg": "Company Tax No. Already Exist",
     "createNewCompanyComTaxNoErrorMsg": "Company Tax No. Already Exist",
     "createNewCompanyComErrorMsg": "Error Occur when Creating New Group, Please Contact System Manager",
+    "updateGroupAdminPwdSuccessMsg": "Change Group Admin Password Successfully",
+    "updateGroupAdminNoUserErrorMsg": "Search No User",
+    "updateGroupAdminErrorMsg": "Change Group Admin Password Fail, Please Contact System Manager",
     "systemErrorMsg": "System Error, Please Contact System Manager"
   },
   "pageTitle": {
@@ -136,7 +139,8 @@
     "subEndDate": "End Date",
     "add": "Add",
     "addNewCompany": "Add New Company",
-    "actions": "Actions"
+    "actions": "Actions",
+    "changePwd": "Change Password"
   },
   "subAddNewGroup": {
     "title": "Add New Group",
@@ -182,5 +186,9 @@
   "subAddNewGroupConfirm": {
     "title": "Group Administrator's Password : ",
     "passwordLabel": "Group Administrator's Password :"
+  },
+  "subChangeGroupAdminPwdConfirm": {
+    "title": "Group Administrator's New Password : ",
+    "passwordLabel": "Group Administrator's New Password :"
   }
 }

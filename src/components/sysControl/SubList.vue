@@ -4,11 +4,13 @@ import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 import SubAddNewGroup from './SubAddNewGroup.vue'
 import SubAddNewCom from './SubAddNewCom.vue'
+import SubChangeGroupAdminPwdConfirm from './SubChangeGroupAdminPwdConfirm.vue'
 import { useSubItemsStore } from '@/stores/oms/orgs'
-import { getAllGroupSubs } from '@/services/oms/orgs'
+import { getAllGroupSubs, changeGroupAdminPwd } from '@/services/oms/orgs'
 import { getAllSubItems } from '@/services/oms/orgs'
 import type { GroupCompanies, ComSubs } from '@/interfaces'
 import { useUserInfoStore } from '@/stores/oms/auths'
+import {ElNotification} from "element-plus";
 
 const { t, locale } = useI18n()
 
@@ -17,10 +19,12 @@ const { subItems } = storeToRefs(subItemsStore)
 const { groupSubs } = storeToRefs(subItemsStore)
 
 const userInfoStore = useUserInfoStore()
-const { per1000 } = storeToRefs(userInfoStore)
+const { per1000, per0010 } = storeToRefs(userInfoStore)
 
 const showAddGroupDialog = ref(false)
 const showAddComDialog = ref(false)
+const showChangePwdDialog = ref(false)
+const newGroupAdminPwd = ref('')
 const selectedGroup = ref<GroupCompanies | null>(null)
 
 const loading = ref(false)
@@ -29,6 +33,14 @@ const expandedComRowKeys = ref<string[]>([])
 
 const canCreateSubscription = computed(() => {
   return per1000.value.includes('sys-005-1000')
+})
+
+const canChangePassword = computed(() => {
+  return per0010.value.includes('sys-005-0010')
+})
+
+const showActionsColumn = computed(() => {
+  return canCreateSubscription.value || canChangePassword.value
 })
 
 // --- Get Row Keys ---
@@ -59,6 +71,34 @@ const handleComRowClick = (row: ComSubs) => {
 const openAddCompanyDialog = (group: GroupCompanies) => {
   selectedGroup.value = group
   showAddComDialog.value = true
+}
+
+const handleChangePassword = async (group: GroupCompanies) => {
+  const res = await changeGroupAdminPwd({ groupId: group.groupId })
+  if (res.errno === '00000') {
+    newGroupAdminPwd.value = res.groupAdminNewPwd ?? ''
+    showChangePwdDialog.value = true
+
+    ElNotification({
+      title: t('notice.noticeTitle'),
+      message: t('notice.updateGroupAdminPwdSuccessMsg'),
+      type: 'success'
+    })
+  } else {
+    if (res.errno === '01001') {
+      ElNotification({
+        title: t('notice.noticeTitle'),
+        message: t('notice.updateGroupAdminNoUserErrorMsg'),
+        type: 'error'
+      })
+    } else {
+      ElNotification({
+        title: t('notice.noticeTitle'),
+        message: t('notice.updateGroupAdminErrorMsg'),
+        type: 'error'
+      })
+    }
+  }
 }
 
 // --- Table Columns ---
@@ -131,6 +171,7 @@ onMounted(() => {
     </div>
     <SubAddNewGroup v-if="showAddGroupDialog" v-model="showAddGroupDialog" />
     <SubAddNewCom v-if="showAddComDialog" v-model="showAddComDialog" :group="selectedGroup" />
+    <SubChangeGroupAdminPwdConfirm v-if="showChangePwdDialog" v-model="showChangePwdDialog" :group-admin-pwd="newGroupAdminPwd" />
   <el-table
     :data="groupSubs"
     stripe
@@ -200,10 +241,13 @@ onMounted(() => {
       :prop="column.prop"
       :label="column.label"
     />
-    <el-table-column :label="t('subList.actions')" width="120">
+    <el-table-column v-if="showActionsColumn" :label="t('subList.actions')" width="240">
       <template #default="scope">
         <el-button v-if="canCreateSubscription" @click.stop="openAddCompanyDialog(scope.row)">
           {{ t('subList.add') }}
+        </el-button>
+        <el-button type="warning" v-if="canChangePassword" @click.stop="handleChangePassword(scope.row)">
+          {{ t('subList.changePwd') }}
         </el-button>
       </template>
     </el-table-column>

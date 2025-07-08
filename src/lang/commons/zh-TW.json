@@ -48,6 +48,9 @@
     "createNewCompanyDupComTaxNoErrorMsg": "公司統一編號目前已存在",
     "createNewCompanyComTaxNoErrorMsg": "公司統一編號不合規範",
     "createNewCompanyComErrorMsg": "新增公司發生錯誤，請洽系統管理員",
+    "updateGroupAdminPwdSuccessMsg": "修改集團管理者密碼成功",
+    "updateGroupAdminNoUserErrorMsg": "查無該用戶",
+    "updateGroupAdminErrorMsg": "修改集團管理者密碼錯誤，請洽系統管理員",
     "systemErrorMsg": "系統錯誤，請聯繫系統管理員"
   },
   "pageTitle": {
@@ -136,7 +139,8 @@
     "subEndDate": "結束日期",
     "add": "建立",
     "addNewCompany": "新增公司",
-    "actions": "操作"
+    "actions": "操作",
+    "changePwd": "修改密碼"
   },
   "subAddNewGroup": {
     "title": "新增集團",
@@ -180,7 +184,9 @@
     "cancel": "取消"
   },
   "subAddNewGroupConfirm": {
-    "title": "集團管理者的密碼 : ",
-    "passwordLabel": "集團管理者的密碼 :"
+    "title": "集團管理者的密碼 : "
+  },
+  "subChangeGroupAdminPwdConfirm": {
+    "title": "集團管理者的密碼 : "
   }
 }
