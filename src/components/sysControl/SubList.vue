@@ -3,10 +3,12 @@ import { ref, onMounted, computed } from 'vue'
 import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 import SubAddNewGroup from './SubAddNewGroup.vue'
+import SubAddNewCom from './SubAddNewCom.vue'
 import { useSubItemsStore } from '@/stores/oms/orgs'
 import { getAllGroupSubs } from '@/services/oms/orgs'
 import { getAllSubItems } from '@/services/oms/orgs'
 import type { GroupCompanies, ComSubs } from '@/interfaces'
+import { useUserInfoStore } from '@/stores/oms/auths'
 
 const { t, locale } = useI18n()
 
@@ -14,11 +16,20 @@ const subItemsStore = useSubItemsStore()
 const { subItems } = storeToRefs(subItemsStore)
 const { groupSubs } = storeToRefs(subItemsStore)
 
+const userInfoStore = useUserInfoStore()
+const { per1000 } = storeToRefs(userInfoStore)
+
 const showAddGroupDialog = ref(false)
+const showAddComDialog = ref(false)
+const selectedGroup = ref<GroupCompanies | null>(null)
 
 const loading = ref(false)
 const expandedGroupRowKeys = ref<string[]>([])
 const expandedComRowKeys = ref<string[]>([])
+
+const canCreateSubscription = computed(() => {
+  return per1000.value.includes('sys-005-1000')
+})
 
 // --- Get Row Keys ---
 const getGroupRowKey = (row: GroupCompanies) => `group-${row.groupId}`
@@ -43,6 +54,11 @@ const handleComRowClick = (row: ComSubs) => {
   } else {
     expandedComRowKeys.value.push(rowKey)
   }
+}
+
+const openAddCompanyDialog = (group: GroupCompanies) => {
+  selectedGroup.value = group
+  showAddComDialog.value = true
 }
 
 // --- Table Columns ---
@@ -111,9 +127,10 @@ onMounted(() => {
 <template>
   <div class="sub-list-container">
     <div class="header-container">
-      <el-button type="success" class="add-button" @click="showAddGroupDialog = true">{{ t('subList.add') }}</el-button>
+      <el-button v-if="canCreateSubscription" type="success" class="add-button" @click="showAddGroupDialog = true">{{ t('subList.add') }}</el-button>
     </div>
     <SubAddNewGroup v-if="showAddGroupDialog" v-model="showAddGroupDialog" />
+    <SubAddNewCom v-if="showAddComDialog" v-model="showAddComDialog" :group="selectedGroup" />
   <el-table
     :data="groupSubs"
     stripe
@@ -183,6 +200,13 @@ onMounted(() => {
       :prop="column.prop"
       :label="column.label"
     />
+    <el-table-column :label="t('subList.actions')" width="120">
+      <template #default="scope">
+        <el-button v-if="canCreateSubscription" @click.stop="openAddCompanyDialog(scope.row)">
+          {{ t('subList.add') }}
+        </el-button>
+      </template>
+    </el-table-column>
   </el-table>
   </div>
 </template>

@@ -42,6 +42,12 @@
     "createNewGroupDupComTaxNoErrorMsg": "公司統一編號目前已存在",
     "createNewGroupComTaxNoErrorMsg": "公司統一編號不合規範",
     "createNewGroupComErrorMsg": "新增集團發生錯誤，請洽系統管理員",
+    "createNewCompanySuccessMsg": "新增公司成功",
+    "createNewCompanyFormatErrorMsg": "請確認輸入資料",
+    "createNewCompanyNoPerErrorMsg": "您沒有新增公司的權限，請洽系統管理員",
+    "createNewCompanyDupComTaxNoErrorMsg": "公司統一編號目前已存在",
+    "createNewCompanyComTaxNoErrorMsg": "公司統一編號不合規範",
+    "createNewCompanyComErrorMsg": "新增公司發生錯誤，請洽系統管理員",
     "systemErrorMsg": "系統錯誤，請聯繫系統管理員"
   },
   "pageTitle": {
@@ -128,7 +134,9 @@
     "subName": "訂閱名稱",
     "subStartDate": "開始日期",
     "subEndDate": "結束日期",
-    "add": "建立"
+    "add": "建立",
+    "addNewCompany": "新增公司",
+    "actions": "操作"
   },
   "subAddNewGroup": {
     "title": "新增集團",

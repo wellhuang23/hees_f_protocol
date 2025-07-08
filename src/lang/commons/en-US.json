@@ -42,6 +42,12 @@
     "createNewGroupDupComTaxNoErrorMsg": "Company Tax No. Already Exist",
     "createNewGroupComTaxNoErrorMsg": "Company Tax No. is Invalid",
     "createNewGroupComErrorMsg": "Error Occur when Creating New Group, Please Contact System Manager",
+    "createNewCompanySuccessMsg": "Create New Group Successfully",
+    "createNewCompanyFormatErrorMsg": "Please Confirm Input Data",
+    "createNewCompanyNoPerErrorMsg": "You don't Have Permission to Add New Group, Please Contact System Manager",
+    "createNewCompanyDupComTaxNoErrorMsg": "Company Tax No. Already Exist",
+    "createNewCompanyComTaxNoErrorMsg": "Company Tax No. Already Exist",
+    "createNewCompanyComErrorMsg": "Error Occur when Creating New Group, Please Contact System Manager",
     "systemErrorMsg": "System Error, Please Contact System Manager"
   },
   "pageTitle": {
@@ -128,7 +134,9 @@
     "subName": "Subscription Name",
     "subStartDate": "Start Date",
     "subEndDate": "End Date",
-    "add": "Add"
+    "add": "Add",
+    "addNewCompany": "Add New Company",
+    "actions": "Actions"
   },
   "subAddNewGroup": {
     "title": "Add New Group",
