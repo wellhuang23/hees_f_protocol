@@ -1,11 +1,18 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { ref, watch, defineProps, defineEmits } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { useSubItemsStore } from '@/stores/oms/orgs'
 import { storeToRefs } from 'pinia'
 import {ElNotification, type FormInstance, type FormRules} from 'element-plus'
 import type { NewComSub } from '@/interfaces'
 import {createGroupComSubs, getAllGroupSubs} from '@/services'
+import SubAddNewGroupConfirm from './SubAddNewGroupConfirm.vue'
+
+const props = defineProps<{
+  modelValue: boolean
+}>()
+
+const emit = defineEmits(['update:modelValue'])
 
 const { t, locale } = useI18n()
 
@@ -18,6 +25,9 @@ const form = ref({
   comStName: '',
   comEngName: '',
 })
+
+const showConfirmDialog = ref(false)
+const groupAdminPwd = ref('')
 
 const subItemsStore = useSubItemsStore()
 const { subItems } = storeToRefs(subItemsStore)
@@ -81,24 +91,25 @@ const submitForm = (formEl: FormInstance | undefined) => {
             subEndDate: sub.endDate,
           })
         }
+      }
 
-        const comSubs = {
-          comId: -1,
-          comTaxNo: form.value.comTaxNo,
-          comName: form.value.comName,
-          comStName: form.value.comStName,
-          comEngName: form.value.comEngName,
-          subs: subs,
-        }
+      const comSubs = {
+        comId: -1,
+        comTaxNo: form.value.comTaxNo,
+        comName: form.value.comName,
+        comStName: form.value.comStName,
+        comEngName: form.value.comEngName,
+        subs: subs,
+      }
 
-        const param = {
-          groupId: -1,
-          groupName: form.value.groupName,
-          comSubs: comSubs,
-        }
+      const param = {
+        groupId: -1,
+        groupName: form.value.groupName,
+        comSubs: comSubs,
+      }
 
-        const res = await createGroupComSubs(param)
-        if (res.errno === '00000') {
+      const res = await createGroupComSubs(param)
+      if (res.errno === '00000') {
           await getAllGroupSubs()
 
           ElNotification({
@@ -106,7 +117,8 @@ const submitForm = (formEl: FormInstance | undefined) => {
             message: t('notice.createNewGroupSuccessMsg'),
             type: 'success'
           })
-          location.reload()
+          groupAdminPwd.value = res.groupAdminPwd as string
+          showConfirmDialog.value = true
         } else if (res.errno === '99006') {
           ElNotification({
             title: t('notice.noticeTitle'),
@@ -138,8 +150,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
             type: 'error'
           })
         }
-      }
-    } else {
+      } else {
       ElNotification({
         title: t('notice.noticeTitle'),
         message: t('notice.createNewGroupFormatErrorMsg'),
@@ -149,6 +160,10 @@ const submitForm = (formEl: FormInstance | undefined) => {
   })
 }
 
+const handleReloadPage = () => {
+  location.reload()
+}
+
 </script>
 
 <template>
@@ -156,6 +171,8 @@ const submitForm = (formEl: FormInstance | undefined) => {
     :title="t('subAddNewGroup.title')"
     width="700"
     center
+    :model-value="props.modelValue"
+    @close="emit('update:modelValue', false)"
   >
     <el-form :model="form" :rules="rules" ref="formRef" label-width="auto">
       <el-form-item :label="t('subAddNewGroup.groupName')" prop="groupName">
@@ -203,6 +220,12 @@ const submitForm = (formEl: FormInstance | undefined) => {
       </div>
     </template>
   </el-dialog>
+
+  <SubAddNewGroupConfirm
+    v-if="showConfirmDialog"
+    :group-admin-pwd="groupAdminPwd"
+    @confirm="handleReloadPage()"
+  />
 </template>
 
 <style scoped lang="scss">

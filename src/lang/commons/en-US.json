@@ -178,5 +178,9 @@
   "general": {
     "confirm": "Confirm",
     "cancel": "Cancel"
+  },
+  "subAddNewGroupConfirm": {
+    "title": "Group Administrator's Password : ",
+    "passwordLabel": "Group Administrator's Password :"
   }
 }

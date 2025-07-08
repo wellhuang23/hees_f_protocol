@@ -41,6 +41,7 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     SubAddNewCom: typeof import('./src/components/sysControl/SubAddNewCom.vue')['default']
     SubAddNewGroup: typeof import('./src/components/sysControl/SubAddNewGroup.vue')['default']
+    SubAddNewGroupConfirm: typeof import('./src/components/sysControl/SubAddNewGroupConfirm.vue')['default']
     SubList: typeof import('./src/components/sysControl/SubList.vue')['default']
     TopBar: typeof import('./src/components/general/TopBar.vue')['default']
   }

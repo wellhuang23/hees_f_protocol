@@ -178,5 +178,9 @@
   "general": {
     "confirm": "確認",
     "cancel": "取消"
+  },
+  "subAddNewGroupConfirm": {
+    "title": "集團管理者的密碼 : ",
+    "passwordLabel": "集團管理者的密碼 :"
   }
 }
