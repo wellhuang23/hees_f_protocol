@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { sessionCache } from '@/utils/storages'
+import {sessionCache} from '@/utils/storages'
 import type {
     Sub,
     GroupCompanies
@@ -49,6 +49,13 @@ const useSubItemsStore = defineStore(SUB_ITEMS, {
                 subItems: this.subItems,
                 groupSubs: data,
             })
+        },
+
+        clearSubItems() {
+            this.subItems = []
+            this.groupSubs = []
+
+            sessionCache.removeCache(SUB_ITEMS)
         }
     }
 })
