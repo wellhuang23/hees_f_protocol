@@ -145,3 +145,15 @@ export interface UpdateComSubsReqParams {
     // New Company
     subs: NewComSub[];
 }
+
+// Change Group Administrator Password Request Parameters
+export interface ChangeGroupAdminPwdReqParams {
+    // Group ID
+    groupId: number;
+}
+
+//  Change Group Administrator Password Response Parameters
+export interface ChangeGroupAdminPwdResParams extends GeneralResParam {
+    // Group Administrator Password
+    groupAdminNewPwd?: string;
+}

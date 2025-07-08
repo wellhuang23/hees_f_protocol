@@ -6,6 +6,8 @@ import type {
     CreateComSubsReqParams,
     CreateComSubsResParams,
     UpdateComSubsReqParams,
+    ChangeGroupAdminPwdReqParams,
+    ChangeGroupAdminPwdResParams
 } from '@/interfaces'
 import {
     useDeviceInfoStore,
@@ -89,6 +91,28 @@ export async function updateComSubs(updateParams: UpdateComSubsReqParams) {
                     return OMSOrgsAPI.updateComSubscription(
                         updateParams,
                         refreshToken).then((refreshRes: GeneralResParam) => {
+                        return refreshRes
+                    })
+                }
+            }
+        }
+        return res
+    })
+}
+
+export async function changeGroupAdminPwd(changeParams: ChangeGroupAdminPwdReqParams) {
+    const token = deviceStore.token
+    return OMSOrgsAPI.changeGroupAdminPwd(changeParams, token).then(async (res: ChangeGroupAdminPwdResParams)=> {
+        if (res.errno === '00000') {
+            return res
+        } else {
+            if (res.errno === '99005') {
+                const refreshTokenResult = await updateToken().then()
+                if (refreshTokenResult === '00000') {
+                    const refreshToken = deviceStore.token
+                    return OMSOrgsAPI.changeGroupAdminPwd(
+                        changeParams,
+                        refreshToken).then((refreshRes: CreateComSubsResParams) => {
                         return refreshRes
                     })
                 }
