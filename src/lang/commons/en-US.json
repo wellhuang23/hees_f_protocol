@@ -190,5 +190,24 @@
   "subChangeGroupAdminPwdConfirm": {
     "title": "Group Administrator's New Password : ",
     "passwordLabel": "Group Administrator's New Password :"
+  },
+  "calendar": {
+    "today": "Today",
+    "months": {
+      "january": "January",
+      "february": "February",
+      "march": "March",
+      "april": "April",
+      "may": "May",
+      "june": "June",
+      "july": "July",
+      "august": "August",
+      "september": "September",
+      "october": "October",
+      "november": "November",
+      "december": "December"
+    },
+    "addEvent": "Add Event",
+    "refreshHoliday": "Refresh Holiday"
   }
 }
