@@ -409,7 +409,7 @@ const toggleMonthSelector = () => {
   padding: 0 4px;
 }
 
-.events-wrapper .el-tag {
+.events-wrapper {
   width: 100%;
   justify-content: flex-start;
 }
