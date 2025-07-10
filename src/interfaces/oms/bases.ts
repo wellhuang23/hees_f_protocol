@@ -11,6 +11,7 @@ export interface GetLogsReqParams {
     logEndTime: string;
 }
 
+// Execution Information in Log Information
 export interface ExecutionInfo {
     // Error No.
     errno: string;
@@ -28,6 +29,7 @@ export interface ExecutionInfo {
     _model: string;
 }
 
+// Log Information
 export interface LogInfo {
     // log ID
     logId: number;
@@ -91,4 +93,56 @@ export interface LogInfo {
 export interface GetLogsResParams extends GeneralResParam {
     // Logs Data
     data?: LogInfo[];
+}
+
+// Calendar Event
+export interface CalEvent {
+    // Calendar Event ID
+    calId: number;
+
+    // Calendar Event Name
+    calName: string;
+
+    // Calendar Event Description
+    calDesc: string;
+
+    // Calendar Event Name in English
+    calEngName: string;
+
+    // Calendar Event Description in English
+    calEngDesc: string;
+
+    // Calendar Event Date
+    calDate: string;
+
+    // Calendar Type
+    calType: number;
+}
+
+export interface GetCalEventsResParams extends GeneralResParam {
+    calData?: CalEvent[];
+}
+
+// Create Single calendar Event Request Parameters
+export interface CalEventReqParams {
+    // Calendar Event ID
+    calId?: number;
+
+    // Calendar Event Name
+    calName?: string;
+
+    // Calendar Event Description
+    calDesc?: string;
+
+    // Calendar Event Name in English
+    calEngName?: string;
+
+    // Calendar Event Description in English
+    calEngDesc?: string;
+
+    // Calendar Event Date
+    calDate?: string;
+
+    // Calendar Type
+    calType?: number;
 }

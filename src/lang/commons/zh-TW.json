@@ -51,6 +51,18 @@
     "updateGroupAdminPwdSuccessMsg": "修改集團管理者密碼成功",
     "updateGroupAdminNoUserErrorMsg": "查無該用戶",
     "updateGroupAdminErrorMsg": "修改集團管理者密碼錯誤，請洽系統管理員",
+    "syncCalendarSuccessMsg": "行事曆同步成功",
+    "syncCalendarNoPerErrorMsg": "您沒有同步行事曆的權限，請洽系統管理員",
+    "syncCalendarErrorMsg": "行事曆同步失敗，請洽系統管理員",
+    "createCalendarSuccessMsg": "新增行事曆事件成功",
+    "createCalendarNoPerErrorMsg": "您沒有新增行事曆事件的權限，請洽系統管理員",
+    "createCalendarErrorMsg": "新增行事曆事件失敗，請洽系統管理員",
+    "updateCalendarSuccessMsg": "更新行事曆事件成功",
+    "updateCalendarNoPerErrorMsg": "您沒有更新行事曆事件的權限，請洽系統管理員",
+    "updateCalendarErrorMsg": "更新行事曆事件失敗，請洽系統管理員",
+    "deleteCalendarSuccessMsg": "刪除行事曆事件成功",
+    "deleteCalendarNoPerErrorMsg": "您沒有刪除行事曆事件的權限，請洽系統管理員",
+    "deleteCalendarErrorMsg": "刪除行事曆事件失敗，請洽系統管理員",
     "systemErrorMsg": "系統錯誤，請聯繫系統管理員"
   },
   "pageTitle": {
@@ -188,5 +200,46 @@
   },
   "subChangeGroupAdminPwdConfirm": {
     "title": "集團管理者的密碼 : "
+  },
+  "calendar": {
+    "today": "今天",
+    "months": {
+      "january": "一月",
+      "february": "二月",
+      "march": "三月",
+      "april": "四月",
+      "may": "五月",
+      "june": "六月",
+      "july": "七月",
+      "august": "八月",
+      "september": "九月",
+      "october": "十月",
+      "november": "十一月",
+      "december": "十二月"
+    },
+    "addEvent": "新增事件",
+    "refreshHoliday": "更新假日",
+    "addEventDialog": {
+      "title": "新增事件",
+      "name": "事件名稱",
+      "description": "事件描述",
+      "nameEn": "事件英文名稱",
+      "descriptionEn": "事件英文描述",
+      "eventDate": "事件日期",
+      "type": "事件類型",
+      "types": {
+        "system": "系統事件",
+        "national": "國定事件"
+      }
+    },
+    "updateEventDialog": {
+      "title": "更新事件",
+      "update": "更新"
+    },
+    "deleteEventDialog": {
+      "title": "刪除事件",
+      "content": "是否確認刪除事件",
+      "delete": "刪除"
+    }
   }
 }

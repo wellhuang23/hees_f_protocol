@@ -37,7 +37,7 @@
       "title": "pageTitle.calendar",
       "perCodes": ["sys-004-0100"]
     },
-    "component": "sysControl/UpdateCal"
+    "component": "sysControl/Calendar"
   },
   {
     "path": "sys/notifications",
