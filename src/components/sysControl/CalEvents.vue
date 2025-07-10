@@ -7,7 +7,7 @@ import { useUserInfoStore } from '@/stores/oms/auths';
 import type { CalEvent } from '@/interfaces/oms/bases';
 import { getCalEvents } from '@/services/oms/bases'
 import CalEventDesc from './CalEventDesc.vue';
-import CalUpdateEvent from './CalUpdateEvent.vue';
+import CalUpEvent from './CalUpEvent.vue';
 
 const { t, locale } = useI18n();
 const calEventsStore = useCalEventsStore();
@@ -249,7 +249,7 @@ const toggleMonthSelector = () => {
       </div>
     </div>
     <cal-event-desc v-model="isDescDialogVisible" :event="selectedEvent" />
-    <cal-update-event v-model="isUpdateDialogVisible" :event="selectedEvent" />
+    <cal-up-event v-model="isUpdateDialogVisible" :event="selectedEvent" />
   </div>
 </template>
 

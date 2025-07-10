@@ -4,6 +4,8 @@ import { useI18n } from 'vue-i18n';
 import {ElNotification, type FormInstance, type FormRules} from 'element-plus';
 import type { CalEvent } from '@/interfaces/oms/bases';
 import { updateCalEvent } from '@/services/oms/bases'
+import { useUserInfoStore } from '@/stores/oms/auths';
+import CalDelEvent from './CalDelEvent.vue';
 
 // Props and Emits for v-model
 const props = defineProps<{
@@ -14,6 +16,12 @@ const emit = defineEmits(['update:modelValue']);
 
 const { t } = useI18n();
 const formRef = ref<FormInstance>();
+const isDelDialogVisible = ref(false);
+const userInfoStore = useUserInfoStore();
+
+const canDelete = computed(() => {
+  return userInfoStore.per0001.includes('sys-004-0001');
+});
 
 // Form data refs
 const formData = ref({
@@ -108,6 +116,10 @@ const handleConfirm = async () => {
     }
   });
 };
+
+const openDelDialog = () => {
+  isDelDialogVisible.value = true;
+};
 </script>
 
 <template>
@@ -171,18 +183,31 @@ const handleConfirm = async () => {
       </el-form-item>
     </el-form>
     <template #footer>
-      <span class="dialog-footer">
+      <div class="dialog-footer-actions">
+        <el-button v-if="canDelete" type="danger" @click="openDelDialog">{{ t('calendar.deleteEventDialog.delete') }}</el-button>
+        <div class="spacer"></div>
         <el-button @click="closeDialog">{{ t('general.cancel') }}</el-button>
         <el-button type="primary" @click="handleConfirm">
           {{ t('calendar.updateEventDialog.update') }}
         </el-button>
-      </span>
+      </div>
     </template>
   </el-dialog>
+  <cal-del-event v-model="isDelDialogVisible" :event="event" />
 </template>
 
 <style scoped lang="scss">
+.dialog-footer-actions {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
 .add-event-form {
   padding: 20px;
+}
+
+.spacer {
+  flex-grow: 1;
 }
 </style>

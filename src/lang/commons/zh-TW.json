@@ -60,6 +60,9 @@
     "updateCalendarSuccessMsg": "更新行事曆事件成功",
     "updateCalendarNoPerErrorMsg": "您沒有更新行事曆事件的權限，請洽系統管理員",
     "updateCalendarErrorMsg": "更新行事曆事件失敗，請洽系統管理員",
+    "deleteCalendarSuccessMsg": "刪除行事曆事件成功",
+    "deleteCalendarNoPerErrorMsg": "您沒有刪除行事曆事件的權限，請洽系統管理員",
+    "deleteCalendarErrorMsg": "刪除行事曆事件失敗，請洽系統管理員",
     "systemErrorMsg": "系統錯誤，請聯繫系統管理員"
   },
   "pageTitle": {
@@ -232,6 +235,11 @@
     "updateEventDialog": {
       "title": "更新事件",
       "update": "更新"
+    },
+    "deleteEventDialog": {
+      "title": "刪除事件",
+      "content": "是否確認刪除事件",
+      "delete": "刪除"
     }
   }
 }
