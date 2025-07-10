@@ -12,6 +12,7 @@ declare module 'vue' {
     AsignUsers: typeof import('./src/components/sysControl/AsignUsers.vue')['default']
     AssignUsers: typeof import('./src/components/sysControl/PerAssignUsers.vue')['default']
     BottomSign: typeof import('./src/components/general/BottomSign.vue')['default']
+    CalAddEvent: typeof import('./src/components/sysControl/CalAddEvent.vue')['default']
     CalEventDesc: typeof import('./src/components/sysControl/CalEventDesc.vue')['default']
     CalEvents: typeof import('./src/components/sysControl/CalEvents.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']

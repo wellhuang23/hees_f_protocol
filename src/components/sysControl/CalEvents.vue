@@ -18,7 +18,6 @@ const selectedEvent = ref<CalEvent | null>(null);
 const loadCalEventsData = async () => {
   if (calEvents.value.length > 0) return
   await getCalEvents()
-
 }
 
 onMounted(() => {

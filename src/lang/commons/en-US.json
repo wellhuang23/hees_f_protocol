@@ -51,6 +51,12 @@
     "updateGroupAdminPwdSuccessMsg": "Change Group Admin Password Successfully",
     "updateGroupAdminNoUserErrorMsg": "Search No User",
     "updateGroupAdminErrorMsg": "Change Group Admin Password Fail, Please Contact System Manager",
+    "syncCalendarSuccessMsg": "Sync Calendar Successfully",
+    "syncCalendarNoPerErrorMsg": "You don't Have Permission to Sync Calendar, Please Contact System Manger",
+    "syncCalendarErrorMsg": "Sync Calendar Fail, Please Contact System Manger",
+    "createCalendarSuccessMsg": "Create Calendar Event Successfully",
+    "createCalendarNoPerErrorMsg": "You don't Have Permission to Create Calendar Event, Please Contact System Manger",
+    "createCalendarErrorMsg": "Create Calendar Event Fail, Please Contact System Manger",
     "systemErrorMsg": "System Error, Please Contact System Manager"
   },
   "pageTitle": {
@@ -208,6 +214,19 @@
       "december": "December"
     },
     "addEvent": "Add Event",
-    "refreshHoliday": "Refresh Holiday"
+    "refreshHoliday": "Refresh Holiday",
+    "addEventDialog": {
+      "title": "Add Event",
+      "name": "Event Name",
+      "description": "Event Description",
+      "nameEn": "Event English Name",
+      "descriptionEn": "Event English Description",
+      "eventDate": "Event Date",
+      "type": "Event Type",
+      "types": {
+        "system": "System Event",
+        "national": "National Event"
+      }
+    }
   }
 }
