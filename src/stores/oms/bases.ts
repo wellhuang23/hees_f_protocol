@@ -2,20 +2,24 @@ import { defineStore } from 'pinia'
 import type {
     GetLogsResParams,
     LogInfo,
+    GetCalEventsResParams,
+    CalEvent,
 } from '@/interfaces'
 import {
     OMS_SERVER_LOGS,
+    CAL_EVENTS,
 } from '@/global/contstants'
+import { sessionCache } from '@/utils/storages.ts'
 
 const useOmsServerLogsStore = defineStore(OMS_SERVER_LOGS, {
     state:() => ({
         omsServerLogs: [] as LogInfo[],
     }),
     actions: {
-        setOmsServerLogs(omsServerLogs: GetLogsResParams) {
+        setOmsServerLogs(params: GetLogsResParams) {
             const logs: LogInfo[] = []
-            if (omsServerLogs.errno === '00000') {
-                for (const log of omsServerLogs.data ?? []) {
+            if (params.errno === '00000') {
+                for (const log of params.data ?? []) {
                     logs.push(log)
                 }
             }
@@ -25,6 +29,28 @@ const useOmsServerLogsStore = defineStore(OMS_SERVER_LOGS, {
     }
 })
 
+const useCalEventsStore = defineStore(CAL_EVENTS, {
+    state:() => ({
+        calEvents: sessionCache.getCache(CAL_EVENTS)?.subItems ?? [] as CalEvent[]
+    }),
+    actions: {
+        setCalEvents(params: GetCalEventsResParams) {
+            const events: CalEvent[] = []
+            if (params.errno === '00000') {
+                for (const event of params.calData ?? []) {
+                    events.push(event)
+                }
+            }
+            this.calEvents = events
+
+            sessionCache.setCache(CAL_EVENTS, {
+                calEvents: events,
+            })
+        }
+    }
+})
+
 export {
-    useOmsServerLogsStore
+    useOmsServerLogsStore,
+    useCalEventsStore,
 }
