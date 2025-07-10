@@ -1,48 +1,30 @@
-<template>
-  <div class="calendar-container">
-    <div class="calendar-header">
-      <div class="header-selectors">
-        <span @click="toggleYearSelector" class="current-year-month">{{ displayedYear }}</span>
-        <span @click="toggleMonthSelector" class="current-year-month">{{ displayedMonthName }}</span>
-        <div v-if="showYearSelector" class="year-selector">
-          <ul class="year-list">
-            <li v-for="year in yearRange" :key="year" @click="selectYear(year)">{{ year }}</li>
-          </ul>
-        </div>
-        <div v-if="showMonthSelector" class="month-selector">
-          <ul class="month-list">
-            <li v-for="(month, index) in monthNames" :key="index" @click="selectMonth(index)">{{ month }}</li>
-          </ul>
-        </div>
-      </div>
-      <div class="header-actions">
-        <button @click="prevMonth" class="nav-button">&lt;</button>
-        <button @click="goToToday" class="today-button">{{ t('calendar.today') }}</button>
-        <button @click="nextMonth" class="nav-button">&gt;</button>
-      </div>
-    </div>
-    <div class="calendar-grid">
-      <div class="day-header" v-for="day in dayNames" :key="day">{{ day }}</div>
-      <div
-        class="day-cell"
-        v-for="day in calendarDays"
-        :key="day.date.toISOString()"
-        :class="{
-          'other-month': !day.isCurrentMonth,
-          'is-today': day.isToday
-        }"
-      >
-        <span class="day-number">{{ day.date.getDate() }}</span>
-      </div>
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
+import { storeToRefs } from 'pinia';
+import { useCalEventsStore } from '@/stores/oms/bases';
+import type { CalEvent } from '@/interfaces/oms/bases';
+import { getCalEvents } from '@/services/oms/bases'
+import CalEventDesc from './CalEventDesc.vue';
 
-const { t } = useI18n();
+const { t, locale } = useI18n();
+const calEventsStore = useCalEventsStore();
+const { calEvents } = storeToRefs(calEventsStore);
+
+// Dialog state
+const isDialogVisible = ref(false);
+const selectedEvent = ref<CalEvent | null>(null);
+
+const loadCalEventsData = async () => {
+  if (calEvents.value.length > 0) return
+  await getCalEvents()
+
+}
+
+onMounted(() => {
+  loadCalEventsData();
+});
+
 const now = new Date();
 const currentYear = ref(now.getFullYear());
 const currentMonth = ref(now.getMonth()); // 0-11
@@ -73,6 +55,40 @@ const yearRange = computed(() => {
   return years;
 });
 
+// 將事件按 YYYY-MM-DD 格式分組
+const eventsByDate = computed(() => {
+  const map = new Map<string, CalEvent[]>();
+  if (calEvents.value) {
+    for (const event of calEvents.value) {
+      if (!map.has(event.calDate)) {
+        map.set(event.calDate, []);
+      }
+      map.get(event.calDate)!.push(event);
+    }
+  }
+  return map;
+});
+
+// 格式化日期為 YYYY-MM-DD
+const formatDate = (date: Date): string => {
+  const year = date.getFullYear();
+  const month = (date.getMonth() + 1).toString().padStart(2, '0');
+  const day = date.getDate().toString().padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
+// 根據 calType 返回對應的 Tag Type
+const getTagType = (calType: number) => {
+  switch (calType) {
+    case 0:
+      return 'danger';
+    case 1:
+      return 'info';
+    default:
+      return 'primary';
+  }
+};
+
 const calendarDays = computed(() => {
   const year = displayedYear.value;
   const month = displayedMonth.value;
@@ -86,7 +102,7 @@ const calendarDays = computed(() => {
   today.setHours(0, 0, 0, 0);
 
   // Days from previous month
-  const startDayOfWeek = firstDayOfMonth.getDay(); // 0 for Sunday, 1 for Monday, etc.
+  const startDayOfWeek = firstDayOfMonth.getDay();
   for (let i = startDayOfWeek; i > 0; i--) {
     const date = new Date(lastDayOfPrevMonth);
     date.setDate(lastDayOfPrevMonth.getDate() - i + 1);
@@ -107,18 +123,22 @@ const calendarDays = computed(() => {
     const date = new Date(year, month + 1, i);
     days.push({ date, isCurrentMonth: false, isToday: false });
   }
-  
-  // Ensure calendar has 6 weeks (42 days) for consistent height
+
   while (days.length < 42) {
-      const lastDay = days[days.length - 1].date;
-      const nextDay = new Date(lastDay);
+      const lastDay: Date = days[days.length - 1].date;
+      const nextDay: Date = new Date(lastDay);
       nextDay.setDate(lastDay.getDate() + 1);
       days.push({ date: nextDay, isCurrentMonth: false, isToday: false });
   }
 
-
   return days;
 });
+
+// 顯示事件詳情
+const showEventDetails = (event: CalEvent) => {
+  selectedEvent.value = event;
+  isDialogVisible.value = true;
+};
 
 function prevMonth() {
   if (currentMonth.value === 0) {
@@ -167,8 +187,63 @@ const toggleMonthSelector = () => {
     showYearSelector.value = false;
   }
 };
-
 </script>
+
+<template>
+  <div class="calendar-container">
+    <div class="calendar-header">
+      <div class="header-selectors">
+        <span @click="toggleYearSelector" class="current-year-month">{{ displayedYear }}</span>
+        <span @click="toggleMonthSelector" class="current-year-month">{{ displayedMonthName }}</span>
+        <div v-if="showYearSelector" class="year-selector">
+          <ul class="year-list">
+            <li v-for="year in yearRange" :key="year" @click="selectYear(year)">{{ year }}</li>
+          </ul>
+        </div>
+        <div v-if="showMonthSelector" class="month-selector">
+          <ul class="month-list">
+            <li v-for="(month, index) in monthNames" :key="index" @click="selectMonth(index)">{{ month }}</li>
+          </ul>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button @click="prevMonth" class="nav-button">&lt;</button>
+        <button @click="goToToday" class="today-button">{{ t('calendar.today') }}</button>
+        <button @click="nextMonth" class="nav-button">&gt;</button>
+      </div>
+    </div>
+    <div class="calendar-grid">
+      <div class="day-header" v-for="day in dayNames" :key="day">{{ day }}</div>
+      <div
+        class="day-cell"
+        v-for="day in calendarDays"
+        :key="day.date.toISOString()"
+        :class="{
+          'other-month': !day.isCurrentMonth,
+          'is-today': day.isToday
+        }"
+      >
+        <div class="day-content">
+          <span class="day-number">{{ day.date.getDate() }}</span>
+          <div class="events-wrapper">
+            <el-tag
+              v-for="event in eventsByDate.get(formatDate(day.date))"
+              :key="event.calId"
+              :type="getTagType(event.calType)"
+              size="small"
+              effect="light"
+              @click="showEventDetails(event)"
+              style="cursor: pointer;"
+            >
+              {{ locale === 'zh-TW' ? event.calName : event.calEngName }}
+            </el-tag>
+          </div>
+        </div>
+      </div>
+    </div>
+    <cal-event-desc v-model="isDialogVisible" :event="selectedEvent" />
+  </div>
+</template>
 
 <style scoped>
 .calendar-container {
@@ -293,15 +368,18 @@ const toggleMonthSelector = () => {
 .day-cell {
   border: 1px solid #e0e0e0;
   border-radius: 4px;
-  padding: 8px;
-  font-size: 0.9rem;
   transition: background-color 0.2s;
+  padding: 4px;
+}
+
+.day-content {
   display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
+  flex-direction: column;
+  height: 100%;
 }
 
 .day-number {
+  align-self: flex-end;
   padding: 5px;
 }
 
@@ -320,5 +398,19 @@ const toggleMonthSelector = () => {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.events-wrapper {
+  flex-grow: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 0 4px;
+}
+
+.events-wrapper .el-tag {
+  width: 100%;
+  justify-content: flex-start;
 }
 </style>

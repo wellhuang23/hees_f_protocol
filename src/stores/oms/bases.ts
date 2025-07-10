@@ -9,6 +9,7 @@ import {
     OMS_SERVER_LOGS,
     CAL_EVENTS,
 } from '@/global/contstants'
+import { sessionCache } from '@/utils/storages.ts'
 
 const useOmsServerLogsStore = defineStore(OMS_SERVER_LOGS, {
     state:() => ({
@@ -30,7 +31,7 @@ const useOmsServerLogsStore = defineStore(OMS_SERVER_LOGS, {
 
 const useCalEventsStore = defineStore(CAL_EVENTS, {
     state:() => ({
-        calEvents: [] as CalEvent[]
+        calEvents: sessionCache.getCache(CAL_EVENTS)?.subItems ?? [] as CalEvent[]
     }),
     actions: {
         setCalEvents(params: GetCalEventsResParams) {
@@ -40,8 +41,11 @@ const useCalEventsStore = defineStore(CAL_EVENTS, {
                     events.push(event)
                 }
             }
-
             this.calEvents = events
+
+            sessionCache.setCache(CAL_EVENTS, {
+                calEvents: events,
+            })
         }
     }
 })
