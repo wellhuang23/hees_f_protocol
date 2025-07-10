@@ -98,7 +98,7 @@ class OMSBasesAPI {
     // API for Getting System calendar Events
     async getSysCalEvents(token: string): Promise<GetCalEventsResParams> {
         return request<any, any>({
-            url: BASE_API + '/sys/cals/get',
+            url: BASE_API + '/cals/sys/get',
             method: 'GET',
             headers: {
                 Authorization: `HEEsToken ${token}`,
@@ -144,7 +144,7 @@ class OMSBasesAPI {
         }
 
         return request<any, any>({
-            url: BASE_API + '/sys/cal/create',
+            url: BASE_API + '/cal/sys/create',
             method: 'POST',
             headers: {
                 Authorization: `HEEsToken ${token}`,
@@ -171,7 +171,7 @@ class OMSBasesAPI {
         }
 
         return request<any, any>({
-            url: BASE_API + '/sys/cal/update',
+            url: BASE_API + '/cal/sys/update',
             method: 'POST',
             headers: {
                 Authorization: `HEEsToken ${token}`,
@@ -192,7 +192,7 @@ class OMSBasesAPI {
         }
 
         return request<any, any>({
-            url: BASE_API + '/sys/cal/delete',
+            url: BASE_API + '/cal/sys/delete',
             method: 'POST',
             headers: {
                 Authorization: `HEEsToken ${token}`,
@@ -209,7 +209,7 @@ class OMSBasesAPI {
     // API for Syncing National Calendar Events from Government
     async syncGovCalEvents(token: string): Promise<GeneralResParam> {
         return request<any, any>({
-            url: BASE_API + '/sys/cals/sync',
+            url: BASE_API + '/cals/sys/sync',
             method: 'POST',
             headers: {
                 Authorization: `HEEsToken ${token}`,
