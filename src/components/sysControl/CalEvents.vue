@@ -3,16 +3,20 @@ import { ref, computed, onMounted } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { storeToRefs } from 'pinia';
 import { useCalEventsStore } from '@/stores/oms/bases';
+import { useUserInfoStore } from '@/stores/oms/auths';
 import type { CalEvent } from '@/interfaces/oms/bases';
 import { getCalEvents } from '@/services/oms/bases'
 import CalEventDesc from './CalEventDesc.vue';
+import CalUpdateEvent from './CalUpdateEvent.vue';
 
 const { t, locale } = useI18n();
 const calEventsStore = useCalEventsStore();
 const { calEvents } = storeToRefs(calEventsStore);
+const userInfoStore = useUserInfoStore();
 
 // Dialog state
-const isDialogVisible = ref(false);
+const isDescDialogVisible = ref(false);
+const isUpdateDialogVisible = ref(false);
 const selectedEvent = ref<CalEvent | null>(null);
 
 const loadCalEventsData = async () => {
@@ -136,7 +140,11 @@ const calendarDays = computed(() => {
 // 顯示事件詳情
 const showEventDetails = (event: CalEvent) => {
   selectedEvent.value = event;
-  isDialogVisible.value = true;
+  if (userInfoStore.per0010.includes('sys-004-0010')) {
+    isUpdateDialogVisible.value = true;
+  } else {
+    isDescDialogVisible.value = true;
+  }
 };
 
 function prevMonth() {
@@ -240,7 +248,8 @@ const toggleMonthSelector = () => {
         </div>
       </div>
     </div>
-    <cal-event-desc v-model="isDialogVisible" :event="selectedEvent" />
+    <cal-event-desc v-model="isDescDialogVisible" :event="selectedEvent" />
+    <cal-update-event v-model="isUpdateDialogVisible" :event="selectedEvent" />
   </div>
 </template>
 

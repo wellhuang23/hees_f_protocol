@@ -15,6 +15,7 @@ declare module 'vue' {
     CalAddEvent: typeof import('./src/components/sysControl/CalAddEvent.vue')['default']
     CalEventDesc: typeof import('./src/components/sysControl/CalEventDesc.vue')['default']
     CalEvents: typeof import('./src/components/sysControl/CalEvents.vue')['default']
+    CalUpdateEvent: typeof import('./src/components/sysControl/CalUpdateEvent.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCalendar: typeof import('element-plus/es')['ElCalendar']
     ElDatePicker: typeof import('element-plus/es')['ElDatePicker']

@@ -57,6 +57,9 @@
     "createCalendarSuccessMsg": "Create Calendar Event Successfully",
     "createCalendarNoPerErrorMsg": "You don't Have Permission to Create Calendar Event, Please Contact System Manger",
     "createCalendarErrorMsg": "Create Calendar Event Fail, Please Contact System Manger",
+    "updateCalendarSuccessMsg": "Update Calendar Event Successfully",
+    "updateCalendarNoPerErrorMsg": "You don't Have Permission to Update Calendar Event, Please Contact System Manger",
+    "updateCalendarErrorMsg": "Update Calendar Event Fail, Please Contact System Manger",
     "systemErrorMsg": "System Error, Please Contact System Manager"
   },
   "pageTitle": {
@@ -227,6 +230,10 @@
         "system": "System Event",
         "national": "National Event"
       }
+    },
+    "updateEventDialog": {
+      "title": "Update Event",
+      "update": "Update"
     }
   }
 }
