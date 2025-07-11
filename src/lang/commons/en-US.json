@@ -65,6 +65,17 @@
     "deleteCalendarErrorMsg": "Delete Calendar Event Fail, Please Contact System Manger",
     "systemErrorMsg": "System Error, Please Contact System Manager"
   },
+  "cusSug": {
+    "pageTitle": "Your suggestions are the driving force for our continuous progress !",
+    "addBtn": "Add",
+    "status0": "New Suggestions",
+    "status1": "In Processing",
+    "status2": "Done",
+    "status3": "Sealed",
+    "tableHeaderName": "Name",
+    "tableHeaderSubNo": "Subscription No.",
+    "tableHeaderSubName": "Subscription Name"
+  },
   "pageTitle": {
     "logIn": "Log In",
     "notExist": "Page Not Exist",

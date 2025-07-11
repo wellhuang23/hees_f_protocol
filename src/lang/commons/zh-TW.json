@@ -65,6 +65,17 @@
     "deleteCalendarErrorMsg": "刪除行事曆事件失敗，請洽系統管理員",
     "systemErrorMsg": "系統錯誤，請聯繫系統管理員"
   },
+  "cusSug": {
+    "pageTitle": "您的建議，是我們持續進步的動力 !",
+    "addBtn": "新增",
+    "status0": "新建議",
+    "status1": "處理中",
+    "status2": "已完成",
+    "status3": "已封存",
+    "tableHeaderName": "標題",
+    "tableHeaderSubNo": "訂閱代號",
+    "tableHeaderSubName": "訂閱名稱"
+  },
   "pageTitle": {
     "logIn": "登入",
     "notExist": "頁面不存在",
