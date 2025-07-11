@@ -4,10 +4,13 @@ import type {
     LogInfo,
     GetCalEventsResParams,
     CalEvent,
+    CusSugMsg,
+    GetCusSugResParams,
 } from '@/interfaces'
 import {
     OMS_SERVER_LOGS,
     CAL_EVENTS,
+    CUS_SUGGESTIONS,
 } from '@/global/contstants'
 import { sessionCache } from '@/utils/storages.ts'
 
@@ -50,7 +53,33 @@ const useCalEventsStore = defineStore(CAL_EVENTS, {
     }
 })
 
+const useCusSuggestionsStore = defineStore(CUS_SUGGESTIONS, {
+    state:() => ({
+        cusSugStatus0: sessionCache.getCache(CUS_SUGGESTIONS)?.cusSugStatus0 ?? [] as CusSugMsg[],
+        cusSugStatus1: sessionCache.getCache(CUS_SUGGESTIONS)?.cusSugStatus1 ?? [] as CusSugMsg[],
+        cusSugStatus2: sessionCache.getCache(CUS_SUGGESTIONS)?.cusSugStatus2 ?? [] as CusSugMsg[],
+        cusSugStatus3: sessionCache.getCache(CUS_SUGGESTIONS)?.cusSugStatus3 ?? [] as CusSugMsg[],
+
+    }),
+    actions: {
+        setCusSuggestions(params: GetCusSugResParams) {
+            this.cusSugStatus0 = params.status0 ?? []
+            this.cusSugStatus1 = params.status1 ?? []
+            this.cusSugStatus2 = params.status2 ?? []
+            this.cusSugStatus3 = params.status3 ?? []
+
+            sessionCache.setCache(CUS_SUGGESTIONS, {
+                cusSugStatus0: params.status0,
+                cusSugStatus1: params.status1,
+                cusSugStatus2: params.status2,
+                cusSugStatus3: params.status3,
+            })
+        }
+    }
+})
+
 export {
     useOmsServerLogsStore,
     useCalEventsStore,
+    useCusSuggestionsStore,
 }

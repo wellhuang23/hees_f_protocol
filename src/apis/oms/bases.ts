@@ -7,6 +7,9 @@ import type {
     GetCalEventsResParams,
     CalEvent,
     CalEventReqParams,
+    GetCusSugResParams,
+    CusSugMsg,
+    CusSugReqParams,
 } from '@/interfaces'
 import request from '@/utils/requests'
 import { convertToNumber } from '@/utils/conNumber'
@@ -214,6 +217,217 @@ class OMSBasesAPI {
             headers: {
                 Authorization: `HEEsToken ${token}`,
             },
+        }).then((response): GeneralResParam => {
+            return {
+                errno: response.data.errno,
+                desc: response.data.desc,
+            }
+        });
+    }
+
+    // API for Getting Customer Suggestion
+    async getCusSuggestion(token: string): Promise<GetCusSugResParams> {
+        return request<any, any>({
+            url: BASE_API + '/cus/sugs/get',
+            method: 'GET',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+        }).then((response): GetCusSugResParams => {
+            if (response.data.errno === '00000') {
+                const cusSugStatus0: CusSugMsg[] = []
+                for (const cusSug of response.data.status_0) {
+                    cusSugStatus0.push({
+                        cusSugId: (convertToNumber(cusSug.cus_sug_id) ?? 0),
+                        cusSugName: cusSug.cus_sug_name,
+                        cusSugDesc: cusSug.cus_sug_desc,
+                        cusSugRes: cusSug.cus_sug_res,
+                        cusSugStatus: (convertToNumber(cusSug.status) ?? 0),
+                        cusSugSub: {
+                            sugId: (convertToNumber(cusSug.sub.sub_id) ?? 0),
+                            subNo: cusSug.sub.sub_no,
+                            subName: cusSug.sub.sub_name,
+                            subEngName: cusSug.sub.sub_eng_name,
+                        },
+                        creator: {
+                            userId: (convertToNumber(cusSug.creator.user_id) ?? 0),
+                            userStName: cusSug.creator.user_st_name,
+                            comStName: cusSug.creator.com_st_name,
+                            groupName: cusSug.creator.group_name,
+                        },
+                        updater: {
+                            userId: (convertToNumber(cusSug.updater.user_id) ?? 0),
+                            userStName: cusSug.updater.user_st_name,
+                            comStName: cusSug.updater.com_st_name,
+                            groupName: cusSug.updater.group_name,
+                        },
+                    })
+                }
+
+                const cusSugStatus1: CusSugMsg[] = []
+                for (const cusSug of response.data.status_1) {
+                    cusSugStatus1.push({
+                        cusSugId: (convertToNumber(cusSug.cus_sug_id) ?? 0),
+                        cusSugName: cusSug.cus_sug_name,
+                        cusSugDesc: cusSug.cus_sug_desc,
+                        cusSugRes: cusSug.cus_sug_res,
+                        cusSugStatus: (convertToNumber(cusSug.status) ?? 1),
+                        cusSugSub: {
+                            sugId: (convertToNumber(cusSug.sub.sub_id) ?? 0),
+                            subNo: cusSug.sub.sub_no,
+                            subName: cusSug.sub.sub_name,
+                            subEngName: cusSug.sub.sub_eng_name,
+                        },
+                        creator: {
+                            userId: (convertToNumber(cusSug.creator.user_id) ?? 0),
+                            userStName: cusSug.creator.user_st_name,
+                            comStName: cusSug.creator.com_st_name,
+                            groupName: cusSug.creator.group_name,
+                        },
+                        updater: {
+                            userId: (convertToNumber(cusSug.updater.user_id) ?? 0),
+                            userStName: cusSug.updater.user_st_name,
+                            comStName: cusSug.updater.com_st_name,
+                            groupName: cusSug.updater.group_name,
+                        },
+                    })
+                }
+
+                const cusSugStatus2: CusSugMsg[] = []
+                for (const cusSug of response.data.status_2) {
+                    cusSugStatus1.push({
+                        cusSugId: (convertToNumber(cusSug.cus_sug_id) ?? 0),
+                        cusSugName: cusSug.cus_sug_name,
+                        cusSugDesc: cusSug.cus_sug_desc,
+                        cusSugRes: cusSug.cus_sug_res,
+                        cusSugStatus: (convertToNumber(cusSug.status) ?? 2),
+                        cusSugSub: {
+                            sugId: (convertToNumber(cusSug.sub.sub_id) ?? 0),
+                            subNo: cusSug.sub.sub_no,
+                            subName: cusSug.sub.sub_name,
+                            subEngName: cusSug.sub.sub_eng_name,
+                        },
+                        creator: {
+                            userId: (convertToNumber(cusSug.creator.user_id) ?? 0),
+                            userStName: cusSug.creator.user_st_name,
+                            comStName: cusSug.creator.com_st_name,
+                            groupName: cusSug.creator.group_name,
+                        },
+                        updater: {
+                            userId: (convertToNumber(cusSug.updater.user_id) ?? 0),
+                            userStName: cusSug.updater.user_st_name,
+                            comStName: cusSug.updater.com_st_name,
+                            groupName: cusSug.updater.group_name,
+                        },
+                    })
+                }
+
+                const cusSugStatus3: CusSugMsg[] = []
+                for (const cusSug of response.data.status_1) {
+                    cusSugStatus1.push({
+                        cusSugId: (convertToNumber(cusSug.cus_sug_id) ?? 0),
+                        cusSugName: cusSug.cus_sug_name,
+                        cusSugDesc: cusSug.cus_sug_desc,
+                        cusSugRes: cusSug.cus_sug_res,
+                        cusSugStatus: (convertToNumber(cusSug.status) ?? 3),
+                        cusSugSub: {
+                            sugId: (convertToNumber(cusSug.sub.sub_id) ?? 0),
+                            subNo: cusSug.sub.sub_no,
+                            subName: cusSug.sub.sub_name,
+                            subEngName: cusSug.sub.sub_eng_name,
+                        },
+                        creator: {
+                            userId: (convertToNumber(cusSug.creator.user_id) ?? 0),
+                            userStName: cusSug.creator.user_st_name,
+                            comStName: cusSug.creator.com_st_name,
+                            groupName: cusSug.creator.group_name,
+                        },
+                        updater: {
+                            userId: (convertToNumber(cusSug.updater.user_id) ?? 0),
+                            userStName: cusSug.updater.user_st_name,
+                            comStName: cusSug.updater.com_st_name,
+                            groupName: cusSug.updater.group_name,
+                        },
+                    })
+                }
+
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                    status0: cusSugStatus0,
+                    status1: cusSugStatus1,
+                    status2: cusSugStatus2,
+                    status3: cusSugStatus3,
+                }
+            } else {
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                }
+            }
+        });
+    }
+
+    // API for Creating New Customer Suggestion
+    async createNewCusSuggestion(data: CusSugReqParams, token: string): Promise<GeneralResParam> {
+        const params = {
+            'cus_sug_name': data.cusSugName ?? '',
+            'cus_sug_desc': data.cusSugDesc ?? '',
+            'sub_id': data.subId ?? 0,
+        }
+
+        return request<any, any>({
+            url: BASE_API + '/cus/sug/update',
+            method: 'POST',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            data: params,
+        }).then((response): GeneralResParam => {
+            return {
+                errno: response.data.errno,
+                desc: response.data.desc,
+            }
+        });
+    }
+
+    // API for Updating New Customer Suggestion
+    async updateCusSuggestion(data: CusSugReqParams, token: string): Promise<GeneralResParam> {
+        const params = {
+            'cus_sug_id': data.cusSugName ?? 0,
+            'cus_sug_res': data.cusSugRes ?? '',
+            'cus_sug_status': data.cusSugStatus ?? 1,
+            'notes': data.notes ?? '',
+        }
+
+        return request<any, any>({
+            url: BASE_API + '/cus/sug/update',
+            method: 'POST',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            data: params,
+        }).then((response): GeneralResParam => {
+            return {
+                errno: response.data.errno,
+                desc: response.data.desc,
+            }
+        });
+    }
+
+    // API for Deleting New Customer Suggestion
+    async deleteCusSuggestion(data: CusSugReqParams, token: string): Promise<GeneralResParam> {
+        const params = {
+            'cus_sug_id': data.cusSugName ?? 0,
+        }
+
+        return request<any, any>({
+            url: BASE_API + '/cus/sug/delete',
+            method: 'POST',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            data: params,
         }).then((response): GeneralResParam => {
             return {
                 errno: response.data.errno,

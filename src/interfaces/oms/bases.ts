@@ -123,7 +123,7 @@ export interface GetCalEventsResParams extends GeneralResParam {
     calData?: CalEvent[];
 }
 
-// Create Single calendar Event Request Parameters
+// Create/Update/Delete Single calendar Event Request Parameters
 export interface CalEventReqParams {
     // Calendar Event ID
     calId?: number;
@@ -145,4 +145,100 @@ export interface CalEventReqParams {
 
     // Calendar Type
     calType?: number;
+}
+
+// Subscription Item for Customer Suggestion
+export interface CusSugSubItem {
+    // Subscription Item ID
+    sugId: number;
+
+    // Subscription Item No.
+    subNo: string;
+
+    // Subscription Item Name
+    subName: string;
+
+    // Subscription Item Name in English
+    subEngName: string;
+}
+
+// Operator in Customer Suggestion
+export interface CusSugOperator {
+    // User ID
+    userId: number;
+
+    // User Short Name
+    userStName: string;
+
+    // Company Short Name
+    comStName: string;
+
+    // Group Name
+    groupName: string;
+}
+
+// Message about Customer Suggestion
+export interface CusSugMsg {
+    // Customer Suggestion ID
+    cusSugId: number;
+
+    // Customer Suggestion Name
+    cusSugName: string;
+
+    // Customer Suggestion Description
+    cusSugDesc: string;
+
+    // Custom Suggestion Response
+    cusSugRes: string;
+
+    // Custom Suggestion Status
+    cusSugStatus: number;
+
+    // Custom Suggestion Relation Subscription Item
+    cusSugSub: CusSugSubItem;
+
+    // Custom Suggestion Creator
+    creator: CusSugOperator;
+
+    // Custom Suggestion Response Man
+    updater: CusSugOperator;
+}
+
+// Get Customer Suggestions Response Parameters
+export interface GetCusSugResParams extends GeneralResParam {
+    // Customer Suggestion in Status 0
+    status0?: CusSugMsg[];
+
+    // Customer Suggestion in Status 1
+    status1?: CusSugMsg[];
+
+    // Customer Suggestion in Status 2
+    status2?: CusSugMsg[];
+
+    // Customer Suggestion in Status 3
+    status3?: CusSugMsg[];
+}
+
+// Create/Update/Delete Single Customer Suggestion Request Parameters
+export interface CusSugReqParams {
+    // Customer Suggestion ID
+    cusSugId?: number;
+
+    // Customer Suggestion Name
+    cusSugName?: string;
+
+    // Customer Suggestion Description
+    cusSugDesc?: string;
+
+    // Custom Suggestion Response
+    cusSugRes?: string;
+
+    // Subscription Item ID
+    subId?: number;
+
+    // Custom Suggestion Status
+    cusSugStatus?: number;
+
+    // Notes
+    notes?: string;
 }
