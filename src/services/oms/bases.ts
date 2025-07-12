@@ -7,6 +7,8 @@ import type {
     GetCusSugResParams,
     CusSugReqParams,
     GetCusSugSubItemParams,
+    GetNotificationResParams,
+    NotificationReqParams,
 } from '@/interfaces'
 import OMSBasesAPI from '@/apis/oms/bases.ts'
 import { updateToken } from '@/services'
@@ -15,12 +17,14 @@ import {
     useOmsServerLogsStore,
     useCalEventsStore,
     useCusSuggestionsStore,
+    useNotificationStore,
 } from '@/stores'
 
 const deviceStore = useDeviceInfoStore()
 const omsServerLogsStore = useOmsServerLogsStore()
 const calEventsStore = useCalEventsStore()
 const cusSuggestionsStore = useCusSuggestionsStore()
+const notificationStore = useNotificationStore()
 
 export async function getOmsServerLogs(getLogsReqParams: GetLogsReqParams) {
     const token = deviceStore.token
@@ -234,6 +238,87 @@ export async function deleteCusSuggestion(params: CusSugReqParams) {
             if (refreshTokenResult === '00000') {
                 const refreshToken = deviceStore.token
                 return OMSBasesAPI.deleteCusSuggestion(
+                    params,
+                    refreshToken).then((refreshRes: GeneralResParam) => {
+                    return refreshRes.errno
+                })
+            }
+        } else {
+            return res.errno
+        }
+        return res.errno
+    })
+}
+
+export async function getSysNotification() {
+    const token = deviceStore.token
+    return OMSBasesAPI.getSysNotifications(token).then(async (res: GetNotificationResParams)=> {
+        if (res.errno === '99005') {
+            const refreshTokenResult = await updateToken().then()
+            if (refreshTokenResult === '00000') {
+                const refreshToken = deviceStore.token
+                return OMSBasesAPI.getSysNotifications(
+                    refreshToken).then((refreshRes: GetNotificationResParams) => {
+                    notificationStore.setSysNotifications(refreshRes)
+                    return refreshRes.errno
+                })
+            }
+        } else {
+            notificationStore.setSysNotifications(res)
+            return res.errno
+        }
+        return res.errno
+    })
+}
+
+export async function createNewSysNotification(params: NotificationReqParams) {
+    const token = deviceStore.token
+    return OMSBasesAPI.createNewSysNotification(params, token).then(async (res: GeneralResParam)=> {
+        if (res.errno === '99005') {
+            const refreshTokenResult = await updateToken().then()
+            if (refreshTokenResult === '00000') {
+                const refreshToken = deviceStore.token
+                return OMSBasesAPI.createNewSysNotification(
+                    params,
+                    refreshToken).then((refreshRes: GeneralResParam) => {
+                    return refreshRes.errno
+                })
+            }
+        } else {
+            return res.errno
+        }
+        return res.errno
+    })
+}
+
+export async function updateSysNotification(params: NotificationReqParams) {
+    const token = deviceStore.token
+    return OMSBasesAPI.updateSysNotification(params, token).then(async (res: GeneralResParam)=> {
+        if (res.errno === '99005') {
+            const refreshTokenResult = await updateToken().then()
+            if (refreshTokenResult === '00000') {
+                const refreshToken = deviceStore.token
+                return OMSBasesAPI.updateSysNotification(
+                    params,
+                    refreshToken).then((refreshRes: GeneralResParam) => {
+                    return refreshRes.errno
+                })
+            }
+        } else {
+            return res.errno
+        }
+        return res.errno
+    })
+}
+
+export async function deleteSysNotification(params: NotificationReqParams) {
+    const token = deviceStore.token
+    return OMSBasesAPI.deleteSysNotification(params, token).then(async (res: GeneralResParam)=> {
+        if (res.errno === '99005') {
+            const refreshTokenResult = await updateToken().then()
+            if (refreshTokenResult === '00000') {
+                const refreshToken = deviceStore.token
+                return OMSBasesAPI.deleteSysNotification(
                     params,
                     refreshToken).then((refreshRes: GeneralResParam) => {
                     return refreshRes.errno

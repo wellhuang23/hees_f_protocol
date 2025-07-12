@@ -12,6 +12,9 @@ import type {
     CusSugReqParams,
     GetCusSugSubItemParams,
     CusSugSubItem,
+    GetNotificationResParams,
+    Notification,
+    NotificationReqParams,
 } from '@/interfaces'
 import request from '@/utils/requests'
 import { convertToNumber } from '@/utils/conNumber'
@@ -464,6 +467,112 @@ class OMSBasesAPI {
 
         return request<any, any>({
             url: BASE_API + '/cus/sug/delete',
+            method: 'POST',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            data: params,
+        }).then((response): GeneralResParam => {
+            return {
+                errno: response.data.errno,
+                desc: response.data.desc,
+            }
+        });
+    }
+
+    // API for Getting System Notifications
+    async getSysNotifications(token: string): Promise<GetNotificationResParams> {
+        return request<any, any>({
+            url: BASE_API + '/cus/sugs/get',
+            method: 'GET',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+        }).then((response): GetNotificationResParams => {
+            if (response.data.errno === '00000') {
+                const notifications: Notification[] = []
+                for (const notification of response.data.data) {
+                    notifications.push({
+                        notiId: (convertToNumber(notification.noti_id) ?? 0),
+                        notiName: notification.noti_name,
+                        notiDesc: notification.noti_desc,
+                        notiType: (convertToNumber(notification.noti_type) ?? 0),
+                        creator: {
+                            userId: (convertToNumber(notification.creator.user_id) ?? 0),
+                            userStName: notification.creator.user_st_name,
+                            comStName: notification.creator.com_st_name,
+                            groupName: notification.creator.group_name,
+                        },
+                    })
+                }
+
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                    notifications: notifications,
+                }
+            } else {
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                }
+            }
+        });
+    }
+
+    // API for Creating New System Notification
+    async createNewSysNotification(data: NotificationReqParams, token: string): Promise<GeneralResParam> {
+        const params = {
+            'noti_name': data.notiName ?? '',
+            'noti_desc': data.notiDesc ?? '',
+        }
+
+        return request<any, any>({
+            url: BASE_API + '/noti/sys/create',
+            method: 'POST',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            data: params,
+        }).then((response): GeneralResParam => {
+            return {
+                errno: response.data.errno,
+                desc: response.data.desc,
+            }
+        });
+    }
+
+    // API for Updating System Notification
+    async updateSysNotification(data: NotificationReqParams, token: string): Promise<GeneralResParam> {
+        const params = {
+            'noti_id': data.notiId ?? 0,
+            'noti_name': data.notiName ?? '',
+            'noti_desc': data.notiDesc ?? '',
+        }
+
+        return request<any, any>({
+            url: BASE_API + '/noti/sys/update',
+            method: 'POST',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            data: params,
+        }).then((response): GeneralResParam => {
+            return {
+                errno: response.data.errno,
+                desc: response.data.desc,
+            }
+        });
+    }
+
+    // API for Deleting System Notification
+    async deleteSysNotification(data: NotificationReqParams, token: string): Promise<GeneralResParam> {
+        const params = {
+            'noti_id': data.notiId ?? 0,
+        }
+
+        return request<any, any>({
+            url: BASE_API + '/noti/sys/delete',
             method: 'POST',
             headers: {
                 Authorization: `HEEsToken ${token}`,
