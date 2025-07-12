@@ -297,5 +297,17 @@
   "g": {
     "cancel": "Cancel",
     "delete": "Delete"
+  },
+  "sysNoti": {
+    "notiName": "Notice Title",
+    "creator": "Posted by",
+    "company": "Company",
+    "group": "Group",
+    "notiDesc": "Notice Content",
+    "addBtn": "Add",
+    "modifyBtn": "Modify",
+    "deleteBtn": "Delete",
+    "releaseTime": "Release Time",
+    "updateTime": "Latest Update Time"
   }
 }

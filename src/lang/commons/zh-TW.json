@@ -295,5 +295,17 @@
   "g": {
     "cancel": "取消",
     "delete": "刪除"
+  },
+  "sysNoti": {
+    "notiName": "通知標題",
+    "creator": "發佈人",
+    "company": "發佈公司",
+    "group": "發布集團",
+    "notiDesc": "通知內容",
+    "addBtn": "新增",
+    "modifyBtn": "修改",
+    "deleteBtn": "刪除",
+    "releaseTime": "發布時間",
+    "updateTime": "最後更新時間"
   }
 }

@@ -266,6 +266,12 @@ export interface Notification {
     // Notification Type
     notiType: number;
 
+    // Notification Create Time
+    createTime: string;
+
+    // Notification Latest Update Time
+    updateTime: string;
+
     // Notification Creator
     creator: Operator;
 }

@@ -483,7 +483,7 @@ class OMSBasesAPI {
     // API for Getting System Notifications
     async getSysNotifications(token: string): Promise<GetNotificationResParams> {
         return request<any, any>({
-            url: BASE_API + '/cus/sugs/get',
+            url: BASE_API + '/noti/sys/get',
             method: 'GET',
             headers: {
                 Authorization: `HEEsToken ${token}`,
@@ -497,6 +497,8 @@ class OMSBasesAPI {
                         notiName: notification.noti_name,
                         notiDesc: notification.noti_desc,
                         notiType: (convertToNumber(notification.noti_type) ?? 0),
+                        createTime: notification.create_time,
+                        updateTime: notification.update_time,
                         creator: {
                             userId: (convertToNumber(notification.creator.user_id) ?? 0),
                             userStName: notification.creator.user_st_name,
