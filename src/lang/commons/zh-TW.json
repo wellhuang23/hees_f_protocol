@@ -63,6 +63,9 @@
     "deleteCalendarSuccessMsg": "刪除行事曆事件成功",
     "deleteCalendarNoPerErrorMsg": "您沒有刪除行事曆事件的權限，請洽系統管理員",
     "deleteCalendarErrorMsg": "刪除行事曆事件失敗，請洽系統管理員",
+    "createCusSuggestionSuccessMsg": "新增顧客建議成功",
+    "createCusSuggestionNoPerErrorMsg": "您沒有新增顧客建議的權限，請洽系統管理員",
+    "createCusSuggestionErrorMsg": "新增顧客建議失敗，請洽系統管理員",
     "systemErrorMsg": "系統錯誤，請聯繫系統管理員"
   },
   "cusSug": {
@@ -75,6 +78,12 @@
     "tableHeaderName": "標題",
     "tableHeaderSubNo": "訂閱代號",
     "tableHeaderSubName": "訂閱名稱"
+  },
+  "cusSugs": {
+    "addSug": "新增建議",
+    "name": "名稱",
+    "content": "內容",
+    "sub": "訂閱項目"
   },
   "pageTitle": {
     "logIn": "登入",

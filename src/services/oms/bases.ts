@@ -6,6 +6,7 @@ import type {
     GeneralResParam,
     GetCusSugResParams,
     CusSugReqParams,
+    GetCusSugSubItemParams,
 } from '@/interfaces'
 import OMSBasesAPI from '@/apis/oms/bases.ts'
 import { updateToken } from '@/services'
@@ -137,6 +138,27 @@ export async function syncGovCalEvents() {
                 })
             }
         } else {
+            return res.errno
+        }
+        return res.errno
+    })
+}
+
+export async function getCusSugSubItems() {
+    const token = deviceStore.token
+    return OMSBasesAPI.getCusSugSubItem(token).then(async (res: GetCusSugSubItemParams)=> {
+        if (res.errno === '99005') {
+            const refreshTokenResult = await updateToken().then()
+            if (refreshTokenResult === '00000') {
+                const refreshToken = deviceStore.token
+                return OMSBasesAPI.getCusSugSubItem(
+                    refreshToken).then((refreshRes: GetCusSugSubItemParams) => {
+                    cusSuggestionsStore.setCusSugSubItems(refreshRes)
+                    return refreshRes.errno
+                })
+            }
+        } else {
+            cusSuggestionsStore.setCusSugSubItems(res)
             return res.errno
         }
         return res.errno

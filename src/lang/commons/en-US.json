@@ -63,6 +63,9 @@
     "deleteCalendarSuccessMsg": "Delete Calendar Event Successfully",
     "deleteCalendarNoPerErrorMsg": "You don't Have Permission to Delete Calendar Event, Please Contact System Manger",
     "deleteCalendarErrorMsg": "Delete Calendar Event Fail, Please Contact System Manger",
+    "createCusSuggestionSuccessMsg": "Create Customer Suggestion Successfully",
+    "createCusSuggestionNoPerErrorMsg": "You don't Have Permission to Create Customer Suggestion, Please Contact System Manger",
+    "createCusSuggestionErrorMsg": "Create Customer Suggestion Fail, Please Contact System Manger",
     "systemErrorMsg": "System Error, Please Contact System Manager"
   },
   "cusSug": {
@@ -75,6 +78,12 @@
     "tableHeaderName": "Name",
     "tableHeaderSubNo": "Subscription No.",
     "tableHeaderSubName": "Subscription Name"
+  },
+  "cusSugs": {
+    "addSug": "Add Suggestion",
+    "name": "Name",
+    "content": "Content",
+    "sub": "Subscription"
   },
   "pageTitle": {
     "logIn": "Log In",

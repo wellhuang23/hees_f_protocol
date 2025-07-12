@@ -150,7 +150,7 @@ export interface CalEventReqParams {
 // Subscription Item for Customer Suggestion
 export interface CusSugSubItem {
     // Subscription Item ID
-    sugId: number;
+    subId: number;
 
     // Subscription Item No.
     subNo: string;
@@ -160,6 +160,12 @@ export interface CusSugSubItem {
 
     // Subscription Item Name in English
     subEngName: string;
+}
+
+// Get Subscription Items for Customer Suggestion Response Parameters
+export interface GetCusSugSubItemParams extends GeneralResParam {
+    // Subscription Items for Customer Suggestion
+    subs?: CusSugSubItem[];
 }
 
 // Operator in Customer Suggestion

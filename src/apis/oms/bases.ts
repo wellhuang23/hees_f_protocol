@@ -10,6 +10,8 @@ import type {
     GetCusSugResParams,
     CusSugMsg,
     CusSugReqParams,
+    GetCusSugSubItemParams,
+    CusSugSubItem,
 } from '@/interfaces'
 import request from '@/utils/requests'
 import { convertToNumber } from '@/utils/conNumber'
@@ -225,6 +227,40 @@ class OMSBasesAPI {
         });
     }
 
+    // API for Getting System calendar Events
+    async getCusSugSubItem(token: string): Promise<GetCusSugSubItemParams> {
+        return request<any, any>({
+            url: BASE_API + '/cus/sub/items',
+            method: 'GET',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+        }).then((response): GetCusSugSubItemParams => {
+            if (response.data.errno === '00000') {
+                const cusSugSubItems: CusSugSubItem[] = []
+                for (const cusSugSubItem of response.data.data) {
+                    cusSugSubItems.push({
+                        subId: (convertToNumber(cusSugSubItem.sub_id) ?? 0),
+                        subNo: cusSugSubItem.sub_no,
+                        subName: cusSugSubItem.sub_name,
+                        subEngName: cusSugSubItem.sub_eng_name,
+                    })
+                }
+
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                    subs: cusSugSubItems,
+                }
+            } else {
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                }
+            }
+        });
+    }
+
     // API for Getting Customer Suggestion
     async getCusSuggestion(token: string): Promise<GetCusSugResParams> {
         return request<any, any>({
@@ -244,7 +280,7 @@ class OMSBasesAPI {
                         cusSugRes: cusSug.cus_sug_res,
                         cusSugStatus: (convertToNumber(cusSug.status) ?? 0),
                         cusSugSub: {
-                            sugId: (convertToNumber(cusSug.sub.sub_id) ?? 0),
+                            subId: (convertToNumber(cusSug.sub.sub_id) ?? 0),
                             subNo: cusSug.sub.sub_no,
                             subName: cusSug.sub.sub_name,
                             subEngName: cusSug.sub.sub_eng_name,
@@ -273,7 +309,7 @@ class OMSBasesAPI {
                         cusSugRes: cusSug.cus_sug_res,
                         cusSugStatus: (convertToNumber(cusSug.status) ?? 1),
                         cusSugSub: {
-                            sugId: (convertToNumber(cusSug.sub.sub_id) ?? 0),
+                            subId: (convertToNumber(cusSug.sub.sub_id) ?? 0),
                             subNo: cusSug.sub.sub_no,
                             subName: cusSug.sub.sub_name,
                             subEngName: cusSug.sub.sub_eng_name,
@@ -302,7 +338,7 @@ class OMSBasesAPI {
                         cusSugRes: cusSug.cus_sug_res,
                         cusSugStatus: (convertToNumber(cusSug.status) ?? 2),
                         cusSugSub: {
-                            sugId: (convertToNumber(cusSug.sub.sub_id) ?? 0),
+                            subId: (convertToNumber(cusSug.sub.sub_id) ?? 0),
                             subNo: cusSug.sub.sub_no,
                             subName: cusSug.sub.sub_name,
                             subEngName: cusSug.sub.sub_eng_name,
@@ -331,7 +367,7 @@ class OMSBasesAPI {
                         cusSugRes: cusSug.cus_sug_res,
                         cusSugStatus: (convertToNumber(cusSug.status) ?? 3),
                         cusSugSub: {
-                            sugId: (convertToNumber(cusSug.sub.sub_id) ?? 0),
+                            subId: (convertToNumber(cusSug.sub.sub_id) ?? 0),
                             subNo: cusSug.sub.sub_no,
                             subName: cusSug.sub.sub_name,
                             subEngName: cusSug.sub.sub_eng_name,
@@ -377,7 +413,7 @@ class OMSBasesAPI {
         }
 
         return request<any, any>({
-            url: BASE_API + '/cus/sug/update',
+            url: BASE_API + '/cus/sug/create',
             method: 'POST',
             headers: {
                 Authorization: `HEEsToken ${token}`,
