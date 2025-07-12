@@ -68,6 +68,18 @@
     "createCusSuggestionErrorMsg": "Create Customer Suggestion Fail, Please Contact System Manger",
     "systemErrorMsg": "System Error, Please Contact System Manager"
   },
+  "cusSugDetail": {
+    "title": "Suggestion Details",
+    "subscription": "Subscription",
+    "name": "Name",
+    "content": "Content",
+    "status": "Status",
+    "creator": "Creator",
+    "company": "Company",
+    "group": "Group",
+    "response": "Response",
+    "respondent": "Respondent"
+  },
   "cusSug": {
     "pageTitle": "Your suggestions are the driving force for our continuous progress !",
     "addBtn": "Add",

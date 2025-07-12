@@ -68,6 +68,18 @@
     "createCusSuggestionErrorMsg": "新增顧客建議失敗，請洽系統管理員",
     "systemErrorMsg": "系統錯誤，請聯繫系統管理員"
   },
+  "cusSugDetail": {
+    "title": "客訴單詳細資訊",
+    "subscription": "訂閱項目",
+    "name": "名稱",
+    "content": "內容",
+    "status": "狀態",
+    "creator": "建立人",
+    "company": "建立人公司",
+    "group": "建立人集團",
+    "response": "回覆",
+    "respondent": "回覆人"
+  },
   "cusSug": {
     "pageTitle": "您的建議，是我們持續進步的動力 !",
     "addBtn": "新增",
