@@ -4,16 +4,22 @@ import type {
     LogInfo,
     GetCalEventsResParams,
     CalEvent,
+    CusSugMsg,
+    GetCusSugResParams,
+    CusSugSubItem,
+    GetCusSugSubItemParams,
 } from '@/interfaces'
 import {
     OMS_SERVER_LOGS,
     CAL_EVENTS,
+    CUS_SUGGESTIONS,
 } from '@/global/contstants'
 import { sessionCache } from '@/utils/storages.ts'
 
 const useOmsServerLogsStore = defineStore(OMS_SERVER_LOGS, {
     state:() => ({
         omsServerLogs: [] as LogInfo[],
+
     }),
     actions: {
         setOmsServerLogs(params: GetLogsResParams) {
@@ -50,7 +56,30 @@ const useCalEventsStore = defineStore(CAL_EVENTS, {
     }
 })
 
+const useCusSuggestionsStore = defineStore(CUS_SUGGESTIONS, {
+    state:() => ({
+        cusSugStatus0: [] as CusSugMsg[],
+        cusSugStatus1: [] as CusSugMsg[],
+        cusSugStatus2: [] as CusSugMsg[],
+        cusSugStatus3: [] as CusSugMsg[],
+        cusSugSubItems: [] as CusSugSubItem[],
+    }),
+    actions: {
+        setCusSuggestions(params: GetCusSugResParams) {
+            this.cusSugStatus0 = params.status0 ?? []
+            this.cusSugStatus1 = params.status1 ?? []
+            this.cusSugStatus2 = params.status2 ?? []
+            this.cusSugStatus3 = params.status3 ?? []
+        },
+
+        setCusSugSubItems(params: GetCusSugSubItemParams) {
+            this.cusSugSubItems = params.subs ?? []
+        }
+    }
+})
+
 export {
     useOmsServerLogsStore,
     useCalEventsStore,
+    useCusSuggestionsStore,
 }

@@ -4,6 +4,9 @@ import type {
     GetCalEventsResParams,
     CalEventReqParams,
     GeneralResParam,
+    GetCusSugResParams,
+    CusSugReqParams,
+    GetCusSugSubItemParams,
 } from '@/interfaces'
 import OMSBasesAPI from '@/apis/oms/bases.ts'
 import { updateToken } from '@/services'
@@ -11,11 +14,13 @@ import {
     useDeviceInfoStore,
     useOmsServerLogsStore,
     useCalEventsStore,
+    useCusSuggestionsStore,
 } from '@/stores'
 
 const deviceStore = useDeviceInfoStore()
 const omsServerLogsStore = useOmsServerLogsStore()
 const calEventsStore = useCalEventsStore()
+const cusSuggestionsStore = useCusSuggestionsStore()
 
 export async function getOmsServerLogs(getLogsReqParams: GetLogsReqParams) {
     const token = deviceStore.token
@@ -128,6 +133,108 @@ export async function syncGovCalEvents() {
             if (refreshTokenResult === '00000') {
                 const refreshToken = deviceStore.token
                 return OMSBasesAPI.syncGovCalEvents(
+                    refreshToken).then((refreshRes: GeneralResParam) => {
+                    return refreshRes.errno
+                })
+            }
+        } else {
+            return res.errno
+        }
+        return res.errno
+    })
+}
+
+export async function getCusSugSubItems() {
+    const token = deviceStore.token
+    return OMSBasesAPI.getCusSugSubItem(token).then(async (res: GetCusSugSubItemParams)=> {
+        if (res.errno === '99005') {
+            const refreshTokenResult = await updateToken().then()
+            if (refreshTokenResult === '00000') {
+                const refreshToken = deviceStore.token
+                return OMSBasesAPI.getCusSugSubItem(
+                    refreshToken).then((refreshRes: GetCusSugSubItemParams) => {
+                    cusSuggestionsStore.setCusSugSubItems(refreshRes)
+                    return refreshRes.errno
+                })
+            }
+        } else {
+            cusSuggestionsStore.setCusSugSubItems(res)
+            return res.errno
+        }
+        return res.errno
+    })
+}
+
+export async function getCusSuggestions() {
+    const token = deviceStore.token
+    return OMSBasesAPI.getCusSuggestion(token).then(async (res: GetCusSugResParams)=> {
+        if (res.errno === '99005') {
+            const refreshTokenResult = await updateToken().then()
+            if (refreshTokenResult === '00000') {
+                const refreshToken = deviceStore.token
+                return OMSBasesAPI.getCusSuggestion(
+                    refreshToken).then((refreshRes: GetCusSugResParams) => {
+                    cusSuggestionsStore.setCusSuggestions(refreshRes)
+                    return refreshRes.errno
+                })
+            }
+        } else {
+            cusSuggestionsStore.setCusSuggestions(res)
+            return res.errno
+        }
+        return res.errno
+    })
+}
+
+export async function createNewCusSuggestion(params: CusSugReqParams) {
+    const token = deviceStore.token
+    return OMSBasesAPI.createNewCusSuggestion(params, token).then(async (res: GeneralResParam)=> {
+        if (res.errno === '99005') {
+            const refreshTokenResult = await updateToken().then()
+            if (refreshTokenResult === '00000') {
+                const refreshToken = deviceStore.token
+                return OMSBasesAPI.createNewCusSuggestion(
+                    params,
+                    refreshToken).then((refreshRes: GeneralResParam) => {
+                    return refreshRes.errno
+                })
+            }
+        } else {
+            return res.errno
+        }
+        return res.errno
+    })
+}
+
+export async function updateCusSuggestion(params: CusSugReqParams) {
+    const token = deviceStore.token
+    return OMSBasesAPI.updateCusSuggestion(params, token).then(async (res: GeneralResParam)=> {
+        if (res.errno === '99005') {
+            const refreshTokenResult = await updateToken().then()
+            if (refreshTokenResult === '00000') {
+                const refreshToken = deviceStore.token
+                return OMSBasesAPI.updateCusSuggestion(
+                    params,
+                    refreshToken).then((refreshRes: GeneralResParam) => {
+                    return refreshRes.errno
+                })
+            }
+        } else {
+            return res.errno
+        }
+        return res.errno
+    })
+}
+
+export async function deleteCusSuggestion(params: CusSugReqParams) {
+    const token = deviceStore.token
+    return OMSBasesAPI.deleteCusSuggestion(params, token).then(async (res: GeneralResParam)=> {
+        if (res.errno === '99005') {
+            const refreshTokenResult = await updateToken().then()
+            if (refreshTokenResult === '00000') {
+                const refreshToken = deviceStore.token
+                return OMSBasesAPI.deleteCusSuggestion(
+                    params,
                     refreshToken).then((refreshRes: GeneralResParam) => {
                     return refreshRes.errno
                 })

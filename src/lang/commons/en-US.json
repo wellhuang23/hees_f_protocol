@@ -63,7 +63,57 @@
     "deleteCalendarSuccessMsg": "Delete Calendar Event Successfully",
     "deleteCalendarNoPerErrorMsg": "You don't Have Permission to Delete Calendar Event, Please Contact System Manger",
     "deleteCalendarErrorMsg": "Delete Calendar Event Fail, Please Contact System Manger",
+    "createCusSuggestionSuccessMsg": "Create Customer Suggestion Successfully",
+    "createCusSuggestionNoPerErrorMsg": "You don't Have Permission to Create Customer Suggestion, Please Contact System Manger",
+    "createCusSuggestionErrorMsg": "Create Customer Suggestion Fail, Please Contact System Manger",
+    "updateCusSuggestionSuccessMsg": "Update Customer Suggestion Successfully",
+    "updateCusSuggestionNoPerErrorMsg": "You don't Have Permission to Update Customer Suggestion, Please Contact System Manger",
+    "updateCusSuggestionErrorMsg": "Update Customer Suggestion Fail, Please Contact System Manger",
+    "deleteCusSuggestionSuccessMsg": "Delete Customer Suggestion Successfully",
+    "deleteCusSuggestionNoPerErrorMsg": "You don't Have Permission to Delete Customer Suggestion, Please Contact System Manger",
+    "deleteCusSuggestionErrorMsg": "Delete Customer Suggestion Fail, Please Contact System Manger",
     "systemErrorMsg": "System Error, Please Contact System Manager"
+  },
+  "cusSugDetail": {
+    "title": "Suggestion Details",
+    "subscription": "Subscription",
+    "name": "Name",
+    "content": "Content",
+    "status": "Status",
+    "creator": "Creator",
+    "company": "Company",
+    "group": "Group",
+    "response": "Response",
+    "respondent": "Respondent"
+  },
+  "cusUpSug": {
+    "title": "Update Suggestion",
+    "response": "Response",
+    "remarks": "Remarks",
+    "updateBtn": "Update",
+    "statusOptions": {
+      "new": "New Suggestion",
+      "processing": "In Processing",
+      "done": "Done",
+      "sealed": "Sealed"
+    }
+  },
+  "cusSug": {
+    "pageTitle": "Your suggestions are the driving force for our continuous progress !",
+    "addBtn": "Add",
+    "status0": "New Suggestions",
+    "status1": "In Processing",
+    "status2": "Done",
+    "status3": "Sealed",
+    "tableHeaderName": "Name",
+    "tableHeaderSubNo": "Subscription No.",
+    "tableHeaderSubName": "Subscription Name"
+  },
+  "cusSugs": {
+    "addSug": "Add Suggestion",
+    "name": "Name",
+    "content": "Content",
+    "sub": "Subscription"
   },
   "pageTitle": {
     "logIn": "Log In",
@@ -243,5 +293,9 @@
       "content": "Sure for Deleting the Event ?",
       "delete": "Delete"
     }
+  },
+  "g": {
+    "cancel": "Cancel",
+    "delete": "Delete"
   }
 }
