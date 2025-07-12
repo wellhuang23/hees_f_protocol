@@ -50,6 +50,7 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
+import type { CusSugMsg } from '@/interfaces/oms/bases';
 
 const props = defineProps({
   visible: {
@@ -57,7 +58,7 @@ const props = defineProps({
     required: true,
   },
   suggestion: {
-    type: Object,
+    type: Object as () => CusSugMsg | null,
     default: () => null,
   },
 });

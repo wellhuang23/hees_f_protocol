@@ -279,6 +279,7 @@ class OMSBasesAPI {
                         cusSugDesc: cusSug.cus_sug_desc,
                         cusSugRes: cusSug.cus_sug_res,
                         cusSugStatus: (convertToNumber(cusSug.status) ?? 0),
+                        notes: cusSug.notes,
                         cusSugSub: {
                             subId: (convertToNumber(cusSug.sub.sub_id) ?? 0),
                             subNo: cusSug.sub.sub_no,
@@ -308,6 +309,7 @@ class OMSBasesAPI {
                         cusSugDesc: cusSug.cus_sug_desc,
                         cusSugRes: cusSug.cus_sug_res,
                         cusSugStatus: (convertToNumber(cusSug.status) ?? 1),
+                        notes: cusSug.notes,
                         cusSugSub: {
                             subId: (convertToNumber(cusSug.sub.sub_id) ?? 0),
                             subNo: cusSug.sub.sub_no,
@@ -331,12 +333,13 @@ class OMSBasesAPI {
 
                 const cusSugStatus2: CusSugMsg[] = []
                 for (const cusSug of response.data.status_2) {
-                    cusSugStatus1.push({
+                    cusSugStatus2.push({
                         cusSugId: (convertToNumber(cusSug.cus_sug_id) ?? 0),
                         cusSugName: cusSug.cus_sug_name,
                         cusSugDesc: cusSug.cus_sug_desc,
                         cusSugRes: cusSug.cus_sug_res,
                         cusSugStatus: (convertToNumber(cusSug.status) ?? 2),
+                        notes: cusSug.notes,
                         cusSugSub: {
                             subId: (convertToNumber(cusSug.sub.sub_id) ?? 0),
                             subNo: cusSug.sub.sub_no,
@@ -359,13 +362,14 @@ class OMSBasesAPI {
                 }
 
                 const cusSugStatus3: CusSugMsg[] = []
-                for (const cusSug of response.data.status_1) {
-                    cusSugStatus1.push({
+                for (const cusSug of response.data.status_3) {
+                    cusSugStatus3.push({
                         cusSugId: (convertToNumber(cusSug.cus_sug_id) ?? 0),
                         cusSugName: cusSug.cus_sug_name,
                         cusSugDesc: cusSug.cus_sug_desc,
                         cusSugRes: cusSug.cus_sug_res,
                         cusSugStatus: (convertToNumber(cusSug.status) ?? 3),
+                        notes: cusSug.notes,
                         cusSugSub: {
                             subId: (convertToNumber(cusSug.sub.sub_id) ?? 0),
                             subNo: cusSug.sub.sub_no,
@@ -430,10 +434,11 @@ class OMSBasesAPI {
     // API for Updating New Customer Suggestion
     async updateCusSuggestion(data: CusSugReqParams, token: string): Promise<GeneralResParam> {
         const params = {
-            'cus_sug_id': data.cusSugName ?? 0,
+            'cus_sug_id': data.cusSugId ?? 0,
             'cus_sug_res': data.cusSugRes ?? '',
             'cus_sug_status': data.cusSugStatus ?? 1,
             'notes': data.notes ?? '',
+            'sub_id': data.subId ?? 0,
         }
 
         return request<any, any>({

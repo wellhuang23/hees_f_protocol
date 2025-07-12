@@ -59,16 +59,6 @@ const handleConfirm = async () => {
   if (!formRef.value) return;
   await formRef.value.validate(async (valid) => {
     if (valid) {
-      const selectedOption = eventTypeOptions.value.find(opt => opt.value === formData.value.eventType);
-
-      console.log({
-        ...formData.value,
-        eventDate: formatDate(formData.value.eventDate),
-        eventType: {
-          value: formData.value.eventType,
-          label: selectedOption ? selectedOption.label : undefined,
-        },
-      });
       const createRes = await createNewCalEvent(
           {
             calName: formData.value.eventName,

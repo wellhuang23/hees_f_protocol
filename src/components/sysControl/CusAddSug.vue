@@ -69,9 +69,6 @@ const subItems = computed(() => {
 });
 
 const submitForm = async () => {
-  // console.log('Form submitted:', typeof form.value.name);
-  // console.log('Form submitted:', typeof form.value.content);
-  // console.log('Form submitted:', typeof form.value.subId);
   const createRes = await createNewCusSuggestion({
     cusSugName: form.value.name,
     cusSugDesc: form.value.content,

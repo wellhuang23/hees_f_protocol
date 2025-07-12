@@ -66,6 +66,9 @@
     "createCusSuggestionSuccessMsg": "Create Customer Suggestion Successfully",
     "createCusSuggestionNoPerErrorMsg": "You don't Have Permission to Create Customer Suggestion, Please Contact System Manger",
     "createCusSuggestionErrorMsg": "Create Customer Suggestion Fail, Please Contact System Manger",
+    "updateCusSuggestionSuccessMsg": "Update Customer Suggestion Successfully",
+    "updateCusSuggestionNoPerErrorMsg": "You don't Have Permission to Update Customer Suggestion, Please Contact System Manger",
+    "updateCusSuggestionErrorMsg": "Update Customer Suggestion Fail, Please Contact System Manger",
     "systemErrorMsg": "System Error, Please Contact System Manager"
   },
   "cusSugDetail": {
@@ -79,6 +82,18 @@
     "group": "Group",
     "response": "Response",
     "respondent": "Respondent"
+  },
+  "cusUpSug": {
+    "title": "Update Suggestion",
+    "response": "Response",
+    "remarks": "Remarks",
+    "updateBtn": "Update",
+    "statusOptions": {
+      "new": "New Suggestion",
+      "processing": "In Processing",
+      "done": "Done",
+      "sealed": "Sealed"
+    }
   },
   "cusSug": {
     "pageTitle": "Your suggestions are the driving force for our continuous progress !",
@@ -275,5 +290,8 @@
       "content": "Sure for Deleting the Event ?",
       "delete": "Delete"
     }
+  },
+  "g": {
+    "cancel": "Cancel"
   }
 }

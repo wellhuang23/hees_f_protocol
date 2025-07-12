@@ -57,7 +57,8 @@
     </el-collapse>
 
     <CusAddSug v-model:visible="dialogVisible" />
-    <CusSugDetail v-model:visible="drawerVisible" :suggestion="selectedSuggestion" />
+    <CusSugDetail v-model:visible="detailDrawerVisible" :suggestion="selectedSuggestion" />
+    <CusUpSug v-model:visible="upSugDrawerVisible" :suggestion="selectedSuggestion" />
   </div>
 </template>
 
@@ -68,24 +69,31 @@ import { storeToRefs } from 'pinia';
 import { useCusSuggestionsStore } from '@/stores/oms/bases';
 import { useUserInfoStore } from '@/stores/oms/auths';
 import { getCusSuggestions, getCusSugSubItems } from '@/services/oms/bases';
+import type { CusSugMsg } from '@/interfaces/oms/bases';
 import CusAddSug from './CusAddSug.vue';
 import CusSugDetail from './CusSugDetail.vue';
+import CusUpSug from './CusUpSug.vue';
 
 const { t, locale } = useI18n();
 const cusSuggestionsStore = useCusSuggestionsStore();
 const { cusSugStatus0, cusSugStatus1, cusSugStatus2, cusSugStatus3 } = storeToRefs(cusSuggestionsStore);
-const userInfo = useUserInfoStore()
+const userInfo = useUserInfoStore();
 
 const activeNames = ref(['0']);
 const dialogVisible = ref(false);
-const drawerVisible = ref(false);
-const selectedSuggestion = ref<any>();
+const detailDrawerVisible = ref(false);
+const upSugDrawerVisible = ref(false);
+const selectedSuggestion = ref<CusSugMsg | null>();
 
 const subNameKey = computed(() => (locale.value === 'zh-TW' ? 'subName' : 'subEngName'));
 
-const handleRowClick = (row: any) => {
+const handleRowClick = (row: CusSugMsg) => {
   selectedSuggestion.value = row;
-  drawerVisible.value = true;
+  if (userInfo.per0010.includes('sys-007-0010')) {
+    upSugDrawerVisible.value = true;
+  } else {
+    detailDrawerVisible.value = true;
+  }
 };
 
 onMounted(async () => {

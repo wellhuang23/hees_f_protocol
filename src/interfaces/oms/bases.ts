@@ -200,6 +200,9 @@ export interface CusSugMsg {
     // Custom Suggestion Status
     cusSugStatus: number;
 
+    // Notes
+    notes: string;
+
     // Custom Suggestion Relation Subscription Item
     cusSugSub: CusSugSubItem;
 
