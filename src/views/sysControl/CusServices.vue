@@ -1,9 +1,9 @@
 <script setup lang="ts">
-
+import CusSuggestions from '@/components/sysControl/CusSugList.vue'
 </script>
 
 <template>
-  <div class="custom-services">CUSTOM SERVICES</div>
+  <cus-suggestions />
 </template>
 
 <style scoped lang="scss">
