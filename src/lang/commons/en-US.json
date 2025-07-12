@@ -69,6 +69,9 @@
     "updateCusSuggestionSuccessMsg": "Update Customer Suggestion Successfully",
     "updateCusSuggestionNoPerErrorMsg": "You don't Have Permission to Update Customer Suggestion, Please Contact System Manger",
     "updateCusSuggestionErrorMsg": "Update Customer Suggestion Fail, Please Contact System Manger",
+    "deleteCusSuggestionSuccessMsg": "Delete Customer Suggestion Successfully",
+    "deleteCusSuggestionNoPerErrorMsg": "You don't Have Permission to Delete Customer Suggestion, Please Contact System Manger",
+    "deleteCusSuggestionErrorMsg": "Delete Customer Suggestion Fail, Please Contact System Manger",
     "systemErrorMsg": "System Error, Please Contact System Manager"
   },
   "cusSugDetail": {
@@ -292,6 +295,7 @@
     }
   },
   "g": {
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "delete": "Delete"
   }
 }

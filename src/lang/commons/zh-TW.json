@@ -69,6 +69,9 @@
     "updateCusSuggestionSuccessMsg": "更新顧客建議成功",
     "updateCusSuggestionNoPerErrorMsg": "您沒有更新顧客建議的權限，請洽系統管理員",
     "updateCusSuggestionErrorMsg": "更新顧客建議失敗，請洽系統管理員",
+    "deleteCusSuggestionSuccessMsg": "刪除顧客建議成功",
+    "deleteCusSuggestionNoPerErrorMsg": "您沒有刪除顧客建議的權限，請洽系統管理員",
+    "deleteCusSuggestionErrorMsg": "刪除顧客建議失敗，請洽系統管理員",
     "systemErrorMsg": "系統錯誤，請聯繫系統管理員"
   },
   "cusSugDetail": {
@@ -290,6 +293,7 @@
     }
   },
   "g": {
-    "cancel": "取消"
+    "cancel": "取消",
+    "delete": "刪除"
   }
 }

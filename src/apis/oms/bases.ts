@@ -459,7 +459,7 @@ class OMSBasesAPI {
     // API for Deleting New Customer Suggestion
     async deleteCusSuggestion(data: CusSugReqParams, token: string): Promise<GeneralResParam> {
         const params = {
-            'cus_sug_id': data.cusSugName ?? 0,
+            'cus_sug_id': data.cusSugId ?? 0,
         }
 
         return request<any, any>({

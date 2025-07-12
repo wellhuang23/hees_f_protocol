@@ -62,7 +62,9 @@
       </div>
     </div>
     <template #footer>
-      <div style="flex: auto">
+      <div class="footer-container">
+        <el-button v-if="userInfo.per0001.includes('sys-007-0001')" type="danger" @click="handleDelete">{{ t('g.delete') }}</el-button>
+        <div class="spacer"></div>
         <el-button @click="$emit('update:visible', false)">{{ t('g.cancel') }}</el-button>
         <el-button type="primary" @click="handleUpdate">{{ t('cusUpSug.updateBtn') }}</el-button>
       </div>
@@ -74,9 +76,10 @@
 import { ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import type { CusSugMsg } from '@/interfaces/oms/bases';
-import { updateCusSuggestion } from '@/services/oms/bases';
+import {deleteCusSuggestion, updateCusSuggestion} from '@/services/oms/bases';
 import { ElNotification } from "element-plus";
 import { useCusSuggestionsStore } from '@/stores/oms/bases';
+import { useUserInfoStore } from '@/stores/oms/auths';
 
 const props = defineProps({
   visible: {
@@ -91,6 +94,7 @@ const props = defineProps({
 
 const { t, locale } = useI18n();
 const cusSuggestionsStore = useCusSuggestionsStore();
+const userInfo = useUserInfoStore();
 
 const formData = ref<CusSugMsg | null>(null);
 
@@ -131,6 +135,32 @@ const handleUpdate = async () => {
     });
   }
 };
+
+const handleDelete = async () => {
+  const deleteRes = await deleteCusSuggestion({
+    cusSugId: formData.value?.cusSugId,
+  })
+  if (deleteRes === '00000') {
+    ElNotification({
+      title: t('notice.noticeTitle'),
+      message: t('notice.deleteCusSuggestionSuccessMsg'),
+      type: 'success'
+    });
+    location.reload(); // Consider updating data without a full reload
+  } else if (deleteRes === '99006') {
+    ElNotification({
+      title: t('notice.noticeTitle'),
+      message: t('notice.deleteCusSuggestionNoPerErrorMsg'),
+      type: 'error'
+    });
+  } else {
+    ElNotification({
+      title: t('notice.noticeTitle'),
+      message: t('notice.deleteCusSuggestionErrorMsg'),
+      type: 'error'
+    });
+  }
+};
 </script>
 
 <style scoped>
@@ -160,5 +190,14 @@ pre {
   word-wrap: break-word;
   font-family: inherit;
   margin: 0;
+}
+.footer-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+}
+.spacer {
+  flex-grow: 1;
 }
 </style>

@@ -44,6 +44,11 @@
         <p class="value">{{ suggestion.updater?.userStName }}</p>
       </div>
     </div>
+    <template #footer>
+      <div class="footer-container">
+        <el-button v-if="userInfo.per0001.includes('sys-007-0001')" type="danger" @click="handleDelete">{{ t('g.delete') }}</el-button>
+      </div>
+    </template>
   </el-drawer>
 </template>
 
@@ -51,6 +56,9 @@
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import type { CusSugMsg } from '@/interfaces/oms/bases';
+import { useUserInfoStore } from '@/stores/oms/auths';
+import {deleteCusSuggestion} from "@/services";
+import {ElNotification} from "element-plus";
 
 const props = defineProps({
   visible: {
@@ -66,6 +74,7 @@ const props = defineProps({
 defineEmits(['update:visible']);
 
 const { t, locale } = useI18n();
+const userInfo = useUserInfoStore();
 
 const subscriptionName = computed(() => {
   if (!props.suggestion?.cusSugSub) return '';
@@ -90,6 +99,33 @@ const statusText = computed(() => {
       return '';
   }
 });
+
+const handleDelete = async () => {
+  console.log('Delete Suggestion Info:', props.suggestion);
+  const deleteRes = await deleteCusSuggestion({
+    cusSugId: props.suggestion?.cusSugId,
+  })
+  if (deleteRes === '00000') {
+    ElNotification({
+      title: t('notice.noticeTitle'),
+      message: t('notice.deleteCusSuggestionSuccessMsg'),
+      type: 'success'
+    });
+    location.reload(); // Consider updating data without a full reload
+  } else if (deleteRes === '99006') {
+    ElNotification({
+      title: t('notice.noticeTitle'),
+      message: t('notice.deleteCusSuggestionNoPerErrorMsg'),
+      type: 'error'
+    });
+  } else {
+    ElNotification({
+      title: t('notice.noticeTitle'),
+      message: t('notice.deleteCusSuggestionErrorMsg'),
+      type: 'error'
+    });
+  }
+};
 </script>
 
 <style scoped>
@@ -117,5 +153,11 @@ pre {
   word-wrap: break-word;
   font-family: inherit;
   margin: 0;
+}
+.footer-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
 }
 </style>
