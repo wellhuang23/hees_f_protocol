@@ -329,5 +329,9 @@
   "notiDelNotice": {
     "title": "Delete System Notice",
     "content": "Sure for Deleting the System Notice ?"
+  },
+  "cusDelSug": {
+    "title": "Delete Suggestion",
+    "content": "Sure for Deleting the Customer Suggestion ?"
   }
 }

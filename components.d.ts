@@ -18,6 +18,7 @@ declare module 'vue' {
     CalEvents: typeof import('./src/components/sysControl/CalEvents.vue')['default']
     CalUpEvent: typeof import('./src/components/sysControl/CalUpEvent.vue')['default']
     CusAddSug: typeof import('./src/components/sysControl/CusAddSug.vue')['default']
+    CusDelSug: typeof import('./src/components/sysControl/CusDelSug.vue')['default']
     CusSugDetail: typeof import('./src/components/sysControl/CusSugDetail.vue')['default']
     CusSugList: typeof import('./src/components/sysControl/CusSugList.vue')['default']
     CusUpSug: typeof import('./src/components/sysControl/CusUpSug.vue')['default']

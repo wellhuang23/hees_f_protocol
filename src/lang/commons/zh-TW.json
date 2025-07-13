@@ -327,5 +327,9 @@
   "notiDelNotice": {
     "title": "刪除系統通知",
     "content": "是否確認刪除系統通知 ?"
+  },
+  "cusDelSug": {
+    "title": "刪除建議",
+    "content": "是否確認刪除客戶建議 ?"
   }
 }
