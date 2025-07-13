@@ -72,6 +72,9 @@
     "deleteCusSuggestionSuccessMsg": "Delete Customer Suggestion Successfully",
     "deleteCusSuggestionNoPerErrorMsg": "You don't Have Permission to Delete Customer Suggestion, Please Contact System Manger",
     "deleteCusSuggestionErrorMsg": "Delete Customer Suggestion Fail, Please Contact System Manger",
+    "createSysNotificationSuccessMsg": "Create System Notification Successfully",
+    "createSysNotificationNoPerErrorMsg": "You don't Have Permission to Create System Notification, Please Contact System Manger",
+    "createSysNotificationErrorMsg": "Create System Notification Fail, Please Contact System Manger",
     "systemErrorMsg": "System Error, Please Contact System Manager"
   },
   "cusSugDetail": {
@@ -308,6 +311,7 @@
     "modifyBtn": "Modify",
     "deleteBtn": "Delete",
     "releaseTime": "Release Time",
-    "updateTime": "Latest Update Time"
+    "updateTime": "Latest Update Time",
+    "addNotiTitle": "Add System Notice"
   }
 }

@@ -49,6 +49,7 @@ declare module 'vue' {
     ElTag: typeof import('element-plus/es')['ElTag']
     LogFilter: typeof import('./src/components/sysControl/LogFilter.vue')['default']
     LogRecords: typeof import('./src/components/sysControl/LogRecords.vue')['default']
+    NotiAddNotice: typeof import('./src/components/sysControl/NotiAddNotice.vue')['default']
     NotiList: typeof import('./src/components/sysControl/NotiList.vue')['default']
     PerAssignUsers: typeof import('./src/components/sysControl/PerAssignUsers.vue')['default']
     PerRoles: typeof import('./src/components/sysControl/PerRoles.vue')['default']

@@ -77,6 +77,8 @@
         @current-change="handleCurrentChange"
       />
     </div>
+
+    <NotiAddNotice :visible="isAddNotiDialogVisible" @close="closeAddNotiDialog" />
   </div>
 </template>
 
@@ -89,6 +91,7 @@ import { useUserInfoStore } from '@/stores/oms/auths';
 import { getSysNotification } from '@/services/oms/bases';
 import type { Notification } from '@/interfaces/oms/bases';
 import { useRouter } from 'vue-router';
+import NotiAddNotice from './NotiAddNotice.vue';
 
 const { t } = useI18n();
 const notificationStore = useNotificationStore();
@@ -99,6 +102,7 @@ const router = useRouter();
 const expandedRowKeys = ref<number[]>([]);
 const currentPage = ref(1);
 const pageSize = ref(12);
+const isAddNotiDialogVisible = ref(false);
 
 const pagedNotifications = computed(() => {
   const start = (currentPage.value - 1) * pageSize.value;
@@ -131,7 +135,11 @@ const handleRowClick = (row: Notification) => {
 };
 
 const addNoti = () => {
-  // Implement navigation or dialog for adding a new notification
+  isAddNotiDialogVisible.value = true;
+};
+
+const closeAddNotiDialog = () => {
+  isAddNotiDialogVisible.value = false;
 };
 
 const modifyNoti = (row: Notification) => {
