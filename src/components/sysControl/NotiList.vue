@@ -48,22 +48,24 @@
         </template>
       </el-table-column>
       <el-table-column prop="notiName" :label="t('sysNoti.notiName')"></el-table-column>
-      <el-table-column :label="t('subList.actions')" width="180">
-        <template #default="scope">
-          <el-button
-            v-if="userInfo.per0010.includes('sys-006-0010')"
-            type="warning"
-            size="small"
-            @click.stop="modifyNoti(scope.row)"
-          >{{ t('sysNoti.modifyBtn') }}</el-button>
-          <el-button
-            v-if="userInfo.per0001.includes('sys-006-0001')"
-            type="danger"
-            size="small"
-            @click.stop="deleteNoti(scope.row)"
-          >{{ t('sysNoti.deleteBtn') }}</el-button>
-        </template>
-      </el-table-column>
+      <el-table-column :label="t('sysNoti.actions')" align="center" width="150px">
+      <template #default="scope">
+        <el-button
+          type="warning"
+          size="small"
+          @click="updateClick(scope.row)"
+        >
+          {{ t('sysNoti.modifyBtn') }}
+        </el-button>
+        <el-button
+          type="danger"
+          size="small"
+          @click="deleteClick(scope.row)"
+        >
+          {{ t('sysNoti.deleteBtn') }}
+        </el-button>
+      </template>
+    </el-table-column>
     </el-table>
 
     <div class="pagination-container">
@@ -79,6 +81,7 @@
     </div>
 
     <NotiAddNotice :visible="isAddNotiDialogVisible" @close="closeAddNotiDialog" />
+    <NotiUpNotice v-if="isUpNotiDialogVisible" v-model="isUpNotiDialogVisible" :notice="selectedNotice" />
   </div>
 </template>
 
@@ -92,6 +95,7 @@ import { getSysNotification } from '@/services/oms/bases';
 import type { Notification } from '@/interfaces/oms/bases';
 import { useRouter } from 'vue-router';
 import NotiAddNotice from './NotiAddNotice.vue';
+import NotiUpNotice from './NotiUpNotice.vue';
 
 const { t } = useI18n();
 const notificationStore = useNotificationStore();
@@ -103,6 +107,8 @@ const expandedRowKeys = ref<number[]>([]);
 const currentPage = ref(1);
 const pageSize = ref(12);
 const isAddNotiDialogVisible = ref(false);
+const isUpNotiDialogVisible = ref(false);
+const selectedNotice = ref<Notification | null>(null);
 
 const pagedNotifications = computed(() => {
   const start = (currentPage.value - 1) * pageSize.value;
@@ -142,12 +148,13 @@ const closeAddNotiDialog = () => {
   isAddNotiDialogVisible.value = false;
 };
 
-const modifyNoti = (row: Notification) => {
-  // Implement navigation or dialog for modifying a notification
+const updateClick = (row: Notification) => {
+  selectedNotice.value = row;
+  isUpNotiDialogVisible.value = true;
 };
 
-const deleteNoti = (row: Notification) => {
-  // Implement logic for deleting a notification
+const deleteClick = (row: Notification) => {
+  console.log(row);
 };
 
 onMounted(async () => {

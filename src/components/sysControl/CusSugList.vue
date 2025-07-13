@@ -5,7 +5,7 @@
         <p>{{ t('cusSug.pageTitle') }}</p>
       </el-col>
       <el-col :span="4" style="text-align: right;">
-        <el-button v-if="userInfo.per1000.includes('sys-007-1000')" type="primary" @click="dialogVisible = true">{{ t('cusSug.addBtn') }}</el-button>
+        <el-button v-if="userInfo.per1000.includes('sys-007-1000')" type="success" @click="dialogVisible = true">{{ t('cusSug.addBtn') }}</el-button>
       </el-col>
     </el-row>
 

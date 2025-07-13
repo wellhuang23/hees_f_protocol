@@ -75,6 +75,9 @@
     "createSysNotificationSuccessMsg": "Create System Notification Successfully",
     "createSysNotificationNoPerErrorMsg": "You don't Have Permission to Create System Notification, Please Contact System Manger",
     "createSysNotificationErrorMsg": "Create System Notification Fail, Please Contact System Manger",
+    "updateSysNotificationSuccessMsg": "Update System Notification Successfully",
+    "updateSysNotificationNoPerErrorMsg": "You don't Have Permission to Update System Notification, Please Contact System Manger",
+    "updateSysNotificationErrorMsg": "Update System Notification Fail, Please Contact System Manger",
     "systemErrorMsg": "System Error, Please Contact System Manager"
   },
   "cusSugDetail": {
@@ -307,11 +310,17 @@
     "company": "Company",
     "group": "Group",
     "notiDesc": "Notice Content",
+    "actions": "Actions",
     "addBtn": "Add",
     "modifyBtn": "Modify",
     "deleteBtn": "Delete",
     "releaseTime": "Release Time",
     "updateTime": "Latest Update Time",
     "addNotiTitle": "Add System Notice"
+  },
+  "notiUpNotice": {
+    "title": "Update System Notice",
+    "notiName": "Notice Title",
+    "notiDesc": "Notice Content"
   }
 }

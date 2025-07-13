@@ -75,6 +75,9 @@
     "createSysNotificationSuccessMsg": "新增系統通知成功",
     "createSysNotificationNoPerErrorMsg": "您沒有新增系統通知的權限，請洽系統管理員",
     "createSysNotificationErrorMsg": "新增系統通知失敗，請洽系統管理員",
+    "updateSysNotificationSuccessMsg": "更新系統通知成功",
+    "updateSysNotificationNoPerErrorMsg": "您沒有更新系統通知的權限，請洽系統管理員",
+    "updateSysNotificationErrorMsg": "更新系統通知失敗，請洽系統管理員",
     "systemErrorMsg": "系統錯誤，請聯繫系統管理員"
   },
   "cusSugDetail": {
@@ -306,10 +309,16 @@
     "group": "發布集團",
     "notiDesc": "通知內容",
     "addBtn": "新增",
+    "actions": "操作",
     "modifyBtn": "修改",
     "deleteBtn": "刪除",
     "releaseTime": "發布時間",
     "updateTime": "最後更新時間",
     "addNotiTitle": "新增系統通知"
+  },
+  "notiUpNotice": {
+    "title": "更新系統通知",
+    "notiName": "通知標題",
+    "notiDesc": "通知內容"
   }
 }
