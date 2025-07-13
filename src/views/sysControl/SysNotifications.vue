@@ -1,9 +1,9 @@
 <script setup lang="ts">
-
+import Notifications from '@/components/sysControl/NotiList.vue'
 </script>
 
 <template>
-  <div class="system_notifications">SYSTEM NOTIFICATION</div>
+  <Notifications />
 </template>
 
 <style scoped lang="scss">

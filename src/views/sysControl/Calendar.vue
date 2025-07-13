@@ -58,7 +58,7 @@ const refreshHoliday = async () => {
 <template>
   <div class="calendar-view-container">
     <div class="actions-bar">
-      <el-button v-if="canAddEvent" type="primary" @click="addEvent">{{ t('calendar.addEvent') }}</el-button>
+      <el-button v-if="canAddEvent" type="success" @click="addEvent">{{ t('calendar.addEvent') }}</el-button>
       <div class="spacer"></div>
       <el-button
         v-if="canRefreshHoliday"

@@ -70,16 +70,18 @@
       </div>
     </template>
   </el-drawer>
+  <CusDelSug v-if="isDelSugDialogVisible" v-model="isDelSugDialogVisible" :event="formData" />
 </template>
 
 <script setup lang="ts">
 import { ref, watch } from 'vue';
 import { useI18n } from 'vue-i18n';
 import type { CusSugMsg } from '@/interfaces/oms/bases';
-import {deleteCusSuggestion, updateCusSuggestion} from '@/services/oms/bases';
+import { updateCusSuggestion } from '@/services/oms/bases';
 import { ElNotification } from "element-plus";
 import { useCusSuggestionsStore } from '@/stores/oms/bases';
 import { useUserInfoStore } from '@/stores/oms/auths';
+import CusDelSug from './CusDelSug.vue';
 
 const props = defineProps({
   visible: {
@@ -97,6 +99,7 @@ const cusSuggestionsStore = useCusSuggestionsStore();
 const userInfo = useUserInfoStore();
 
 const formData = ref<CusSugMsg | null>(null);
+const isDelSugDialogVisible = ref(false);
 
 const resetForm = () => {
   if (props.suggestion) {
@@ -136,30 +139,8 @@ const handleUpdate = async () => {
   }
 };
 
-const handleDelete = async () => {
-  const deleteRes = await deleteCusSuggestion({
-    cusSugId: formData.value?.cusSugId,
-  })
-  if (deleteRes === '00000') {
-    ElNotification({
-      title: t('notice.noticeTitle'),
-      message: t('notice.deleteCusSuggestionSuccessMsg'),
-      type: 'success'
-    });
-    location.reload(); // Consider updating data without a full reload
-  } else if (deleteRes === '99006') {
-    ElNotification({
-      title: t('notice.noticeTitle'),
-      message: t('notice.deleteCusSuggestionNoPerErrorMsg'),
-      type: 'error'
-    });
-  } else {
-    ElNotification({
-      title: t('notice.noticeTitle'),
-      message: t('notice.deleteCusSuggestionErrorMsg'),
-      type: 'error'
-    });
-  }
+const handleDelete = () => {
+  isDelSugDialogVisible.value = true;
 };
 </script>
 
