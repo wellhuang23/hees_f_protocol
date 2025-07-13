@@ -331,5 +331,9 @@
   "cusDelSug": {
     "title": "刪除建議",
     "content": "是否確認刪除客戶建議 ?"
+  },
+  "dashboard": {
+    "sysNotice": "系統通知",
+    "more": "更多 >>>"
   }
 }
