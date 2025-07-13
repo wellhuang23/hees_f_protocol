@@ -72,6 +72,15 @@
     "deleteCusSuggestionSuccessMsg": "刪除顧客建議成功",
     "deleteCusSuggestionNoPerErrorMsg": "您沒有刪除顧客建議的權限，請洽系統管理員",
     "deleteCusSuggestionErrorMsg": "刪除顧客建議失敗，請洽系統管理員",
+    "createSysNotificationSuccessMsg": "新增系統通知成功",
+    "createSysNotificationNoPerErrorMsg": "您沒有新增系統通知的權限，請洽系統管理員",
+    "createSysNotificationErrorMsg": "新增系統通知失敗，請洽系統管理員",
+    "updateSysNotificationSuccessMsg": "更新系統通知成功",
+    "updateSysNotificationNoPerErrorMsg": "您沒有更新系統通知的權限，請洽系統管理員",
+    "updateSysNotificationErrorMsg": "更新系統通知失敗，請洽系統管理員",
+    "deleteSysNotificationSuccessMsg": "刪除系統通知成功",
+    "deleteSysNotificationNoPerErrorMsg": "您沒有刪除系統通知的權限，請洽系統管理員",
+    "deleteSysNotificationErrorMsg": "刪除系統通知失敗，請洽系統管理員",
     "systemErrorMsg": "系統錯誤，請聯繫系統管理員"
   },
   "cusSugDetail": {
@@ -295,5 +304,32 @@
   "g": {
     "cancel": "取消",
     "delete": "刪除"
+  },
+  "sysNoti": {
+    "notiName": "通知標題",
+    "creator": "發佈人",
+    "company": "發佈公司",
+    "group": "發布集團",
+    "notiDesc": "通知內容",
+    "addBtn": "新增",
+    "actions": "操作",
+    "modifyBtn": "修改",
+    "deleteBtn": "刪除",
+    "releaseTime": "發布時間",
+    "updateTime": "最後更新時間",
+    "addNotiTitle": "新增系統通知"
+  },
+  "notiUpNotice": {
+    "title": "更新系統通知",
+    "notiName": "通知標題",
+    "notiDesc": "通知內容"
+  },
+  "notiDelNotice": {
+    "title": "刪除系統通知",
+    "content": "是否確認刪除系統通知 ?"
+  },
+  "cusDelSug": {
+    "title": "刪除建議",
+    "content": "是否確認刪除客戶建議 ?"
   }
 }

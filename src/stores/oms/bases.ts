@@ -8,11 +8,14 @@ import type {
     GetCusSugResParams,
     CusSugSubItem,
     GetCusSugSubItemParams,
+    Notification,
+    GetNotificationResParams,
 } from '@/interfaces'
 import {
     OMS_SERVER_LOGS,
     CAL_EVENTS,
     CUS_SUGGESTIONS,
+    NOTIFICATION,
 } from '@/global/contstants'
 import { sessionCache } from '@/utils/storages.ts'
 
@@ -78,8 +81,20 @@ const useCusSuggestionsStore = defineStore(CUS_SUGGESTIONS, {
     }
 })
 
+const useNotificationStore = defineStore(NOTIFICATION, {
+    state:() => ({
+        sysNotification: [] as Notification[],
+    }),
+    actions: {
+        setSysNotifications(params: GetNotificationResParams) {
+            this.sysNotification = params.notifications ?? []
+        }
+    }
+})
+
 export {
     useOmsServerLogsStore,
     useCalEventsStore,
     useCusSuggestionsStore,
+    useNotificationStore,
 }

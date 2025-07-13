@@ -169,7 +169,7 @@ export interface GetCusSugSubItemParams extends GeneralResParam {
 }
 
 // Operator in Customer Suggestion
-export interface CusSugOperator {
+export interface Operator {
     // User ID
     userId: number;
 
@@ -207,10 +207,10 @@ export interface CusSugMsg {
     cusSugSub: CusSugSubItem;
 
     // Custom Suggestion Creator
-    creator: CusSugOperator;
+    creator: Operator;
 
     // Custom Suggestion Response Man
-    updater: CusSugOperator;
+    updater: Operator;
 }
 
 // Get Customer Suggestions Response Parameters
@@ -250,4 +250,46 @@ export interface CusSugReqParams {
 
     // Notes
     notes?: string;
+}
+
+// Message about Notification
+export interface Notification {
+    // Notification ID
+    notiId: number;
+
+    // Notification Name
+    notiName: string;
+
+    // Notification Description
+    notiDesc: string;
+
+    // Notification Type
+    notiType: number;
+
+    // Notification Create Time
+    createTime: string;
+
+    // Notification Latest Update Time
+    updateTime: string;
+
+    // Notification Creator
+    creator: Operator;
+}
+
+// Get Notification Response Parameters
+export interface GetNotificationResParams extends GeneralResParam {
+    // Notifications
+    notifications?: Notification[];
+}
+
+// Create/Update/Delete Single Notification Request Parameters
+export interface NotificationReqParams {
+    // Notification ID
+    notiId?: number;
+
+    // Notification Name
+    notiName?: string;
+
+    // Notification Description
+    notiDesc?: string;
 }
