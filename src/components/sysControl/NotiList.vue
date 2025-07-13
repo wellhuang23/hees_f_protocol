@@ -189,7 +189,7 @@ onMounted(async () => {
 
 .detail-item {
   display: grid;
-  grid-template-columns: 120px 1fr;
+  grid-template-columns: 140px 1fr;
   gap: 1rem;
   margin-bottom: 0.5rem;
 }
