@@ -333,5 +333,9 @@
   "cusDelSug": {
     "title": "Delete Suggestion",
     "content": "Sure for Deleting the Customer Suggestion ?"
+  },
+  "dashboard": {
+    "sysNotice": "System notices",
+    "more": "More >>>"
   }
 }
