@@ -78,6 +78,9 @@
     "updateSysNotificationSuccessMsg": "更新系統通知成功",
     "updateSysNotificationNoPerErrorMsg": "您沒有更新系統通知的權限，請洽系統管理員",
     "updateSysNotificationErrorMsg": "更新系統通知失敗，請洽系統管理員",
+    "deleteSysNotificationSuccessMsg": "刪除系統通知成功",
+    "deleteSysNotificationNoPerErrorMsg": "您沒有刪除系統通知的權限，請洽系統管理員",
+    "deleteSysNotificationErrorMsg": "刪除系統通知失敗，請洽系統管理員",
     "systemErrorMsg": "系統錯誤，請聯繫系統管理員"
   },
   "cusSugDetail": {
@@ -320,5 +323,9 @@
     "title": "更新系統通知",
     "notiName": "通知標題",
     "notiDesc": "通知內容"
+  },
+  "notiDelNotice": {
+    "title": "刪除系統通知",
+    "content": "是否確認刪除系統通知 ?"
   }
 }

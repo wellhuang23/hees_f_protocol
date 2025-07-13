@@ -78,6 +78,9 @@
     "updateSysNotificationSuccessMsg": "Update System Notification Successfully",
     "updateSysNotificationNoPerErrorMsg": "You don't Have Permission to Update System Notification, Please Contact System Manger",
     "updateSysNotificationErrorMsg": "Update System Notification Fail, Please Contact System Manger",
+    "deleteSysNotificationSuccessMsg": "Delete System Notification Successfully",
+    "deleteSysNotificationNoPerErrorMsg": "You don't Have Permission to Delete System Notification, Please Contact System Manger",
+    "deleteSysNotificationErrorMsg": "Delete System Notification Fail, Please Contact System Manger",
     "systemErrorMsg": "System Error, Please Contact System Manager"
   },
   "cusSugDetail": {
@@ -322,5 +325,9 @@
     "title": "Update System Notice",
     "notiName": "Notice Title",
     "notiDesc": "Notice Content"
+  },
+  "notiDelNotice": {
+    "title": "Delete System Notice",
+    "content": "Sure for Deleting the System Notice ?"
   }
 }

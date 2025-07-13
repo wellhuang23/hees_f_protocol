@@ -50,6 +50,7 @@ declare module 'vue' {
     LogFilter: typeof import('./src/components/sysControl/LogFilter.vue')['default']
     LogRecords: typeof import('./src/components/sysControl/LogRecords.vue')['default']
     NotiAddNotice: typeof import('./src/components/sysControl/NotiAddNotice.vue')['default']
+    NotiDelNotice: typeof import('./src/components/sysControl/NotiDelNotice.vue')['default']
     NotiList: typeof import('./src/components/sysControl/NotiList.vue')['default']
     NotiUpNotice: typeof import('./src/components/sysControl/NotiUpNotice.vue')['default']
     PerAssignUsers: typeof import('./src/components/sysControl/PerAssignUsers.vue')['default']

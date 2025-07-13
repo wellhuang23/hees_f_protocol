@@ -48,7 +48,7 @@
         </template>
       </el-table-column>
       <el-table-column prop="notiName" :label="t('sysNoti.notiName')"></el-table-column>
-      <el-table-column :label="t('sysNoti.actions')" align="center" width="150px">
+      <el-table-column :label="t('sysNoti.actions')" align="center" width="180px">
       <template #default="scope">
         <el-button
           type="warning"
@@ -82,6 +82,7 @@
 
     <NotiAddNotice :visible="isAddNotiDialogVisible" @close="closeAddNotiDialog" />
     <NotiUpNotice v-if="isUpNotiDialogVisible" v-model="isUpNotiDialogVisible" :notice="selectedNotice" />
+    <NotiDelNotice v-if="isDelNotiDialogVisible" v-model="isDelNotiDialogVisible" :event="selectedNotice" />
   </div>
 </template>
 
@@ -96,6 +97,7 @@ import type { Notification } from '@/interfaces/oms/bases';
 import { useRouter } from 'vue-router';
 import NotiAddNotice from './NotiAddNotice.vue';
 import NotiUpNotice from './NotiUpNotice.vue';
+import NotiDelNotice from './NotiDelNotice.vue';
 
 const { t } = useI18n();
 const notificationStore = useNotificationStore();
@@ -108,6 +110,7 @@ const currentPage = ref(1);
 const pageSize = ref(12);
 const isAddNotiDialogVisible = ref(false);
 const isUpNotiDialogVisible = ref(false);
+const isDelNotiDialogVisible = ref(false);
 const selectedNotice = ref<Notification | null>(null);
 
 const pagedNotifications = computed(() => {
@@ -154,7 +157,8 @@ const updateClick = (row: Notification) => {
 };
 
 const deleteClick = (row: Notification) => {
-  console.log(row);
+  selectedNotice.value = row;
+  isDelNotiDialogVisible.value = true;
 };
 
 onMounted(async () => {
