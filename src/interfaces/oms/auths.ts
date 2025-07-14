@@ -4,11 +4,11 @@ import type {
 
 // Log In Request Parameters
 export interface LogInReqParams {
-    // Company Tax No.
-    comTaxNo: string;
-
-    // User
-    user: string;
+    // User Log In Account
+    // Company Tax No. (for System or Group Administrator)
+    // User No.
+    // Email
+    account: string;
 
     // Password
     pwd: string;
