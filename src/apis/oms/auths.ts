@@ -22,8 +22,7 @@ class OMSAuthsAPI {
     // API for Logging In
     async logIn(data: LogInReqParams): Promise<LogInResParams> {
         const params = {
-            'com_tax_no': data.comTaxNo,
-            'user': data.user,
+            'account': data.account,
             'pwd': data.pwd,
             'device_type': 0,
         }

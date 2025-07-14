@@ -1,12 +1,10 @@
 {
   "logInPage": {
     "title": "歡迎使用 HEEs",
-    "hintComTaxNo": "請輸入公司統一編號",
-    "hintUser": "請輸入登入 E-mail",
+    "hintUser": "請輸入登入使用者代號或是 E-mail",
     "hintPwd": "請輸入登入密碼",
     "submitBtn": "登入",
-    "errHintComTaxNo": "請輸入正確的公司統一編號 (8位數字)",
-    "errHintUser": "請輸入正確的 E-mail (例如: your@example.com)",
+    "errHintAccount": "請輸入正確的使用者代號或是 E-mail",
     "errHintPwd": "請輸入正確的密碼"
   },
   "topBar": {

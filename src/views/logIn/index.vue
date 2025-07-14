@@ -6,7 +6,7 @@ import type {
 } from 'element-plus'
 import BottomSign from '@/components/general/BottomSign.vue'
 // Import icons
-import { OfficeBuilding, User, Lock } from '@element-plus/icons-vue'
+import { User, Lock } from '@element-plus/icons-vue'
 import { logInAction } from '@/services'
 import { ElNotification } from 'element-plus'
 import { useRouter } from 'vue-router'
@@ -20,8 +20,7 @@ const formRef = ref<FormInstance>()
 const router = useRouter()
 
 const logInForm = reactive({
-  comTaxNo: '',
-  user: '',
+  account: '',
   pwd: ''
 })
 
@@ -33,31 +32,13 @@ const handleSelect = (index: string) => {
   }
 }
 
-// Validate Company Tax No.
-const comTaxNoValidator = (_rule: any, value: any, callback: any) => {
+// Validate Account (Company Tax No. / User No. / Email)
+const comAccountValidator = (_rule: any, value: any, callback: any) => {
   // Assuming a valid Taiwan Uniform Invoice Number is 8 digits
-  if (value === '' || value.length !== 8 || !/^\d+$/.test(value)) { // Added check for digits only
-    callback(new Error(t('logInPage.errHintComTaxNo')))
+  if (value === '') { // Added check for digits only
+    callback(new Error(t('logInPage.errHintAccount')))
   } else {
     callback()
-  }
-}
-
-// Validate User (Email)
-const userValidator = (_rule: any, value: any, callback: any) => {
-  if (value === '') {
-    callback(new Error(t('logInPage.errHintUser')))
-  } else if (value === 'admin') {
-    // 'admin' is a special case and doesn't need email format validation
-    callback();
-  } else {
-    // A more robust regex for email validation (can be adjusted)
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (!emailRegex.test(value)) {
-      callback(new Error(t('logInPage.errHintUser')))
-    } else {
-      callback()
-    }
   }
 }
 
@@ -72,8 +53,7 @@ const pwdValidator = (_rule: any, value: any, callback: any) => {
 
 // Validation Rules
 const rules = reactive<FormRules<typeof logInForm>>({
-  comTaxNo: [{ validator: comTaxNoValidator, trigger: 'blur' }],
-  user: [{ validator: userValidator, trigger: 'blur' }],
+  account: [{ validator: comAccountValidator, trigger: 'blur' }],
   pwd: [{ validator: pwdValidator, trigger: 'blur' }]
 })
 
@@ -86,8 +66,7 @@ const onSubmit = async () => { // Changed to async as validate returns a Promise
     const valid = await formRef.value.validate() // Await the validation
     if (valid) {
       logInAction({
-        comTaxNo: logInForm.comTaxNo,
-        user: logInForm.user,
+        account: logInForm.account,
         pwd: logInForm.pwd,
         deviceType: 0
       }).then((result) => {
@@ -159,24 +138,11 @@ const onSubmit = async () => { // Changed to async as validate returns a Promise
     </div>
     <el-form :model="logInForm" class="logInContainer" ref="formRef" :rules="rules">
       <h1 class="logInTitle">{{ t('logInPage.title') }}</h1>
-      <el-form-item prop="comTaxNo">
-        <el-input
-            type="text"
-            :placeholder="t('logInPage.hintComTaxNo')"
-            v-model="logInForm.comTaxNo"
-        >
-          <template #prefix>
-            <el-icon class="el-input__icon">
-              <OfficeBuilding />
-            </el-icon>
-          </template>
-        </el-input>
-      </el-form-item>
-      <el-form-item prop="user">
+      <el-form-item prop="account">
         <el-input
             type="text"
             :placeholder="t('logInPage.hintUser')"
-            v-model="logInForm.user"
+            v-model="logInForm.account"
         >
           <template #prefix>
             <el-icon class="el-input__icon">

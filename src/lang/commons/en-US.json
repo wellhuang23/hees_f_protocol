@@ -1,12 +1,10 @@
 {
   "logInPage": {
     "title": "Welcome to HEEs",
-    "hintComTaxNo": "Please Input Company Tax No.",
-    "hintUser": "Please Input Log In Email",
+    "hintUser": "Please Input Log In User No. or Email",
     "hintPwd": "Please Input Log In Password",
     "submitBtn": "Log In",
-    "errHintComTaxNo": "Please Input Correct Company Tax No. (8 Digits)",
-    "errHintUser": "Please Input correct Email (例如: your@example.com)",
+    "errHintAccount": "Please Input correct User No. or Email",
     "errHintPwd": "Please Input Correct Password"
   },
   "topBar": {
