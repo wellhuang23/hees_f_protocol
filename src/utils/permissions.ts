@@ -20,9 +20,13 @@ export function checkLogIn(to: RouteLocationNormalized): boolean {
 const NOT_CHECK_PERMISSION = ['/logIn', '/main/401', '/main/404', '/main/dashboard']
 export function checkPermission(to: RouteLocationNormalized, next: NavigationGuardNext) {
     const per0100: string[] = localCache.getCache(USER_INFO)?.per0100 ?? []
+    const comTaxNo: string = localCache.getCache(USER_INFO)?.comTaxNo ?? 'xxxxxxxx'
     if (!NOT_CHECK_PERMISSION.includes(to.path)) {
         const perCodes = to.meta.perCodes as string[] ?? []
         for (const perCode of perCodes) {
+            if (perCode.includes('xxxxxxxx')) {
+                perCode.replace('xxxxxxxx', comTaxNo)
+            }
             if (!per0100.includes(perCode)) {
                 next({
                     path: '/main/401'

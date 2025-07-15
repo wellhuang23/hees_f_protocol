@@ -31,6 +31,9 @@ export interface LogInResParams extends GeneralResParam {
     // Company ID
     comId?: number;
 
+    // Company Tax No.
+    comTaxNo?: string;
+
     // User ID
     userId?: number;
 
