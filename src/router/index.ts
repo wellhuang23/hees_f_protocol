@@ -9,7 +9,7 @@ import {
     checkPermission
 } from '@/utils/permissions'
 import { i18n } from '@/lang'
-import routerItems from '@/router/commons/asideBarItems.json'
+import routerSysItems from '@/router/commons/sysItems.json'
 import { localCache } from '@/utils/storages.ts'
 import { USER_INFO } from '@/global/contstants.ts'
 
@@ -19,7 +19,7 @@ const modules = import.meta.glob('/src/views/**/**.vue')
 function loadRouteItems() {
     let routes = []
     let appendedPath: string[] = []
-    for (const item of routerItems) {
+    for (const item of routerSysItems) {
         for (const perCode of item.meta.perCodes) {
             if (!appendedPath.includes(item.path)) {
                 if (per0100.includes(perCode)) {
@@ -50,7 +50,7 @@ const routes = [
     {
         path: '/logIn',
         meta: {
-            title: 'pageTitle.logIn'
+            title: 'pageTitle.general.logIn'
         },
         component: () => import('@/views/logIn/index.vue')
     },
@@ -64,21 +64,21 @@ const routes = [
             {
                 path: '404',
                 meta: {
-                    title: 'pageTitle.notExist'
+                    title: 'pageTitle.general.notExist'
                 },
                 component: () => import('@/views/excepts/NotFound.vue'),
             },
             {
                 path: '401',
                 meta: {
-                    title: 'pageTitle.noPermission'
+                    title: 'pageTitle.general.noPermission'
                 },
                 component: () => import('@/views/excepts/NoPermission.vue'),
             },
             {
                 path: 'dashboard',
                 meta: {
-                    title: 'pageTitle.dashboard'
+                    title: 'pageTitle.general.dashboard'
                 },
                 component: () => import('@/views/dashboard/index.vue'),
             },

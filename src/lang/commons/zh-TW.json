@@ -123,16 +123,28 @@
     "sub": "訂閱項目"
   },
   "pageTitle": {
-    "logIn": "登入",
-    "notExist": "頁面不存在",
-    "noPermission": "沒有權限",
-    "dashboard": "儀錶板",
-    "sysPermissions": "系統權限",
-    "sysLogs": "系統日誌",
-    "subManage": "訂閱管理",
-    "cusServices": "客戶服務",
-    "calendar": "行事曆",
-    "sysNotification": "系統通知"
+    "general": {
+      "logIn": "登入",
+      "notExist": "頁面不存在",
+      "noPermission": "沒有權限",
+      "dashboard": "儀錶板"
+    },
+    "system": {
+      "sysPermissions": "系統權限",
+      "sysLogs": "系統日誌",
+      "subManage": "訂閱管理",
+      "cusServices": "客戶服務",
+      "calendar": "行事曆",
+      "sysNotification": "系統通知"
+    },
+    "oms": {
+      "comPermissions": "權限管理",
+      "comInformation": "公司資訊",
+      "comStructure": "公司架構",
+      "comJobPosition": "公司職務",
+      "comMember": "公司成員",
+      "notifications": "企業公告"
+    }
   },
   "asideBarCategory": {
     "sysManage": "系統管理"

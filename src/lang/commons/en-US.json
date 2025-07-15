@@ -123,16 +123,28 @@
     "sub": "Subscription"
   },
   "pageTitle": {
-    "logIn": "Log In",
-    "notExist": "Page Not Exist",
-    "noPermission": "No Permission",
-    "dashboard": "Dashboard",
-    "sysPermissions": "System Permission",
-    "sysLogs": "System Logs",
-    "subManage": "Subscriptions",
-    "cusServices": "Customer Services",
-    "calendar": "Calendar",
-    "sysNotification": "System Notification"
+    "general": {
+      "logIn": "Log In",
+      "notExist": "Page Not Exist",
+      "noPermission": "No Permission",
+      "dashboard": "Dashboard"
+    },
+    "system": {
+      "sysPermissions": "System Permission",
+      "sysLogs": "System Logs",
+      "subManage": "Subscriptions",
+      "cusServices": "Customer Services",
+      "calendar": "Calendar",
+      "sysNotification": "System Notification"
+    },
+    "oms": {
+      "comPermissions": "Permission Management",
+      "comInformation": "Company Information",
+      "comStructure": "Company Structure",
+      "comJobPosition": "Company Job Position",
+      "comMember": "Company Member",
+      "notifications": "Enterprise Notification"
+    }
   },
   "asideBarCategory": {
     "sysManage": "System Manage"
