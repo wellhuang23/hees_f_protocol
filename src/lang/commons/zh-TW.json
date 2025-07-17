@@ -147,7 +147,8 @@
     }
   },
   "asideBarCategory": {
-    "sysManage": "系統管理"
+    "sysManage": "系統管理",
+    "omsSubscription": "組織管理"
   },
   "copyright": {
     "title": "版權所有",

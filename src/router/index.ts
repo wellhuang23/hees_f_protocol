@@ -10,6 +10,7 @@ import {
 } from '@/utils/permissions'
 import { i18n } from '@/lang'
 import routerSysItems from '@/router/commons/sysItems.json'
+import routerOmsItems from '@/router/commons/omsItems.json'
 import { localCache } from '@/utils/storages.ts'
 import { USER_INFO } from '@/global/contstants.ts'
 
@@ -19,7 +20,27 @@ const modules = import.meta.glob('/src/views/**/**.vue')
 function loadRouteItems() {
     let routes = []
     let appendedPath: string[] = []
+    // Append Path about System Manage
     for (const item of routerSysItems) {
+        for (const perCode of item.meta.perCodes) {
+            if (!appendedPath.includes(item.path)) {
+                if (per0100.includes(perCode)) {
+                    routes.push({
+                        path: item.path,
+                        meta: {
+                            title: item.meta.title,
+                            perCodes: item.meta.perCodes,
+                        },
+                        component: modules[`/src/views/${item.component}.vue`]
+                    })
+
+                    appendedPath.push(item.path)
+                }
+            }
+        }
+    }
+    // Append Path about Organization Manage
+    for (const item of routerOmsItems) {
         for (const perCode of item.meta.perCodes) {
             if (!appendedPath.includes(item.path)) {
                 if (per0100.includes(perCode)) {

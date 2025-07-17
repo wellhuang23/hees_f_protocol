@@ -147,7 +147,8 @@
     }
   },
   "asideBarCategory": {
-    "sysManage": "System Manage"
+    "sysManage": "System Manage",
+    "omsSubscription": "Organization Manage"
   },
   "copyright": {
     "title": "Copyright",
