@@ -3,7 +3,7 @@
     "path": "oms/com/per",
     "meta": {
       "title": "pageTitle.oms.comPermissions",
-      "perCodes": ["tttttttt-oms-002-0100", "tttttttt-oms-003-0100"]
+      "perCodes": ["xxxxxxxx-oms-002-0100", "xxxxxxxx-oms-003-0100"]
     },
     "component": "oms/ComPerControl"
   },
@@ -11,7 +11,7 @@
     "path": "oms/com/info",
     "meta": {
       "title": "pageTitle.oms.comInformation",
-      "perCodes": ["tttttttt-oms-004-0010"]
+      "perCodes": ["xxxxxxxx-oms-004-0010"]
     },
     "component": "oms/ComInfo"
   },
@@ -19,7 +19,7 @@
     "path": "oms/com/str",
     "meta": {
       "title": "pageTitle.oms.comStructure",
-      "perCodes": ["tttttttt-oms-005-0100"]
+      "perCodes": ["xxxxxxxx-oms-005-0100"]
     },
     "component": "oms/ComStructure"
   },
@@ -27,7 +27,7 @@
     "path": "oms/com/jp",
     "meta": {
       "title": "pageTitle.oms.comJobPosition",
-      "perCodes": ["tttttttt-oms-006-0100"]
+      "perCodes": ["xxxxxxxx-oms-006-0100"]
     },
     "component": "oms/ComJobPosition"
   },
@@ -35,7 +35,7 @@
     "path": "oms/com/members",
     "meta": {
       "title": "pageTitle.oms.comMember",
-      "perCodes": ["tttttttt-oms-007-0100"]
+      "perCodes": ["xxxxxxxx-oms-007-0100"]
     },
     "component": "oms/ComMembers"
   },
@@ -43,7 +43,7 @@
     "path": "oms/com/notifications",
     "meta": {
       "title": "pageTitle.oms.notifications",
-      "perCodes": ["tttttttt-oms-001-0100", "tttttttt-oms-009-0100"]
+      "perCodes": ["xxxxxxxx-oms-001-0100", "xxxxxxxx-oms-009-0100"]
     },
     "component": "oms/ComNotifications"
   }
