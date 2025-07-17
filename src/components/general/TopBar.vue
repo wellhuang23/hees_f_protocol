@@ -20,18 +20,6 @@ const validComStore = useValidComStore()
 
 const router = useRouter()
 
-const handleSelect = (index: string) => {
-  if (['2-1', '2-2'].includes(index)) {
-    if (index === '2_1') {
-      changeLanguage('zh-TW')
-    } else if (index === '2_2') {
-      changeLanguage('en-US')
-    }
-  } else {
-    validComStore.changeCom(index)
-  }
-}
-
 const onLogOut = async () => { // Changed to async as validate returns a Promise
   const errno: string = await logOutAction()
   if (errno === '00000') {
@@ -91,14 +79,17 @@ const onToggleAside = () => {
         background-color="#142334"
         text-color="#fff"
         active-text-color="#ffd04b"
-        @select="handleSelect"
     >
       <el-sub-menu index="1" class="hide-arrow">
         <template #title>
           <img src="/src/assets/icons/solid/building.svg" alt="Language" class="company" style="width: 20px; height: 20px;"/>
           <span>{{ validComStore.currentCom.comStName }}</span>
         </template>
-        <el-menu-item v-for="validCom in validComStore.validCompanies" :index="validCom.comTaxNo">
+        <el-menu-item
+            v-for="validCom in validComStore.validCompanies"
+            :index="validCom.comTaxNo"
+            @click="validComStore.changeCom(validCom.comTaxNo)"
+        >
           {{ validCom.comTaxNo}}-{{ validCom.comStName }}
         </el-menu-item>
       </el-sub-menu>
@@ -106,8 +97,8 @@ const onToggleAside = () => {
         <template #title>
           <img src="/src/assets/icons/solid/globe.svg" alt="Language" class="globe" style="width: 20px; height: 20px;"/>
         </template>
-        <el-menu-item index="2_1">繁體中文</el-menu-item>
-        <el-menu-item index="2_2">English</el-menu-item>
+        <el-menu-item index="2_1" @click="changeLanguage('zh-TW')">繁體中文</el-menu-item>
+        <el-menu-item index="2_2" @click="changeLanguage('en-US')">English</el-menu-item>
       </el-sub-menu>
       <el-sub-menu index="3">
         <template #title>
