@@ -1,11 +1,17 @@
 import { defineStore } from 'pinia'
-import {sessionCache} from '@/utils/storages'
+import {
+    sessionCache,
+    localCache,
+} from '@/utils/storages'
 import type {
     Sub,
-    GroupCompanies
+    GroupCompanies,
+    ValidCom,
+    LogInResParams,
 } from '@/interfaces'
 import {
-    SUB_ITEMS
+    SUB_ITEMS,
+    VALID_COM,
 } from '@/global/contstants'
 
 const useSubItemsStore = defineStore(SUB_ITEMS, {
@@ -60,6 +66,59 @@ const useSubItemsStore = defineStore(SUB_ITEMS, {
     }
 })
 
+const useValidComStore = defineStore(VALID_COM, {
+    state:() => ({
+        originalCom: localCache.getCache(VALID_COM)?.originalCom ?? {} as ValidCom,
+        currentCom: localCache.getCache(VALID_COM)?.currentCom ?? {} as ValidCom,
+        validCompanies: localCache.getCache(VALID_COM)?.validCompanies ?? [] as ValidCom[],
+    }),
+    actions: {
+        activeLogIn(data: LogInResParams) {
+            const tempCom: ValidCom = {
+                comId: 0,
+                comTaxNo: 'xxxxxxxx',
+                comStName: ''
+            }
+            let originCom: ValidCom = tempCom
+            for (const validCom of data.validCompanies ?? []) {
+                if (validCom.comId == data.comId) {
+                    originCom = validCom
+                }
+            }
+            this.originalCom = originCom
+            this.currentCom = originCom
+            this.validCompanies = data.validCompanies ?? []
+
+            localCache.setCache(VALID_COM, {
+                originalCom: originCom ?? tempCom,
+                currentCom: originCom ?? tempCom,
+                validCompanies: data.validCompanies ?? [],
+            })
+        },
+
+        changeCom(comTaxNo: string) {
+            const tempCom: ValidCom = {
+                comId: 0,
+                comTaxNo: 'xxxxxxxx',
+                comStName: ''
+            }
+            let current: ValidCom = tempCom
+            for (const validCom of this.validCompanies) {
+                if (validCom.comTaxNo === comTaxNo) {
+                    current = validCom
+                }
+            }
+
+            this.currentCom = current
+
+            localCache.setCache(VALID_COM, {
+                currentCom: current ?? tempCom,
+            })
+        }
+    }
+})
+
 export {
-    useSubItemsStore
+    useSubItemsStore,
+    useValidComStore,
 }

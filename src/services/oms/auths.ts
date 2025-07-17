@@ -14,6 +14,7 @@ import {
     useDeviceInfoStore,
     useSysPerRoleStore,
     useSubItemsStore,
+    useValidComStore,
 } from '@/stores'
 
 
@@ -21,12 +22,14 @@ const userInfoStore = useUserInfoStore()
 const deviceStore = useDeviceInfoStore()
 const sysPerRoleStore = useSysPerRoleStore()
 const subItemsStore = useSubItemsStore()
+const validComStore = useValidComStore()
 
 export async function logInAction(logInInfo: LogInReqParams){
     return OMSAuthsAPI.logIn(logInInfo).then((res: LogInResParams): string => {
         if (res.errno === '00000') {
             userInfoStore.setUserInfo(res)
             deviceStore.setDeviceInfo(res)
+            validComStore.activeLogIn(res)
 
             return res.errno
         } else {
@@ -73,6 +76,7 @@ export async function syncUser(){
     return OMSAuthsAPI.syncUser(token).then(async (res: LogInResParams): Promise<string> => {
         if (res.errno === '00000') {
             userInfoStore.setUserInfo(res)
+            validComStore.activeLogIn(res)
             return res.errno
         } else {
             if (res.errno === '99005') {
@@ -82,6 +86,7 @@ export async function syncUser(){
                     return OMSAuthsAPI.syncUser(refreshToken).then((refreshRes: LogInResParams): string => {
                         if (refreshRes.errno === '00000') {
                             userInfoStore.setUserInfo(refreshRes)
+                            validComStore.activeLogIn(refreshRes)
                         } else {
                             userInfoStore.clearUserInfo()
                             deviceStore.clearDeviceInfo()

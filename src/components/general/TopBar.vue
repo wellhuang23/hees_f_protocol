@@ -5,21 +5,30 @@ import {
 } from '@/services'
 import { ElNotification } from 'element-plus'
 import {useRouter} from 'vue-router'
-import { useUserInfoStore, usePersonalSetting } from '@/stores'
+import {
+  useUserInfoStore,
+  usePersonalSetting,
+  useValidComStore
+} from '@/stores'
 import { changeLanguage } from '@/services/general/changeLang.ts'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n()
 const userInfoStore = useUserInfoStore()
 const personalSetting = usePersonalSetting()
+const validComStore = useValidComStore()
 
 const router = useRouter()
 
 const handleSelect = (index: string) => {
-  if (index === '1_1') {
-    changeLanguage('zh-TW')
-  } else if (index === '1_2') {
-    changeLanguage('en-US')
+  if (['2-1', '2-2'].includes(index)) {
+    if (index === '2_1') {
+      changeLanguage('zh-TW')
+    } else if (index === '2_2') {
+      changeLanguage('en-US')
+    }
+  } else {
+    validComStore.changeCom(index)
   }
 }
 
@@ -86,19 +95,28 @@ const onToggleAside = () => {
     >
       <el-sub-menu index="1" class="hide-arrow">
         <template #title>
+          <img src="/src/assets/icons/solid/building.svg" alt="Language" class="company" style="width: 20px; height: 20px;"/>
+          <span>{{ validComStore.currentCom.comStName }}</span>
+        </template>
+        <el-menu-item v-for="validCom in validComStore.validCompanies" :index="validCom.comTaxNo">
+          {{ validCom.comTaxNo}}-{{ validCom.comStName }}
+        </el-menu-item>
+      </el-sub-menu>
+      <el-sub-menu index="2" class="hide-arrow">
+        <template #title>
           <img src="/src/assets/icons/solid/globe.svg" alt="Language" class="globe" style="width: 20px; height: 20px;"/>
         </template>
-        <el-menu-item index="1_1">繁體中文</el-menu-item>
-        <el-menu-item index="1_2">English</el-menu-item>
+        <el-menu-item index="2_1">繁體中文</el-menu-item>
+        <el-menu-item index="2_2">English</el-menu-item>
       </el-sub-menu>
-      <el-sub-menu index="2">
+      <el-sub-menu index="3">
         <template #title>
           <img src="/src/assets/icons/solid/user-large.svg" alt="user" class="user" style="width: 20px; height: 20px; margin-right: 8px;"/>
           <span>{{ userInfoStore.userStName }}</span>
         </template>
-        <el-menu-item index="2_1">{{ t('topBar.profile') }}</el-menu-item>
-        <el-menu-item index="2_2" @click="onSyncUser">{{ t('topBar.syncPermission') }}</el-menu-item>
-        <el-menu-item index="2_3" @click="onLogOut">{{ t('topBar.logOut') }}</el-menu-item>
+        <el-menu-item index="3_1">{{ t('topBar.profile') }}</el-menu-item>
+        <el-menu-item index="3_2" @click="onSyncUser">{{ t('topBar.syncPermission') }}</el-menu-item>
+        <el-menu-item index="3_3" @click="onLogOut">{{ t('topBar.logOut') }}</el-menu-item>
       </el-sub-menu>
     </el-menu>
   </div>
@@ -126,6 +144,11 @@ const onToggleAside = () => {
 
   .el-menu {
     border-bottom: none;
+
+    .company {
+      filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
+      margin-right: 10px;
+    }
 
     .globe {
       filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
