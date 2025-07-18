@@ -73,11 +73,6 @@ watch(() => props.notice, (val) => {
 
 
 const confirmClick = async () => {
-  console.log({
-    notiId: form.value.notiId,
-    notiName: form.value.notiName,
-    notiDesc: form.value.notiDesc,
-  })
   const updateRes = await updateSysNotification({
     notiId: convertToNumber(form.value.notiId) ?? 0,
     notiName: form.value.notiName,

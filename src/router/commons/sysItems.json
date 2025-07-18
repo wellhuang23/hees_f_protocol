@@ -2,7 +2,7 @@
   {
     "path": "sys/perControl",
     "meta": {
-      "title": "pageTitle.sysPermissions",
+      "title": "pageTitle.system.sysPermissions",
       "perCodes": ["sys-001-0100"]
     },
     "component": "sysControl/SysPerControl"
@@ -10,7 +10,7 @@
   {
     "path": "sys/logs",
     "meta": {
-      "title": "pageTitle.sysLogs",
+      "title": "pageTitle.system.sysLogs",
       "perCodes": ["sys-003-0100"]
     },
     "component": "sysControl/SysLogs"
@@ -18,7 +18,7 @@
   {
     "path": "sys/subs",
     "meta": {
-      "title": "pageTitle.subManage",
+      "title": "pageTitle.system.subManage",
       "perCodes": ["sys-005-0100"]
     },
     "component": "sysControl/Subscriptions"
@@ -26,7 +26,7 @@
   {
     "path": "sys/cusServices",
     "meta": {
-      "title": "pageTitle.cusServices",
+      "title": "pageTitle.system.cusServices",
       "perCodes": ["sys-007-0100"]
     },
     "component": "sysControl/CusServices"
@@ -34,7 +34,7 @@
   {
     "path": "sys/updateCal",
     "meta": {
-      "title": "pageTitle.calendar",
+      "title": "pageTitle.system.calendar",
       "perCodes": ["sys-004-0100"]
     },
     "component": "sysControl/Calendar"
@@ -42,7 +42,7 @@
   {
     "path": "sys/notifications",
     "meta": {
-      "title": "pageTitle.sysNotification",
+      "title": "pageTitle.system.sysNotification",
       "perCodes": ["sys-006-0100"]
     },
     "component": "sysControl/SysNotifications"

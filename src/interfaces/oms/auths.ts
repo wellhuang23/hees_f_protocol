@@ -17,6 +17,18 @@ export interface LogInReqParams {
     deviceType: number;
 }
 
+// Company which is Visible for User
+export interface ValidCom {
+    // Company ID
+    comId: number;
+
+    // Company Tax No.
+    comTaxNo: string;
+
+    // Company Short Name
+    comStName: string;
+}
+
 // Log In Response Parameters
 export interface LogInResParams extends GeneralResParam {
     // Token
@@ -30,6 +42,9 @@ export interface LogInResParams extends GeneralResParam {
 
     // Company ID
     comId?: number;
+
+    // Company Tax No.
+    comTaxNo?: string;
 
     // User ID
     userId?: number;
@@ -54,6 +69,9 @@ export interface LogInResParams extends GeneralResParam {
 
     // Delete Permission Codes
     per0001?: string[];
+
+    // Visible Companies for User
+    validCompanies?: ValidCom[];
 }
 
 // Generate Token Request Parameters

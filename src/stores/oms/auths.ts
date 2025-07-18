@@ -18,6 +18,7 @@ const useUserInfoStore = defineStore(USER_INFO, {
     state:() => ({
         groupId: localCache.getCache(USER_INFO)?.groupId ?? -1,
         comId: localCache.getCache(USER_INFO)?.comId ?? -1,
+        comTaxNo: localCache.getCache(USER_INFO)?.comTaxNo ?? 'xxxxxxxx',
         userId: localCache.getCache(USER_INFO)?.userId ?? -1,
         userNo: localCache.getCache(USER_INFO)?.userNo ?? '',
         userStName: localCache.getCache(USER_INFO)?.userStName ?? '',
@@ -31,6 +32,7 @@ const useUserInfoStore = defineStore(USER_INFO, {
         setUserInfo(logInfo: LogInResParams) {
             this.groupId = logInfo.groupId ?? -1
             this.comId = logInfo.comId ?? -1
+            this.comTaxNo = logInfo.comTaxNo ?? 'xxxxxxxx'
             this.userId = logInfo.userId ?? -1
             this.userNo = logInfo.userNo ?? ''
             this.userStName = logInfo.userStName ?? ''
@@ -43,6 +45,7 @@ const useUserInfoStore = defineStore(USER_INFO, {
             localCache.setCache(USER_INFO, {
                 groupId: logInfo.groupId ?? -1,
                 comId: logInfo.comId ?? -1,
+                comTaxNo: logInfo.comTaxNo ?? 'xxxxxxxx',
                 userId: logInfo.userId ?? -1,
                 userNo: logInfo.userNo ?? '',
                 userStName: logInfo.userStName ?? '',

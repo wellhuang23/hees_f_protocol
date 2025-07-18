@@ -12,6 +12,7 @@ import type {
     SysRoleUsers,
     GetSysUsersResParams,
     AssignUserSysPerRoleReqParams,
+    ValidCom,
 } from '@/interfaces'
 import request from '@/utils/requests'
 import { convertToNumber } from '@/utils/conNumber'
@@ -33,6 +34,15 @@ class OMSAuthsAPI {
             data: params,
         }).then((response): LogInResParams => {
             if (response.data.errno === '00000') {
+                const validCompanies: ValidCom[] = [];
+                for (const validCompany of response.data.valid_companies) {
+                    validCompanies.push({
+                        comId: (convertToNumber(validCompany.com_id) ?? 0),
+                        comTaxNo: validCompany.com_tax_no,
+                        comStName: validCompany.com_st_name
+                    })
+                }
+
                 return {
                     errno: response.data.errno,
                     desc: response.data.desc,
@@ -40,6 +50,7 @@ class OMSAuthsAPI {
                     deviceNo: response.data.device_no,
                     groupId: convertToNumber(response.data.group_id),
                     comId: convertToNumber(response.data.com_id),
+                    comTaxNo: response.data.com_tax_no,
                     userId: convertToNumber(response.data.user_id),
                     userNo: response.data.user_no,
                     userStName: response.data.user_st_name,
@@ -48,6 +59,7 @@ class OMSAuthsAPI {
                     per0100: response.data.per_0100 || [],
                     per0010: response.data.per_0010 || [],
                     per0001: response.data.per_0001 || [],
+                    validCompanies:validCompanies
                 }
             } else {
                 return {
@@ -126,6 +138,15 @@ class OMSAuthsAPI {
             }
         }).then((response): LogInResParams => {
             if (response.data.errno === '00000') {
+                const validCompanies: ValidCom[] = [];
+                for (const validCompany of response.data.valid_companies) {
+                    validCompanies.push({
+                        comId: (convertToNumber(validCompany.com_id) ?? 0),
+                        comTaxNo: validCompany.com_tax_no,
+                        comStName: validCompany.com_st_name
+                    })
+                }
+
                 return {
                     errno: response.data.errno,
                     desc: response.data.desc,
@@ -133,6 +154,7 @@ class OMSAuthsAPI {
                     deviceNo: response.data.device_no,
                     groupId: convertToNumber(response.data.group_id),
                     comId: convertToNumber(response.data.com_id),
+                    comTaxNo: response.data.com_tax_no,
                     userId: convertToNumber(response.data.user_id),
                     userNo: response.data.user_no,
                     userStName: response.data.user_st_name,
@@ -141,6 +163,7 @@ class OMSAuthsAPI {
                     per0100: response.data.per_0100 || [],
                     per0010: response.data.per_0010 || [],
                     per0001: response.data.per_0001 || [],
+                    validCompanies: validCompanies
                 }
             } else {
                 return {
