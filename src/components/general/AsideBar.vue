@@ -42,7 +42,7 @@ const asideBarItems = computed(() => getAsideBarSysItems())
 
 <style scoped lang="scss">
 .asides {
-  width: 200px;
+  width: 240px;
   background-color: #142334;
   color: white;
   transition: width 0.3s;

@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import GroupNotifications from '@/components/oms/NotiGroupList.vue'
-import CompanyNotifications from  '@/components/oms/NotiComList.vue'
+import NotificationList from '@/components/oms/NotiList.vue'
 </script>
 
 <template>
-  <group-notifications />
-  <company-notifications />
+  <NotificationList />
 </template>
 
 <style scoped lang="scss">

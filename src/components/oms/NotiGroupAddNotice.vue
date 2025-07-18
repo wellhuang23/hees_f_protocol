@@ -1,9 +1,9 @@
 <template>
   <el-dialog
-    :model-value="visible"
-    :title="t('notices.addSysNotiTitle')"
-    @close="closeDialog"
-    width="500px"
+      :model-value="visible"
+      :title="t('notices.addGroupNotiTitle')"
+      @close="closeDialog"
+      width="500px"
   >
     <el-form :model="form" :rules="rules" ref="formRef" label-position="top">
       <el-form-item :label="t('notices.notiName')" prop="title">
@@ -25,7 +25,7 @@
 import { ref, reactive } from 'vue';
 import { useI18n } from 'vue-i18n';
 import {ElNotification, type FormInstance, type FormRules} from 'element-plus';
-import { createNewSysNotification } from '@/services/oms/bases'
+import { createNewGroupNotification } from '@/services/oms/bases'
 
 const { t } = useI18n();
 
@@ -63,7 +63,7 @@ const submitForm = async () => {
   if (!formRef.value) return;
   await formRef.value.validate(async (valid) => {
     if (valid) {
-      const createRes = await createNewSysNotification({
+      const createRes = await createNewGroupNotification({
         notiName: form.title,
         notiDesc: form.content
       })

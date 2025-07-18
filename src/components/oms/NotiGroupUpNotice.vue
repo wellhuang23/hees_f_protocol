@@ -1,9 +1,9 @@
 <template>
   <el-drawer
-    v-model="drawer"
-    :title="t('notiUpNotice.title')"
-    direction="rtl"
-    size="50%"
+      v-model="drawer"
+      :title="t('notiUpNotice.title')"
+      direction="rtl"
+      size="50%"
   >
     <el-form :model="form" label-width="120px">
       <el-form-item :label="t('notiUpNotice.notiName')">
@@ -25,7 +25,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import {useI18n} from "vue-i18n";
-import { updateSysNotification } from '@/services/oms/bases'
+import { updateGroupNotification } from '@/services/oms/bases'
 import {convertToNumber} from "@/utils/conNumber.ts";
 import {ElNotification} from "element-plus";
 
@@ -73,7 +73,7 @@ watch(() => props.notice, (val) => {
 
 
 const confirmClick = async () => {
-  const updateRes = await updateSysNotification({
+  const updateRes = await updateGroupNotification({
     notiId: convertToNumber(form.value.notiId) ?? 0,
     notiName: form.value.notiName,
     notiDesc: form.value.notiDesc,

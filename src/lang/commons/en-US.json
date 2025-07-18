@@ -318,7 +318,7 @@
     "cancel": "Cancel",
     "delete": "Delete"
   },
-  "sysNoti": {
+  "notices": {
     "notiName": "Notice Title",
     "creator": "Posted by",
     "company": "Company",
@@ -330,7 +330,9 @@
     "deleteBtn": "Delete",
     "releaseTime": "Release Time",
     "updateTime": "Latest Update Time",
-    "addNotiTitle": "Add System Notice"
+    "addSysNotiTitle": "Add System Notice",
+    "addGroupNotiTitle": "Add Group Notice",
+    "addComNotiTitle": "Add Company Notice"
   },
   "notiUpNotice": {
     "title": "Update System Notice",
@@ -339,14 +341,19 @@
   },
   "notiDelNotice": {
     "title": "Delete System Notice",
-    "content": "Sure for Deleting the System Notice ?"
+    "content": "Sure for Deleting the Notice ?"
   },
   "cusDelSug": {
     "title": "Delete Suggestion",
     "content": "Sure for Deleting the Customer Suggestion ?"
   },
   "dashboard": {
-    "sysNotice": "System notices",
+    "sysNotice": "System Notices",
+    "groupNotice": "Group Notices",
     "more": "More >>>"
+  },
+  "entNotifications": {
+    "labelGroup": "Group Notifications",
+    "labelCompany": "Company Notifications"
   }
 }

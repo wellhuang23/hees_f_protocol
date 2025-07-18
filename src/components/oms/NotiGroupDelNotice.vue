@@ -2,7 +2,7 @@
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 import type { Notification } from '@/interfaces/oms/bases';
-import { deleteSysNotification } from '@/services/oms/bases'
+import { deleteGroupNotification } from '@/services/oms/bases'
 import {ElNotification} from "element-plus";
 
 // Props and Emits for v-model
@@ -26,7 +26,7 @@ const closeDialog = () => {
 
 const handleConfirm = async () => {
   if (props.event?.notiId) {
-    const deleteRes = await deleteSysNotification({
+    const deleteRes = await deleteGroupNotification({
       notiId: props.event.notiId
     })
     if (deleteRes === '00000') {
@@ -57,11 +57,11 @@ const handleConfirm = async () => {
 
 <template>
   <el-dialog
-    v-model="isVisible"
-    :title="t('notiDelNotice.title')"
-    width="400px"
-    :close-on-click-modal="true"
-    @close="closeDialog"
+      v-model="isVisible"
+      :title="t('notiDelNotice.title')"
+      width="400px"
+      :close-on-click-modal="true"
+      @close="closeDialog"
   >
     <div class="dialog-content-wrapper">
       <p class="dialog-content">{{ t('notiDelNotice.content') }}</p>
