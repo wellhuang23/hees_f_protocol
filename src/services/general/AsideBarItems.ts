@@ -51,7 +51,6 @@ export function getAsideBarSysItems() {
     }
     const appendedOmsItemTitle: string[] = []
     for (const item of routerOmsItems) {
-        console.log(item)
         for (const perCode of item.meta.perCodes) {
             if (!appendedOmsItemTitle.includes(item.meta.title)) {
                 if (per0100.value.includes(perCode.replace('xxxxxxxx', comTaxNo.value))) {
