@@ -64,9 +64,9 @@ watch(drawer, (val) => {
 watch(() => props.notice, (val) => {
   if (val) {
     form.value = {
-      notiId: val.notiId,
-      notiName: val.notiName,
-      notiDesc: val.notiDesc,
+      notiId: val.notiId ?? 0,
+      notiName: val.notiName ?? '',
+      notiDesc: val.notiDesc ?? '',
     }
   }
 }, { immediate: true, deep: true })

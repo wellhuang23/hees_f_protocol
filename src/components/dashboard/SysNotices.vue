@@ -5,7 +5,7 @@
       <li
           v-for="notification in notificationStore.sysNotification.slice(0, 5)"
           :key="notification.notiId"
-          @click="clickNotice()"
+          @click="clickNotice(notification.notiId)"
       >
         <router-link to="/main/sys/notifications" class="single-row">
           * {{ notification.notiName }} : {{ notification.notiDesc }}
@@ -32,8 +32,13 @@ const router = useRouter()
 const { t } = useI18n();
 const notificationStore = useNotificationStore();
 
-const clickNotice = () => {
-  router.push('/main/sys/notifications')
+const clickNotice = (notiId: number) => {
+  router.push({
+    path: '/main/sys/notifications',
+    query: {
+      notiId: notiId
+    },
+  })
 }
 
 onMounted(async () => {

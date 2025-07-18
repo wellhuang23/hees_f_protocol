@@ -94,16 +94,18 @@ import { useNotificationStore } from '@/stores/oms/bases';
 import { useUserInfoStore } from '@/stores/oms/auths';
 import { getSysNotification } from '@/services/oms/bases';
 import type { Notification } from '@/interfaces/oms/bases';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 import NotiAddNotice from './NotiAddNotice.vue';
 import NotiUpNotice from './NotiUpNotice.vue';
 import NotiDelNotice from './NotiDelNotice.vue';
+import {convertToNumber} from "@/utils/conNumber.ts";
 
 const { t } = useI18n();
 const notificationStore = useNotificationStore();
 const { sysNotification: notifications } = storeToRefs(notificationStore);
 const userInfo = useUserInfoStore();
 const router = useRouter();
+const route = useRoute();
 
 const expandedRowKeys = ref<number[]>([]);
 const currentPage = ref(1);
@@ -166,6 +168,11 @@ onMounted(async () => {
     router.push({ name: 'NoPermission' });
   }
   await getSysNotification();
+
+  const rowKey: number = convertToNumber(route.query?.notiId) ?? 0
+  if (rowKey !== 0) {
+    expandedRowKeys.value = [rowKey];
+  }
 });
 </script>
 
