@@ -1,7 +1,7 @@
 <template>
   <el-drawer
       v-model="drawer"
-      :title="t('notiUpNotice.groupTitle')"
+      :title="t('notiUpNotice.comTitle')"
       direction="rtl"
       size="50%"
   >
@@ -25,7 +25,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import {useI18n} from "vue-i18n";
-import { updateGroupNotification } from '@/services/oms/bases'
+import { updateComNotification } from '@/services/oms/bases'
 import {convertToNumber} from "@/utils/conNumber.ts";
 import {ElNotification} from "element-plus";
 
@@ -73,7 +73,7 @@ watch(() => props.notice, (val) => {
 
 
 const confirmClick = async () => {
-  const updateRes = await updateGroupNotification({
+  const updateRes = await updateComNotification({
     notiId: convertToNumber(form.value.notiId) ?? 0,
     notiName: form.value.notiName,
     notiDesc: form.value.notiDesc,
@@ -84,7 +84,7 @@ const confirmClick = async () => {
       message: t('notice.updateNotificationSuccessMsg'),
       type: 'success'
     });
-    location.reload(); // Consider updating data without a full reload
+    location.reload()
   } else if (updateRes === '99006') {
     ElNotification({
       title: t('notice.noticeTitle'),

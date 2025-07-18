@@ -58,7 +58,7 @@ const handleConfirm = async () => {
 <template>
   <el-dialog
       v-model="isVisible"
-      :title="t('notiDelNotice.title')"
+      :title="t('notiDelNotice.groupTitle')"
       width="400px"
       :close-on-click-modal="true"
       @close="closeDialog"

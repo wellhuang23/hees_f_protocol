@@ -333,12 +333,16 @@
     "addComNotiTitle": "新增公司公告"
   },
   "notiUpNotice": {
-    "title": "更新系統公告",
+    "sysTitle": "更新系統公告",
+    "groupTitle": "更新集團公告",
+    "comTitle": "更新公司公告",
     "notiName": "公告標題",
     "notiDesc": "公告內容"
   },
   "notiDelNotice": {
-    "title": "刪除系統公告",
+    "sysTitle": "刪除系統公告",
+    "groupTitle": "刪除集團公告",
+    "comTitle": "刪除公司公告",
     "content": "是否確認刪除公告 ?"
   },
   "cusDelSug": {
@@ -348,6 +352,7 @@
   "dashboard": {
     "sysNotice": "系統公告",
     "groupNotice": "集團公告",
+    "comNotice": "公司公告",
     "more": "更多 >>>"
   },
   "entNotifications": {

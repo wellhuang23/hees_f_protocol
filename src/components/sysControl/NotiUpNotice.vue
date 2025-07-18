@@ -1,7 +1,7 @@
 <template>
   <el-drawer
     v-model="drawer"
-    :title="t('notiUpNotice.title')"
+    :title="t('notiUpNotice.sysTitle')"
     direction="rtl"
     size="50%"
   >
