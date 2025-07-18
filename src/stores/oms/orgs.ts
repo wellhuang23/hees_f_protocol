@@ -112,7 +112,9 @@ const useValidComStore = defineStore(VALID_COM, {
             this.currentCom = current
 
             localCache.setCache(VALID_COM, {
+                originalCom: this.originalCom,
                 currentCom: current ?? tempCom,
+                validCompanies: this.validCompanies
             })
         }
     }

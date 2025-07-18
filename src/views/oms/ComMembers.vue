@@ -3,7 +3,7 @@
 </script>
 
 <template>
-
+  <div>COMPANY MEMBERS</div>
 </template>
 
 <style scoped lang="scss">

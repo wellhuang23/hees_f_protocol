@@ -63,6 +63,11 @@ const onSyncUser = async () => { // Changed to async as validate returns a Promi
   }
 }
 
+const changeCompany = async (comTaxNo: string) => {
+  validComStore.changeCom(comTaxNo)
+  location.reload()
+}
+
 const onToggleAside = () => {
   personalSetting.toggleAside()
 }
@@ -88,7 +93,7 @@ const onToggleAside = () => {
         <el-menu-item
             v-for="validCom in validComStore.validCompanies"
             :index="validCom.comTaxNo"
-            @click="validComStore.changeCom(validCom.comTaxNo)"
+            @click="changeCompany(validCom.comTaxNo)"
         >
           {{ validCom.comTaxNo}}-{{ validCom.comStName }}
         </el-menu-item>

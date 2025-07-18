@@ -12,9 +12,10 @@ import { i18n } from '@/lang'
 import routerSysItems from '@/router/commons/sysItems.json'
 import routerOmsItems from '@/router/commons/omsItems.json'
 import { localCache } from '@/utils/storages.ts'
-import { USER_INFO } from '@/global/contstants.ts'
+import {USER_INFO, VALID_COM} from '@/global/contstants.ts'
 
 const per0100 = localCache.getCache(USER_INFO)?.per0100 ?? [] as string[]
+const comTaxNo = localCache.getCache(VALID_COM)?.currentCom.comTaxNo ?? 'xxxxxxxx'
 const modules = import.meta.glob('/src/views/**/**.vue')
 
 function loadRouteItems() {
@@ -43,7 +44,7 @@ function loadRouteItems() {
     for (const item of routerOmsItems) {
         for (const perCode of item.meta.perCodes) {
             if (!appendedPath.includes(item.path)) {
-                if (per0100.includes(perCode)) {
+                if (per0100.includes(perCode.replace('xxxxxxxx', comTaxNo))) {
                     routes.push({
                         path: item.path,
                         meta: {

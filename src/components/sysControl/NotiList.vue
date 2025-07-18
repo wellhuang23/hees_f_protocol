@@ -2,7 +2,7 @@
   <div class="noti-list-container">
     <el-row justify="space-between" align="middle" class="page-header">
       <el-col :span="20">
-        <p>{{ t('pageTitle.sysNotification') }}</p>
+        <p>{{ t('pageTitle.system.sysNotification') }}</p>
       </el-col>
       <el-col :span="4" style="text-align: right;">
         <el-button v-if="userInfo.per1000.includes('sys-006-1000')" type="success" @click="addNoti">{{ t('sysNoti.addBtn') }}</el-button>

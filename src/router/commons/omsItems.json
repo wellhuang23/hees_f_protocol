@@ -11,7 +11,7 @@
     "path": "oms/com/info",
     "meta": {
       "title": "pageTitle.oms.comInformation",
-      "perCodes": ["xxxxxxxx-oms-004-0010"]
+      "perCodes": ["xxxxxxxx-oms-004-0100"]
     },
     "component": "oms/ComInfo"
   },

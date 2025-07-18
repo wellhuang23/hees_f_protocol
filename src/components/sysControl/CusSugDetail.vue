@@ -101,7 +101,6 @@ const statusText = computed(() => {
 });
 
 const handleDelete = async () => {
-  console.log('Delete Suggestion Info:', props.suggestion);
   const deleteRes = await deleteCusSuggestion({
     cusSugId: props.suggestion?.cusSugId,
   })
