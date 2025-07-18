@@ -29,7 +29,6 @@ onMounted(async () => {
   }
 
   const activeLabel: string = route.query?.label as string ?? 'groupNotices'
-  console.log(activeLabel)
   activeName = ref(activeLabel)
 });
 </script>
