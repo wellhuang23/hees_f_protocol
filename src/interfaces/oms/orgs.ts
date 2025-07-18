@@ -157,3 +157,51 @@ export interface ChangeGroupAdminPwdResParams extends GeneralResParam {
     // Group Administrator Password
     groupAdminNewPwd?: string;
 }
+
+// Company Information
+export interface ComInfo {
+    // Company ID
+    comId: number;
+
+    // Company Name
+    comName: string;
+
+    // Company Short Name
+    comStName: string;
+
+    // Company Tax No.
+    comTaxNo: string;
+
+    // Company Leader
+    comLeader: string;
+
+    // Company Phone
+    comPhone: string;
+
+    // Company Address
+    comAddr: string;
+
+    // Company Description
+    comDesc: string;
+
+    // Company Name in English
+    comEngName: string;
+
+    // Company Address in English
+    comEngAddr: string;
+
+    // Group ID
+    groupId: number;
+
+    // Group Name
+    groupName: string;
+
+    // Group Description
+    groupDesc: string;
+}
+
+//  Get Company Information Response Parameters
+export interface GetComInfoResParams extends GeneralResParam {
+    // Company Information
+    comInfo?: ComInfo;
+}

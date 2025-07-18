@@ -11,6 +11,8 @@ import type {
     UpdateComSubsReqParams,
     ChangeGroupAdminPwdReqParams,
     ChangeGroupAdminPwdResParams,
+    GetComInfoResParams,
+    ComInfo,
 } from '@/interfaces'
 import request from '@/utils/requests'
 import { convertToNumber } from '@/utils/conNumber'
@@ -209,6 +211,80 @@ class OMSOrgsAPI {
                     groupAdminNewPwd: response.data.new_group_admin_pwd
                 }
             }
+            return {
+                errno: response.data.errno,
+                desc: response.data.desc,
+            }
+        });
+    }
+
+    // API for Getting Company Information
+    async getComInfo(token: string, comId: number): Promise<GetComInfoResParams> {
+        const params = {
+            'com_id': comId,
+        }
+        return request<any, any>({
+            url: ORGS_API + '/com/info',
+            method: 'GET',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            params: params,
+        }).then((response): GetComInfoResParams => {
+            if (response.data.errno === '00000') {
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                    comInfo: {
+                        comId: (convertToNumber(response.data.data.com_id) ?? 0),
+                        comName: response.data.data.com_name,
+                        comStName: response.data.data.com_st_name,
+                        comTaxNo: response.data.data.com_tax_no,
+                        comLeader: response.data.data.com_leader,
+                        comPhone: response.data.data.com_phone,
+                        comAddr: response.data.data.com_addr,
+                        comDesc: response.data.data.com_desc,
+                        comEngName: response.data.data.com_eng_name,
+                        comEngAddr: response.data.data.com_eng_addr,
+                        groupId: (convertToNumber(response.data.data.group_id) ?? 0),
+                        groupName: response.data.data.group_name,
+                        groupDesc: response.data.data.group_desc,
+                    }
+                }
+            } else {
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                }
+            }
+        });
+    }
+
+    // API for Updating Company Information
+    async updateComInfo(data: ComInfo, token: string): Promise<GeneralResParam> {
+        const params = {
+            com_id: data.comId,
+            com_name: data.comName,
+            com_st_name: data.comStName,
+            com_tax_no: data.comTaxNo,
+            com_leader: data.comLeader,
+            com_phone: data.comPhone,
+            com_addr: data.comAddr,
+            com_desc: data.comDesc,
+            com_eng_name: data.comEngName,
+            com_eng_addr: data.comEngAddr,
+            group_id: data.groupId,
+            group_name: data.groupName,
+            group_desc: data.groupDesc,
+        }
+        return request<any, any>({
+            url: ORGS_API + '/com/info/update',
+            method: 'POST',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            data: params,
+        }).then((response): GeneralResParam => {
             return {
                 errno: response.data.errno,
                 desc: response.data.desc,
