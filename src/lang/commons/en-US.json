@@ -70,15 +70,15 @@
     "deleteCusSuggestionSuccessMsg": "Delete Customer Suggestion Successfully",
     "deleteCusSuggestionNoPerErrorMsg": "You don't Have Permission to Delete Customer Suggestion, Please Contact System Manger",
     "deleteCusSuggestionErrorMsg": "Delete Customer Suggestion Fail, Please Contact System Manger",
-    "createSysNotificationSuccessMsg": "Create System Notification Successfully",
-    "createSysNotificationNoPerErrorMsg": "You don't Have Permission to Create System Notification, Please Contact System Manger",
-    "createSysNotificationErrorMsg": "Create System Notification Fail, Please Contact System Manger",
-    "updateSysNotificationSuccessMsg": "Update System Notification Successfully",
-    "updateSysNotificationNoPerErrorMsg": "You don't Have Permission to Update System Notification, Please Contact System Manger",
-    "updateSysNotificationErrorMsg": "Update System Notification Fail, Please Contact System Manger",
-    "deleteSysNotificationSuccessMsg": "Delete System Notification Successfully",
-    "deleteSysNotificationNoPerErrorMsg": "You don't Have Permission to Delete System Notification, Please Contact System Manger",
-    "deleteSysNotificationErrorMsg": "Delete System Notification Fail, Please Contact System Manger",
+    "createNotificationSuccessMsg": "Create Notification Successfully",
+    "createNotificationNoPerErrorMsg": "You don't Have Permission to Create Notification, Please Contact System Manger",
+    "createNotificationErrorMsg": "Create Notification Fail, Please Contact System Manger",
+    "updateNotificationSuccessMsg": "Update Notification Successfully",
+    "updateNotificationNoPerErrorMsg": "You don't Have Permission to Update Notification, Please Contact System Manger",
+    "updateNotificationErrorMsg": "Update Notification Fail, Please Contact System Manger",
+    "deleteNotificationSuccessMsg": "Delete Notification Successfully",
+    "deleteNotificationNoPerErrorMsg": "You don't Have Permission to Delete Notification, Please Contact System Manger",
+    "deleteNotificationErrorMsg": "Delete Notification Fail, Please Contact System Manger",
     "systemErrorMsg": "System Error, Please Contact System Manager"
   },
   "cusSugDetail": {
@@ -318,7 +318,7 @@
     "cancel": "Cancel",
     "delete": "Delete"
   },
-  "sysNoti": {
+  "notices": {
     "notiName": "Notice Title",
     "creator": "Posted by",
     "company": "Company",
@@ -330,23 +330,35 @@
     "deleteBtn": "Delete",
     "releaseTime": "Release Time",
     "updateTime": "Latest Update Time",
-    "addNotiTitle": "Add System Notice"
+    "addSysNotiTitle": "Add System Notice",
+    "addGroupNotiTitle": "Add Group Notice",
+    "addComNotiTitle": "Add Company Notice"
   },
   "notiUpNotice": {
-    "title": "Update System Notice",
+    "sysTitle": "Update System Notice",
+    "groupTitle": "Update Group Notice",
+    "comTitle": "Update Company Notice",
     "notiName": "Notice Title",
     "notiDesc": "Notice Content"
   },
   "notiDelNotice": {
-    "title": "Delete System Notice",
-    "content": "Sure for Deleting the System Notice ?"
+    "sysTitle": "Delete System Notice",
+    "groupTitle": "Delete Group Notice",
+    "comTitle": "Delete Company Notice",
+    "content": "Sure for Deleting the Notice ?"
   },
   "cusDelSug": {
     "title": "Delete Suggestion",
     "content": "Sure for Deleting the Customer Suggestion ?"
   },
   "dashboard": {
-    "sysNotice": "System notices",
+    "sysNotice": "System Notices",
+    "groupNotice": "Group Notices",
+    "comNotice": "Company Notices",
     "more": "More >>>"
+  },
+  "entNotifications": {
+    "labelGroup": "Group Notices",
+    "labelCompany": "Company Notices"
   }
 }

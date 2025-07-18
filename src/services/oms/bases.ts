@@ -330,3 +330,165 @@ export async function deleteSysNotification(params: NotificationReqParams) {
         return res.errno
     })
 }
+
+export async function getGroupNotification() {
+    const token = deviceStore.token
+    return OMSBasesAPI.getGroupNotifications(token).then(async (res: GetNotificationResParams)=> {
+        if (res.errno === '99005') {
+            const refreshTokenResult = await updateToken().then()
+            if (refreshTokenResult === '00000') {
+                const refreshToken = deviceStore.token
+                return OMSBasesAPI.getGroupNotifications(
+                    refreshToken).then((refreshRes: GetNotificationResParams) => {
+                    notificationStore.setGroupNotifications(refreshRes)
+                    return refreshRes.errno
+                })
+            }
+        } else {
+            notificationStore.setGroupNotifications(res)
+            return res.errno
+        }
+        return res.errno
+    })
+}
+
+export async function createNewGroupNotification(params: NotificationReqParams) {
+    const token = deviceStore.token
+    return OMSBasesAPI.createNewGroupNotification(params, token).then(async (res: GeneralResParam)=> {
+        if (res.errno === '99005') {
+            const refreshTokenResult = await updateToken().then()
+            if (refreshTokenResult === '00000') {
+                const refreshToken = deviceStore.token
+                return OMSBasesAPI.createNewGroupNotification(
+                    params,
+                    refreshToken).then((refreshRes: GeneralResParam) => {
+                    return refreshRes.errno
+                })
+            }
+        } else {
+            return res.errno
+        }
+        return res.errno
+    })
+}
+
+export async function updateGroupNotification(params: NotificationReqParams) {
+    const token = deviceStore.token
+    return OMSBasesAPI.updateGroupNotification(params, token).then(async (res: GeneralResParam)=> {
+        if (res.errno === '99005') {
+            const refreshTokenResult = await updateToken().then()
+            if (refreshTokenResult === '00000') {
+                const refreshToken = deviceStore.token
+                return OMSBasesAPI.updateGroupNotification(
+                    params,
+                    refreshToken).then((refreshRes: GeneralResParam) => {
+                    return refreshRes.errno
+                })
+            }
+        } else {
+            return res.errno
+        }
+        return res.errno
+    })
+}
+
+export async function deleteGroupNotification(params: NotificationReqParams) {
+    const token = deviceStore.token
+    return OMSBasesAPI.deleteGroupNotification(params, token).then(async (res: GeneralResParam)=> {
+        if (res.errno === '99005') {
+            const refreshTokenResult = await updateToken().then()
+            if (refreshTokenResult === '00000') {
+                const refreshToken = deviceStore.token
+                return OMSBasesAPI.deleteGroupNotification(
+                    params,
+                    refreshToken).then((refreshRes: GeneralResParam) => {
+                    return refreshRes.errno
+                })
+            }
+        } else {
+            return res.errno
+        }
+        return res.errno
+    })
+}
+
+export async function getComNotification() {
+    const token = deviceStore.token
+    return OMSBasesAPI.getComNotifications(token).then(async (res: GetNotificationResParams)=> {
+        if (res.errno === '99005') {
+            const refreshTokenResult = await updateToken().then()
+            if (refreshTokenResult === '00000') {
+                const refreshToken = deviceStore.token
+                return OMSBasesAPI.getComNotifications(
+                    refreshToken).then((refreshRes: GetNotificationResParams) => {
+                    notificationStore.setComNotifications(refreshRes)
+                    return refreshRes.errno
+                })
+            }
+        } else {
+            notificationStore.setComNotifications(res)
+            return res.errno
+        }
+        return res.errno
+    })
+}
+
+export async function createNewComNotification(params: NotificationReqParams) {
+    const token = deviceStore.token
+    return OMSBasesAPI.createNewComNotification(params, token).then(async (res: GeneralResParam)=> {
+        if (res.errno === '99005') {
+            const refreshTokenResult = await updateToken().then()
+            if (refreshTokenResult === '00000') {
+                const refreshToken = deviceStore.token
+                return OMSBasesAPI.createNewComNotification(
+                    params,
+                    refreshToken).then((refreshRes: GeneralResParam) => {
+                    return refreshRes.errno
+                })
+            }
+        } else {
+            return res.errno
+        }
+        return res.errno
+    })
+}
+
+export async function updateComNotification(params: NotificationReqParams) {
+    const token = deviceStore.token
+    return OMSBasesAPI.updateComNotification(params, token).then(async (res: GeneralResParam)=> {
+        if (res.errno === '99005') {
+            const refreshTokenResult = await updateToken().then()
+            if (refreshTokenResult === '00000') {
+                const refreshToken = deviceStore.token
+                return OMSBasesAPI.updateComNotification(
+                    params,
+                    refreshToken).then((refreshRes: GeneralResParam) => {
+                    return refreshRes.errno
+                })
+            }
+        } else {
+            return res.errno
+        }
+        return res.errno
+    })
+}
+
+export async function deleteComNotification(params: NotificationReqParams) {
+    const token = deviceStore.token
+    return OMSBasesAPI.deleteComNotification(params, token).then(async (res: GeneralResParam)=> {
+        if (res.errno === '99005') {
+            const refreshTokenResult = await updateToken().then()
+            if (refreshTokenResult === '00000') {
+                const refreshToken = deviceStore.token
+                return OMSBasesAPI.deleteComNotification(
+                    params,
+                    refreshToken).then((refreshRes: GeneralResParam) => {
+                    return refreshRes.errno
+                })
+            }
+        } else {
+            return res.errno
+        }
+        return res.errno
+    })
+}

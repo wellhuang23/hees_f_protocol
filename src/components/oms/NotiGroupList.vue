@@ -1,21 +1,19 @@
 <template>
   <div class="noti-list-container">
     <el-row justify="space-between" align="middle" class="page-header">
-      <el-col :span="20">
-        <p>{{ t('pageTitle.system.sysNotification') }}</p>
-      </el-col>
+      <el-col :span="20"></el-col>
       <el-col :span="4" style="text-align: right;">
-        <el-button v-if="userInfo.per1000.includes('sys-006-1000')" type="success" @click="addNoti">{{ t('notices.addBtn') }}</el-button>
+        <el-button v-if="userInfo.per1000.includes(perCreateCode)" type="success" @click="addNoti">{{ t('notices.addBtn') }}</el-button>
       </el-col>
     </el-row>
 
     <el-table
-      :data="pagedNotifications"
-      stripe
-      style="width: 100%"
-      :row-key="getRowKey"
-      :expand-row-keys="expandedRowKeys"
-      @row-click="handleRowClick"
+        :data="pagedNotifications"
+        stripe
+        style="width: 100%"
+        :row-key="getRowKey"
+        :expand-row-keys="expandedRowKeys"
+        @row-click="handleRowClick"
     >
       <el-table-column type="expand">
         <template #default="props">
@@ -49,13 +47,13 @@
       </el-table-column>
       <el-table-column prop="notiName" :label="t('notices.notiName')"></el-table-column>
       <el-table-column
+          v-if="userInfo.per0010.includes(perUpdateCode) || userInfo.per0001.includes(perDeleteCode)"
           :label="t('notices.actions')"
-          v-if="userInfo.per0010.includes('sys-006-0010') || userInfo.per0001.includes('sys-006-0001')"
           align="center" width="180px"
       >
         <template #default="scope">
           <el-button
-              v-if="userInfo.per0010.includes('sys-006-0010')"
+              v-if="userInfo.per0010.includes(perUpdateCode)"
               type="warning"
               size="small"
               @click="updateClick(scope.row)"
@@ -63,7 +61,7 @@
             {{ t('notices.modifyBtn') }}
           </el-button>
           <el-button
-              v-if="userInfo.per0001.includes('sys-006-0001')"
+              v-if="userInfo.per0001.includes(perDeleteCode)"
               type="danger"
               size="small"
               @click="deleteClick(scope.row)"
@@ -76,13 +74,13 @@
 
     <div class="pagination-container">
       <el-pagination
-        v-model:current-page="currentPage"
-        v-model:page-size="pageSize"
-        :page-sizes="[10, 20, 50, 100]"
-        :total="totalNotifications"
-        layout="total, sizes, prev, pager, next, jumper"
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
+          v-model:current-page="currentPage"
+          v-model:page-size="pageSize"
+          :page-sizes="[10, 20, 50, 100]"
+          :total="totalNotifications"
+          layout="total, sizes, prev, pager, next, jumper"
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
       />
     </div>
 
@@ -98,20 +96,27 @@ import { useI18n } from 'vue-i18n';
 import { storeToRefs } from 'pinia';
 import { useNotificationStore } from '@/stores/oms/bases';
 import { useUserInfoStore } from '@/stores/oms/auths';
-import { getSysNotification } from '@/services/oms/bases';
+import { useValidComStore } from '@/stores/oms/orgs';
+import { getGroupNotification } from '@/services/oms/bases';
 import type { Notification } from '@/interfaces/oms/bases';
-import { useRouter, useRoute } from 'vue-router';
-import NotiAddNotice from '@/components/sysControl/NotiAddNotice.vue';
-import NotiUpNotice from '@/components/sysControl/NotiUpNotice.vue';
-import NotiDelNotice from '@/components/sysControl/NotiDelNotice.vue';
+import { useRoute } from 'vue-router';
+import NotiAddNotice from '@/components/oms/NotiGroupAddNotice.vue';
+import NotiUpNotice from '@/components/oms/NotiGroupUpNotice.vue';
+import NotiDelNotice from '@/components/oms/NotiGroupDelNotice.vue';
 import {convertToNumber} from "@/utils/conNumber.ts";
 
 const { t } = useI18n();
 const notificationStore = useNotificationStore();
-const { sysNotification: notifications } = storeToRefs(notificationStore);
+const { groupNotification: notifications } = storeToRefs(notificationStore);
 const userInfo = useUserInfoStore();
-const router = useRouter();
+const validComStore = useValidComStore();
 const route = useRoute();
+
+const comTaxNo = validComStore.currentCom.comTaxNo
+const perReadCode = comTaxNo + '-oms-001-0100'
+const perCreateCode = comTaxNo + '-oms-001-1000'
+const perUpdateCode = comTaxNo + '-oms-001-0010'
+const perDeleteCode = comTaxNo + '-oms-001-0001'
 
 const expandedRowKeys = ref<number[]>([]);
 const currentPage = ref(1);
@@ -170,10 +175,9 @@ const deleteClick = (row: Notification) => {
 };
 
 onMounted(async () => {
-  if (!userInfo.per0100.includes('sys-006-0100')) {
-    await router.push('/main/401');
+  if (userInfo.per0100.includes(perReadCode)) {
+    await getGroupNotification();
   }
-  await getSysNotification();
 
   const rowKey: number = convertToNumber(route.query?.notiId) ?? 0
   if (rowKey !== 0) {

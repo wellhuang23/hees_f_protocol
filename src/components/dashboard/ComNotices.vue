@@ -1,9 +1,9 @@
 <template>
   <div class="sys-notices custom-block" style="width: 100%">
-    <h3 class="custom-block-title">{{ t('dashboard.sysNotice') }}</h3>
+    <h3 class="custom-block-title">{{ t('dashboard.comNotice') }}</h3>
     <ul>
       <li
-          v-for="notification in notificationStore.sysNotification.slice(0, 5)"
+          v-for="notification in notificationStore.comNotification.slice(0, 5)"
           :key="notification.notiId"
           @click="clickNotice(notification.notiId)"
       >
@@ -13,7 +13,7 @@
       </li>
     </ul>
     <div class="more-hyperlink">
-      <router-link to="/main/sys/notifications" class="more-hyperlink-text">
+      <router-link to="/main/oms/com/notifications" class="more-hyperlink-text">
         {{ t('dashboard.more') }}
       </router-link>
     </div>
@@ -23,7 +23,7 @@
 <script setup lang="ts">
 import {useI18n} from 'vue-i18n';
 import {onMounted} from 'vue';
-import {getSysNotification} from '@/services';
+import {getComNotification} from '@/services';
 import {useNotificationStore} from '@/stores/oms/bases';
 import {useRouter} from 'vue-router'
 
@@ -34,24 +34,25 @@ const notificationStore = useNotificationStore();
 
 const clickNotice = (notiId: number) => {
   router.push({
-    path: '/main/sys/notifications',
+    path: '/main/oms/com/notifications',
     query: {
+      label: 'comNotices',
       notiId: notiId
     },
   })
 }
 
 onMounted(async () => {
-  await getSysNotification();
+  await getComNotification();
 });
 </script>
 
 <style scoped lang="scss">
 .custom-block.sys-notices {
   padding: 8px 16px;
-  background-color: rgba(245, 108, 108, .1);
+  background-color: rgba(102, 177, 255, .1);
   border-radius: 4px;
-  border-left: 5px solid #f56c6c;
+  border-left: 5px solid #409EFF;
   margin: 20px 0;
 
   ul {

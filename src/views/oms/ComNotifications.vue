@@ -1,9 +1,9 @@
 <script setup lang="ts">
-
+import NotificationList from '@/components/oms/NotiList.vue'
 </script>
 
 <template>
-  <div>ENTERPRISE NOTIFICATION</div>
+  <NotificationList />
 </template>
 
 <style scoped lang="scss">
