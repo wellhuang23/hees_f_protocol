@@ -84,10 +84,20 @@ const useCusSuggestionsStore = defineStore(CUS_SUGGESTIONS, {
 const useNotificationStore = defineStore(NOTIFICATION, {
     state:() => ({
         sysNotification: [] as Notification[],
+        groupNotification: [] as Notification[],
+        comNotification: [] as Notification[],
     }),
     actions: {
         setSysNotifications(params: GetNotificationResParams) {
             this.sysNotification = params.notifications ?? []
+        },
+
+        setGroupNotifications(params: GetNotificationResParams) {
+            this.groupNotification = params.notifications ?? []
+        },
+
+        setComNotifications(params: GetNotificationResParams) {
+            this.comNotification = params.notifications ?? []
         }
     }
 })
