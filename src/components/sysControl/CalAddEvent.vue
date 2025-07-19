@@ -75,7 +75,7 @@ const handleConfirm = async () => {
           message: t('notice.createCalendarSuccessMsg'),
           type: 'success'
         });
-        location.reload(); // Consider updating data without a full reload
+        isVisible.value = false;
       } else if (createRes === '99006') {
         ElNotification({
           title: t('notice.noticeTitle'),

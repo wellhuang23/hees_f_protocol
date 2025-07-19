@@ -32,7 +32,6 @@ const handleRefresh = async () => {
   await getSysRole()
   await getSysRoleUsers()
   await getSysUsers()
-  location.reload()
 }
 </script>
 
@@ -48,18 +47,10 @@ const handleRefresh = async () => {
 </template>
 
 <style scoped lang="scss">
-.sys_per_control {
-  /* No longer relative positioning needed here for button */
-}
-
 .refresh-button-container {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 20px; /* Add some space below the button */
-}
-
-.refresh-button {
-  /* No absolute positioning */
 }
 </style>
 

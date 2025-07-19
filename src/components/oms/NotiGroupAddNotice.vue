@@ -73,7 +73,7 @@ const submitForm = async () => {
           message: t('notice.createNotificationSuccessMsg'),
           type: 'success'
         });
-        location.reload(); // Consider updating data without a full reload
+        closeDialog()
       } else if (createRes === '99006') {
         ElNotification({
           title: t('notice.noticeTitle'),

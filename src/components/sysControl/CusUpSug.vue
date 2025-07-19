@@ -1,10 +1,10 @@
 <template>
   <el-drawer
-    :model-value="visible"
+    :model-value="modelValue"
     :title="t('cusUpSug.title')"
     direction="rtl"
     size="50%"
-    @update:model-value="$emit('update:visible', $event)"
+    @update:model-value="$emit('update:modelValue', $event)"
     @open="resetForm"
   >
     <div v-if="formData" class="detail-container">
@@ -65,12 +65,17 @@
       <div class="footer-container">
         <el-button v-if="userInfo.per0001.includes('sys-007-0001')" type="danger" @click="handleDelete">{{ t('g.delete') }}</el-button>
         <div class="spacer"></div>
-        <el-button @click="$emit('update:visible', false)">{{ t('g.cancel') }}</el-button>
+        <el-button @click="$emit('update:modelValue', false)">{{ t('g.cancel') }}</el-button>
         <el-button type="primary" @click="handleUpdate">{{ t('cusUpSug.updateBtn') }}</el-button>
       </div>
     </template>
   </el-drawer>
-  <CusDelSug v-if="isDelSugDialogVisible" v-model="isDelSugDialogVisible" :event="formData" />
+  <CusDelSug
+    v-if="isDelSugDialogVisible"
+    v-model="isDelSugDialogVisible"
+    :event="formData"
+    @delete-confirmed="handleDeleteConfirmed"
+  />
 </template>
 
 <script setup lang="ts">
@@ -84,7 +89,7 @@ import { useUserInfoStore } from '@/stores/oms/auths';
 import CusDelSug from './CusDelSug.vue';
 
 const props = defineProps({
-  visible: {
+  modelValue: {
     type: Boolean,
     required: true,
   },
@@ -93,6 +98,8 @@ const props = defineProps({
     default: () => null,
   },
 });
+
+const emit = defineEmits(['update:modelValue']);
 
 const { t, locale } = useI18n();
 const cusSuggestionsStore = useCusSuggestionsStore();
@@ -123,7 +130,7 @@ const handleUpdate = async () => {
       message: t('notice.updateCusSuggestionSuccessMsg'),
       type: 'success'
     });
-    location.reload(); // Consider updating data without a full reload
+    emit('update:modelValue', false); // Close drawer on success
   } else if (updateRes === '99006') {
     ElNotification({
       title: t('notice.noticeTitle'),
@@ -141,6 +148,10 @@ const handleUpdate = async () => {
 
 const handleDelete = () => {
   isDelSugDialogVisible.value = true;
+};
+
+const handleDeleteConfirmed = () => {
+  emit('update:modelValue', false); // Close the main drawer
 };
 </script>
 

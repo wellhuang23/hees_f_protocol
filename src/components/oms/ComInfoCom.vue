@@ -67,7 +67,6 @@ const confirmChanges = async () => {
     groupDesc: props.info?.groupDesc,
   })
   if (updateRes === '00000') {
-    location.reload();
     ElNotification({
       title: t('notice.noticeTitle'),
       message: t('notice.updateComInfoSuccessMsg'),

@@ -78,8 +78,6 @@ const handleConfirm = async () => {
         message: t('notice.updateSysPerRoleUsersSuccessMsg'),
         type: 'success'
       })
-      location.reload()
-
     } else {
       ElNotification({
         title: t('notice.noticeTitle'),

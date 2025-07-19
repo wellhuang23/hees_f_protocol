@@ -10,7 +10,7 @@
         <el-input v-model="form.notiName" />
       </el-form-item>
       <el-form-item :label="t('notiUpNotice.notiDesc')">
-        <el-input v-model="form.notiDesc" type="textarea" :rows="5" />
+        <el-input v-model="form.notiDesc" type="textarea" :rows="20" />
       </el-form-item>
     </el-form>
     <template #footer>
@@ -71,6 +71,9 @@ watch(() => props.notice, (val) => {
   }
 }, { immediate: true, deep: true })
 
+const closeDrawer = () => {
+  emit('update:modelValue', false)
+}
 
 const confirmClick = async () => {
   const updateRes = await updateSysNotification({
@@ -84,7 +87,7 @@ const confirmClick = async () => {
       message: t('notice.updateNotificationSuccessMsg'),
       type: 'success'
     });
-    location.reload(); // Consider updating data without a full reload
+    closeDrawer()
   } else if (updateRes === '99006') {
     ElNotification({
       title: t('notice.noticeTitle'),

@@ -1,20 +1,20 @@
 <template>
   <el-dialog
-    :model-value="visible"
+    :model-value="modelValue"
     :title="t('cusSugs.addSug')"
     width="500"
     center
-    @create:model-value="$emit('create:visible', $event)"
+    @update:model-value="$emit('update:modelValue', $event)"
   >
     <el-form :model="form" label-position="top">
       <el-form-item :label="t('cusSugs.name')">
         <el-input v-model="form.name" :maxlength="50" show-word-limit />
       </el-form-item>
       <el-form-item :label="t('cusSugs.content')">
-        <el-input v-model="form.content" type="textarea" :rows="4" />
+        <el-input v-model="form.content" type="textarea" :rows="10" />
       </el-form-item>
       <el-form-item :label="t('cusSugs.sub')">
-        <el-select v-model="form.subId" placeholder="Select">
+        <el-select v-model="form.subId" placeholder="Select" style="width: 100%;">
           <el-option
             v-for="item in subItems"
             :key="item.value"
@@ -26,7 +26,7 @@
     </el-form>
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="$emit('create:visible', false)">{{ t('general.cancel') }}</el-button>
+        <el-button @click="$emit('update:modelValue', false)">{{ t('general.cancel') }}</el-button>
         <el-button type="primary" @click="submitForm">
           {{ t('general.confirm') }}
         </el-button>
@@ -44,10 +44,10 @@ import { createNewCusSuggestion } from '@/services/oms/bases'
 import {ElNotification} from "element-plus";
 
 defineProps<{
-  visible: boolean;
+  modelValue: boolean;
 }>();
 
-defineEmits(['create:visible']);
+const emit = defineEmits(['update:modelValue']);
 
 const { t, locale } = useI18n();
 const cusSuggestionsStore = useCusSuggestionsStore();
@@ -80,7 +80,7 @@ const submitForm = async () => {
       message: t('notice.createCusSuggestionSuccessMsg'),
       type: 'success'
     });
-    location.reload(); // Consider updating data without a full reload
+    emit('update:modelValue', false) // Close dialog on success
   } else if (createRes === '99006') {
     ElNotification({
       title: t('notice.noticeTitle'),

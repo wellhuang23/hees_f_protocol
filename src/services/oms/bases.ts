@@ -79,11 +79,27 @@ export async function createNewCalEvent(params: CalEventReqParams) {
                 return OMSBasesAPI.createNewCalEvent(
                     params,
                     refreshToken).then((refreshRes: GeneralResParam) => {
-                    return refreshRes.errno
+                    if (refreshRes.errno === '00000') {
+                        return OMSBasesAPI.getSysCalEvents(token).then(async (refreshGetRes: GetCalEventsResParams)=> {
+                            if (refreshGetRes.errno === '00000') {
+                                calEventsStore.setCalEvents(refreshGetRes)
+                            }
+                            return refreshGetRes.errno
+                        })
+                    } else {
+                        return refreshRes.errno
+                    }
                 })
             }
         } else {
-            return res.errno
+            if (res.errno === '00000') {
+                return OMSBasesAPI.getSysCalEvents(token).then(async (getRes: GetCalEventsResParams)=> {
+                    if (getRes.errno === '00000') {
+                        calEventsStore.setCalEvents(getRes)
+                    }
+                    return getRes.errno
+                })
+            }
         }
         return res.errno
     })
@@ -99,11 +115,27 @@ export async function updateCalEvent(params: CalEventReqParams) {
                 return OMSBasesAPI.updateCalEvent(
                     params,
                     refreshToken).then((refreshRes: GeneralResParam) => {
-                    return refreshRes.errno
+                    if (refreshRes.errno === '00000') {
+                        return OMSBasesAPI.getSysCalEvents(token).then(async (refreshGetRes: GetCalEventsResParams)=> {
+                            if (refreshGetRes.errno === '00000') {
+                                calEventsStore.setCalEvents(refreshGetRes)
+                            }
+                            return refreshGetRes.errno
+                        })
+                    } else {
+                        return refreshRes.errno
+                    }
                 })
             }
         } else {
-            return res.errno
+            if (res.errno === '00000') {
+                return OMSBasesAPI.getSysCalEvents(token).then(async (getRes: GetCalEventsResParams)=> {
+                    if (getRes.errno === '00000') {
+                        calEventsStore.setCalEvents(getRes)
+                    }
+                    return getRes.errno
+                })
+            }
         }
         return res.errno
     })
@@ -119,11 +151,27 @@ export async function deleteCalEvent(params: CalEventReqParams) {
                 return OMSBasesAPI.deleteCalEvent(
                     params,
                     refreshToken).then((refreshRes: GeneralResParam) => {
-                    return refreshRes.errno
+                    if (refreshRes.errno === '00000') {
+                        return OMSBasesAPI.getSysCalEvents(token).then(async (refreshGetRes: GetCalEventsResParams)=> {
+                            if (refreshGetRes.errno === '00000') {
+                                calEventsStore.setCalEvents(refreshGetRes)
+                            }
+                            return refreshGetRes.errno
+                        })
+                    } else {
+                        return refreshRes.errno
+                    }
                 })
             }
         } else {
-            return res.errno
+            if (res.errno === '00000') {
+                return OMSBasesAPI.getSysCalEvents(token).then(async (getRes: GetCalEventsResParams)=> {
+                    if (getRes.errno === '00000') {
+                        calEventsStore.setCalEvents(getRes)
+                    }
+                    return getRes.errno
+                })
+            }
         }
         return res.errno
     })
@@ -138,11 +186,27 @@ export async function syncGovCalEvents() {
                 const refreshToken = deviceStore.token
                 return OMSBasesAPI.syncGovCalEvents(
                     refreshToken).then((refreshRes: GeneralResParam) => {
-                    return refreshRes.errno
+                    if (refreshRes.errno === '00000') {
+                        return OMSBasesAPI.getSysCalEvents(token).then(async (refreshGetRes: GetCalEventsResParams)=> {
+                            if (refreshGetRes.errno === '00000') {
+                                calEventsStore.setCalEvents(refreshGetRes)
+                            }
+                            return refreshGetRes.errno
+                        })
+                    } else {
+                        return refreshRes.errno
+                    }
                 })
             }
         } else {
-            return res.errno
+            if (res.errno === '00000') {
+                return OMSBasesAPI.getSysCalEvents(token).then(async (getRes: GetCalEventsResParams)=> {
+                    if (getRes.errno === '00000') {
+                        calEventsStore.setCalEvents(getRes)
+                    }
+                    return getRes.errno
+                })
+            }
         }
         return res.errno
     })
@@ -200,11 +264,27 @@ export async function createNewCusSuggestion(params: CusSugReqParams) {
                 return OMSBasesAPI.createNewCusSuggestion(
                     params,
                     refreshToken).then((refreshRes: GeneralResParam) => {
-                    return refreshRes.errno
+                    if (refreshRes.errno === '00000') {
+                        return OMSBasesAPI.getCusSuggestion(token).then(async (refreshGetRes: GetCusSugResParams)=> {
+                            if (refreshGetRes.errno === '00000') {
+                                cusSuggestionsStore.setCusSuggestions(refreshGetRes)
+                            }
+                            return refreshGetRes.errno
+                        })
+                    } else {
+                        return refreshRes.errno
+                    }
                 })
             }
         } else {
-            return res.errno
+            if (res.errno === '00000') {
+                return OMSBasesAPI.getCusSuggestion(token).then(async (getRes: GetCusSugResParams)=> {
+                    if (getRes.errno === '00000') {
+                        cusSuggestionsStore.setCusSuggestions(getRes)
+                    }
+                    return getRes.errno
+                })
+            }
         }
         return res.errno
     })
@@ -220,11 +300,27 @@ export async function updateCusSuggestion(params: CusSugReqParams) {
                 return OMSBasesAPI.updateCusSuggestion(
                     params,
                     refreshToken).then((refreshRes: GeneralResParam) => {
-                    return refreshRes.errno
+                    if (refreshRes.errno === '00000') {
+                        return OMSBasesAPI.getCusSuggestion(token).then(async (refreshGetRes: GetCusSugResParams)=> {
+                            if (refreshGetRes.errno === '00000') {
+                                cusSuggestionsStore.setCusSuggestions(refreshGetRes)
+                            }
+                            return refreshGetRes.errno
+                        })
+                    } else {
+                        return refreshRes.errno
+                    }
                 })
             }
         } else {
-            return res.errno
+            if (res.errno === '00000') {
+                return OMSBasesAPI.getCusSuggestion(token).then(async (getRes: GetCusSugResParams)=> {
+                    if (getRes.errno === '00000') {
+                        cusSuggestionsStore.setCusSuggestions(getRes)
+                    }
+                    return getRes.errno
+                })
+            }
         }
         return res.errno
     })
@@ -240,11 +336,27 @@ export async function deleteCusSuggestion(params: CusSugReqParams) {
                 return OMSBasesAPI.deleteCusSuggestion(
                     params,
                     refreshToken).then((refreshRes: GeneralResParam) => {
-                    return refreshRes.errno
+                    if (refreshRes.errno === '00000') {
+                        return OMSBasesAPI.getCusSuggestion(token).then(async (refreshGetRes: GetCusSugResParams)=> {
+                            if (refreshGetRes.errno === '00000') {
+                                cusSuggestionsStore.setCusSuggestions(refreshGetRes)
+                            }
+                            return refreshGetRes.errno
+                        })
+                    } else {
+                        return refreshRes.errno
+                    }
                 })
             }
         } else {
-            return res.errno
+            if (res.errno === '00000') {
+                return OMSBasesAPI.getCusSuggestion(token).then(async (getRes: GetCusSugResParams)=> {
+                    if (getRes.errno === '00000') {
+                        cusSuggestionsStore.setCusSuggestions(getRes)
+                    }
+                    return getRes.errno
+                })
+            }
         }
         return res.errno
     })
@@ -281,11 +393,27 @@ export async function createNewSysNotification(params: NotificationReqParams) {
                 return OMSBasesAPI.createNewSysNotification(
                     params,
                     refreshToken).then((refreshRes: GeneralResParam) => {
-                    return refreshRes.errno
+                    if (refreshRes.errno === '00000') {
+                        return OMSBasesAPI.getSysNotifications(token).then(async (refreshGetRes: GetNotificationResParams)=> {
+                            if (refreshGetRes.errno === '00000') {
+                                notificationStore.setSysNotifications(refreshGetRes)
+                            }
+                            return refreshGetRes.errno
+                        })
+                    } else {
+                        return refreshRes.errno
+                    }
                 })
             }
         } else {
-            return res.errno
+            if (res.errno === '00000') {
+                return OMSBasesAPI.getSysNotifications(token).then(async (getRes: GetNotificationResParams)=> {
+                    if (getRes.errno === '00000') {
+                        notificationStore.setSysNotifications(getRes)
+                    }
+                    return getRes.errno
+                })
+            }
         }
         return res.errno
     })
@@ -301,11 +429,27 @@ export async function updateSysNotification(params: NotificationReqParams) {
                 return OMSBasesAPI.updateSysNotification(
                     params,
                     refreshToken).then((refreshRes: GeneralResParam) => {
-                    return refreshRes.errno
+                    if (refreshRes.errno === '00000') {
+                        return OMSBasesAPI.getSysNotifications(token).then(async (refreshGetRes: GetNotificationResParams)=> {
+                            if (refreshGetRes.errno === '00000') {
+                                notificationStore.setSysNotifications(refreshGetRes)
+                            }
+                            return refreshGetRes.errno
+                        })
+                    } else {
+                        return refreshRes.errno
+                    }
                 })
             }
         } else {
-            return res.errno
+            if (res.errno === '00000') {
+                return OMSBasesAPI.getSysNotifications(token).then(async (getRes: GetNotificationResParams)=> {
+                    if (getRes.errno === '00000') {
+                        notificationStore.setSysNotifications(getRes)
+                    }
+                    return getRes.errno
+                })
+            }
         }
         return res.errno
     })
@@ -321,11 +465,27 @@ export async function deleteSysNotification(params: NotificationReqParams) {
                 return OMSBasesAPI.deleteSysNotification(
                     params,
                     refreshToken).then((refreshRes: GeneralResParam) => {
-                    return refreshRes.errno
+                    if (refreshRes.errno === '00000') {
+                        return OMSBasesAPI.getSysNotifications(token).then(async (refreshGetRes: GetNotificationResParams)=> {
+                            if (refreshGetRes.errno === '00000') {
+                                notificationStore.setSysNotifications(refreshGetRes)
+                            }
+                            return refreshGetRes.errno
+                        })
+                    } else {
+                        return refreshRes.errno
+                    }
                 })
             }
         } else {
-            return res.errno
+            if (res.errno === '00000') {
+                return OMSBasesAPI.getSysNotifications(token).then(async (getRes: GetNotificationResParams)=> {
+                    if (getRes.errno === '00000') {
+                        notificationStore.setSysNotifications(getRes)
+                    }
+                    return getRes.errno
+                })
+            }
         }
         return res.errno
     })
@@ -362,11 +522,29 @@ export async function createNewGroupNotification(params: NotificationReqParams) 
                 return OMSBasesAPI.createNewGroupNotification(
                     params,
                     refreshToken).then((refreshRes: GeneralResParam) => {
-                    return refreshRes.errno
+                    if (refreshRes.errno === '00000') {
+                        return OMSBasesAPI.getGroupNotifications(token).then(async (refreshGetRes: GetNotificationResParams) => {
+                            if (refreshGetRes.errno === '00000') {
+                                notificationStore.setGroupNotifications(refreshGetRes)
+                            }
+                            return refreshGetRes.errno
+                        })
+                    } else {
+                        return refreshRes.errno
+                    }
                 })
             }
         } else {
-            return res.errno
+            if (res.errno === '00000') {
+                return OMSBasesAPI.getGroupNotifications(token).then(async (getRes: GetNotificationResParams) => {
+                    if (getRes.errno === '00000') {
+                        notificationStore.setGroupNotifications(getRes)
+                    }
+                    return getRes.errno
+                })
+            } else {
+                return res.errno
+            }
         }
         return res.errno
     })
@@ -382,11 +560,29 @@ export async function updateGroupNotification(params: NotificationReqParams) {
                 return OMSBasesAPI.updateGroupNotification(
                     params,
                     refreshToken).then((refreshRes: GeneralResParam) => {
-                    return refreshRes.errno
+                    if (refreshRes.errno === '00000') {
+                        return OMSBasesAPI.getGroupNotifications(token).then(async (refreshGetRes: GetNotificationResParams) => {
+                            if (refreshGetRes.errno === '00000') {
+                                notificationStore.setGroupNotifications(refreshGetRes)
+                            }
+                            return refreshGetRes.errno
+                        })
+                    } else {
+                        return refreshRes.errno
+                    }
                 })
             }
         } else {
-            return res.errno
+            if (res.errno === '00000') {
+                return OMSBasesAPI.getGroupNotifications(token).then(async (getRes: GetNotificationResParams) => {
+                    if (getRes.errno === '00000') {
+                        notificationStore.setGroupNotifications(getRes)
+                    }
+                    return getRes.errno
+                })
+            } else {
+                return res.errno
+            }
         }
         return res.errno
     })
@@ -402,11 +598,29 @@ export async function deleteGroupNotification(params: NotificationReqParams) {
                 return OMSBasesAPI.deleteGroupNotification(
                     params,
                     refreshToken).then((refreshRes: GeneralResParam) => {
-                    return refreshRes.errno
+                    if (refreshRes.errno === '00000') {
+                        return OMSBasesAPI.getGroupNotifications(token).then(async (refreshGetRes: GetNotificationResParams) => {
+                            if (refreshGetRes.errno === '00000') {
+                                notificationStore.setGroupNotifications(refreshGetRes)
+                            }
+                            return refreshGetRes.errno
+                        })
+                    } else {
+                        return refreshRes.errno
+                    }
                 })
             }
         } else {
-            return res.errno
+            if (res.errno === '00000') {
+                return OMSBasesAPI.getGroupNotifications(token).then(async (getRes: GetNotificationResParams) => {
+                    if (getRes.errno === '00000') {
+                        notificationStore.setGroupNotifications(getRes)
+                    }
+                    return getRes.errno
+                })
+            } else {
+                return res.errno
+            }
         }
         return res.errno
     })
@@ -443,11 +657,29 @@ export async function createNewComNotification(params: NotificationReqParams) {
                 return OMSBasesAPI.createNewComNotification(
                     params,
                     refreshToken).then((refreshRes: GeneralResParam) => {
-                    return refreshRes.errno
+                    if (refreshRes.errno === '00000') {
+                        return OMSBasesAPI.getComNotifications(token).then(async (refreshGetRes: GetNotificationResParams) => {
+                            if (refreshGetRes.errno === '00000') {
+                                notificationStore.setComNotifications(refreshGetRes)
+                            }
+                            return refreshGetRes.errno
+                        })
+                    } else {
+                        return refreshRes.errno
+                    }
                 })
             }
         } else {
-            return res.errno
+            if (res.errno === '00000') {
+                return OMSBasesAPI.getComNotifications(token).then(async (getRes: GetNotificationResParams) => {
+                    if (getRes.errno === '00000') {
+                        notificationStore.setComNotifications(getRes)
+                    }
+                    return getRes.errno
+                })
+            } else {
+                return res.errno
+            }
         }
         return res.errno
     })
@@ -463,11 +695,29 @@ export async function updateComNotification(params: NotificationReqParams) {
                 return OMSBasesAPI.updateComNotification(
                     params,
                     refreshToken).then((refreshRes: GeneralResParam) => {
-                    return refreshRes.errno
+                    if (refreshRes.errno === '00000') {
+                        return OMSBasesAPI.getComNotifications(token).then(async (refreshGetRes: GetNotificationResParams) => {
+                            if (refreshGetRes.errno === '00000') {
+                                notificationStore.setComNotifications(refreshGetRes)
+                            }
+                            return refreshGetRes.errno
+                        })
+                    } else {
+                        return refreshRes.errno
+                    }
                 })
             }
         } else {
-            return res.errno
+            if (res.errno === '00000') {
+                return OMSBasesAPI.getComNotifications(token).then(async (getRes: GetNotificationResParams) => {
+                    if (getRes.errno === '00000') {
+                        notificationStore.setComNotifications(getRes)
+                    }
+                    return getRes.errno
+                })
+            } else {
+                return res.errno
+            }
         }
         return res.errno
     })
@@ -483,11 +733,29 @@ export async function deleteComNotification(params: NotificationReqParams) {
                 return OMSBasesAPI.deleteComNotification(
                     params,
                     refreshToken).then((refreshRes: GeneralResParam) => {
-                    return refreshRes.errno
+                    if (refreshRes.errno === '00000') {
+                        return OMSBasesAPI.getComNotifications(token).then(async (refreshGetRes: GetNotificationResParams) => {
+                            if (refreshGetRes.errno === '00000') {
+                                notificationStore.setComNotifications(refreshGetRes)
+                            }
+                            return refreshGetRes.errno
+                        })
+                    } else {
+                        return refreshRes.errno
+                    }
                 })
             }
         } else {
-            return res.errno
+            if (res.errno === '00000') {
+                return OMSBasesAPI.getComNotifications(token).then(async (getRes: GetNotificationResParams) => {
+                    if (getRes.errno === '00000') {
+                        notificationStore.setComNotifications(getRes)
+                    }
+                    return getRes.errno
+                })
+            } else {
+                return res.errno
+            }
         }
         return res.errno
     })

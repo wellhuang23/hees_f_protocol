@@ -155,14 +155,26 @@ export async function updateComInfo(data: ComInfo) {
     const token = deviceStore.token
     return OMSOrgsAPI.updateComInfo(data, token).then(async (res: GeneralResParam)=> {
         if (res.errno === '00000') {
-            return res.errno
+            OMSOrgsAPI.getComInfo(token, data.comId).then((getRes: GetComInfoResParams)=> {
+                if (getRes.errno === '00000') {
+                    comInfoStore.setComInfo(getRes)
+                }
+                return getRes.errno
+            })
         } else {
             if (res.errno === '99005') {
                 const refreshTokenResult = await updateToken().then()
                 if (refreshTokenResult === '00000') {
                     const refreshToken = deviceStore.token
                     return OMSOrgsAPI.updateComInfo(data, refreshToken).then((refreshRes: GeneralResParam) => {
-                        return refreshRes.errno
+                        if (refreshRes.errno === '00000') {
+                            OMSOrgsAPI.getComInfo(token, data.comId).then((refreshGetRes: GetComInfoResParams)=> {
+                                if (refreshGetRes.errno === '00000') {
+                                    comInfoStore.setComInfo(refreshGetRes)
+                                }
+                                return refreshGetRes.errno
+                            })
+                        }
                     })
                 }
             }

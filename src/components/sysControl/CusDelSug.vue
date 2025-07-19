@@ -10,7 +10,7 @@ const props = defineProps<{
   modelValue: boolean;
   event: CusSugMsg | null;
 }>();
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:modelValue', 'delete-confirmed']);
 
 const { t } = useI18n();
 
@@ -35,7 +35,8 @@ const handleConfirm = async () => {
         message: t('notice.deleteCusSuggestionSuccessMsg'),
         type: 'success'
       });
-      location.reload(); // Consider updating data without a full reload
+      emit('delete-confirmed');
+      closeDialog();
     } else if (deleteRes === '99006') {
       ElNotification({
         title: t('notice.noticeTitle'),
@@ -50,7 +51,6 @@ const handleConfirm = async () => {
       });
     }
   }
-  closeDialog();
 };
 </script>
 
