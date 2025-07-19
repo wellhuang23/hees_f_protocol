@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import NotificationList from '@/components/oms/NotiList.vue'
+import NotificationList from '@/components/oms/NotiOmsList.vue'
 </script>
 
 <template>

@@ -7,16 +7,22 @@ import type {
     CreateComSubsResParams,
     UpdateComSubsReqParams,
     ChangeGroupAdminPwdReqParams,
-    ChangeGroupAdminPwdResParams
+    ChangeGroupAdminPwdResParams,
+    GetComInfoResParams,
+    ComInfo,
 } from '@/interfaces'
 import {
     useDeviceInfoStore,
-    useSubItemsStore
+    useSubItemsStore,
+    useValidComStore,
+    useComInfoStore,
 } from '@/stores'
 import { updateToken } from '@/services'
 
 const deviceStore = useDeviceInfoStore()
 const usbItemsStore = useSubItemsStore()
+const validComStore = useValidComStore()
+const comInfoStore = useComInfoStore()
 
 export async function getAllSubItems() {
     const token = deviceStore.token
@@ -119,5 +125,48 @@ export async function changeGroupAdminPwd(changeParams: ChangeGroupAdminPwdReqPa
             }
         }
         return res
+    })
+}
+
+export async function getComInfo() {
+    const token = deviceStore.token
+    const comId = validComStore.currentCom.comId
+    return OMSOrgsAPI.getComInfo(token, comId).then(async (res: GetComInfoResParams)=> {
+        if (res.errno === '00000') {
+            comInfoStore.setComInfo(res)
+            return res.errno
+        } else {
+            if (res.errno === '99005') {
+                const refreshTokenResult = await updateToken().then()
+                if (refreshTokenResult === '00000') {
+                    const refreshToken = deviceStore.token
+                    return OMSOrgsAPI.getComInfo(refreshToken, comId).then((refreshRes: GetComInfoResParams) => {
+                        comInfoStore.setComInfo(refreshRes)
+                        return refreshRes.errno
+                    })
+                }
+            }
+        }
+        return res.errno
+    })
+}
+
+export async function updateComInfo(data: ComInfo) {
+    const token = deviceStore.token
+    return OMSOrgsAPI.updateComInfo(data, token).then(async (res: GeneralResParam)=> {
+        if (res.errno === '00000') {
+            return res.errno
+        } else {
+            if (res.errno === '99005') {
+                const refreshTokenResult = await updateToken().then()
+                if (refreshTokenResult === '00000') {
+                    const refreshToken = deviceStore.token
+                    return OMSOrgsAPI.updateComInfo(data, refreshToken).then((refreshRes: GeneralResParam) => {
+                        return refreshRes.errno
+                    })
+                }
+            }
+        }
+        return res.errno
     })
 }

@@ -8,10 +8,13 @@ import type {
     GroupCompanies,
     ValidCom,
     LogInResParams,
+    GetComInfoResParams,
+    ComInfo,
 } from '@/interfaces'
 import {
     SUB_ITEMS,
     VALID_COM,
+    COM_INFO,
 } from '@/global/contstants'
 
 const useSubItemsStore = defineStore(SUB_ITEMS, {
@@ -120,7 +123,40 @@ const useValidComStore = defineStore(VALID_COM, {
     }
 })
 
+const useComInfoStore = defineStore(COM_INFO, {
+    state:() => ({
+        comInfo: sessionCache.getCache(COM_INFO)?.comInfo ?? {} as ComInfo,
+    }),
+    actions: {
+        setComInfo(data: GetComInfoResParams) {
+            const comInfo: ComInfo = {
+                comId: data.comInfo?.comId ?? 0,
+                comName: data.comInfo?.comName ?? '',
+                comStName: data.comInfo?.comStName ?? '',
+                comTaxNo: data.comInfo?.comTaxNo ?? '',
+                comLeader: data.comInfo?.comLeader ?? '',
+                comPhone: data.comInfo?.comPhone ?? '',
+                comAddr: data.comInfo?.comAddr ?? '',
+                comDesc: data.comInfo?.comDesc ?? '',
+                comEngName: data.comInfo?.comEngName ?? '',
+                comEngAddr: data.comInfo?.comEngAddr ?? '',
+                groupId: data.comInfo?.groupId ?? 0,
+                groupName: data.comInfo?.groupName ?? '',
+                groupDesc: data.comInfo?.groupDesc ?? '',
+            }
+
+            this.comInfo = comInfo
+
+            sessionCache.setCache(COM_INFO, {
+                comInfo: comInfo ?? {}
+            })
+        }
+    }
+})
+
+
 export {
     useSubItemsStore,
     useValidComStore,
+    useComInfoStore,
 }
