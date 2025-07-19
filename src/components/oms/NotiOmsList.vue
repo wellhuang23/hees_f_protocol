@@ -12,7 +12,8 @@ const router = useRouter();
 const route = useRoute();
 
 const { t } = useI18n();
-let activeName = ref('groupNotices')
+const activeLabel = route.query?.label as string || 'groupNotices'
+const activeName = ref(activeLabel)
 
 onMounted(async () => {
   const comTaxNo = validComStore.currentCom.comTaxNo
@@ -27,9 +28,6 @@ onMounted(async () => {
   if (!visible) {
     await router.push('/main/401');
   }
-
-  const activeLabel: string = route.query?.label as string ?? 'groupNotices'
-  activeName = ref(activeLabel)
 });
 </script>
 

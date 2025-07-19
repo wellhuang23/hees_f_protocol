@@ -13,7 +13,7 @@
       </li>
     </ul>
     <div class="more-hyperlink">
-      <router-link to="/main/oms/com/notifications" class="more-hyperlink-text">
+      <router-link to="/main/oms/com/notifications?label=comNotices" class="more-hyperlink-text">
         {{ t('dashboard.more') }}
       </router-link>
     </div>
