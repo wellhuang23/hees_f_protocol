@@ -31,7 +31,7 @@ onMounted(async () => {
 
 <template>
   <group-info :info="comInfo" />
-  <com-info :com-info="comInfo" />
+  <com-info :info="comInfo" />
 </template>
 
 <style scoped lang="scss">

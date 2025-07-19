@@ -39,9 +39,6 @@ const cancelEditing = () => {
 }
 
 const confirmChanges = async () => {
-  console.log(props.info?.groupId)
-  console.log('Updated Group Name:', editableGroupName.value)
-  console.log('Updated Group Description:', editableGroupDesc.value)
   const updateRes = await updateComInfo({
     comId: convertToNumber(props.info?.comId) ?? 0,
     comName: props.info?.comName,
@@ -61,19 +58,19 @@ const confirmChanges = async () => {
     location.reload();
     ElNotification({
       title: t('notice.noticeTitle'),
-      message: t('notice.updateGroupInfoSuccessMsg'),
+      message: t('notice.updateComInfoSuccessMsg'),
       type: 'success'
     });
   } else if (updateRes === '99006') {
     ElNotification({
       title: t('notice.noticeTitle'),
-      message: t('notice.updateGroupInfoNoPerErrorMsg'),
+      message: t('notice.updateComInfoNoPerErrorMsg'),
       type: 'error'
     });
   } else {
     ElNotification({
       title: t('notice.noticeTitle'),
-      message: t('notice.updateGroupInfoErrorMsg'),
+      message: t('notice.updateComInfoErrorMsg'),
       type: 'error'
     });
   }
