@@ -35,7 +35,7 @@ const handleConfirm = async () => {
         message: t('notice.deleteNotificationSuccessMsg'),
         type: 'success'
       });
-      location.reload(); // Consider updating data without a full reload
+      closeDialog();
     } else if (deleteRes === '99006') {
       ElNotification({
         title: t('notice.noticeTitle'),
@@ -50,8 +50,6 @@ const handleConfirm = async () => {
       });
     }
   }
-
-  closeDialog();
 };
 </script>
 

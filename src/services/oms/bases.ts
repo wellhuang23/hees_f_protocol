@@ -362,11 +362,29 @@ export async function createNewGroupNotification(params: NotificationReqParams) 
                 return OMSBasesAPI.createNewGroupNotification(
                     params,
                     refreshToken).then((refreshRes: GeneralResParam) => {
-                    return refreshRes.errno
+                    if (refreshRes.errno === '00000') {
+                        return OMSBasesAPI.getGroupNotifications(token).then(async (refreshGetRes: GetNotificationResParams) => {
+                            if (refreshGetRes.errno === '00000') {
+                                notificationStore.setGroupNotifications(refreshGetRes)
+                            }
+                            return refreshGetRes.errno
+                        })
+                    } else {
+                        return refreshRes.errno
+                    }
                 })
             }
         } else {
-            return res.errno
+            if (res.errno === '00000') {
+                return OMSBasesAPI.getGroupNotifications(token).then(async (getRes: GetNotificationResParams) => {
+                    if (getRes.errno === '00000') {
+                        notificationStore.setGroupNotifications(getRes)
+                    }
+                    return getRes.errno
+                })
+            } else {
+                return res.errno
+            }
         }
         return res.errno
     })
@@ -382,11 +400,29 @@ export async function updateGroupNotification(params: NotificationReqParams) {
                 return OMSBasesAPI.updateGroupNotification(
                     params,
                     refreshToken).then((refreshRes: GeneralResParam) => {
-                    return refreshRes.errno
+                    if (refreshRes.errno === '00000') {
+                        return OMSBasesAPI.getGroupNotifications(token).then(async (refreshGetRes: GetNotificationResParams) => {
+                            if (refreshGetRes.errno === '00000') {
+                                notificationStore.setGroupNotifications(refreshGetRes)
+                            }
+                            return refreshGetRes.errno
+                        })
+                    } else {
+                        return refreshRes.errno
+                    }
                 })
             }
         } else {
-            return res.errno
+            if (res.errno === '00000') {
+                return OMSBasesAPI.getGroupNotifications(token).then(async (getRes: GetNotificationResParams) => {
+                    if (getRes.errno === '00000') {
+                        notificationStore.setGroupNotifications(getRes)
+                    }
+                    return getRes.errno
+                })
+            } else {
+                return res.errno
+            }
         }
         return res.errno
     })
@@ -402,11 +438,29 @@ export async function deleteGroupNotification(params: NotificationReqParams) {
                 return OMSBasesAPI.deleteGroupNotification(
                     params,
                     refreshToken).then((refreshRes: GeneralResParam) => {
-                    return refreshRes.errno
+                    if (refreshRes.errno === '00000') {
+                        return OMSBasesAPI.getGroupNotifications(token).then(async (refreshGetRes: GetNotificationResParams) => {
+                            if (refreshGetRes.errno === '00000') {
+                                notificationStore.setGroupNotifications(refreshGetRes)
+                            }
+                            return refreshGetRes.errno
+                        })
+                    } else {
+                        return refreshRes.errno
+                    }
                 })
             }
         } else {
-            return res.errno
+            if (res.errno === '00000') {
+                return OMSBasesAPI.getGroupNotifications(token).then(async (getRes: GetNotificationResParams) => {
+                    if (getRes.errno === '00000') {
+                        notificationStore.setGroupNotifications(getRes)
+                    }
+                    return getRes.errno
+                })
+            } else {
+                return res.errno
+            }
         }
         return res.errno
     })
@@ -443,11 +497,29 @@ export async function createNewComNotification(params: NotificationReqParams) {
                 return OMSBasesAPI.createNewComNotification(
                     params,
                     refreshToken).then((refreshRes: GeneralResParam) => {
-                    return refreshRes.errno
+                    if (refreshRes.errno === '00000') {
+                        return OMSBasesAPI.getComNotifications(token).then(async (refreshGetRes: GetNotificationResParams) => {
+                            if (refreshGetRes.errno === '00000') {
+                                notificationStore.setComNotifications(refreshGetRes)
+                            }
+                            return refreshGetRes.errno
+                        })
+                    } else {
+                        return refreshRes.errno
+                    }
                 })
             }
         } else {
-            return res.errno
+            if (res.errno === '00000') {
+                return OMSBasesAPI.getComNotifications(token).then(async (getRes: GetNotificationResParams) => {
+                    if (getRes.errno === '00000') {
+                        notificationStore.setComNotifications(getRes)
+                    }
+                    return getRes.errno
+                })
+            } else {
+                return res.errno
+            }
         }
         return res.errno
     })
@@ -463,11 +535,29 @@ export async function updateComNotification(params: NotificationReqParams) {
                 return OMSBasesAPI.updateComNotification(
                     params,
                     refreshToken).then((refreshRes: GeneralResParam) => {
-                    return refreshRes.errno
+                    if (refreshRes.errno === '00000') {
+                        return OMSBasesAPI.getComNotifications(token).then(async (refreshGetRes: GetNotificationResParams) => {
+                            if (refreshGetRes.errno === '00000') {
+                                notificationStore.setComNotifications(refreshGetRes)
+                            }
+                            return refreshGetRes.errno
+                        })
+                    } else {
+                        return refreshRes.errno
+                    }
                 })
             }
         } else {
-            return res.errno
+            if (res.errno === '00000') {
+                return OMSBasesAPI.getComNotifications(token).then(async (getRes: GetNotificationResParams) => {
+                    if (getRes.errno === '00000') {
+                        notificationStore.setComNotifications(getRes)
+                    }
+                    return getRes.errno
+                })
+            } else {
+                return res.errno
+            }
         }
         return res.errno
     })
@@ -483,11 +573,29 @@ export async function deleteComNotification(params: NotificationReqParams) {
                 return OMSBasesAPI.deleteComNotification(
                     params,
                     refreshToken).then((refreshRes: GeneralResParam) => {
-                    return refreshRes.errno
+                    if (refreshRes.errno === '00000') {
+                        return OMSBasesAPI.getComNotifications(token).then(async (refreshGetRes: GetNotificationResParams) => {
+                            if (refreshGetRes.errno === '00000') {
+                                notificationStore.setComNotifications(refreshGetRes)
+                            }
+                            return refreshGetRes.errno
+                        })
+                    } else {
+                        return refreshRes.errno
+                    }
                 })
             }
         } else {
-            return res.errno
+            if (res.errno === '00000') {
+                return OMSBasesAPI.getComNotifications(token).then(async (getRes: GetNotificationResParams) => {
+                    if (getRes.errno === '00000') {
+                        notificationStore.setComNotifications(getRes)
+                    }
+                    return getRes.errno
+                })
+            } else {
+                return res.errno
+            }
         }
         return res.errno
     })
