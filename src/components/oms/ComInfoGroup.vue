@@ -55,7 +55,6 @@ const confirmChanges = async () => {
     groupDesc: editableGroupDesc.value,
   })
   if (updateRes === '00000') {
-    location.reload();
     ElNotification({
       title: t('notice.noticeTitle'),
       message: t('notice.updateGroupInfoSuccessMsg'),
