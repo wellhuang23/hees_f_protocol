@@ -58,19 +58,19 @@ const confirmChanges = async () => {
     location.reload();
     ElNotification({
       title: t('notice.noticeTitle'),
-      message: t('notice.updateComInfoSuccessMsg'),
+      message: t('notice.updateGroupInfoSuccessMsg'),
       type: 'success'
     });
   } else if (updateRes === '99006') {
     ElNotification({
       title: t('notice.noticeTitle'),
-      message: t('notice.updateComInfoNoPerErrorMsg'),
+      message: t('notice.updateGroupInfoNoPerErrorMsg'),
       type: 'error'
     });
   } else {
     ElNotification({
       title: t('notice.noticeTitle'),
-      message: t('notice.updateComInfoErrorMsg'),
+      message: t('notice.updateGroupInfoErrorMsg'),
       type: 'error'
     });
   }
