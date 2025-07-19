@@ -161,7 +161,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
 }
 
 const handleReloadPage = () => {
-  location.reload()
+  emit('update:modelValue', false)
 }
 
 </script>

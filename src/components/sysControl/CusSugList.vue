@@ -56,9 +56,9 @@
       </el-collapse-item>
     </el-collapse>
 
-    <CusAddSug v-model:visible="dialogVisible" />
-    <CusSugDetail v-model:visible="detailDrawerVisible" :suggestion="selectedSuggestion" />
-    <CusUpSug v-model:visible="upSugDrawerVisible" :suggestion="selectedSuggestion" />
+    <CusAddSug v-model="dialogVisible" />
+    <CusSugDetail v-model="detailDrawerVisible" :suggestion="selectedSuggestion" />
+    <CusUpSug v-model="upSugDrawerVisible" :suggestion="selectedSuggestion" />
   </div>
 </template>
 

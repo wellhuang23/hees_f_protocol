@@ -2,7 +2,7 @@
   <el-dialog
     :model-value="modelValue"
     :title="dialogTitle"
-    @update:model-value="$emit('update:modelValue', $event)"
+    @update:modelValue="$emit('update:modelValue', $event)"
     width="700"
     center
   >
@@ -63,6 +63,7 @@ import { createGroupComSubs, getAllGroupSubs } from '@/services'
 const { t, locale } = useI18n()
 
 const props = defineProps<{ modelValue: boolean, group: GroupCompanies | null }>()
+const emit = defineEmits(['update:modelValue'])
 
 const formRef = ref<FormInstance>()
 
@@ -130,72 +131,69 @@ const submitForm = (formEl: FormInstance | undefined) => {
   if (!formEl) return
   formEl.validate(async (valid: boolean) => {
     if (valid) {
-      const subs: NewComSub[] = []
-      for (const sub of subscriptions.value) {
-        if (sub.startDate.length !== 0) {
-          subs.push({
-            subId: sub.subId,
-            subStartDate: sub.startDate,
-            subEndDate: sub.endDate,
-          })
-        }
+      const subs: NewComSub[] = subscriptions.value
+        .filter(sub => sub.startDate)
+        .map(sub => ({
+          subId: sub.subId,
+          subStartDate: sub.startDate,
+          subEndDate: sub.endDate,
+        }));
 
-        const comSubs = {
-          comId: -1,
-          comTaxNo: form.value.comTaxNo,
-          comName: form.value.comName,
-          comStName: form.value.comStName,
-          comEngName: form.value.comEngName,
-          subs: subs,
-        }
+      const comSubs = {
+        comId: -1,
+        comTaxNo: form.value.comTaxNo,
+        comName: form.value.comName,
+        comStName: form.value.comStName,
+        comEngName: form.value.comEngName,
+        subs: subs,
+      }
 
-        const param = {
-          groupId: props.group?.groupId ?? -1,
-          groupName: props.group?.groupName ?? '',
-          comSubs: comSubs,
-        }
+      const param = {
+        groupId: props.group?.groupId ?? -1,
+        groupName: props.group?.groupName ?? '',
+        comSubs: comSubs,
+      }
 
-        const res = await createGroupComSubs(param)
-        if (res.errno === '00000') {
-          await getAllGroupSubs()
+      const res = await createGroupComSubs(param)
+      if (res.errno === '00000') {
+        await getAllGroupSubs()
 
-          ElNotification({
-            title: t('notice.noticeTitle'),
-            message: t('notice.createNewCompanySuccessMsg'),
-            type: 'success'
-          })
-          location.reload()
-        } else if (res.errno === '99006') {
-          ElNotification({
-            title: t('notice.noticeTitle'),
-            message: t('notice.createNewCompanyNoPerErrorMsg'),
-            type: 'error'
-          })
-        } else if (res.errno === '03001') {
-          ElNotification({
-            title: t('notice.noticeTitle'),
-            message: t('notice.createNewCompanyDupComTaxNoErrorMsg'),
-            type: 'error'
-          })
-        } else if (res.errno === '03002') {
-          ElNotification({
-            title: t('notice.noticeTitle'),
-            message: t('notice.createNewCompanyComTaxNoErrorMsg'),
-            type: 'error'
-          })
-        } else if (['99001', '99002', '99003'].includes(res.errno)) {
-          ElNotification({
-            title: t('notice.noticeTitle'),
-            message: t('notice.createNewCompanyFormatErrorMsg'),
-            type: 'error'
-          })
-        } else {
-          ElNotification({
-            title: t('notice.noticeTitle'),
-            message: t('notice.createNewCompanyComErrorMsg'),
-            type: 'error'
-          })
-        }
+        ElNotification({
+          title: t('notice.noticeTitle'),
+          message: t('notice.createNewCompanySuccessMsg'),
+          type: 'success'
+        })
+        emit('update:modelValue', false) // Close dialog on success
+      } else if (res.errno === '99006') {
+        ElNotification({
+          title: t('notice.noticeTitle'),
+          message: t('notice.createNewCompanyNoPerErrorMsg'),
+          type: 'error'
+        })
+      } else if (res.errno === '03001') {
+        ElNotification({
+          title: t('notice.noticeTitle'),
+          message: t('notice.createNewCompanyDupComTaxNoErrorMsg'),
+          type: 'error'
+        })
+      } else if (res.errno === '03002') {
+        ElNotification({
+          title: t('notice.noticeTitle'),
+          message: t('notice.createNewCompanyComTaxNoErrorMsg'),
+          type: 'error'
+        })
+      } else if (['99001', '99002', '99003'].includes(res.errno)) {
+        ElNotification({
+          title: t('notice.noticeTitle'),
+          message: t('notice.createNewCompanyFormatErrorMsg'),
+          type: 'error'
+        })
+      } else {
+        ElNotification({
+          title: t('notice.noticeTitle'),
+          message: t('notice.createNewCompanyComErrorMsg'),
+          type: 'error'
+        })
       }
     } else {
       ElNotification({
