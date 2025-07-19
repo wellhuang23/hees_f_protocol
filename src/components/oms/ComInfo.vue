@@ -1,12 +1,17 @@
 <script setup lang="ts">
+import GroupInfo from '@/components/oms/ComInfoGroup.vue'
+import ComInfo from '@/components/oms/ComInfoCom.vue'
 import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { useUserInfoStore, useValidComStore } from '@/stores'
+import { useUserInfoStore, useValidComStore, useComInfoStore } from '@/stores'
 import { getComInfo } from '@/services/oms/orgs'
-
+import { storeToRefs } from "pinia"
 const userInfo = useUserInfoStore();
+
 const validComStore = useValidComStore()
+const comInfoStore = useComInfoStore()
 const router = useRouter();
+const { comInfo: comInfo } = storeToRefs(comInfoStore);
 
 onMounted(async () => {
   const comTaxNo = validComStore.currentCom.comTaxNo
@@ -25,7 +30,8 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div>COMPANY INFORMATION</div>
+  <group-info :info="comInfo" />
+  <com-info :com-info="comInfo" />
 </template>
 
 <style scoped lang="scss">

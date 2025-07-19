@@ -79,6 +79,9 @@
     "deleteNotificationSuccessMsg": "Delete Notification Successfully",
     "deleteNotificationNoPerErrorMsg": "You don't Have Permission to Delete Notification, Please Contact System Manger",
     "deleteNotificationErrorMsg": "Delete Notification Fail, Please Contact System Manger",
+    "updateGroupInfoSuccessMsg": "Update Group Information Successfully",
+    "updateGroupInfoNoPerErrorMsg": "You don't Have Permission to Update Group Information, Please Contact System Manger",
+    "updateGroupInfoErrorMsg": "Update Group Information Fail, Please Contact System Manger",
     "systemErrorMsg": "System Error, Please Contact System Manager"
   },
   "cusSugDetail": {
@@ -360,5 +363,15 @@
   "entNotifications": {
     "labelGroup": "Group Notices",
     "labelCompany": "Company Notices"
+  },
+  "comInfo": {
+    "groupInfo": {
+      "title": "Group Information",
+      "groupName": "Group Name :",
+      "groupDesc": "Group Description :",
+      "modify": "Modify Group Information",
+      "cancel": "Cancel",
+      "confirm": "Confirm"
+    }
   }
 }

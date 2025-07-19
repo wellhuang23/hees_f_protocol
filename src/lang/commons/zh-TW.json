@@ -79,6 +79,9 @@
     "deleteNotificationSuccessMsg": "刪除公告成功",
     "deleteNotificationNoPerErrorMsg": "您沒有刪除公告的權限，請洽系統管理員",
     "deleteNotificationErrorMsg": "刪除公告失敗，請洽系統管理員",
+    "updateGroupInfoSuccessMsg": "更新集團資訊成功",
+    "updateGroupInfoNoPerErrorMsg": "您沒有更新集團資訊的權限，請洽系統管理員",
+    "updateGroupInfoErrorMsg": "更新集團資訊失敗，請洽系統管理員",
     "systemErrorMsg": "系統錯誤，請聯繫系統管理員"
   },
   "cusSugDetail": {
@@ -358,5 +361,15 @@
   "entNotifications": {
     "labelGroup": "集團公告",
     "labelCompany": "公司公告"
+  },
+  "comInfo": {
+    "groupInfo": {
+      "title": "集團資訊",
+      "groupName": "集團名稱 :",
+      "groupDesc": "集團描述 :",
+      "modify": "修改集團資訊",
+      "cancel": "取消",
+      "confirm": "確認"
+    }
   }
 }
