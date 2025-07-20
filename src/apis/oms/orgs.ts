@@ -313,7 +313,7 @@ class OMSOrgsAPI {
                 for (const row of response.data.data) {
                     const children: ComStrUnit[] = []
                     if (row.children.length > 0) {
-                        this._resortComStrUnitChildren(row.children).then(res => {
+                        this._resortComStrUnitChildren(row.children, (convertToNumber(row.str_unit_id) ?? 0)).then(res => {
                             children.push(...res)
                         })
                     }
@@ -323,7 +323,8 @@ class OMSOrgsAPI {
                         strUnitName: row.str_unit_name,
                         strUnitDesc: row.str_unit_desc,
                         strUnitNo: row.str_unit_no,
-                        children: children
+                        children: children,
+                        parentStrUnitId: 0
                     })
                 }
 
@@ -416,12 +417,12 @@ class OMSOrgsAPI {
         });
     }
 
-    async _resortComStrUnitChildren(children: Array<any>): Promise<ComStrUnit[]> {
+    async _resortComStrUnitChildren(children: Array<any>, parentStrUnitId: number): Promise<ComStrUnit[]> {
         const result: Array<ComStrUnit> = []
         for (const child of children) {
             let children: ComStrUnit[] = []
             if (child.children.length > 0) {
-                this._resortComStrUnitChildren(child.children).then(res => {
+                this._resortComStrUnitChildren(child.children, child.str_unit_id).then(res => {
                     children.push(...res)
                 })
             }
@@ -431,7 +432,8 @@ class OMSOrgsAPI {
                 strUnitName: child.str_unit_name,
                 strUnitDesc: child.str_unit_desc,
                 strUnitNo: child.str_unit_no,
-                children: children
+                children: children,
+                parentStrUnitId: parentStrUnitId
             })
         }
 

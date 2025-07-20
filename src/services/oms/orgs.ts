@@ -243,7 +243,7 @@ export async function creatNewComStrUnits(data: ComStrUnitOprReqParams) {
     })
 }
 
-export async function updateComStrUnits(data: ComStrUnitOprReqParams) {
+export async function updateComStrUnit(data: ComStrUnitOprReqParams) {
     const token = deviceStore.token
     const comId = validComStore.currentCom.comId
     return OMSOrgsAPI.updateComStrUnit(data, token).then(async (res: GeneralResParam)=> {
@@ -276,7 +276,7 @@ export async function updateComStrUnits(data: ComStrUnitOprReqParams) {
     })
 }
 
-export async function deleteComStrUnits(data: ComStrUnitOprReqParams) {
+export async function deleteComStrUnit(data: ComStrUnitOprReqParams) {
     const token = deviceStore.token
     const comId = validComStore.currentCom.comId
     return OMSOrgsAPI.deleteComStrUnit(data, token).then(async (res: GeneralResParam)=> {

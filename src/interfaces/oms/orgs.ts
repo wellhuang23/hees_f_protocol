@@ -220,6 +220,9 @@ export interface ComStrUnit {
     // Structure Unit No.
     strUnitNo: string;
 
+    // Parent Structure Unit ID
+    parentStrUnitId: number;
+
     // Structure Unit Children
     children: ComStrUnit[];
 }

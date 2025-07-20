@@ -9,6 +9,8 @@ import type { ComStrUnit } from '@/interfaces'
 import { useI18n } from 'vue-i18n'
 // import html2canvas from 'html2canvas'
 import StrAddNewUnits from './StrAddNewUnits.vue'
+import StrUnitDetail from './StrUnitDetail.vue'
+import StrUpUnit from './StrUpUnit.vue'
 
 const { t } = useI18n()
 const router = useRouter()
@@ -18,12 +20,25 @@ const strUnitsStore = useComStrUnitStore()
 
 const comTaxNo = validComStore.currentCom.comTaxNo
 const perCreateCode = comTaxNo + '-oms-001-1000'
+const perUpdateCode = comTaxNo + '-oms-005-0010'
 
 const elements = ref<any[]>([])
-const { fitView } = useVueFlow() // Added getNodes
+const { fitView, onNodeClick } = useVueFlow()
 const flowContainer = ref<HTMLElement | null>(null)
 
-const showAddUnitDialog = ref(false) // Declared showAddUnitDialog
+const showAddUnitDialog = ref(false)
+const showUnitDetailDrawer = ref(false)
+const showUpUnitDrawer = ref(false)
+const selectedNode = ref(null)
+
+onNodeClick((event) => {
+  selectedNode.value = event.node.data
+  if (userInfo.per0010.includes(perUpdateCode)) {
+    showUpUnitDrawer.value = true
+  } else {
+    showUnitDetailDrawer.value = true
+  }
+})
 
 const nodeWidth = 220
 const horizontalGap = 40
@@ -212,6 +227,8 @@ onMounted(async () => {
       <Controls id="vue-flow-controls" position="bottom-right" :show-interactive="false" />
     </VueFlow>
     <StrAddNewUnits v-model:dialogVisible="showAddUnitDialog" />
+    <StrUnitDetail v-model="showUnitDetailDrawer" :node-data="selectedNode" />
+    <StrUpUnit v-model="showUpUnitDrawer" :node-data="selectedNode" />
   </div>
 </template>
 

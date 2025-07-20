@@ -88,6 +88,9 @@
     "createComStrUnitSuccessMsg": "Create Structure Unit in Company Successfully",
     "createComStrUnitNoPerErrorMsg": "You don't Have Permission to Create Structure Unit in Company, Please Contact System Manger",
     "createComStrUnitErrorMsg": "Create Structure Unit in Company Fail, Please Contact System Manger",
+    "updateComStrUnitSuccessMsg": "Update Structure Unit in Company Successfully",
+    "updateComStrUnitNoPerErrorMsg": "You don't Have Permission to Update Structure Unit in Company, Please Contact System Manger",
+    "updateComStrUnitErrorMsg": "Update Structure Unit in Company Fail, Please Contact System Manger",
     "systemErrorMsg": "System Error, Please Contact System Manager"
   },
   "cusSugDetail": {
@@ -404,6 +407,12 @@
     "addGroupDesc": "Unit x",
     "unitName": "Unit Name",
     "unitDesc": "Unit description",
-    "unitNo": "Unit No."
+    "unitNo": "Unit No.",
+    "unitDetail": "Unit Detail",
+    "unitNameLabel": "Unit Name :",
+    "unitNoLabel": "Unit No. :",
+    "unitDescLabel": "Unit Description :",
+    "upUnitTitle": "Update Unit",
+    "parentUnitLabel": "Parent Unit :"
   }
 }

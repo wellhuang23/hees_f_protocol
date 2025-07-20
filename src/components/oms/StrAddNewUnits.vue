@@ -62,8 +62,6 @@ const handleCancel = () => {
 
 // Process data on confirm
 const handleConfirm = async () => {
-  console.log(selectedUnit.value)
-  console.log(unitGroups.value)
   const units: ComStrUnitOprReqParams[] = []
   for (const row of unitGroups.value) {
     units.push({
