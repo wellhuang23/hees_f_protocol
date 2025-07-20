@@ -125,7 +125,7 @@ watch(() => props.nodeData, (newNodeData) => {
 
 const handleConfirm = async () => {
   const updateRes = await updateComStrUnit({
-    strUnitId: props.nodeData.strUnitId,
+    strUnitId: props.nodeData?.strUnitId ?? 0,
     parentStrUnitId: form.value.parentStrUnitId,
     strUnitName: form.value.strUnitName,
     strUnitDesc: form.value.strUnitDesc,

@@ -190,9 +190,9 @@ watch(
 
 onMounted(async () => {
   const comTaxNo = validComStore.currentCom.comTaxNo
-  const perCode = 'xxxxxxxx-oms-005-0100'
+  const perCode = comTaxNo + '-oms-005-0100'
   let visible = false
-  if (userInfo.per0100.includes(perCode.replace('xxxxxxxx', comTaxNo))) {
+  if (userInfo.per0100.includes(perCode)) {
     visible = true
   }
 

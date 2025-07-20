@@ -22,6 +22,7 @@
 import {defineProps, defineEmits, computed} from 'vue'
 import { useI18n } from 'vue-i18n'
 import {useComStrUnitStore} from '@/stores'
+import type {ComStrUnit} from "@/interfaces";
 
 const { t } = useI18n()
 const strUnitsStore = useComStrUnitStore()
@@ -51,14 +52,15 @@ const props = defineProps({
     required: true
   },
   nodeData: {
-    type: Object,
+    type: Object as () => ComStrUnit | null,
     default: null
   }
 })
 
 const parentStrUnit = computed(() => {
   for (const row of parentOption.value) {
-    if (row.strUnitId === props.nodeData.parentStrUnitId) {
+    const parentStrUnitId = props.nodeData?.parentStrUnitId ?? 0
+    if (row.strUnitId === parentStrUnitId) {
       return row.strUnitName
     }
   }
