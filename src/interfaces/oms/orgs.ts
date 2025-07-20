@@ -253,3 +253,24 @@ export interface ComStrUnitOprReqParams {
     // Create Structure Units
     strUnits?: ComStrUnitOprReqParams[];
 }
+
+// Company Job Position
+export interface ComJobPosition {
+    // Job Position ID
+    jobPosId?: number;
+
+    // Job Position Name
+    jobPosName?: string;
+
+    // Job Position Level
+    jobPosLevel?: string;
+
+    // Job Position Description
+    jobPosDesc?: string;
+}
+
+// Get Job Position in Company Response Parameters
+export interface GetComJobPositionResParams extends GeneralResParam {
+    // Job Positions
+    comJobPositions?: ComJobPosition[];
+}
