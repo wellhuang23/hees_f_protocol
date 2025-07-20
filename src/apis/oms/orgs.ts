@@ -309,7 +309,7 @@ class OMSOrgsAPI {
             params: params,
         }).then((response): GetComStrUnitResParams => {
             if (response.data.errno === '00000') {
-                const conStrUnits: ComStrUnit[] = []
+                const comStrUnits: ComStrUnit[] = []
                 for (const row of response.data.data) {
                     const children: ComStrUnit[] = []
                     if (row.children.length > 0) {
@@ -318,7 +318,7 @@ class OMSOrgsAPI {
                         })
                     }
 
-                    conStrUnits.push({
+                    comStrUnits.push({
                         strUnitId: (convertToNumber(row.str_unit_id) ?? 0),
                         strUnitName: row.str_unit_name,
                         strUnitDesc: row.str_unit_desc,
@@ -330,7 +330,7 @@ class OMSOrgsAPI {
                 return {
                     errno: response.data.errno,
                     desc: response.data.desc,
-                    comStrUnit: conStrUnits
+                    comStrUnit: comStrUnits
                 }
             } else {
                 return {

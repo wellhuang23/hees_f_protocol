@@ -160,6 +160,7 @@ const useComInfoStore = defineStore(COM_INFO, {
 const useComStrUnitStore = defineStore(COM_STR_UNIT, {
     state:() => ({
         comStrUnits: sessionCache.getCache(COM_STR_UNIT)?.comStrUnits ?? [] as ComStrUnit[],
+        allComStrUnits: [] as ComStrUnit[]
     }),
     actions: {
         setComStrUnits(data: GetComStrUnitResParams) {
@@ -168,11 +169,42 @@ const useComStrUnitStore = defineStore(COM_STR_UNIT, {
                 comStrUnits.push(row)
             }
 
+            const allComStrUnits: ComStrUnit[] = []
+            for (const row of data.comStrUnit ?? []) {
+                allComStrUnits.push({
+                    strUnitId: row.strUnitId,
+                    strUnitName: row.strUnitName,
+                    strUnitDesc: row.strUnitDesc,
+                    strUnitNo: row.strUnitNo,
+                    children: []
+                })
+
+                if (row.children.length > 0) {
+                    allComStrUnits.push(...this._getChildren(row.children))
+                }
+            }
+
             this.comStrUnits = comStrUnits
+            this.allComStrUnits = allComStrUnits
 
             sessionCache.setCache(COM_STR_UNIT, {
                 comStrUnits: comStrUnits ?? {}
             })
+        },
+
+        _getChildren(data: ComStrUnit[]) {
+            const result: ComStrUnit[] = []
+            for (const row of data) {
+                result.push({
+                    strUnitId: row.strUnitId,
+                    strUnitName: row.strUnitName,
+                    strUnitDesc: row.strUnitDesc,
+                    strUnitNo: row.strUnitNo,
+                    children: []
+                })
+            }
+
+            return result
         }
     }
 })

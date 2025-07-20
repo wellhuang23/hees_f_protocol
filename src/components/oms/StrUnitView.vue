@@ -7,7 +7,7 @@ import { useRouter } from 'vue-router'
 import { getComStrUnits } from '@/services/oms/orgs'
 import type { ComStrUnit } from '@/interfaces'
 import { useI18n } from 'vue-i18n'
-import html2canvas from 'html2canvas'
+// import html2canvas from 'html2canvas'
 import StrAddNewUnits from './StrAddNewUnits.vue'
 
 const { t } = useI18n()
@@ -29,36 +29,36 @@ const nodeWidth = 220
 const horizontalGap = 40
 const verticalGap = 150
 
-const downloadImage = async () => {
-  if (flowContainer.value) {
-    await fitView()
-    await new Promise(resolve => setTimeout(resolve, 500))
-
-    html2canvas(flowContainer.value, {
-      backgroundColor: '#ffffff',
-      useCORS: true,
-      onclone: (document) => {
-        const downloadButton = document.querySelector('#download-button')
-        if (downloadButton) {
-          downloadButton.style.display = 'none'
-        }
-        const addButton = document.querySelector('#add-button')
-        if (addButton) {
-          addButton.style.display = 'none'
-        }
-        const controls = document.querySelector('#vue-flow-controls')
-        if (controls) {
-          controls.style.display = 'none'
-        }
-      },
-    }).then((canvas) => {
-      const link = document.createElement('a')
-      link.download = 'company_structure.png'
-      link.href = canvas.toDataURL('image/png')
-      link.click()
-    })
-  }
-}
+// const downloadImage = async () => {
+//   if (flowContainer.value) {
+//     await fitView()
+//     await new Promise(resolve => setTimeout(resolve, 500))
+//
+//     html2canvas(flowContainer.value, {
+//       backgroundColor: '#ffffff',
+//       useCORS: true,
+//       onclone: (document) => {
+//         const downloadButton = document.querySelector('#download-button')
+//         if (downloadButton) {
+//           downloadButton.style.display = 'none'
+//         }
+//         const addButton = document.querySelector('#add-button')
+//         if (addButton) {
+//           addButton.style.display = 'none'
+//         }
+//         const controls = document.querySelector('#vue-flow-controls')
+//         if (controls) {
+//           controls.style.display = 'none'
+//         }
+//       },
+//     }).then((canvas) => {
+//       const link = document.createElement('a')
+//       link.download = 'company_structure.png'
+//       link.href = canvas.toDataURL('image/png')
+//       link.click()
+//     })
+//   }
+// }
 
 function layoutElements(units: ComStrUnit[]): any[] {
   const allNodes: any[] = []
@@ -191,14 +191,14 @@ onMounted(async () => {
 
 <template>
   <div ref="flowContainer" style="height: 80vh; position: relative;">
-    <el-button
-      id="download-button"
-      type="info"
-      @click="downloadImage"
-      style="position: absolute; top: 10px; left: 10px; z-index: 4;"
-    >
-      {{ t('comStr.download') }}
-    </el-button>
+<!--    <el-button-->
+<!--      id="download-button"-->
+<!--      type="info"-->
+<!--      @click="downloadImage"-->
+<!--      style="position: absolute; top: 10px; left: 10px; z-index: 4;"-->
+<!--    >-->
+<!--      {{ t('comStr.download') }}-->
+<!--    </el-button>-->
     <el-button
         id="add-button"
         v-if="userInfo.per1000.includes(perCreateCode)"

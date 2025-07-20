@@ -85,6 +85,9 @@
     "updateComInfoSuccessMsg": "Update Company Information Successfully",
     "updateComInfoNoPerErrorMsg": "You don't Have Permission to Update Company Information, Please Contact System Manger",
     "updateComInfoErrorMsg": "Update Company Information Fail, Please Contact System Manger",
+    "createComStrUnitSuccessMsg": "Create Structure Unit in Company Successfully",
+    "createComStrUnitNoPerErrorMsg": "You don't Have Permission to Create Structure Unit in Company, Please Contact System Manger",
+    "createComStrUnitErrorMsg": "Create Structure Unit in Company Fail, Please Contact System Manger",
     "systemErrorMsg": "System Error, Please Contact System Manager"
   },
   "cusSugDetail": {
@@ -396,6 +399,11 @@
     "download": "Download",
     "add": "Add",
     "addUnitTitle": "Add New units in Structure",
-    "addUnitContent": "Create new unit"
+    "parentUnit": "Parent Unit",
+    "noParentUnit": "No Parent Unit",
+    "addGroupDesc": "Unit x",
+    "unitName": "Unit Name",
+    "unitDesc": "Unit description",
+    "unitNo": "Unit No."
   }
 }

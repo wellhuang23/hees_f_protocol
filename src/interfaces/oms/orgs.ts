@@ -233,7 +233,7 @@ export interface GetComStrUnitResParams extends GeneralResParam {
 // Structure Unit in Company Operation Request Parameters
 export interface ComStrUnitOprReqParams {
     // Structure Unit ID
-    strUnitId: number;
+    strUnitId?: number;
 
     // Structure Unit Name
     strUnitName?: string;
