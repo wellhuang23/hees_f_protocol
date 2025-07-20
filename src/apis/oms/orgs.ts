@@ -13,6 +13,9 @@ import type {
     ChangeGroupAdminPwdResParams,
     GetComInfoResParams,
     ComInfo,
+    GetComStrUnitResParams,
+    ComStrUnit,
+    ComStrUnitOprReqParams,
 } from '@/interfaces'
 import request from '@/utils/requests'
 import { convertToNumber } from '@/utils/conNumber'
@@ -290,6 +293,151 @@ class OMSOrgsAPI {
                 desc: response.data.desc,
             }
         });
+    }
+
+    // API for Getting Company Information
+    async getComStrUnits(token: string, comId: number): Promise<GetComStrUnitResParams> {
+        const params = {
+            'com_id': comId,
+        }
+        return request<any, any>({
+            url: ORGS_API + '/com/str/units',
+            method: 'GET',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            params: params,
+        }).then((response): GetComStrUnitResParams => {
+            if (response.data.errno === '00000') {
+                const comStrUnits: ComStrUnit[] = []
+                for (const row of response.data.data) {
+                    const children: ComStrUnit[] = []
+                    if (row.children.length > 0) {
+                        this._resortComStrUnitChildren(row.children, (convertToNumber(row.str_unit_id) ?? 0)).then(res => {
+                            children.push(...res)
+                        })
+                    }
+
+                    comStrUnits.push({
+                        strUnitId: (convertToNumber(row.str_unit_id) ?? 0),
+                        strUnitName: row.str_unit_name,
+                        strUnitDesc: row.str_unit_desc,
+                        strUnitNo: row.str_unit_no,
+                        children: children,
+                        parentStrUnitId: 0
+                    })
+                }
+
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                    comStrUnit: comStrUnits
+                }
+            } else {
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                }
+            }
+        });
+    }
+
+    // API for Creating Company Structure Units
+    async createNewComStrUnits(data: ComStrUnitOprReqParams, comId: number, token: string): Promise<GeneralResParam> {
+        const strUnits = []
+        for (const row of data.strUnits ?? []) {
+            strUnits.push({
+                str_unit_name: row.strUnitName,
+                str_unit_desc: row.strUnitDesc,
+                str_unit_no: row.strUnitNo
+            })
+        }
+
+        const params = {
+            com_id: comId,
+            parent_str_unit_id: data.parentStrUnitId ?? 0,
+            str_units: strUnits,
+        }
+        return request<any, any>({
+            url: ORGS_API + '/com/str/unit/create',
+            method: 'POST',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            data: params,
+        }).then((response): GeneralResParam => {
+            return {
+                errno: response.data.errno,
+                desc: response.data.desc,
+            }
+        });
+    }
+
+    // API for Updating Company Structure Unit
+    async updateComStrUnit(data: ComStrUnitOprReqParams, token: string): Promise<GeneralResParam> {
+        const params = {
+            str_unit_id: data.strUnitId ?? 0,
+            str_unit_name: data.strUnitName ?? '',
+            str_unit_desc: data.strUnitDesc ?? '',
+            str_unit_no: data.strUnitNo ?? '',
+            parent_str_unit_id: data.parentStrUnitId ?? 0
+        }
+        return request<any, any>({
+            url: ORGS_API + '/com/str/unit/update',
+            method: 'POST',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            data: params,
+        }).then((response): GeneralResParam => {
+            return {
+                errno: response.data.errno,
+                desc: response.data.desc,
+            }
+        });
+    }
+
+    // API for Deleting Company Structure Unit
+    async deleteComStrUnit(data: ComStrUnitOprReqParams, token: string): Promise<GeneralResParam> {
+        const params = {
+            str_unit_id: data.strUnitId ?? 0
+        }
+        return request<any, any>({
+            url: ORGS_API + '/com/str/unit/delete',
+            method: 'POST',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            data: params,
+        }).then((response): GeneralResParam => {
+            return {
+                errno: response.data.errno,
+                desc: response.data.desc,
+            }
+        });
+    }
+
+    async _resortComStrUnitChildren(children: Array<any>, parentStrUnitId: number): Promise<ComStrUnit[]> {
+        const result: Array<ComStrUnit> = []
+        for (const child of children) {
+            let children: ComStrUnit[] = []
+            if (child.children.length > 0) {
+                this._resortComStrUnitChildren(child.children, child.str_unit_id).then(res => {
+                    children.push(...res)
+                })
+            }
+
+            result.push({
+                strUnitId: (convertToNumber(child.str_unit_id) ?? 0),
+                strUnitName: child.str_unit_name,
+                strUnitDesc: child.str_unit_desc,
+                strUnitNo: child.str_unit_no,
+                children: children,
+                parentStrUnitId: parentStrUnitId
+            })
+        }
+
+        return result
     }
 }
 

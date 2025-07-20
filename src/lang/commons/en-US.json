@@ -85,6 +85,15 @@
     "updateComInfoSuccessMsg": "Update Company Information Successfully",
     "updateComInfoNoPerErrorMsg": "You don't Have Permission to Update Company Information, Please Contact System Manger",
     "updateComInfoErrorMsg": "Update Company Information Fail, Please Contact System Manger",
+    "createComStrUnitSuccessMsg": "Create Structure Unit in Company Successfully",
+    "createComStrUnitNoPerErrorMsg": "You don't Have Permission to Create Structure Unit in Company, Please Contact System Manger",
+    "createComStrUnitErrorMsg": "Create Structure Unit in Company Fail, Please Contact System Manger",
+    "updateComStrUnitSuccessMsg": "Update Structure Unit in Company Successfully",
+    "updateComStrUnitNoPerErrorMsg": "You don't Have Permission to Update Structure Unit in Company, Please Contact System Manger",
+    "updateComStrUnitErrorMsg": "Update Structure Unit in Company Fail, Please Contact System Manger",
+    "deleteComStrUnitSuccessMsg": "Delete Structure Unit in Company Successfully",
+    "deleteComStrUnitNoPerErrorMsg": "You don't Have Permission to Delete Structure Unit in Company, Please Contact System Manger",
+    "deleteComStrUnitErrorMsg": "Delete Structure Unit in Company Fail, Please Contact System Manger",
     "systemErrorMsg": "System Error, Please Contact System Manager"
   },
   "cusSugDetail": {
@@ -391,5 +400,26 @@
       "cancel": "Cancel",
       "confirm": "Confirm"
     }
+  },
+  "comStr": {
+    "download": "Download",
+    "add": "Add",
+    "addUnitTitle": "Add New units in Structure",
+    "parentUnit": "Parent Unit",
+    "noParentUnit": "No Parent Unit",
+    "addGroupDesc": "Unit x",
+    "unitName": "Unit Name",
+    "unitDesc": "Unit description",
+    "unitNo": "Unit No.",
+    "unitDetail": "Unit Detail",
+    "unitNameLabel": "Unit Name :",
+    "unitNoLabel": "Unit No. :",
+    "unitDescLabel": "Unit Description :",
+    "upUnitTitle": "Update Unit",
+    "parentUnitLabel": "Parent Unit :"
+  },
+  "comStrDelUnit": {
+    "title": "Delete Unit",
+    "content": "Sure for Deleting the Unit ?"
   }
 }

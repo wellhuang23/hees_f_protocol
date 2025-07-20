@@ -1,9 +1,9 @@
 <script setup lang="ts">
-
+import StrUnitView from '@/components/oms/StrUnitView.vue'
 </script>
 
 <template>
-  <div>COMPANY STRUCTURE</div>
+  <str-unit-view />
 </template>
 
 <style scoped lang="scss">

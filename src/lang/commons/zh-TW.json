@@ -85,6 +85,15 @@
     "updateComInfoSuccessMsg": "更新公司資訊成功",
     "updateComInfoNoPerErrorMsg": "您沒有更新公司資訊的權限，請洽系統管理員",
     "updateComInfoErrorMsg": "更新公司資訊失敗，請洽系統管理員",
+    "createComStrUnitSuccessMsg": "新增單位成功",
+    "createComStrUnitNoPerErrorMsg": "您沒有新增單位的權限，請洽系統管理員",
+    "createComStrUnitErrorMsg": "新增單位失敗，請洽系統管理員",
+    "updateComStrUnitSuccessMsg": "更新單位成功",
+    "updateComStrUnitNoPerErrorMsg": "您沒有更新單位的權限，請洽系統管理員",
+    "updateComStrUnitErrorMsg": "更新單位失敗，請洽系統管理員",
+    "deleteComStrUnitSuccessMsg": "刪除單位成功",
+    "deleteComStrUnitNoPerErrorMsg": "您沒有刪除單位的權限，請洽系統管理員",
+    "deleteComStrUnitErrorMsg": "刪除單位失敗，請洽系統管理員",
     "systemErrorMsg": "系統錯誤，請聯繫系統管理員"
   },
   "cusSugDetail": {
@@ -389,5 +398,26 @@
       "cancel": "取消",
       "confirm": "確認"
     }
+  },
+  "comStr": {
+    "download": "下載",
+    "add": "新增",
+    "addUnitTitle": "建立架構中的單位",
+    "parentUnit": "上層單位",
+    "noParentUnit": "無上層單位",
+    "addGroupDesc": "第 x 個單位",
+    "unitName": "單位名稱",
+    "unitDesc": "單位描述",
+    "unitNo": "單位代號",
+    "unitDetail": "單位詳情",
+    "unitNameLabel": "單位名稱 :",
+    "unitNoLabel": "單位代號 :",
+    "unitDescLabel": "單位描述 :",
+    "upUnitTitle": "修改單位",
+    "parentUnitLabel": "上層單位 :"
+  },
+  "comStrDelUnit": {
+    "title": "刪除單位",
+    "content": "是否確認刪除該單位 ?"
   }
 }
