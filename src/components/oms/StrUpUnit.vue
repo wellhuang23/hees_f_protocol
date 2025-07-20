@@ -30,7 +30,7 @@
     </div>
     <template #footer>
       <div style="display: flex; justify-content: space-between;">
-        <el-button type="danger">{{ t('g.delete') }}</el-button>
+        <el-button v-if="userInfo.per0001.includes(perDeleteCode)" type="danger" @click="handleDelete">{{ t('g.delete') }}</el-button>
         <div>
           <el-button @click="$emit('update:modelValue', false)">{{ t('general.cancel') }}</el-button>
           <el-button type="primary" @click="handleConfirm">{{ t('general.confirm') }}</el-button>
@@ -38,6 +38,12 @@
       </div>
     </template>
   </el-drawer>
+  <str-del-unit
+      v-if="isDelSugDialogVisible"
+      v-model="isDelSugDialogVisible"
+      :event="nodeData"
+      @delete-confirmed="handleDeleteConfirmed"
+  />
 </template>
 
 <script setup lang="ts">
@@ -45,10 +51,23 @@ import {defineProps, defineEmits, ref, watch, computed} from 'vue'
 import { useI18n } from 'vue-i18n'
 import { updateComStrUnit } from '@/services/oms/orgs'
 import { ElNotification } from 'element-plus'
-import { useComStrUnitStore } from '@/stores'
+import { useComStrUnitStore, useUserInfoStore, useValidComStore } from '@/stores'
+import StrDelUnit from '@/components/oms/StrDelUnit.vue'
+import type { ComStrUnit } from '@/interfaces'
 
 const { t } = useI18n()
 const strUnitsStore = useComStrUnitStore()
+const userInfo = useUserInfoStore()
+const validComStore = useValidComStore()
+
+const isDelSugDialogVisible = ref(false);
+
+const comTaxNo = validComStore.currentCom.comTaxNo
+const perDeleteCode = comTaxNo + '-oms-005-0001'
+
+const handleDelete = () => {
+  isDelSugDialogVisible.value = true;
+};
 
 const props = defineProps({
   modelValue: {
@@ -56,12 +75,16 @@ const props = defineProps({
     required: true
   },
   nodeData: {
-    type: Object,
+    type: Object as () => ComStrUnit | null,
     default: null
   }
 })
 
 const emits = defineEmits(['update:modelValue'])
+
+const handleDeleteConfirmed = () => {
+  emits('update:modelValue', false);
+};
 
 const noParenUnit = computed(() => {
   return t('comStr.noParentUnit')

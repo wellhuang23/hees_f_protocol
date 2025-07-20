@@ -176,6 +176,7 @@ const useComStrUnitStore = defineStore(COM_STR_UNIT, {
                     strUnitName: row.strUnitName,
                     strUnitDesc: row.strUnitDesc,
                     strUnitNo: row.strUnitNo,
+                    parentStrUnitId: row.parentStrUnitId,
                     children: []
                 })
 
@@ -200,6 +201,7 @@ const useComStrUnitStore = defineStore(COM_STR_UNIT, {
                     strUnitName: row.strUnitName,
                     strUnitDesc: row.strUnitDesc,
                     strUnitNo: row.strUnitNo,
+                    parentStrUnitId: row.parentStrUnitId,
                     children: []
                 })
             }

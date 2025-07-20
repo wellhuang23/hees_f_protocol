@@ -91,6 +91,9 @@
     "updateComStrUnitSuccessMsg": "Update Structure Unit in Company Successfully",
     "updateComStrUnitNoPerErrorMsg": "You don't Have Permission to Update Structure Unit in Company, Please Contact System Manger",
     "updateComStrUnitErrorMsg": "Update Structure Unit in Company Fail, Please Contact System Manger",
+    "deleteComStrUnitSuccessMsg": "Delete Structure Unit in Company Successfully",
+    "deleteComStrUnitNoPerErrorMsg": "You don't Have Permission to Delete Structure Unit in Company, Please Contact System Manger",
+    "deleteComStrUnitErrorMsg": "Delete Structure Unit in Company Fail, Please Contact System Manger",
     "systemErrorMsg": "System Error, Please Contact System Manager"
   },
   "cusSugDetail": {
@@ -414,5 +417,9 @@
     "unitDescLabel": "Unit Description :",
     "upUnitTitle": "Update Unit",
     "parentUnitLabel": "Parent Unit :"
+  },
+  "comStrDelUnit": {
+    "title": "Delete Unit",
+    "content": "Sure for Deleting the Unit ?"
   }
 }

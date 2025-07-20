@@ -19,7 +19,7 @@ const validComStore = useValidComStore()
 const strUnitsStore = useComStrUnitStore()
 
 const comTaxNo = validComStore.currentCom.comTaxNo
-const perCreateCode = comTaxNo + '-oms-001-1000'
+const perCreateCode = comTaxNo + '-oms-005-1000'
 const perUpdateCode = comTaxNo + '-oms-005-0010'
 
 const elements = ref<any[]>([])
