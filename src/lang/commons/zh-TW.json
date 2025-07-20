@@ -389,5 +389,11 @@
       "cancel": "取消",
       "confirm": "確認"
     }
+  },
+  "comStr": {
+    "download": "下載",
+    "add": "新增",
+    "addUnitTitle": "建立架構中的單元",
+    "addUnitContent": "建立新的單元"
   }
 }

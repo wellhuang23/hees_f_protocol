@@ -68,6 +68,8 @@ declare module 'vue' {
     PerRoleUsers: typeof import('./src/components/sysControl/PerRoleUsers.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    StrAddNewUnits: typeof import('./src/components/oms/StrAddNewUnits.vue')['default']
+    StrUnitView: typeof import('./src/components/oms/StrUnitView.vue')['default']
     SubAddNewCom: typeof import('./src/components/sysControl/SubAddNewCom.vue')['default']
     SubAddNewGroup: typeof import('./src/components/sysControl/SubAddNewGroup.vue')['default']
     SubAddNewGroupConfirm: typeof import('./src/components/sysControl/SubAddNewGroupConfirm.vue')['default']

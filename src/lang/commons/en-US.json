@@ -391,5 +391,11 @@
       "cancel": "Cancel",
       "confirm": "Confirm"
     }
+  },
+  "comStr": {
+    "download": "Download",
+    "add": "Add",
+    "addUnitTitle": "Add New units in Structure",
+    "addUnitContent": "Create new unit"
   }
 }
