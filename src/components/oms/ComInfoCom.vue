@@ -142,11 +142,11 @@ const confirmChanges = async () => {
     <div v-else class="info-edit">
       <div class="field">
         <label class="field-label" for="comNameInput">{{ t('comInfo.comInfo.comName') }}</label>
-        <input id="comNameInput" v-model="editableComName" type="text" />
+        <el-input id="comNameInput" v-model="editableComName" :maxlength="30" show-word-limit />
       </div>
       <div class="field">
         <label class="field-label" for="comStNameInput">{{ t('comInfo.comInfo.comStName') }}</label>
-        <input id="comStNameInput" v-model="editableComStName" type="text" />
+        <el-input id="comStNameInput" v-model="editableComStName" :maxlength="10" show-word-limit />
       </div>
       <div class="field">
         <p class="field-label">{{ t('comInfo.comInfo.comTaxNo') }}</p>
@@ -154,27 +154,27 @@ const confirmChanges = async () => {
       </div>
       <div class="field">
         <label class="field-label" for="comLeaderInput">{{ t('comInfo.comInfo.comLeader') }}</label>
-        <input id="comLeaderInput" v-model="editableComLeader" type="text" />
+        <el-input id="comLeaderInput" v-model="editableComLeader" :maxlength="30" show-word-limit />
       </div>
       <div class="field">
         <label class="field-label" for="comAddrInput">{{ t('comInfo.comInfo.comAddr') }}</label>
-        <input id="comAddrInput" v-model="editableComAddr" type="text" />
+        <el-input id="comAddrInput" v-model="editableComAddr" />
       </div>
       <div class="field">
         <label class="field-label" for="comPhoneInput">{{ t('comInfo.comInfo.comPhone') }}</label>
-        <input id="comPhoneInput" v-model="editableComPhone" type="text" />
+        <el-input id="comPhoneInput" v-model="editableComPhone" :maxlength="20" show-word-limit />
       </div>
       <div class="field">
         <label class="field-label" for="comDescTextarea">{{ t('comInfo.comInfo.comDesc') }}</label>
-        <textarea id="comDescTextarea" v-model="editableComDesc" rows="5"></textarea>
+        <el-input id="comDescTextarea" v-model="editableComDesc" type="textarea" rows="5"></el-input>
       </div>
       <div class="field">
         <label class="field-label" for="comEngNameInput">{{ t('comInfo.comInfo.comEngName') }}</label>
-        <input id="comEngNameInput" v-model="editableComEngName" type="text" />
+        <el-input id="comEngNameInput" v-model="editableComEngName" :maxlength="100" show-word-limit />
       </div>
       <div class="field">
         <label class="field-label" for="comEngAddrInput">{{ t('comInfo.comInfo.comEngAddr') }}</label>
-        <input id="comEngAddrInput" v-model="editableComEngAddr" type="text" />
+        <el-input id="comEngAddrInput" v-model="editableComEngAddr" />
       </div>
       <div class="edit-actions">
         <el-button type="info" @click="cancelEditing">{{ t('comInfo.comInfo.cancel') }}</el-button>

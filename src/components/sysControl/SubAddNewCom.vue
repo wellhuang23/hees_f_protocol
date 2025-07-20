@@ -8,16 +8,16 @@
   >
     <el-form :model="form" :rules="rules" ref="formRef" label-width="auto">
       <el-form-item :label="t('subAddNewGroup.comTaxNo')" prop="comTaxNo">
-        <el-input v-model="form.comTaxNo" />
+        <el-input v-model="form.comTaxNo" :maxlength="8" show-word-limit />
       </el-form-item>
       <el-form-item :label="t('subAddNewGroup.comName')" prop="comName">
-        <el-input v-model="form.comName" />
+        <el-input v-model="form.comName" :maxlength="50" show-word-limit />
       </el-form-item>
       <el-form-item :label="t('subAddNewGroup.comStName')" prop="comStName">
-        <el-input v-model="form.comStName" />
+        <el-input v-model="form.comStName" :maxlength="10" show-word-limit />
       </el-form-item>
       <el-form-item :label="t('subAddNewGroup.comEngName')" prop="comEngName">
-        <el-input v-model="form.comEngName" />
+        <el-input v-model="form.comEngName" :maxlength="100" show-word-limit />
       </el-form-item>
       <el-form-item
         v-for="(subscription, index) in subscriptions"

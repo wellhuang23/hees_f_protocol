@@ -7,7 +7,7 @@
   >
     <el-form :model="form" label-width="120px">
       <el-form-item :label="t('notiUpNotice.notiName')">
-        <el-input v-model="form.notiName" />
+        <el-input v-model="form.notiName" :maxlength="50" show-word-limit />
       </el-form-item>
       <el-form-item :label="t('notiUpNotice.notiDesc')">
         <el-input v-model="form.notiDesc" type="textarea" :rows="20" />
