@@ -102,11 +102,11 @@ const confirmChanges = async () => {
     <div v-else class="info-edit">
       <div class="field">
         <label class="field-label" for="groupNameInput">{{ t('comInfo.groupInfo.groupName') }}</label>
-        <input id="groupNameInput" v-model="editableGroupName" type="text" />
+        <el-input id="groupNameInput" v-model="editableGroupName" :maxlength="30" show-word-limit />
       </div>
       <div class="field">
         <label class="field-label" for="groupDescTextarea">{{ t('comInfo.groupInfo.groupDesc') }}</label>
-        <textarea id="groupDescTextarea" v-model="editableGroupDesc" rows="5"></textarea>
+        <el-input id="groupDescTextarea" v-model="editableGroupDesc" type="textarea" rows="5"></el-input>
       </div>
       <div class="edit-actions">
         <el-button type="info" @click="cancelEditing">{{ t('comInfo.groupInfo.cancel') }}</el-button>
