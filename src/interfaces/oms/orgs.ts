@@ -152,7 +152,7 @@ export interface ChangeGroupAdminPwdReqParams {
     groupId: number;
 }
 
-//  Change Group Administrator Password Response Parameters
+// Change Group Administrator Password Response Parameters
 export interface ChangeGroupAdminPwdResParams extends GeneralResParam {
     // Group Administrator Password
     groupAdminNewPwd?: string;
@@ -200,8 +200,53 @@ export interface ComInfo {
     groupDesc: string;
 }
 
-//  Get Company Information Response Parameters
+// Get Company Information Response Parameters
 export interface GetComInfoResParams extends GeneralResParam {
     // Company Information
     comInfo?: ComInfo;
+}
+
+// Company Structure Unit
+export interface ComStrUnit {
+    // Structure Unit ID
+    strUnitId: number;
+
+    // Structure Unit Name
+    strUnitName: string;
+
+    // Structure Unit Description
+    strUnitDesc: string;
+
+    // Structure Unit No.
+    strUnitNo: string;
+
+    // Structure Unit Children
+    children: ComStrUnit[];
+}
+
+// Get Structure Unit in Company Response Parameters
+export interface GetComStrUnitResParams extends GeneralResParam {
+    // Structure Units
+    comStrUnit?: ComStrUnit[];
+}
+
+// Structure Unit in Company Operation Request Parameters
+export interface ComStrUnitOprReqParams {
+    // Structure Unit ID
+    strUnitId: number;
+
+    // Structure Unit Name
+    strUnitName?: string;
+
+    // Structure Unit Description
+    strUnitDesc?: string;
+
+    // Structure Unit No.
+    strUnitNo?: string;
+
+    // Parent Structure Unit ID
+    parentStrUnitId?: number;
+
+    // Create Structure Units
+    strUnits?: ComStrUnitOprReqParams[];
 }

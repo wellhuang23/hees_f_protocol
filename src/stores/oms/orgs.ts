@@ -10,11 +10,14 @@ import type {
     LogInResParams,
     GetComInfoResParams,
     ComInfo,
+    ComStrUnit,
+    GetComStrUnitResParams,
 } from '@/interfaces'
 import {
     SUB_ITEMS,
     VALID_COM,
     COM_INFO,
+    COM_STR_UNIT,
 } from '@/global/contstants'
 
 const useSubItemsStore = defineStore(SUB_ITEMS, {
@@ -154,9 +157,29 @@ const useComInfoStore = defineStore(COM_INFO, {
     }
 })
 
+const useComStrUnitStore = defineStore(COM_STR_UNIT, {
+    state:() => ({
+        comStrUnits: sessionCache.getCache(COM_STR_UNIT)?.comStrUnits ?? [] as ComStrUnit[],
+    }),
+    actions: {
+        setComStrUnits(data: GetComStrUnitResParams) {
+            const comStrUnits: ComStrUnit[] = []
+            for (const row of data.comStrUnit ?? []) {
+                comStrUnits.push(row)
+            }
+
+            this.comStrUnits = comStrUnits
+
+            sessionCache.setCache(COM_STR_UNIT, {
+                comStrUnits: comStrUnits ?? {}
+            })
+        }
+    }
+})
 
 export {
     useSubItemsStore,
     useValidComStore,
     useComInfoStore,
+    useComStrUnitStore,
 }
