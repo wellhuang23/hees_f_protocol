@@ -16,6 +16,8 @@ import type {
     GetComStrUnitResParams,
     ComStrUnit,
     ComStrUnitOprReqParams,
+    GetComJobPositionResParams,
+    ComJobPosition,
 } from '@/interfaces'
 import request from '@/utils/requests'
 import { convertToNumber } from '@/utils/conNumber'
@@ -295,7 +297,7 @@ class OMSOrgsAPI {
         });
     }
 
-    // API for Getting Company Information
+    // API for Getting Company Structure Units
     async getComStrUnits(token: string, comId: number): Promise<GetComStrUnitResParams> {
         const params = {
             'com_id': comId,
@@ -404,6 +406,110 @@ class OMSOrgsAPI {
         }
         return request<any, any>({
             url: ORGS_API + '/com/str/unit/delete',
+            method: 'POST',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            data: params,
+        }).then((response): GeneralResParam => {
+            return {
+                errno: response.data.errno,
+                desc: response.data.desc,
+            }
+        });
+    }
+
+    // API for Getting Company Job Positions
+    async getComJobPositions(token: string, comId: number): Promise<GetComJobPositionResParams> {
+        const params = {
+            'com_id': comId,
+        }
+        return request<any, any>({
+            url: ORGS_API + '/com/job/pos/get',
+            method: 'GET',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            params: params,
+        }).then((response): GetComJobPositionResParams => {
+            if (response.data.errno === '00000') {
+                const comJobPositions: ComJobPosition[] = []
+                for (const row of response.data.data) {
+                    comJobPositions.push({
+                        jobPosId: (convertToNumber(row.jp_id) ?? 0),
+                        jobPosName: row.jp_name,
+                        jobPosLevel: row.jp_level,
+                        jobPosDesc: row.jp_desc,
+                    })
+                }
+
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                    comJobPositions: comJobPositions
+                }
+            } else {
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                }
+            }
+        });
+    }
+
+    // API for Creating Company Job Position
+    async createNewJobPosition(data: ComJobPosition, comId: number, token: string): Promise<GeneralResParam> {
+        const params = {
+            com_id: comId,
+            jp_name: data.jobPosName,
+            jp_level: data.jobPosLevel,
+            jp_desc: data.jobPosDesc,
+        }
+        return request<any, any>({
+            url: ORGS_API + '/com/job/pos/create',
+            method: 'POST',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            data: params,
+        }).then((response): GeneralResParam => {
+            return {
+                errno: response.data.errno,
+                desc: response.data.desc,
+            }
+        });
+    }
+
+    // API for Updating Company Job Position
+    async updateJobPosition(data: ComJobPosition, token: string): Promise<GeneralResParam> {
+        const params = {
+            jp_id: data.jobPosId,
+            jp_name: data.jobPosName,
+            jp_level: data.jobPosLevel,
+            jp_desc: data.jobPosDesc,
+        }
+        return request<any, any>({
+            url: ORGS_API + '/com/job/pos/update',
+            method: 'POST',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            data: params,
+        }).then((response): GeneralResParam => {
+            return {
+                errno: response.data.errno,
+                desc: response.data.desc,
+            }
+        });
+    }
+
+    // API for Deleting Company Job Position
+    async deleteJobPosition(data: ComJobPosition, token: string): Promise<GeneralResParam> {
+        const params = {
+            jp_id: data.jobPosId,
+        }
+        return request<any, any>({
+            url: ORGS_API + '/com/job/pos/delete',
             method: 'POST',
             headers: {
                 Authorization: `HEEsToken ${token}`,

@@ -12,6 +12,8 @@ import type {
     ComInfo,
     GetComStrUnitResParams,
     ComStrUnitOprReqParams,
+    GetComJobPositionResParams,
+    ComJobPosition,
 } from '@/interfaces'
 import {
     useDeviceInfoStore,
@@ -19,6 +21,7 @@ import {
     useValidComStore,
     useComInfoStore,
     useComStrUnitStore,
+    useComJobPositionStore,
 } from '@/stores'
 import { updateToken } from '@/services'
 
@@ -27,6 +30,7 @@ const usbItemsStore = useSubItemsStore()
 const validComStore = useValidComStore()
 const comInfoStore = useComInfoStore()
 const comStrUnitStore = useComStrUnitStore()
+const comJobPositionStore = useComJobPositionStore()
 
 export async function getAllSubItems() {
     const token = deviceStore.token
@@ -303,6 +307,147 @@ export async function deleteComStrUnit(data: ComStrUnitOprReqParams) {
                         }
                     })
                 }
+            }
+        }
+        return res.errno
+    })
+}
+
+export async function getComJobPositions() {
+    const token = deviceStore.token
+    const comId = validComStore.currentCom.comId
+    return OMSOrgsAPI.getComJobPositions(token, comId).then(async (res: GetComJobPositionResParams)=> {
+        if (res.errno === '00000') {
+            comJobPositionStore.setComJobPositions(res)
+            return res.errno
+        } else {
+            if (res.errno === '99005') {
+                const refreshTokenResult = await updateToken().then()
+                if (refreshTokenResult === '00000') {
+                    const refreshToken = deviceStore.token
+                    return OMSOrgsAPI.getComJobPositions(refreshToken, comId).then((refreshRes: GetComJobPositionResParams) => {
+                        comJobPositionStore.setComJobPositions(refreshRes)
+                        return refreshRes.errno
+                    })
+                }
+            }
+        }
+        return res.errno
+    })
+}
+
+export async function createComJobPositions(params: ComJobPosition) {
+    const token = deviceStore.token
+    const comId = validComStore.currentCom.comId
+    return OMSOrgsAPI.createNewJobPosition(params, comId, token).then(async (res: GeneralResParam)=> {
+        if (res.errno === '99005') {
+            const refreshTokenResult = await updateToken().then()
+            if (refreshTokenResult === '00000') {
+                const refreshToken = deviceStore.token
+                return OMSOrgsAPI.createNewJobPosition(
+                    params,
+                    comId,
+                    refreshToken).then((refreshRes: GeneralResParam) => {
+                    if (refreshRes.errno === '00000') {
+                        return OMSOrgsAPI.getComJobPositions(token, comId).then(async (refreshGetRes: GetComJobPositionResParams) => {
+                            if (refreshGetRes.errno === '00000') {
+                                comJobPositionStore.setComJobPositions(refreshGetRes)
+                            }
+                            return refreshGetRes.errno
+                        })
+                    } else {
+                        return refreshRes.errno
+                    }
+                })
+            }
+        } else {
+            if (res.errno === '00000') {
+                return OMSOrgsAPI.getComJobPositions(token, comId).then(async (getRes: GetComJobPositionResParams) => {
+                    if (getRes.errno === '00000') {
+                        comJobPositionStore.setComJobPositions(getRes)
+                    }
+                    return getRes.errno
+                })
+            } else {
+                return res.errno
+            }
+        }
+        return res.errno
+    })
+}
+
+export async function updateComJobPositions(params: ComJobPosition) {
+    const token = deviceStore.token
+    const comId = validComStore.currentCom.comId
+    return OMSOrgsAPI.updateJobPosition(params, token).then(async (res: GeneralResParam)=> {
+        if (res.errno === '99005') {
+            const refreshTokenResult = await updateToken().then()
+            if (refreshTokenResult === '00000') {
+                const refreshToken = deviceStore.token
+                return OMSOrgsAPI.updateJobPosition(
+                    params,
+                    refreshToken).then((refreshRes: GeneralResParam) => {
+                    if (refreshRes.errno === '00000') {
+                        return OMSOrgsAPI.getComJobPositions(token, comId).then(async (refreshGetRes: GetComJobPositionResParams) => {
+                            if (refreshGetRes.errno === '00000') {
+                                comJobPositionStore.setComJobPositions(refreshGetRes)
+                            }
+                            return refreshGetRes.errno
+                        })
+                    } else {
+                        return refreshRes.errno
+                    }
+                })
+            }
+        } else {
+            if (res.errno === '00000') {
+                return OMSOrgsAPI.getComJobPositions(token, comId).then(async (getRes: GetComJobPositionResParams) => {
+                    if (getRes.errno === '00000') {
+                        comJobPositionStore.setComJobPositions(getRes)
+                    }
+                    return getRes.errno
+                })
+            } else {
+                return res.errno
+            }
+        }
+        return res.errno
+    })
+}
+
+export async function deleteComJobPositions(params: ComJobPosition) {
+    const token = deviceStore.token
+    const comId = validComStore.currentCom.comId
+    return OMSOrgsAPI.deleteJobPosition(params, token).then(async (res: GeneralResParam)=> {
+        if (res.errno === '99005') {
+            const refreshTokenResult = await updateToken().then()
+            if (refreshTokenResult === '00000') {
+                const refreshToken = deviceStore.token
+                return OMSOrgsAPI.deleteJobPosition(
+                    params,
+                    refreshToken).then((refreshRes: GeneralResParam) => {
+                    if (refreshRes.errno === '00000') {
+                        return OMSOrgsAPI.getComJobPositions(token, comId).then(async (refreshGetRes: GetComJobPositionResParams) => {
+                            if (refreshGetRes.errno === '00000') {
+                                comJobPositionStore.setComJobPositions(refreshGetRes)
+                            }
+                            return refreshGetRes.errno
+                        })
+                    } else {
+                        return refreshRes.errno
+                    }
+                })
+            }
+        } else {
+            if (res.errno === '00000') {
+                return OMSOrgsAPI.getComJobPositions(token, comId).then(async (getRes: GetComJobPositionResParams) => {
+                    if (getRes.errno === '00000') {
+                        comJobPositionStore.setComJobPositions(getRes)
+                    }
+                    return getRes.errno
+                })
+            } else {
+                return res.errno
             }
         }
         return res.errno

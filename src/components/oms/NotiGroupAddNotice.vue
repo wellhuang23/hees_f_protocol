@@ -57,6 +57,8 @@ const rules = reactive<FormRules>({
 
 const closeDialog = () => {
   emit('close');
+  form.title = ''
+  form.content = ''
 };
 
 const submitForm = async () => {

@@ -1,16 +1,19 @@
 <template>
   <el-dialog
       :model-value="visible"
-      :title="t('notices.addComNotiTitle')"
+      :title="t('comJP.addJobPositionTitle')"
       @close="closeDialog"
       width="500px"
   >
     <el-form :model="form" :rules="rules" ref="formRef" label-position="top">
-      <el-form-item :label="t('notices.notiName')" prop="title">
-        <el-input v-model="form.title" :maxlength="50" show-word-limit ></el-input>
+      <el-form-item :label="t('comJP.addJobPosNameLabel')" prop="title">
+        <el-input v-model="form.title" :maxlength="20" show-word-limit ></el-input>
       </el-form-item>
-      <el-form-item :label="t('notices.notiDesc')" prop="content">
-        <el-input v-model="form.content" type="textarea" :rows="4"></el-input>
+      <el-form-item :label="t('comJP.addJobPosLevelLabel')">
+        <el-input v-model="form.level" :maxlength="10" show-word-limit ></el-input>
+      </el-form-item>
+      <el-form-item :label="t('comJP.addJobPosDescLabel')">
+        <el-input v-model="form.desc" type="textarea" :rows="4"></el-input>
       </el-form-item>
     </el-form>
     <template #footer>
@@ -25,7 +28,7 @@
 import { ref, reactive } from 'vue';
 import { useI18n } from 'vue-i18n';
 import {ElNotification, type FormInstance, type FormRules} from 'element-plus';
-import { createNewComNotification } from '@/services/oms/bases'
+import { createComJobPositions } from '@/services'
 
 const { t } = useI18n();
 
@@ -42,7 +45,8 @@ const formRef = ref<FormInstance>();
 
 const form = reactive({
   title: '',
-  content: '',
+  level: '',
+  desc: '',
 });
 
 const rules = reactive<FormRules>({
@@ -50,42 +54,41 @@ const rules = reactive<FormRules>({
     { required: true, message: 'Please input title', trigger: 'blur' },
     { min: 1, max: 50, message: 'Length should be 1 to 50', trigger: 'blur' },
   ],
-  content: [
-    { required: true, message: 'Please input content', trigger: 'blur' },
-  ],
 });
 
 const closeDialog = () => {
-  emit('close');
   form.title = ''
-  form.content = ''
+  form.level = ''
+  form.desc = ''
+  emit('close');
 };
 
 const submitForm = async () => {
   if (!formRef.value) return;
   await formRef.value.validate(async (valid) => {
     if (valid) {
-      const createRes = await createNewComNotification({
-        notiName: form.title,
-        notiDesc: form.content
+      const createRes = await createComJobPositions({
+        jobPosName: form.title,
+        jobPosLevel: form.level,
+        jobPosDesc: form.desc
       })
       if (createRes === '00000') {
         ElNotification({
           title: t('notice.noticeTitle'),
-          message: t('notice.createNotificationSuccessMsg'),
+          message: t('notice.createComJobPositionSuccessMsg'),
           type: 'success'
         });
         closeDialog()
       } else if (createRes === '99006') {
         ElNotification({
           title: t('notice.noticeTitle'),
-          message: t('notice.createNotificationNoPerErrorMsg'),
+          message: t('notice.createComJobPositionNoPerErrorMsg'),
           type: 'error'
         });
       } else {
         ElNotification({
           title: t('notice.noticeTitle'),
-          message: t('notice.createNotificationErrorMsg'),
+          message: t('notice.createComJobPositionErrorMsg'),
           type: 'error'
         });
       }
