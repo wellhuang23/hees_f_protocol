@@ -1,9 +1,9 @@
 <script setup lang="ts">
-
+import JobPositionList from '@/components/oms/JPList.vue'
 </script>
 
 <template>
-  <div>COMPANY JOB POSITION</div>
+  <job-position-list />
 </template>
 
 <style scoped lang="scss">

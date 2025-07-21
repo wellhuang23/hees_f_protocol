@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useI18n } from 'vue-i18n';
-import type { Notification } from '@/interfaces/oms/bases';
-import { deleteComNotification } from '@/services/oms/bases'
+import type { ComJobPosition } from '@/interfaces'
 import {ElNotification} from "element-plus";
+import {deleteComJobPositions} from "@/services";
 
 // Props and Emits for v-model
 const props = defineProps<{
   modelValue: boolean;
-  event: Notification | null;
+  event: ComJobPosition | null;
 }>();
 const emit = defineEmits(['update:modelValue']);
 
@@ -25,27 +25,27 @@ const closeDialog = () => {
 };
 
 const handleConfirm = async () => {
-  if (props.event?.notiId) {
-    const deleteRes = await deleteComNotification({
-      notiId: props.event.notiId
+  if (props.event?.jobPosId) {
+    const deleteRes = await deleteComJobPositions({
+      jobPosId: props.event?.jobPosId,
     })
     if (deleteRes === '00000') {
       ElNotification({
         title: t('notice.noticeTitle'),
-        message: t('notice.deleteNotificationSuccessMsg'),
+        message: t('notice.deleteComJobPositionSuccessMsg'),
         type: 'success'
       });
       closeDialog();
     } else if (deleteRes === '99006') {
       ElNotification({
         title: t('notice.noticeTitle'),
-        message: t('notice.deleteNotificationNoPerErrorMsg'),
+        message: t('notice.deleteComJobPositionNoPerErrorMsg'),
         type: 'error'
       });
     } else {
       ElNotification({
         title: t('notice.noticeTitle'),
-        message: t('notice.deleteNotificationErrorMsg'),
+        message: t('notice.deleteComJobPositionErrorMsg'),
         type: 'error'
       });
     }
@@ -56,13 +56,13 @@ const handleConfirm = async () => {
 <template>
   <el-dialog
       v-model="isVisible"
-      :title="t('notiDelNotice.comTitle')"
+      :title="t('comJP.deleteTitle')"
       width="400px"
       :close-on-click-modal="true"
       @close="closeDialog"
   >
     <div class="dialog-content-wrapper">
-      <p class="dialog-content">{{ t('notiDelNotice.content') }}</p>
+      <p class="dialog-content">{{ t('comJP.deleteContent') }}</p>
     </div>
     <template #footer>
       <span class="dialog-footer">

@@ -94,6 +94,12 @@
     "deleteComStrUnitSuccessMsg": "Delete Structure Unit in Company Successfully",
     "deleteComStrUnitNoPerErrorMsg": "You don't Have Permission to Delete Structure Unit in Company, Please Contact System Manger",
     "deleteComStrUnitErrorMsg": "Delete Structure Unit in Company Fail, Please Contact System Manger",
+    "updateComJobPositionSuccessMsg": "Update Job Position in Company Successfully",
+    "updateComJobPositionNoPerErrorMsg": "You don't Have Permission to Update Job Position in Company, Please Contact System Manger",
+    "updateComJobPositionErrorMsg": "Update Job Position in Company Fail, Please Contact System Manger",
+    "deleteComJobPositionSuccessMsg": "Delete Job Position in Company Successfully",
+    "deleteComJobPositionNoPerErrorMsg": "You don't Have Permission to Delete Job Position in Company, Please Contact System Manger",
+    "deleteComJobPositionErrorMsg": "Delete Job Position in Company Fail, Please Contact System Manger",
     "systemErrorMsg": "System Error, Please Contact System Manager"
   },
   "cusSugDetail": {
@@ -421,5 +427,18 @@
   "comStrDelUnit": {
     "title": "Delete Unit",
     "content": "Sure for Deleting the Unit ?"
+  },
+  "comJP": {
+    "jpNameLabel": "Job Position Name",
+    "jpLevelLabel": "Job Position Level",
+    "jpDescLabel": "Description",
+    "operationLabel": "Actions",
+    "addBtn": "Add",
+    "modifyBtn": "Modify",
+    "deleteBtn": "Delete",
+    "saveBtn": "Confirm",
+    "cancelBtn": "Cancel",
+    "deleteTitle": "Delete Job Position",
+    "deleteContent": "Sure for Deleting the Job Position ?"
   }
 }
