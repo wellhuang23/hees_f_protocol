@@ -7,6 +7,7 @@ import { useI18n } from "vue-i18n";
 import {ElMessage, ElNotification} from 'element-plus';
 import type {ComJobPosition} from '@/interfaces'
 import JpDelPosition from "@/components/oms/JPDelPosition.vue"
+import JpAddPosition from '@/components/oms/JPAddPosition.vue'
 
 const { t } = useI18n();
 
@@ -21,6 +22,7 @@ const perUpdateCode = comTaxNo + '-oms-006-0010';
 const perDeleteCode = comTaxNo + '-oms-006-0001';
 
 const isDelJPDialogVisible = ref(false);
+const isAddJobPositionDialogVisible = ref(false);
 const selectedJobPosition = ref<ComJobPosition | null>(null);
 
 // 用於存儲正在編輯的行，key 是行的唯一標識，value 是該行的修改中數據
@@ -41,6 +43,14 @@ onMounted(async () => {
 
   await getComJobPositions();
 });
+
+const addJobPosition = () => {
+  isAddJobPositionDialogVisible.value = true;
+};
+
+const closeAddJobPositionDialog = () => {
+  isAddJobPositionDialogVisible.value = false;
+};
 
 // 點擊修改按鈕
 const handleUpdate = (row: any) => {
@@ -116,7 +126,7 @@ const isRowEditing = (row: any) => {
   <el-row justify="space-between" align="middle" class="page-header">
     <el-col :span="20"></el-col>
     <el-col :span="4" style="text-align: right;">
-      <el-button v-if="userInfo.per1000.includes(perCreateCode)" type="success">{{ t('comJP.addBtn') }}</el-button>
+      <el-button v-if="userInfo.per1000.includes(perCreateCode)" type="success" @click="addJobPosition">{{ t('comJP.addBtn') }}</el-button>
     </el-col>
   </el-row>
   <br><br>
@@ -184,6 +194,7 @@ const isRowEditing = (row: any) => {
       </template>
     </el-table-column>
   </el-table>
+  <jp-add-position :visible="isAddJobPositionDialogVisible" @close="closeAddJobPositionDialog" />
   <jp-del-position v-model="isDelJPDialogVisible" :event="selectedJobPosition" />
 </template>
 

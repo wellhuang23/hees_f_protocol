@@ -48,6 +48,7 @@ declare module 'vue' {
     ElTabs: typeof import('element-plus/es')['ElTabs']
     ElTag: typeof import('element-plus/es')['ElTag']
     GroupNotices: typeof import('./src/components/dashboard/GroupNotices.vue')['default']
+    JPAddPosition: typeof import('./src/components/oms/JPAddPosition.vue')['default']
     JPDelPosition: typeof import('./src/components/oms/JPDelPosition.vue')['default']
     JPList: typeof import('./src/components/oms/JPList.vue')['default']
     LogFilter: typeof import('./src/components/sysControl/LogFilter.vue')['default']

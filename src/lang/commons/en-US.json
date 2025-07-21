@@ -94,6 +94,9 @@
     "deleteComStrUnitSuccessMsg": "Delete Structure Unit in Company Successfully",
     "deleteComStrUnitNoPerErrorMsg": "You don't Have Permission to Delete Structure Unit in Company, Please Contact System Manger",
     "deleteComStrUnitErrorMsg": "Delete Structure Unit in Company Fail, Please Contact System Manger",
+    "createComJobPositionSuccessMsg": "Create Job Position in Company Successfully",
+    "createComJobPositionNoPerErrorMsg": "You don't Have Permission to Create Job Position in Company, Please Contact System Manger",
+    "createComJobPositionErrorMsg": "Create Job Position in Company Fail, Please Contact System Manger",
     "updateComJobPositionSuccessMsg": "Update Job Position in Company Successfully",
     "updateComJobPositionNoPerErrorMsg": "You don't Have Permission to Update Job Position in Company, Please Contact System Manger",
     "updateComJobPositionErrorMsg": "Update Job Position in Company Fail, Please Contact System Manger",
@@ -431,7 +434,7 @@
   "comJP": {
     "jpNameLabel": "Job Position Name",
     "jpLevelLabel": "Job Position Level",
-    "jpDescLabel": "Description",
+    "jpDescLabel": "Job Position Description",
     "operationLabel": "Actions",
     "addBtn": "Add",
     "modifyBtn": "Modify",
@@ -439,6 +442,10 @@
     "saveBtn": "Confirm",
     "cancelBtn": "Cancel",
     "deleteTitle": "Delete Job Position",
-    "deleteContent": "Sure for Deleting the Job Position ?"
+    "deleteContent": "Sure for Deleting the Job Position ?",
+    "addJobPositionTitle": "Add New Job Position",
+    "addJobPosNameLabel": "Job Position Name",
+    "addJobPosLevelLabel": "Job Position Level",
+    "addJobPosDescLabel": "Job Position Description"
   }
 }

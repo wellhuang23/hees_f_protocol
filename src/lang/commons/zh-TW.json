@@ -94,6 +94,9 @@
     "deleteComStrUnitSuccessMsg": "刪除單位成功",
     "deleteComStrUnitNoPerErrorMsg": "您沒有刪除單位的權限，請洽系統管理員",
     "deleteComStrUnitErrorMsg": "刪除單位失敗，請洽系統管理員",
+    "createComJobPositionSuccessMsg": "新增職務成功",
+    "createComJobPositionNoPerErrorMsg": "您沒有新增職務的權限，請洽系統管理員",
+    "createComJobPositionErrorMsg": "新增職務失敗，請洽系統管理員",
     "updateComJobPositionSuccessMsg": "更新職務成功",
     "updateComJobPositionNoPerErrorMsg": "您沒有更新職務的權限，請洽系統管理員",
     "updateComJobPositionErrorMsg": "更新職務失敗，請洽系統管理員",
@@ -429,7 +432,7 @@
   "comJP": {
     "jpNameLabel": "職務名稱",
     "jpLevelLabel": "職務等階",
-    "jpDescLabel": "描述",
+    "jpDescLabel": "職務描述",
     "operationLabel": "操作",
     "addBtn": "新增",
     "modifyBtn": "修改",
@@ -437,6 +440,10 @@
     "saveBtn": "確認",
     "cancelBtn": "取消",
     "deleteTitle": "刪除職務",
-    "deleteContent": "是否確認刪除該職務 ?"
+    "deleteContent": "是否確認刪除該職務 ?",
+    "addJobPositionTitle": "新增職務",
+    "addJobPosNameLabel": "職務名稱",
+    "addJobPosLevelLabel": "職務等階",
+    "addJobPosDescLabel": "職務描述"
   }
 }
