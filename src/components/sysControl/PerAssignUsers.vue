@@ -2,7 +2,6 @@
 import {computed, ref, watchEffect} from 'vue'
 import {useI18n} from 'vue-i18n'
 import {useSysPerRoleStore} from '@/stores'
-import {storeToRefs} from 'pinia'
 import type {SysRole, SysRoleUser} from '@/interfaces'
 import {assignUsersSysPerRole} from '@/services'
 import {
