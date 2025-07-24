@@ -9,8 +9,8 @@ import type {
     CreateComSubsReqParams,
     CreateComSubsResParams,
     UpdateComSubsReqParams,
-    ChangeGroupAdminPwdReqParams,
-    ChangeGroupAdminPwdResParams,
+    ChangeAdminPwdReqParams,
+    ChangeAdminPwdResParams,
     GetComInfoResParams,
     ComInfo,
     GetComStrUnitResParams,
@@ -153,7 +153,7 @@ class OMSOrgsAPI {
                 return {
                     errno: response.data.errno,
                     desc: response.data.desc,
-                    groupAdminPwd: response.data.group_admin_pwd,
+                    adminPwd: response.data.admin_pwd,
                 }
             } else {
                 return {
@@ -196,24 +196,24 @@ class OMSOrgsAPI {
     }
 
     // API for Changing Group Admin Password
-    async changeGroupAdminPwd(data: ChangeGroupAdminPwdReqParams, token: string): Promise<ChangeGroupAdminPwdResParams> {
+    async changeGroupAdminPwd(data: ChangeAdminPwdReqParams, token: string): Promise<ChangeAdminPwdResParams> {
         const params = {
-            'group_id': data.groupId,
+            'com_id': data.comId,
         }
 
         return request<any, any>({
-            url: ORGS_API + '/g/admin/pwd/change',
+            url: ORGS_API + '/admin/pwd/change',
             method: 'POST',
             headers: {
                 Authorization: `HEEsToken ${token}`,
             },
             data: params,
-        }).then((response): ChangeGroupAdminPwdResParams => {
+        }).then((response): ChangeAdminPwdResParams => {
             if (response.data.errno === '00000') {
                 return {
                     errno: response.data.errno,
                     desc: response.data.desc,
-                    groupAdminNewPwd: response.data.new_group_admin_pwd
+                    adminNewPwd: response.data.new_admin_pwd
                 }
             }
             return {

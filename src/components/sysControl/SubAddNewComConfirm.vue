@@ -22,7 +22,7 @@ const handleConfirm = () => {
 <template>
   <el-dialog
     v-model="dialogVisible"
-    :title="t('subAddNewGroupConfirm.title')"
+    :title="t('subAddNewComConfirm.title')"
     width="30%"
     :show-close="false"
     :close-on-click-modal="false"
@@ -31,7 +31,7 @@ const handleConfirm = () => {
   >
     <template #header="{ titleId, titleClass }">
       <div class="my-header">
-        <h4 :id="titleId" :class="titleClass">{{ t('subAddNewGroupConfirm.title') }}</h4>
+        <h4 :id="titleId" :class="titleClass">{{ t('subAddNewComConfirm.title') }}</h4>
       </div>
     </template>
     <div class="dialog-content">
