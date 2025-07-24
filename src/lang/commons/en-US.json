@@ -293,6 +293,10 @@
     "title": "Group Administrator's Password : ",
     "passwordLabel": "Group Administrator's Password :"
   },
+  "subAddNewComConfirm": {
+    "title": "Company Administrator's Password : ",
+    "passwordLabel": "Company Administrator's Password :"
+  },
   "subChangeGroupAdminPwdConfirm": {
     "title": "Administrator's New Password : ",
     "passwordLabel": "Administrator's New Password :"

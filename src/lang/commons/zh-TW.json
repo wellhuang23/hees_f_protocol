@@ -292,6 +292,9 @@
   "subAddNewGroupConfirm": {
     "title": "管理者的密碼 : "
   },
+  "subAddNewComConfirm": {
+    "title": "管理者的密碼 : "
+  },
   "subChangeGroupAdminPwdConfirm": {
     "title": "管理者的密碼 : "
   },

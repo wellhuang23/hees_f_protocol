@@ -77,6 +77,7 @@ declare module 'vue' {
     StrUnitView: typeof import('./src/components/oms/StrUnitView.vue')['default']
     StrUpUnit: typeof import('./src/components/oms/StrUpUnit.vue')['default']
     SubAddNewCom: typeof import('./src/components/sysControl/SubAddNewCom.vue')['default']
+    SubAddNewComConfirm: typeof import('./src/components/sysControl/SubAddNewComConfirm.vue')['default']
     SubAddNewGroup: typeof import('./src/components/sysControl/SubAddNewGroup.vue')['default']
     SubAddNewGroupConfirm: typeof import('./src/components/sysControl/SubAddNewGroupConfirm.vue')['default']
     SubChangeAdminPwdConfirm: typeof import('./src/components/sysControl/SubChangeAdminPwdConfirm.vue')['default']

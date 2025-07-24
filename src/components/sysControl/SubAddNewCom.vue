@@ -49,6 +49,11 @@
       </div>
     </template>
   </el-dialog>
+  <SubAddNewComConfirm
+      v-if="showConfirmDialog"
+      :adminPwd="adminPwd"
+      @confirm="handleReloadPage()"
+  />
 </template>
 
 <script setup lang="ts">
@@ -59,8 +64,17 @@ import { storeToRefs } from 'pinia'
 import { ElNotification, type FormInstance, type FormRules } from 'element-plus'
 import type { GroupCompanies, NewComSub } from '@/interfaces'
 import { createGroupComSubs, getAllGroupSubs } from '@/services'
+import SubAddNewComConfirm from '@/components/sysControl/SubAddNewComConfirm.vue'
 
 const { t, locale } = useI18n()
+
+const showConfirmDialog = ref(false)
+const adminPwd = ref('')
+
+const handleReloadPage = () => {
+  emit('update:modelValue', false)
+}
+
 
 const props = defineProps<{ modelValue: boolean, group: GroupCompanies | null }>()
 const emit = defineEmits(['update:modelValue'])
@@ -163,7 +177,8 @@ const submitForm = (formEl: FormInstance | undefined) => {
           message: t('notice.createNewCompanySuccessMsg'),
           type: 'success'
         })
-        emit('update:modelValue', false) // Close dialog on success
+        adminPwd.value = res.adminPwd as string
+        showConfirmDialog.value = true
       } else if (res.errno === '99006') {
         ElNotification({
           title: t('notice.noticeTitle'),
