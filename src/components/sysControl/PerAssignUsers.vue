@@ -23,16 +23,9 @@ const props = defineProps<{
 const emit = defineEmits(['update:modelValue'])
 
 const sysPerRoleStore = useSysPerRoleStore()
-const { sysRoleUsers } = storeToRefs(sysPerRoleStore)
 
 const allUsers = computed(() => {
-  const all = sysRoleUsers.value.flatMap(role => role.sysRoleUsers)
-  return all.reduce((acc, user) => {
-    if (user.userId !== undefined && !acc.some(u => u.userId === user.userId)) {
-      acc.push(user)
-    }
-    return acc
-  }, [] as SysRoleUser[])
+  return sysPerRoleStore.sysUsers
 })
 
 const roleName = computed(() => (locale.value === 'zh-TW' ? props.role.sysRoleName : props.role.sysRoleEngName))
