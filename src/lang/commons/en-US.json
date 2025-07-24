@@ -294,8 +294,8 @@
     "passwordLabel": "Group Administrator's Password :"
   },
   "subChangeGroupAdminPwdConfirm": {
-    "title": "Group Administrator's New Password : ",
-    "passwordLabel": "Group Administrator's New Password :"
+    "title": "Administrator's New Password : ",
+    "passwordLabel": "Administrator's New Password :"
   },
   "calendar": {
     "today": "Today",

@@ -6,8 +6,8 @@ import type {
     CreateComSubsReqParams,
     CreateComSubsResParams,
     UpdateComSubsReqParams,
-    ChangeGroupAdminPwdReqParams,
-    ChangeGroupAdminPwdResParams,
+    ChangeAdminPwdReqParams,
+    ChangeAdminPwdResParams,
     GetComInfoResParams,
     ComInfo,
     GetComStrUnitResParams,
@@ -114,9 +114,9 @@ export async function updateComSubs(updateParams: UpdateComSubsReqParams) {
     })
 }
 
-export async function changeGroupAdminPwd(changeParams: ChangeGroupAdminPwdReqParams) {
+export async function changeGroupAdminPwd(changeParams: ChangeAdminPwdReqParams) {
     const token = deviceStore.token
-    return OMSOrgsAPI.changeGroupAdminPwd(changeParams, token).then(async (res: ChangeGroupAdminPwdResParams)=> {
+    return OMSOrgsAPI.changeGroupAdminPwd(changeParams, token).then(async (res: ChangeAdminPwdResParams)=> {
         if (res.errno === '00000') {
             return res
         } else {
@@ -126,7 +126,7 @@ export async function changeGroupAdminPwd(changeParams: ChangeGroupAdminPwdReqPa
                     const refreshToken = deviceStore.token
                     return OMSOrgsAPI.changeGroupAdminPwd(
                         changeParams,
-                        refreshToken).then((refreshRes: ChangeGroupAdminPwdResParams) => {
+                        refreshToken).then((refreshRes: ChangeAdminPwdResParams) => {
                         return refreshRes
                     })
                 }

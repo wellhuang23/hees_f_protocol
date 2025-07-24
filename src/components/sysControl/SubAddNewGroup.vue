@@ -27,7 +27,7 @@ const form = ref({
 })
 
 const showConfirmDialog = ref(false)
-const groupAdminPwd = ref('')
+const adminPwd = ref('')
 
 const subItemsStore = useSubItemsStore()
 const { subItems } = storeToRefs(subItemsStore)
@@ -117,7 +117,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
             message: t('notice.createNewGroupSuccessMsg'),
             type: 'success'
           })
-          groupAdminPwd.value = res.groupAdminPwd as string
+          adminPwd.value = res.adminPwd as string
           showConfirmDialog.value = true
         } else if (res.errno === '99006') {
           ElNotification({
@@ -223,7 +223,7 @@ const handleReloadPage = () => {
 
   <SubAddNewGroupConfirm
     v-if="showConfirmDialog"
-    :group-admin-pwd="groupAdminPwd"
+    :adminPwd="adminPwd"
     @confirm="handleReloadPage()"
   />
 </template>

@@ -134,7 +134,7 @@ export interface CreateComSubsReqParams {
 // Create New Company Subscription Response Parameters
 export interface CreateComSubsResParams extends GeneralResParam {
     // Group Administrator Password
-    groupAdminPwd?: string;
+    adminPwd?: string;
 }
 
 // Update Subscriptions in Company Request Parameters
@@ -146,16 +146,16 @@ export interface UpdateComSubsReqParams {
     subs: NewComSub[];
 }
 
-// Change Group Administrator Password Request Parameters
-export interface ChangeGroupAdminPwdReqParams {
-    // Group ID
-    groupId: number;
+// Change Administrator Password Request Parameters
+export interface ChangeAdminPwdReqParams {
+    // Company ID
+    comId: number;
 }
 
 // Change Group Administrator Password Response Parameters
-export interface ChangeGroupAdminPwdResParams extends GeneralResParam {
+export interface ChangeAdminPwdResParams extends GeneralResParam {
     // Group Administrator Password
-    groupAdminNewPwd?: string;
+    adminNewPwd?: string;
 }
 
 // Company Information

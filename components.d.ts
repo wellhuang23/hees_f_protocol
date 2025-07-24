@@ -79,6 +79,7 @@ declare module 'vue' {
     SubAddNewCom: typeof import('./src/components/sysControl/SubAddNewCom.vue')['default']
     SubAddNewGroup: typeof import('./src/components/sysControl/SubAddNewGroup.vue')['default']
     SubAddNewGroupConfirm: typeof import('./src/components/sysControl/SubAddNewGroupConfirm.vue')['default']
+    SubChangeAdminPwdConfirm: typeof import('./src/components/sysControl/SubChangeAdminPwdConfirm.vue')['default']
     SubChangeGroupAdminPwdConfirm: typeof import('./src/components/sysControl/SubChangeGroupAdminPwdConfirm.vue')['default']
     SubList: typeof import('./src/components/sysControl/SubList.vue')['default']
     SysNotices: typeof import('./src/components/dashboard/SysNotices.vue')['default']
