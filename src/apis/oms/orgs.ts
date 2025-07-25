@@ -525,29 +525,6 @@ class OMSOrgsAPI {
         });
     }
 
-    async _resortComStrUnitChildren(children: Array<any>, parentStrUnitId: number): Promise<ComStrUnit[]> {
-        const result: Array<ComStrUnit> = []
-        for (const child of children) {
-            let children: ComStrUnit[] = []
-            if (child.children.length > 0) {
-                this._resortComStrUnitChildren(child.children, child.str_unit_id).then(res => {
-                    children.push(...res)
-                })
-            }
-
-            result.push({
-                strUnitId: (convertToNumber(child.str_unit_id) ?? 0),
-                strUnitName: child.str_unit_name,
-                strUnitDesc: child.str_unit_desc,
-                strUnitNo: child.str_unit_no,
-                children: children,
-                parentStrUnitId: parentStrUnitId
-            })
-        }
-
-        return result
-    }
-
     // API for Getting Company Job Positions
     async getUserInfoCols(token: string, comId: number): Promise<GetUserInfoColResParams> {
         const params = {
@@ -638,6 +615,29 @@ class OMSOrgsAPI {
                 desc: response.data.desc,
             }
         });
+    }
+
+    async _resortComStrUnitChildren(children: Array<any>, parentStrUnitId: number): Promise<ComStrUnit[]> {
+        const result: Array<ComStrUnit> = []
+        for (const child of children) {
+            let children: ComStrUnit[] = []
+            if (child.children.length > 0) {
+                this._resortComStrUnitChildren(child.children, child.str_unit_id).then(res => {
+                    children.push(...res)
+                })
+            }
+
+            result.push({
+                strUnitId: (convertToNumber(child.str_unit_id) ?? 0),
+                strUnitName: child.str_unit_name,
+                strUnitDesc: child.str_unit_desc,
+                strUnitNo: child.str_unit_no,
+                children: children,
+                parentStrUnitId: parentStrUnitId
+            })
+        }
+
+        return result
     }
 }
 
