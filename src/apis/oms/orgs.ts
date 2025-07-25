@@ -828,6 +828,34 @@ class OMSOrgsAPI {
         });
     }
 
+    // API for Changing general User Password
+    async changeUserPwd(userId: number, token: string): Promise<ChangeAdminPwdResParams> {
+        const params = {
+            'com_id': userId,
+        }
+
+        return request<any, any>({
+            url: ORGS_API + '/user/pwd/change',
+            method: 'POST',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            data: params,
+        }).then((response): ChangeAdminPwdResParams => {
+            if (response.data.errno === '00000') {
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                    adminNewPwd: response.data.new_admin_pwd
+                }
+            }
+            return {
+                errno: response.data.errno,
+                desc: response.data.desc,
+            }
+        });
+    }
+
     async _resortComStrUnitChildren(children: Array<any>, parentStrUnitId: number): Promise<ComStrUnit[]> {
         const result: Array<ComStrUnit> = []
         for (const child of children) {

@@ -703,3 +703,25 @@ export async function deleteUser(userId: number) {
         return res.errno
     })
 }
+
+export async function changeGenUserPwd(userId: number) {
+    const token = deviceStore.token
+    return OMSOrgsAPI.changeUserPwd(userId, token).then(async (res: ChangeAdminPwdResParams)=> {
+        if (res.errno === '00000') {
+            return res
+        } else {
+            if (res.errno === '99005') {
+                const refreshTokenResult = await updateToken().then()
+                if (refreshTokenResult === '00000') {
+                    const refreshToken = deviceStore.token
+                    return OMSOrgsAPI.changeUserPwd(
+                        userId,
+                        refreshToken).then((refreshRes: ChangeAdminPwdResParams) => {
+                        return refreshRes
+                    })
+                }
+            }
+        }
+        return res
+    })
+}
