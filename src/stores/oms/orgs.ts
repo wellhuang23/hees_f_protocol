@@ -14,6 +14,8 @@ import type {
     GetComStrUnitResParams,
     GetComJobPositionResParams,
     ComJobPosition,
+    UserInfoCol,
+    GetUserInfoColResParams,
 } from '@/interfaces'
 import {
     SUB_ITEMS,
@@ -21,6 +23,7 @@ import {
     COM_INFO,
     COM_STR_UNIT,
     COM_JOB_POS,
+    USER_INFO_COLS,
 } from '@/global/contstants'
 
 const useSubItemsStore = defineStore(SUB_ITEMS, {
@@ -234,10 +237,31 @@ const useComJobPositionStore = defineStore(COM_JOB_POS, {
     }
 })
 
+const useUserInfoColsStore = defineStore(USER_INFO_COLS, {
+    state:() => ({
+        userInfoCols: sessionCache.getCache(USER_INFO_COLS)?.userInfoCols ?? [] as UserInfoCol[],
+    }),
+    actions: {
+        setUserInfoCols(data: GetUserInfoColResParams) {
+            const userInfoCols: UserInfoCol[] = []
+            for (const row of data.userInfoCols ?? []) {
+                userInfoCols.push(row)
+            }
+
+            this.userInfoCols = userInfoCols
+
+            sessionCache.setCache(USER_INFO_COLS, {
+                userInfoCols: userInfoCols
+            })
+        },
+    }
+})
+
 export {
     useSubItemsStore,
     useValidComStore,
     useComInfoStore,
     useComStrUnitStore,
     useComJobPositionStore,
+    useUserInfoColsStore,
 }

@@ -274,3 +274,44 @@ export interface GetComJobPositionResParams extends GeneralResParam {
     // Job Positions
     comJobPositions?: ComJobPosition[];
 }
+
+// User Information Columns
+export interface UserInfoCol {
+    // User Information Column ID
+    colId: number;
+
+    // User Information Column Name
+    colName: string;
+
+    // User Information Column Description
+    colDesc: string;
+
+    // User Information Column Type
+    // 0: String
+    // 1: Integer
+    // 2: Float
+    // 3: Date
+    // 4: Datetime
+    colType: string;
+
+    // User Information Column Type Name
+    colTypeName?: string;
+
+    // User Information Column Require
+    colRequire: Boolean;
+}
+
+// Get User Information Columns in Company Response Parameters
+export interface GetUserInfoColResParams extends GeneralResParam {
+    // User Information Columns
+    userInfoCols?: UserInfoCol[];
+}
+
+// User Information Columns in Company Operation Request Parameters
+export interface UserInfoColOpeReqParams {
+    // Company ID
+    comId: number;
+
+    // User Information Columns
+    userInfoCols: UserInfoCol[];
+}

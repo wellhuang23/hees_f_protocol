@@ -18,6 +18,8 @@ import type {
     ComStrUnitOprReqParams,
     GetComJobPositionResParams,
     ComJobPosition,
+    GetUserInfoColResParams,
+    UserInfoCol,
 } from '@/interfaces'
 import request from '@/utils/requests'
 import { convertToNumber } from '@/utils/conNumber'
@@ -544,6 +546,98 @@ class OMSOrgsAPI {
         }
 
         return result
+    }
+
+    // API for Getting Company Job Positions
+    async getUserInfoCols(token: string, comId: number): Promise<GetUserInfoColResParams> {
+        const params = {
+            'com_id': comId,
+        }
+        return request<any, any>({
+            url: ORGS_API + '/user/info/cols',
+            method: 'GET',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            params: params,
+        }).then((response): GetUserInfoColResParams => {
+            if (response.data.errno === '00000') {
+                const userInfoCols: UserInfoCol[] = []
+                for (const row of response.data.data) {
+                    userInfoCols.push({
+                        colId: (convertToNumber(row.user_col_id) ?? 0),
+                        colName: row.col_name,
+                        colDesc: row.col_desc,
+                        colType: row.col_type,
+                        colTypeName: row.col_type_name,
+                        colRequire: row.col_require,
+                    })
+                }
+
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                    userInfoCols: userInfoCols
+                }
+            } else {
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                }
+            }
+        });
+    }
+
+    // API for Operation of User Information Columns in Company
+    async operateUserInfoCols(data: UserInfoCol[], comId: number, token: string): Promise<GeneralResParam> {
+        const cols = []
+        for (const row of data) {
+            cols.push({
+                user_col_id: row.colId,
+                col_name: row.colName,
+                col_desc: row.colDesc,
+                col_type: row.colType,
+                col_require: row.colRequire,
+            })
+        }
+
+        const params = {
+            com_id: comId,
+            user_info_cols: cols
+        }
+        return request<any, any>({
+            url: ORGS_API + '/user/info/cols/operation',
+            method: 'POST',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            data: params,
+        }).then((response): GeneralResParam => {
+            return {
+                errno: response.data.errno,
+                desc: response.data.desc,
+            }
+        });
+    }
+
+    // API for Deleting User Information Column in Company
+    async deleteUserInfoCol(colId: number, token: string): Promise<GeneralResParam> {
+        const params = {
+            user_col_id: colId
+        }
+        return request<any, any>({
+            url: ORGS_API + '/user/info/col/delete',
+            method: 'POST',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            data: params,
+        }).then((response): GeneralResParam => {
+            return {
+                errno: response.data.errno,
+                desc: response.data.desc,
+            }
+        });
     }
 }
 

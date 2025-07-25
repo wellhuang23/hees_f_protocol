@@ -14,6 +14,8 @@ import type {
     ComStrUnitOprReqParams,
     GetComJobPositionResParams,
     ComJobPosition,
+    GetUserInfoColResParams,
+    UserInfoCol,
 } from '@/interfaces'
 import {
     useDeviceInfoStore,
@@ -22,6 +24,7 @@ import {
     useComInfoStore,
     useComStrUnitStore,
     useComJobPositionStore,
+    useUserInfoColsStore,
 } from '@/stores'
 import { updateToken } from '@/services'
 
@@ -31,6 +34,7 @@ const validComStore = useValidComStore()
 const comInfoStore = useComInfoStore()
 const comStrUnitStore = useComStrUnitStore()
 const comJobPositionStore = useComJobPositionStore()
+const userInfoColsStore = useUserInfoColsStore()
 
 export async function getAllSubItems() {
     const token = deviceStore.token
@@ -443,6 +447,108 @@ export async function deleteComJobPositions(params: ComJobPosition) {
                 return OMSOrgsAPI.getComJobPositions(token, comId).then(async (getRes: GetComJobPositionResParams) => {
                     if (getRes.errno === '00000') {
                         comJobPositionStore.setComJobPositions(getRes)
+                    }
+                    return getRes.errno
+                })
+            } else {
+                return res.errno
+            }
+        }
+        return res.errno
+    })
+}
+
+export async function getUserInfoCols() {
+    const token = deviceStore.token
+    const comId = validComStore.currentCom.comId
+    return OMSOrgsAPI.getUserInfoCols(token, comId).then(async (res: GetUserInfoColResParams)=> {
+        if (res.errno === '00000') {
+            userInfoColsStore.setUserInfoCols(res)
+            return res.errno
+        } else {
+            if (res.errno === '99005') {
+                const refreshTokenResult = await updateToken().then()
+                if (refreshTokenResult === '00000') {
+                    const refreshToken = deviceStore.token
+                    return OMSOrgsAPI.getUserInfoCols(refreshToken, comId).then((refreshRes: GetUserInfoColResParams) => {
+                        userInfoColsStore.setUserInfoCols(refreshRes)
+                        return refreshRes.errno
+                    })
+                }
+            }
+        }
+        return res.errno
+    })
+}
+
+export async function operateUserInfoCols(params: UserInfoCol[]) {
+    const token = deviceStore.token
+    const comId = validComStore.currentCom.comId
+    return OMSOrgsAPI.operateUserInfoCols(params, comId, token).then(async (res: GeneralResParam)=> {
+        if (res.errno === '99005') {
+            const refreshTokenResult = await updateToken().then()
+            if (refreshTokenResult === '00000') {
+                const refreshToken = deviceStore.token
+                return OMSOrgsAPI.operateUserInfoCols(
+                    params,
+                    comId,
+                    refreshToken).then((refreshRes: GeneralResParam) => {
+                    if (refreshRes.errno === '00000') {
+                        return OMSOrgsAPI.getUserInfoCols(token, comId).then(async (refreshGetRes: GetUserInfoColResParams) => {
+                            if (refreshGetRes.errno === '00000') {
+                                userInfoColsStore.setUserInfoCols(refreshGetRes)
+                            }
+                            return refreshGetRes.errno
+                        })
+                    } else {
+                        return refreshRes.errno
+                    }
+                })
+            }
+        } else {
+            if (res.errno === '00000') {
+                return OMSOrgsAPI.getUserInfoCols(token, comId).then(async (getRes: GetUserInfoColResParams) => {
+                    if (getRes.errno === '00000') {
+                        userInfoColsStore.setUserInfoCols(getRes)
+                    }
+                    return getRes.errno
+                })
+            } else {
+                return res.errno
+            }
+        }
+        return res.errno
+    })
+}
+
+export async function deleteUserInfoCol(colId: number) {
+    const token = deviceStore.token
+    const comId = validComStore.currentCom.comId
+    return OMSOrgsAPI.deleteUserInfoCol(colId, token).then(async (res: GeneralResParam)=> {
+        if (res.errno === '99005') {
+            const refreshTokenResult = await updateToken().then()
+            if (refreshTokenResult === '00000') {
+                const refreshToken = deviceStore.token
+                return OMSOrgsAPI.deleteUserInfoCol(
+                    colId,
+                    refreshToken).then((refreshRes: GeneralResParam) => {
+                    if (refreshRes.errno === '00000') {
+                        return OMSOrgsAPI.getUserInfoCols(token, comId).then(async (refreshGetRes: GetUserInfoColResParams) => {
+                            if (refreshGetRes.errno === '00000') {
+                                userInfoColsStore.setUserInfoCols(refreshGetRes)
+                            }
+                            return refreshGetRes.errno
+                        })
+                    } else {
+                        return refreshRes.errno
+                    }
+                })
+            }
+        } else {
+            if (res.errno === '00000') {
+                return OMSOrgsAPI.getUserInfoCols(token, comId).then(async (getRes: GetUserInfoColResParams) => {
+                    if (getRes.errno === '00000') {
+                        userInfoColsStore.setUserInfoCols(getRes)
                     }
                     return getRes.errno
                 })
