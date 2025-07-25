@@ -1,10 +1,10 @@
 {
   "logInPage": {
     "title": "Welcome to HEEs",
-    "hintUser": "Please Input Log In User No. or Email",
+    "hintUser": "Please Input Log In Email",
     "hintPwd": "Please Input Log In Password",
     "submitBtn": "Log In",
-    "errHintAccount": "Please Input correct User No. or Email",
+    "errHintAccount": "Please Input correct or Email",
     "errHintPwd": "Please Input Correct Password"
   },
   "topBar": {
@@ -210,11 +210,11 @@
     "perName": "Permission Name",
     "perDesc": "Permission Description",
     "perCode": "Permission Code",
-    "users": "Users",
-    "viewUsers": "View Users",
-    "userList": "User List",
-    "userNo": "User No.",
-    "userStName": "User Name",
+    "users": "Members",
+    "viewUsers": "View Members",
+    "userList": "Member List",
+    "userNo": "Member No.",
+    "userStName": "Member Name",
     "editMembers": "Edit Members",
     "selected": "Selected",
     "notSelected": "Not Selected",

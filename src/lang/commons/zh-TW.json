@@ -1,10 +1,10 @@
 {
   "logInPage": {
     "title": "歡迎使用 HEEs",
-    "hintUser": "請輸入登入使用者代號或是 E-mail",
+    "hintUser": "請輸入登入 E-mail",
     "hintPwd": "請輸入登入密碼",
     "submitBtn": "登入",
-    "errHintAccount": "請輸入正確的使用者代號或是 E-mail",
+    "errHintAccount": "請輸入正確的 E-mail",
     "errHintPwd": "請輸入正確的密碼"
   },
   "topBar": {
@@ -210,11 +210,11 @@
     "perName": "權限名稱",
     "perDesc": "權限描述",
     "perCode": "權限代碼",
-    "users": "使用者",
-    "viewUsers": "查看使用者",
-    "userList": "使用者列表",
-    "userNo": "使用者編號",
-    "userStName": "使用者名稱",
+    "users": "成員",
+    "viewUsers": "查看成員",
+    "userList": "成員列表",
+    "userNo": "成員代號",
+    "userStName": "成員名稱",
     "editMembers": "編輯成員",
     "selected": "已選擇",
     "notSelected": "未選擇",
