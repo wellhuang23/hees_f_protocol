@@ -1,9 +1,9 @@
 <script setup lang="ts">
-
+import UserList from '@/components/oms/UserList.vue'
 </script>
 
 <template>
-  <div>COMPANY MEMBERS</div>
+  <user-list />
 </template>
 
 <style scoped lang="scss">

@@ -103,6 +103,12 @@
     "deleteComJobPositionSuccessMsg": "刪除職務成功",
     "deleteComJobPositionNoPerErrorMsg": "您沒有刪除職務的權限，請洽系統管理員",
     "deleteComJobPositionErrorMsg": "刪除職務失敗，請洽系統管理員",
+    "updateUserInfoColsSuccessMsg": "更新成員資訊欄位成功",
+    "updateUserInfoColsNoPerErrorMsg": "您沒有更新成員資訊欄位的權限，請洽系統管理員",
+    "updateUserInfoColsErrorMsg": "更新成員資訊欄位失敗，請洽系統管理員",
+    "deleteUserInfoColSuccessMsg": "刪除成員資訊欄位成功",
+    "deleteUserInfoColNoPerErrorMsg": "您沒有刪除成員資訊欄位的權限，請洽系統管理員",
+    "deleteUserInfoColErrorMsg": "刪除成員資訊欄位失敗，請洽系統管理員",
     "systemErrorMsg": "系統錯誤，請聯繫系統管理員"
   },
   "cusSugDetail": {
@@ -287,7 +293,8 @@
   },
   "general": {
     "confirm": "確認",
-    "cancel": "取消"
+    "cancel": "取消",
+    "delete": "刪除"
   },
   "subAddNewGroupConfirm": {
     "title": "管理者的密碼 : "
@@ -448,5 +455,28 @@
     "addJobPosNameLabel": "職務名稱",
     "addJobPosLevelLabel": "職務等階",
     "addJobPosDescLabel": "職務描述"
+  },
+  "userInfoCol": {
+    "title": "成員細節資料欄位設定",
+    "groupDesc": "第 x 個欄位",
+    "colName": "欄位名稱",
+    "colDesc": "欄位描述",
+    "colType": "欄位類別",
+    "colRequire": "欄位要求",
+    "colTypeOption": {
+      "string": "字串",
+      "integer": "整數數字",
+      "float": "浮點數數字",
+      "date": "日期",
+      "datetime": "日期及時間"
+    },
+    "colRequireOption": {
+      "true": "必填",
+      "false": "選填"
+    },
+    "delUserInfoCol": {
+      "title": "刪除資料欄位",
+      "content": "是否確認刪除該資料欄位 ?"
+    }
   }
 }

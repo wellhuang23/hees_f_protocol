@@ -85,6 +85,9 @@ declare module 'vue' {
     SubList: typeof import('./src/components/sysControl/SubList.vue')['default']
     SysNotices: typeof import('./src/components/dashboard/SysNotices.vue')['default']
     TopBar: typeof import('./src/components/general/TopBar.vue')['default']
+    UserDelInfoCol: typeof import('./src/components/oms/UserDelInfoCol.vue')['default']
+    UserList: typeof import('./src/components/oms/UserList.vue')['default']
+    UserUpInfoCol: typeof import('./src/components/oms/UserUpInfoCol.vue')['default']
   }
   export interface GlobalDirectives {
     vLoading: typeof import('element-plus/es')['ElLoadingDirective']

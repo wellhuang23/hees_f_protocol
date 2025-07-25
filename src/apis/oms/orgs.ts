@@ -568,7 +568,7 @@ class OMSOrgsAPI {
                         colId: (convertToNumber(row.user_col_id) ?? 0),
                         colName: row.col_name,
                         colDesc: row.col_desc,
-                        colType: row.col_type,
+                        colType: (convertToNumber(row.col_type) ?? 0),
                         colTypeName: row.col_type_name,
                         colRequire: row.col_require,
                     })

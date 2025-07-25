@@ -103,6 +103,12 @@
     "deleteComJobPositionSuccessMsg": "Delete Job Position in Company Successfully",
     "deleteComJobPositionNoPerErrorMsg": "You don't Have Permission to Delete Job Position in Company, Please Contact System Manger",
     "deleteComJobPositionErrorMsg": "Delete Job Position in Company Fail, Please Contact System Manger",
+    "updateUserInfoColsSuccessMsg": "Update Information Columns for Member in Company Successfully",
+    "updateUserInfoColsNoPerErrorMsg": "You don't Have Permission to Update Information Columns for Member in Company, Please Contact System Manger",
+    "updateUserInfoColsErrorMsg": "Update Information Columns for Member in Company Fail, Please Contact System Manger",
+    "deleteUserInfoColSuccessMsg": "Delete Information Column for Member in Company Successfully",
+    "deleteUserInfoColNoPerErrorMsg": "You don't Have Permission to Delete Information Column for Member in Company, Please Contact System Manger",
+    "deleteUserInfoColErrorMsg": "Delete Information Column for Member in Company Fail, Please Contact System Manger",
     "systemErrorMsg": "System Error, Please Contact System Manager"
   },
   "cusSugDetail": {
@@ -287,7 +293,8 @@
   },
   "general": {
     "confirm": "Confirm",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "delete": "Delete"
   },
   "subAddNewGroupConfirm": {
     "title": "Group Administrator's Password : ",
@@ -451,5 +458,28 @@
     "addJobPosNameLabel": "Job Position Name",
     "addJobPosLevelLabel": "Job Position Level",
     "addJobPosDescLabel": "Job Position Description"
+  },
+  "userInfoCol": {
+    "title": "Column Setting about Member Information",
+    "groupDesc": "Column x",
+    "colName": "Column Name",
+    "colDesc": "Column Description",
+    "colType": "Column Type",
+    "colRequire": "Column Require",
+    "colTypeOption": {
+      "string": "String",
+      "integer": "Integer",
+      "float": "Float",
+      "date": "Date",
+      "datetime": "Datetime"
+    },
+    "colRequireOption": {
+      "true": "Require",
+      "false": "Option"
+    },
+    "delUserInfoCol": {
+      "title": "Delete Column Setting",
+      "content": "Sure for Deleting the Column Setting about Member Information ?"
+    }
   }
 }

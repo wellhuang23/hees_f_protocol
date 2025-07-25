@@ -292,7 +292,7 @@ export interface UserInfoCol {
     // 2: Float
     // 3: Date
     // 4: Datetime
-    colType: string;
+    colType: number;
 
     // User Information Column Type Name
     colTypeName?: string;
