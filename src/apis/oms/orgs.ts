@@ -20,6 +20,12 @@ import type {
     ComJobPosition,
     GetUserInfoColResParams,
     UserInfoCol,
+    GetStrUnitUsersResParams,
+    StrUnitUser,
+    UserInfo,
+    UserJobPosition,
+    UserStrUnit,
+    UserDetailInfo,
 } from '@/interfaces'
 import request from '@/utils/requests'
 import { convertToNumber } from '@/utils/conNumber'
@@ -617,6 +623,211 @@ class OMSOrgsAPI {
         });
     }
 
+    // API for Getting Company Job Positions
+    async getStrUnitUsers(token: string, comId: number): Promise<GetStrUnitUsersResParams> {
+        const params = {
+            'com_id': comId,
+        }
+        return request<any, any>({
+            url: ORGS_API + '/users/info/get',
+            method: 'GET',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            params: params,
+        }).then((response): GetStrUnitUsersResParams => {
+            if (response.data.errno === '00000') {
+                const strUnitUsers: StrUnitUser[] = []
+                for (const row of response.data.data) {
+                    const children: StrUnitUser[] = []
+                    if (row.children.length > 0) {
+                        this._resortStrUnitUserChildren(row.children).then(res => {
+                            children.push(...res)
+                        })
+                    }
+
+                    const users: UserInfo[] = []
+                    for (const user of row.users) {
+                        const jobPositions: UserJobPosition[] = []
+                        for (const jobPosition of user.job_positions) {
+                            jobPositions.push({
+                                jobPosId: (convertToNumber(jobPosition.jp_id) ?? 0),
+                                jobPosName: jobPosition.jp_name,
+                                jobPosEngName: jobPosition.jp_eng_name,
+                                jobPosLevel: jobPosition.jp_level,
+                            })
+                        }
+                        const strUnits: UserStrUnit[] = []
+                        for (const strUnit of user.str_units) {
+                            strUnits.push({
+                                strUnitId: (convertToNumber(strUnit.str_unit_id) ?? 0),
+                                strUnitName: strUnit.str_unit_name,
+                                strUnitEngName: strUnit.str_unit_eng_name,
+                                strUnitNo: strUnit.str_unit_no,
+                            })
+                        }
+
+                        const detailInfo: UserDetailInfo[] = []
+                        for (const detail of user.details) {
+                            detailInfo.push({
+                                userDataId: (convertToNumber(detail.user_data_id) ?? 0),
+                                data: detail.data,
+                                colId: (convertToNumber(detail.user_col_id) ?? 0),
+                                colName: detail.col_name,
+                                colType: (convertToNumber(detail.col_type) ?? 0),
+                                colRequire: detail.col_require
+                            })
+                        }
+
+                        users.push({
+                            userId: (convertToNumber(user.user_id) ?? 0),
+                            userName: user.user_name,
+                            userStName: user.user_st_name,
+                            userType: (convertToNumber(user.user_type) ?? 0),
+                            userNo: user.user_no,
+                            email: user.email,
+                            jobPositions: jobPositions,
+                            strUnits: strUnits,
+                            detailInfo: detailInfo
+                        })
+                    }
+
+                    strUnitUsers.push({
+                        strUnitId: (convertToNumber(row.str_unit_id) ?? 0),
+                        strUnitName: row.str_unit_name,
+                        strUnitEngName: row.str_unit_eng_name,
+                        strUnitNo: row.str_unit_no,
+                        children: children,
+                        users: users
+                    })
+                }
+
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                    strUnitUsers: strUnitUsers
+                }
+            } else {
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                }
+            }
+        });
+    }
+
+    // API for Creating New User in Company
+    async createNewUser(data: UserInfo, comId: number, token: string): Promise<GeneralResParam> {
+        const details = []
+        for (const row of data.detailInfo) {
+            details.push({
+                user_col_id: row.colId,
+                user_data_id: 0,
+                data: row.data,
+            })
+        }
+
+        const jobPositionIds: Number[] = []
+        for (const row of data.jobPositions){
+            jobPositionIds.push(row.jobPosId)
+        }
+
+        const strUnitIds: Number[] = []
+        for (const row of data.strUnits){
+            strUnitIds.push(row.strUnitId)
+        }
+
+        const params = {
+            com_id: comId,
+            user_name: data.userName,
+            user_st_name: data.userStName,
+            user_no: data.userNo,
+            email: data.email,
+            user_info_details: details,
+            jp_ids: jobPositionIds,
+            su_ids: strUnitIds,
+        }
+        return request<any, any>({
+            url: ORGS_API + '/user/create',
+            method: 'POST',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            data: params,
+        }).then((response): GeneralResParam => {
+            return {
+                errno: response.data.errno,
+                desc: response.data.desc,
+            }
+        });
+    }
+
+    // API for Updating User in Company
+    async updateUser(data: UserInfo, token: string): Promise<GeneralResParam> {
+        const details = []
+        for (const row of data.detailInfo) {
+            details.push({
+                user_col_id: row.colId,
+                user_data_id: 0,
+                data: row.data,
+            })
+        }
+
+        const jobPositionIds: Number[] = []
+        for (const row of data.jobPositions){
+            jobPositionIds.push(row.jobPosId)
+        }
+
+        const strUnitIds: Number[] = []
+        for (const row of data.strUnits){
+            strUnitIds.push(row.strUnitId)
+        }
+
+        const params = {
+            user_id: data.userId,
+            user_name: data.userName,
+            user_st_name: data.userStName,
+            user_no: data.userNo,
+            email: data.email,
+            user_info_details: details,
+            jp_ids: jobPositionIds,
+            su_ids: strUnitIds,
+        }
+        return request<any, any>({
+            url: ORGS_API + '/user/update',
+            method: 'POST',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            data: params,
+        }).then((response): GeneralResParam => {
+            return {
+                errno: response.data.errno,
+                desc: response.data.desc,
+            }
+        });
+    }
+
+    // API for Deleting User in Company
+    async deleteUser(userId: number, token: string): Promise<GeneralResParam> {
+        const params = {
+            user_id: userId,
+        }
+        return request<any, any>({
+            url: ORGS_API + '/user/delete',
+            method: 'POST',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            data: params,
+        }).then((response): GeneralResParam => {
+            return {
+                errno: response.data.errno,
+                desc: response.data.desc,
+            }
+        });
+    }
+
     async _resortComStrUnitChildren(children: Array<any>, parentStrUnitId: number): Promise<ComStrUnit[]> {
         const result: Array<ComStrUnit> = []
         for (const child of children) {
@@ -634,6 +845,75 @@ class OMSOrgsAPI {
                 strUnitNo: child.str_unit_no,
                 children: children,
                 parentStrUnitId: parentStrUnitId
+            })
+        }
+
+        return result
+    }
+
+    async _resortStrUnitUserChildren(children: Array<any>): Promise<StrUnitUser[]> {
+        const result: Array<StrUnitUser> = []
+        for (const child of children) {
+            let children: StrUnitUser[] = []
+            if (child.children.length > 0) {
+                this._resortStrUnitUserChildren(child.children).then(res => {
+                    children.push(...res)
+                })
+            }
+
+            const users: UserInfo[] = []
+            for (const user of child.users) {
+                const jobPositions: UserJobPosition[] = []
+                for (const jobPosition of user.job_positions) {
+                    jobPositions.push({
+                        jobPosId: (convertToNumber(jobPosition.jp_id) ?? 0),
+                        jobPosName: jobPosition.jp_name,
+                        jobPosEngName: jobPosition.jp_eng_name,
+                        jobPosLevel: jobPosition.jp_level,
+                    })
+                }
+                const strUnits: UserStrUnit[] = []
+                for (const strUnit of user.str_units) {
+                    strUnits.push({
+                        strUnitId: (convertToNumber(strUnit.str_unit_id) ?? 0),
+                        strUnitName: strUnit.str_unit_name,
+                        strUnitEngName: strUnit.str_unit_eng_name,
+                        strUnitNo: strUnit.str_unit_no,
+                    })
+                }
+
+                const detailInfo: UserDetailInfo[] = []
+                for (const detail of user.details) {
+                    detailInfo.push({
+                        userDataId: (convertToNumber(detail.user_data_id) ?? 0),
+                        data: detail.data,
+                        colId: (convertToNumber(detail.user_col_id) ?? 0),
+                        colName: detail.col_name,
+                        colType: (convertToNumber(detail.col_type) ?? 0),
+                        colRequire: detail.col_require
+                    })
+                }
+
+                users.push({
+                    userId: (convertToNumber(user.user_id) ?? 0),
+                    userName: user.user_name,
+                    userStName: user.user_st_name,
+                    userType: (convertToNumber(user.user_type) ?? 0),
+                    userNo: user.user_no,
+                    email: user.email,
+                    jobPositions: jobPositions,
+                    strUnits: strUnits,
+                    detailInfo: detailInfo
+                })
+            }
+
+            result.push({
+                strUnitId: (convertToNumber(child.str_unit_id) ?? 0),
+                strUnitName: child.str_unit_name,
+                strUnitEngName: child.str_unit_eng_name,
+                strUnitNo: child.str_unit_no,
+                children: children,
+                users: users
             })
         }
 

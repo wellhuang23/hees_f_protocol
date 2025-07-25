@@ -16,6 +16,7 @@ import type {
     ComJobPosition,
     GetUserInfoColResParams,
     UserInfoCol,
+    GetStrUnitUsersResParams, UserInfo,
 } from '@/interfaces'
 import {
     useDeviceInfoStore,
@@ -25,6 +26,7 @@ import {
     useComStrUnitStore,
     useComJobPositionStore,
     useUserInfoColsStore,
+    useStrUnitUsersStore,
 } from '@/stores'
 import { updateToken } from '@/services'
 
@@ -35,6 +37,7 @@ const comInfoStore = useComInfoStore()
 const comStrUnitStore = useComStrUnitStore()
 const comJobPositionStore = useComJobPositionStore()
 const userInfoColsStore = useUserInfoColsStore()
+const strUnitUsersStore = useStrUnitUsersStore()
 
 export async function getAllSubItems() {
     const token = deviceStore.token
@@ -549,6 +552,147 @@ export async function deleteUserInfoCol(colId: number) {
                 return OMSOrgsAPI.getUserInfoCols(token, comId).then(async (getRes: GetUserInfoColResParams) => {
                     if (getRes.errno === '00000') {
                         userInfoColsStore.setUserInfoCols(getRes)
+                    }
+                    return getRes.errno
+                })
+            } else {
+                return res.errno
+            }
+        }
+        return res.errno
+    })
+}
+
+export async function getStrUnitUsers() {
+    const token = deviceStore.token
+    const comId = validComStore.currentCom.comId
+    return OMSOrgsAPI.getStrUnitUsers(token, comId).then(async (res: GetStrUnitUsersResParams)=> {
+        if (res.errno === '00000') {
+            strUnitUsersStore.setStrUnitUser(res)
+            return res.errno
+        } else {
+            if (res.errno === '99005') {
+                const refreshTokenResult = await updateToken().then()
+                if (refreshTokenResult === '00000') {
+                    const refreshToken = deviceStore.token
+                    return OMSOrgsAPI.getUserInfoCols(refreshToken, comId).then((refreshRes: GetStrUnitUsersResParams) => {
+                        strUnitUsersStore.setStrUnitUser(refreshRes)
+                        return refreshRes.errno
+                    })
+                }
+            }
+        }
+        return res.errno
+    })
+}
+
+export async function createNewUser(params: UserInfo) {
+    const token = deviceStore.token
+    const comId = validComStore.currentCom.comId
+    return OMSOrgsAPI.createNewUser(params, comId, token).then(async (res: GeneralResParam)=> {
+        if (res.errno === '99005') {
+            const refreshTokenResult = await updateToken().then()
+            if (refreshTokenResult === '00000') {
+                const refreshToken = deviceStore.token
+                return OMSOrgsAPI.createNewUser(
+                    params,
+                    comId,
+                    refreshToken).then((refreshRes: GeneralResParam) => {
+                    if (refreshRes.errno === '00000') {
+                        return OMSOrgsAPI.getStrUnitUsers(token, comId).then(async (refreshGetRes: GetStrUnitUsersResParams) => {
+                            if (refreshGetRes.errno === '00000') {
+                                strUnitUsersStore.setStrUnitUser(refreshGetRes)
+                            }
+                            return refreshGetRes.errno
+                        })
+                    } else {
+                        return refreshRes.errno
+                    }
+                })
+            }
+        } else {
+            if (res.errno === '00000') {
+                return OMSOrgsAPI.getStrUnitUsers(token, comId).then(async (getRes: GetStrUnitUsersResParams) => {
+                    if (getRes.errno === '00000') {
+                        strUnitUsersStore.setStrUnitUser(getRes)
+                    }
+                    return getRes.errno
+                })
+            } else {
+                return res.errno
+            }
+        }
+        return res.errno
+    })
+}
+
+export async function updateUser(params: UserInfo) {
+    const token = deviceStore.token
+    const comId = validComStore.currentCom.comId
+    return OMSOrgsAPI.updateUser(params, token).then(async (res: GeneralResParam)=> {
+        if (res.errno === '99005') {
+            const refreshTokenResult = await updateToken().then()
+            if (refreshTokenResult === '00000') {
+                const refreshToken = deviceStore.token
+                return OMSOrgsAPI.updateUser(
+                    params,
+                    refreshToken).then((refreshRes: GeneralResParam) => {
+                    if (refreshRes.errno === '00000') {
+                        return OMSOrgsAPI.getStrUnitUsers(token, comId).then(async (refreshGetRes: GetStrUnitUsersResParams) => {
+                            if (refreshGetRes.errno === '00000') {
+                                strUnitUsersStore.setStrUnitUser(refreshGetRes)
+                            }
+                            return refreshGetRes.errno
+                        })
+                    } else {
+                        return refreshRes.errno
+                    }
+                })
+            }
+        } else {
+            if (res.errno === '00000') {
+                return OMSOrgsAPI.getStrUnitUsers(token, comId).then(async (getRes: GetStrUnitUsersResParams) => {
+                    if (getRes.errno === '00000') {
+                        strUnitUsersStore.setStrUnitUser(getRes)
+                    }
+                    return getRes.errno
+                })
+            } else {
+                return res.errno
+            }
+        }
+        return res.errno
+    })
+}
+
+export async function deleteUser(userId: number) {
+    const token = deviceStore.token
+    const comId = validComStore.currentCom.comId
+    return OMSOrgsAPI.deleteUser(userId, token).then(async (res: GeneralResParam)=> {
+        if (res.errno === '99005') {
+            const refreshTokenResult = await updateToken().then()
+            if (refreshTokenResult === '00000') {
+                const refreshToken = deviceStore.token
+                return OMSOrgsAPI.deleteUser(
+                    userId,
+                    refreshToken).then((refreshRes: GeneralResParam) => {
+                    if (refreshRes.errno === '00000') {
+                        return OMSOrgsAPI.getStrUnitUsers(token, comId).then(async (refreshGetRes: GetStrUnitUsersResParams) => {
+                            if (refreshGetRes.errno === '00000') {
+                                strUnitUsersStore.setStrUnitUser(refreshGetRes)
+                            }
+                            return refreshGetRes.errno
+                        })
+                    } else {
+                        return refreshRes.errno
+                    }
+                })
+            }
+        } else {
+            if (res.errno === '00000') {
+                return OMSOrgsAPI.getStrUnitUsers(token, comId).then(async (getRes: GetStrUnitUsersResParams) => {
+                    if (getRes.errno === '00000') {
+                        strUnitUsersStore.setStrUnitUser(getRes)
                     }
                     return getRes.errno
                 })

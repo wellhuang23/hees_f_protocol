@@ -307,11 +307,110 @@ export interface GetUserInfoColResParams extends GeneralResParam {
     userInfoCols?: UserInfoCol[];
 }
 
-// User Information Columns in Company Operation Request Parameters
-export interface UserInfoColOpeReqParams {
-    // Company ID
-    comId: number;
+// Structure Unit in User
+export interface UserStrUnit {
+    // Structure Unit ID
+    strUnitId: number;
 
+    // Structure Unit Name
+    strUnitName: string;
+
+    // Structure Unit Name in English
+    strUnitEngName: string;
+
+    // Structure Unit No.
+    strUnitNo: string;
+}
+
+// Job Positions in User
+export interface UserJobPosition {
+    // Job Position ID
+    jobPosId: number;
+
+    // Job Position Name
+    jobPosName: string;
+
+    // Job Position Name in English
+    jobPosEngName: string;
+
+    // Job Position Level
+    jobPosLevel: string;
+}
+
+// User Detail Information
+export interface UserDetailInfo {
+    // User Data ID
+    userDataId: number;
+
+    // Data
+    data: string;
+
+    // User Information Column ID
+    colId: number;
+
+    // Column Name
+    colName?: string;
+
+    // Column Type
+    colType?: number;
+
+    // Column Require
+    colRequire?: boolean;
+}
+
+// User Information
+export interface UserInfo {
+    // User ID
+    userId?: number;
+
+    // User Name
+    userName: string;
+
+    // User Short Name
+    userStName: string;
+
+    // User Type
+    userType: number;
+
+    // User No.
+    userNo: string;
+
+    // User Email
+    email: string;
+
+    // Job Positions
+    jobPositions: UserJobPosition[]
+
+    // Structure Units
+    strUnits: UserStrUnit[];
+
+    // User Detail Information
+    detailInfo: UserDetailInfo[];
+}
+
+// Company Structure Unit with Users
+export interface StrUnitUser {
+    // Structure Unit ID
+    strUnitId: number;
+
+    // Structure Unit Name
+    strUnitName: string;
+
+    // Structure Unit Name in English
+    strUnitEngName: string;
+
+    // Structure Unit No.
+    strUnitNo: string;
+
+    // Structure Unit Children
+    children: StrUnitUser[];
+
+    // Users in the Structure Unit
+    users: UserInfo[];
+}
+
+// Get User Information & Categorize by Structure Unit in Company Response Parameters
+export interface GetStrUnitUsersResParams extends GeneralResParam {
     // User Information Columns
-    userInfoCols: UserInfoCol[];
+    strUnitUsers?: StrUnitUser[];
 }
