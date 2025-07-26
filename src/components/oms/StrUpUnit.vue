@@ -32,7 +32,7 @@
       <div style="display: flex; justify-content: space-between;">
         <el-button v-if="userInfo.per0001.includes(perDeleteCode)" type="danger" @click="handleDelete">{{ t('g.delete') }}</el-button>
         <div>
-          <el-button @click="$emit('update:modelValue', false)">{{ t('general.cancel') }}</el-button>
+          <el-button type="info" @click="$emit('update:modelValue', false)">{{ t('general.cancel') }}</el-button>
           <el-button type="primary" @click="handleConfirm">{{ t('general.confirm') }}</el-button>
         </div>
       </div>

@@ -15,7 +15,7 @@
     </el-form>
     <template #footer>
       <div style="flex: auto">
-        <el-button @click="drawer = false">{{ t('general.cancel') }}</el-button>
+        <el-button type="info" @click="drawer = false">{{ t('general.cancel') }}</el-button>
         <el-button type="primary" @click="confirmClick">{{ t('general.confirm') }}</el-button>
       </div>
     </template>

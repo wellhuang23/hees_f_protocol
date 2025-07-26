@@ -287,5 +287,8 @@ onMounted(async () => {
 </template>
 
 <style scoped lang="scss">
-
+.dialog-footer {
+  text-align: center;
+  display: block;
+}
 </style>

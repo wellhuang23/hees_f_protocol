@@ -108,7 +108,6 @@ const handleConfirm = async () => {
     </el-table>
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="handleClose">{{ t('general.cancel') }}</el-button>
         <el-button type="primary" @click="handleConfirm">
           {{ t('general.confirm') }}
         </el-button>

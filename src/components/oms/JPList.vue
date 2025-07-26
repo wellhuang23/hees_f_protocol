@@ -161,17 +161,17 @@ const isRowEditing = (row: any) => {
       <template #default="scope">
         <template v-if="isRowEditing(scope.row)">
           <el-button
-              type="primary"
-              size="small"
-              @click="handleSave(scope.row)"
-          >
-            {{ t('comJP.saveBtn') }} </el-button>
-          <el-button
               type="info"
               size="small"
               @click="handleCancel(scope.row)"
           >
             {{ t('comJP.cancelBtn') }} </el-button>
+          <el-button
+              type="primary"
+              size="small"
+              @click="handleSave(scope.row)"
+          >
+            {{ t('comJP.saveBtn') }} </el-button>
         </template>
         <template v-else>
           <el-button

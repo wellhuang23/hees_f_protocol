@@ -65,7 +65,7 @@
       <div class="footer-container">
         <el-button v-if="userInfo.per0001.includes('sys-007-0001')" type="danger" @click="handleDelete">{{ t('g.delete') }}</el-button>
         <div class="spacer"></div>
-        <el-button @click="$emit('update:modelValue', false)">{{ t('g.cancel') }}</el-button>
+        <el-button type="info" @click="$emit('update:modelValue', false)">{{ t('g.cancel') }}</el-button>
         <el-button type="primary" @click="handleUpdate">{{ t('cusUpSug.updateBtn') }}</el-button>
       </div>
     </template>
