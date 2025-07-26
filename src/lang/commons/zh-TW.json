@@ -498,6 +498,12 @@
     },
     "addUserConfirm": {
       "title": "成員的密碼 : "
+    },
+    "userListTitle": {
+      "userNo": "成員代號",
+      "userName": "成員姓名",
+      "userStName": "使用者名稱",
+      "email": "電子郵件"
     }
   }
 }

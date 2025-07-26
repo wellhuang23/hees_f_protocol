@@ -501,6 +501,12 @@
     },
     "addUserConfirm": {
       "title": "Member's Password : "
+    },
+    "userListTitle": {
+      "userNo": "Member No.",
+      "userName": "Member Name",
+      "userStName": "Username",
+      "email": "Email"
     }
   }
 }
