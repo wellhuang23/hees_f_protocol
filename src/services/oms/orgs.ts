@@ -16,7 +16,10 @@ import type {
     ComJobPosition,
     GetUserInfoColResParams,
     UserInfoCol,
-    GetStrUnitUsersResParams, UserInfo,
+    GetStrUnitUsersResParams,
+    UserInfo,
+    ChangeUserPwdResParams,
+    CreateGenUserResParams,
 } from '@/interfaces'
 import {
     useDeviceInfoStore,
@@ -589,7 +592,7 @@ export async function getStrUnitUsers() {
 export async function createNewUser(params: UserInfo) {
     const token = deviceStore.token
     const comId = validComStore.currentCom.comId
-    return OMSOrgsAPI.createNewUser(params, comId, token).then(async (res: GeneralResParam)=> {
+    return OMSOrgsAPI.createNewUser(params, comId, token).then(async (res: CreateGenUserResParams)=> {
         if (res.errno === '99005') {
             const refreshTokenResult = await updateToken().then()
             if (refreshTokenResult === '00000') {
@@ -597,16 +600,16 @@ export async function createNewUser(params: UserInfo) {
                 return OMSOrgsAPI.createNewUser(
                     params,
                     comId,
-                    refreshToken).then((refreshRes: GeneralResParam) => {
+                    refreshToken).then((refreshRes: CreateGenUserResParams) => {
                     if (refreshRes.errno === '00000') {
                         return OMSOrgsAPI.getStrUnitUsers(token, comId).then(async (refreshGetRes: GetStrUnitUsersResParams) => {
                             if (refreshGetRes.errno === '00000') {
                                 strUnitUsersStore.setStrUnitUser(refreshGetRes)
                             }
-                            return refreshGetRes.errno
+                            return refreshRes
                         })
                     } else {
-                        return refreshRes.errno
+                        return refreshRes
                     }
                 })
             }
@@ -616,13 +619,13 @@ export async function createNewUser(params: UserInfo) {
                     if (getRes.errno === '00000') {
                         strUnitUsersStore.setStrUnitUser(getRes)
                     }
-                    return getRes.errno
+                    return res
                 })
             } else {
-                return res.errno
+                return res
             }
         }
-        return res.errno
+        return res
     })
 }
 
@@ -706,7 +709,7 @@ export async function deleteUser(userId: number) {
 
 export async function changeGenUserPwd(userId: number) {
     const token = deviceStore.token
-    return OMSOrgsAPI.changeUserPwd(userId, token).then(async (res: ChangeAdminPwdResParams)=> {
+    return OMSOrgsAPI.changeUserPwd(userId, token).then(async (res: ChangeUserPwdResParams)=> {
         if (res.errno === '00000') {
             return res
         } else {
@@ -716,7 +719,7 @@ export async function changeGenUserPwd(userId: number) {
                     const refreshToken = deviceStore.token
                     return OMSOrgsAPI.changeUserPwd(
                         userId,
-                        refreshToken).then((refreshRes: ChangeAdminPwdResParams) => {
+                        refreshToken).then((refreshRes: ChangeUserPwdResParams) => {
                         return refreshRes
                     })
                 }

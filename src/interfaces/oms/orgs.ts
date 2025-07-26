@@ -414,3 +414,15 @@ export interface GetStrUnitUsersResParams extends GeneralResParam {
     // User Information Columns
     strUnitUsers?: StrUnitUser[];
 }
+
+// Create General User Response Parameters
+export interface CreateGenUserResParams extends GeneralResParam {
+    // General User Password
+    userNewPwd?: string;
+}
+
+// Change General User Password Response Parameters
+export interface ChangeUserPwdResParams extends GeneralResParam {
+    // General User Password
+    userNewPwd?: string;
+}

@@ -26,6 +26,8 @@ import type {
     UserJobPosition,
     UserStrUnit,
     UserDetailInfo,
+    CreateGenUserResParams,
+    ChangeUserPwdResParams,
 } from '@/interfaces'
 import request from '@/utils/requests'
 import { convertToNumber } from '@/utils/conNumber'
@@ -717,7 +719,7 @@ class OMSOrgsAPI {
     }
 
     // API for Creating New User in Company
-    async createNewUser(data: UserInfo, comId: number, token: string): Promise<GeneralResParam> {
+    async createNewUser(data: UserInfo, comId: number, token: string): Promise<CreateGenUserResParams> {
         const details = []
         for (const row of data.detailInfo) {
             details.push({
@@ -754,10 +756,11 @@ class OMSOrgsAPI {
                 Authorization: `HEEsToken ${token}`,
             },
             data: params,
-        }).then((response): GeneralResParam => {
+        }).then((response): CreateGenUserResParams => {
             return {
                 errno: response.data.errno,
                 desc: response.data.desc,
+                userNewPwd: response.data.new_pwd,
             }
         });
     }
@@ -829,7 +832,7 @@ class OMSOrgsAPI {
     }
 
     // API for Changing general User Password
-    async changeUserPwd(userId: number, token: string): Promise<ChangeAdminPwdResParams> {
+    async changeUserPwd(userId: number, token: string): Promise<ChangeUserPwdResParams> {
         const params = {
             'com_id': userId,
         }
@@ -841,12 +844,12 @@ class OMSOrgsAPI {
                 Authorization: `HEEsToken ${token}`,
             },
             data: params,
-        }).then((response): ChangeAdminPwdResParams => {
+        }).then((response): ChangeUserPwdResParams => {
             if (response.data.errno === '00000') {
                 return {
                     errno: response.data.errno,
                     desc: response.data.desc,
-                    adminNewPwd: response.data.new_admin_pwd
+                    userNewPwd: response.data.new_pwd
                 }
             }
             return {

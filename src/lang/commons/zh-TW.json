@@ -109,6 +109,9 @@
     "deleteUserInfoColSuccessMsg": "刪除成員資訊欄位成功",
     "deleteUserInfoColNoPerErrorMsg": "您沒有刪除成員資訊欄位的權限，請洽系統管理員",
     "deleteUserInfoColErrorMsg": "刪除成員資訊欄位失敗，請洽系統管理員",
+    "createUserSuccessMsg": "新增公司成員成功",
+    "createUserNoPerErrorMsg": "您沒有新增公司成員的權限，請洽系統管理員",
+    "createUserErrorMsg": "新增公司成員失敗，請洽系統管理員",
     "systemErrorMsg": "系統錯誤，請聯繫系統管理員"
   },
   "cusSugDetail": {
@@ -477,6 +480,24 @@
     "delUserInfoCol": {
       "title": "刪除資料欄位",
       "content": "是否確認刪除該資料欄位 ?"
+    }
+  },
+  "user": {
+    "addBtn": "新增",
+    "addTitle": "新增公司成員",
+    "addColumns": {
+      "basicInfo": "基本資料",
+      "userName": "成員姓名",
+      "userStName": "使用者名稱",
+      "userNo": "成員代號",
+      "email": "電子郵件",
+      "orgInfo": "組織資料",
+      "orgStrUnits": "所屬單位",
+      "orgJobPositions": "所屬職務",
+      "detailInfo": "詳細資料"
+    },
+    "addUserConfirm": {
+      "title": "成員的密碼 : "
     }
   }
 }

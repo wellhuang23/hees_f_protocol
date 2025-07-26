@@ -109,6 +109,9 @@
     "deleteUserInfoColSuccessMsg": "Delete Information Column for Member in Company Successfully",
     "deleteUserInfoColNoPerErrorMsg": "You don't Have Permission to Delete Information Column for Member in Company, Please Contact System Manger",
     "deleteUserInfoColErrorMsg": "Delete Information Column for Member in Company Fail, Please Contact System Manger",
+    "createUserSuccessMsg": "Create User in Company Successfully",
+    "createUserNoPerErrorMsg": "You don't Have Permission to Create User in Company, Please Contact System Manger",
+    "createUserErrorMsg": "Create User in Company Fail, Please Contact System Manger",
     "systemErrorMsg": "System Error, Please Contact System Manager"
   },
   "cusSugDetail": {
@@ -480,6 +483,24 @@
     "delUserInfoCol": {
       "title": "Delete Column Setting",
       "content": "Sure for Deleting the Column Setting about Member Information ?"
+    }
+  },
+  "user": {
+    "addBtn": "Add",
+    "addTitle": "Add Member in Company",
+    "addColumns": {
+      "basicInfo": "Basic Information",
+      "userName": "Member Name",
+      "userStName": "Username",
+      "userNo": "Member No.",
+      "email": "Email",
+      "orgInfo": "Organization Information",
+      "orgStrUnits": "Structure Units",
+      "orgJobPositions": "Job Positions",
+      "detailInfo": "Detail Information"
+    },
+    "addUserConfirm": {
+      "title": "Member's Password : "
     }
   }
 }
