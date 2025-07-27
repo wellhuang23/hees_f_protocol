@@ -117,8 +117,6 @@ const handleReloadPage = () => {
 }
 
 const submitForm = async () => {
-  console.log(form)
-  console.log('Dynamic Fields:', dynamicData)
 
   const jobPositions: UserJobPosition[] = []
   for (const jp of form.comJobPositions) {

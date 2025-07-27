@@ -28,6 +28,7 @@ import {useI18n} from "vue-i18n";
 import { updateSysNotification } from '@/services/oms/bases'
 import {convertToNumber} from "@/utils/conNumber.ts";
 import {ElNotification} from "element-plus";
+import type {Notification} from "@/interfaces";
 
 const { t } = useI18n();
 
@@ -37,7 +38,7 @@ const props = defineProps({
     required: true,
   },
   notice: {
-    type: Object,
+    type: Object as () => Notification | null,
     required: true,
   },
 })

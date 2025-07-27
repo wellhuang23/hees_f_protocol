@@ -770,8 +770,8 @@ class OMSOrgsAPI {
         const details = []
         for (const row of data.detailInfo) {
             details.push({
-                user_col_id: row.colId,
-                user_data_id: 0,
+                user_col_id: 0,
+                user_data_id: row.userDataId,
                 data: row.data,
             })
         }
@@ -834,7 +834,7 @@ class OMSOrgsAPI {
     // API for Changing general User Password
     async changeUserPwd(userId: number, token: string): Promise<ChangeUserPwdResParams> {
         const params = {
-            'com_id': userId,
+            'user_id': userId,
         }
 
         return request<any, any>({

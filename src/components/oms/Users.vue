@@ -23,6 +23,7 @@ const perCreateUser = comTaxNo + '-oms-008-1000'
 const showUserInfoCols = ref(false)
 const isAddMemberDialogVisible = ref(false);
 const selectedNodeUsers = ref<UserInfo[]>([])
+const selectedNodeCategory = ref<String>('')
 
 const closeAddMemberDialog = () => {
   isAddMemberDialogVisible.value = false;
@@ -51,6 +52,7 @@ const props = {
 
 const handleNodeClick = (node: any) => {
   selectedNodeUsers.value = node.users || []
+  selectedNodeCategory.value = locale.value === 'zh-TW' ? node.strUnitName : node.strUnitEngName
 }
 
 onMounted(async () => {
@@ -78,9 +80,15 @@ onMounted(async () => {
     </div>
     <div class="content-container" v-if="userInfo.per0100.includes(perReadUsers)">
       <div class="str-units-container">
-        <el-tree-v2 :data="treeData" :props="props" @node-click="handleNodeClick" />
+        <el-tree
+            :data="treeData"
+            :props="props"
+            @node-click="handleNodeClick"
+            :expand-on-click-node="false"
+            :default-expand-all="true"
+        />
       </div>
-      <users-list :users="selectedNodeUsers" />
+      <users-list class="users-container" :users="selectedNodeUsers" :category="selectedNodeCategory" />
     </div>
     <user-up-info-col v-model:drawerVisible="showUserInfoCols" />
     <user-add-member :visible="isAddMemberDialogVisible" @close="closeAddMemberDialog" />
@@ -105,12 +113,29 @@ onMounted(async () => {
   gap: 20px;
   flex-grow: 1;
   min-height: 0;
+  overflow: hidden;
 }
 
 .str-units-container {
   padding: 1rem;
   border: 1px solid #ccc;
   border-radius: 8px;
-  width: 15%;
+  flex-shrink: 0; /* Do not shrink */
+  overflow-y: auto;
+  /* Let the width be determined by its content */
+  width: auto;
+  max-width: 50%; /* Optional: prevent it from getting too wide */
+}
+
+.users-container {
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex-grow: 1;
+  /* This is crucial for flex children that need to shrink */
+  min-width: 0;
 }
 </style>

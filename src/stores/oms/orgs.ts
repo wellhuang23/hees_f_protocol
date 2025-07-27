@@ -174,12 +174,10 @@ const useComStrUnitStore = defineStore(COM_STR_UNIT, {
     actions: {
         setComStrUnits(data: GetComStrUnitResParams) {
             const comStrUnits: ComStrUnit[] = []
-            for (const row of data.comStrUnit ?? []) {
-                comStrUnits.push(row)
-            }
-
             const allComStrUnits: ComStrUnit[] = []
             for (const row of data.comStrUnit ?? []) {
+                comStrUnits.push(row)
+
                 allComStrUnits.push({
                     strUnitId: row.strUnitId,
                     strUnitName: row.strUnitName,
@@ -213,6 +211,10 @@ const useComStrUnitStore = defineStore(COM_STR_UNIT, {
                     parentStrUnitId: row.parentStrUnitId,
                     children: []
                 })
+
+                if (row.children.length > 0) {
+                    result.push(...this._getChildren(row.children))
+                }
             }
 
             return result

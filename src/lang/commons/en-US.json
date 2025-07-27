@@ -112,6 +112,12 @@
     "createUserSuccessMsg": "Create User in Company Successfully",
     "createUserNoPerErrorMsg": "You don't Have Permission to Create User in Company, Please Contact System Manger",
     "createUserErrorMsg": "Create User in Company Fail, Please Contact System Manger",
+    "updateGenUserPwdSuccessMsg": "Change General Member's Password in Company Successfully",
+    "updateGenUserNoUserErrorMsg": "Search No User",
+    "updateGenUserErrorMsg": "Change General Member's Password in Company Password Fail, Please Contact System Manager",
+    "updateUserSuccessMsg": "Update User in Company Successfully",
+    "updateUserNoPerErrorMsg": "You don't Have Permission to Update User in Company, Please Contact System Manger",
+    "updateUserErrorMsg": "Update User in Company Fail, Please Contact System Manger",
     "systemErrorMsg": "System Error, Please Contact System Manager"
   },
   "cusSugDetail": {
@@ -502,11 +508,30 @@
     "addUserConfirm": {
       "title": "Member's Password : "
     },
-    "userListTitle": {
+    "userList": {
+      "fullInfo": "Information",
+      "basicInfo": "Basic Information",
       "userNo": "Member No.",
       "userName": "Member Name",
       "userStName": "Username",
-      "email": "Email"
+      "email": "Email",
+      "orgInfo": "Organization Information",
+      "orgStrUnits": "Structure Units",
+      "orgJobPositions": "Job Positions",
+      "detailInfo": "Detail Information",
+      "changePwdBtn": "Change password",
+      "deleteUserBtn": "Delete Member",
+      "updateBtn": "Modify",
+      "cancelBtn": "Cancel",
+      "confirmBtn": "Confirm",
+      "require": " is Required"
+    },
+    "changeUserConfirm": {
+      "title": "成員的密碼 : "
+    },
+    "deleteUserConfirm": {
+      "title": "Delete the Member in Company",
+      "content": "Sure for Deleting the Member in Company ?"
     }
   }
 }

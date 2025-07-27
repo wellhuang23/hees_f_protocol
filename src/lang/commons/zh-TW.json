@@ -112,6 +112,15 @@
     "createUserSuccessMsg": "新增公司成員成功",
     "createUserNoPerErrorMsg": "您沒有新增公司成員的權限，請洽系統管理員",
     "createUserErrorMsg": "新增公司成員失敗，請洽系統管理員",
+    "updateGenUserPwdSuccessMsg": "修改公司成員密碼成功",
+    "updateGenUserNoUserErrorMsg": "查無該用戶",
+    "updateGenUserErrorMsg": "修改公司成員密碼錯誤，請洽系統管理員",
+    "updateUserSuccessMsg": "更新公司成員成功",
+    "updateUserNoPerErrorMsg": "您沒有更新公司成員的權限，請洽系統管理員",
+    "updateUserErrorMsg": "更新公司成員失敗，請洽系統管理員",
+    "deleteUserSuccessMsg": "刪除公司成員成功",
+    "deleteUserNoPerErrorMsg": "您沒有刪除公司成員的權限，請洽系統管理員",
+    "deleteUserErrorMsg": "刪除公司成員失敗，請洽系統管理員",
     "systemErrorMsg": "系統錯誤，請聯繫系統管理員"
   },
   "cusSugDetail": {
@@ -499,11 +508,30 @@
     "addUserConfirm": {
       "title": "成員的密碼 : "
     },
-    "userListTitle": {
+    "userList": {
+      "fullInfo": "完整資料",
+      "basicInfo": "基本資料",
       "userNo": "成員代號",
       "userName": "成員姓名",
       "userStName": "使用者名稱",
-      "email": "電子郵件"
+      "email": "電子郵件",
+      "orgInfo": "組織資料",
+      "orgStrUnits": "所屬單位",
+      "orgJobPositions": "所屬職務",
+      "detailInfo": "詳細資料",
+      "changePwdBtn": "修改密碼",
+      "deleteUserBtn": "刪除成員",
+      "updateBtn": "修改",
+      "cancelBtn": "取消",
+      "confirmBtn": "確認",
+      "require": "為必填"
+    },
+    "changeUserConfirm": {
+      "title": "成員的密碼 : "
+    },
+    "deleteUserConfirm": {
+      "title": "刪除公司成員",
+      "content": "是否確認刪除該名公司成員"
     }
   }
 }
