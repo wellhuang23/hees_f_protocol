@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import GearIcon from '@/assets/icons/solid/gear.svg'
 import {useUserInfoStore, useValidComStore, useStrUnitUsersStore} from '@/stores'
-import {ref, computed, onMounted} from 'vue'
+import {ref, computed, onMounted, nextTick} from 'vue'
 import UserUpInfoCol from '@/components/oms/UserUpInfoCol.vue'
 import UserAddMember from '@/components/oms/UserAddMember.vue'
 import {useI18n} from 'vue-i18n'
 import type { StrUnitUser, UserInfo } from '@/interfaces'
 import { getStrUnitUsers } from '@/services'
 import UsersList from '@/components/oms/UsersList.vue'
+import type {ElTree} from "element-plus";
 
 const { t, locale } = useI18n()
 
@@ -24,6 +25,7 @@ const showUserInfoCols = ref(false)
 const isAddMemberDialogVisible = ref(false);
 const selectedNodeUsers = ref<UserInfo[]>([])
 const selectedNodeCategory = ref<String>('')
+const treeRef = ref<InstanceType<typeof ElTree>>()
 
 const closeAddMemberDialog = () => {
   isAddMemberDialogVisible.value = false;
@@ -57,6 +59,13 @@ const handleNodeClick = (node: any) => {
 
 onMounted(async () => {
   await getStrUnitUsers()
+  await nextTick()
+
+  if (treeData.value.length > 0) {
+    const firstNode = treeData.value[0];
+    treeRef.value?.setCurrentKey(firstNode.id)
+    handleNodeClick(firstNode)
+  }
 })
 </script>
 
@@ -81,11 +90,14 @@ onMounted(async () => {
     <div class="content-container" v-if="userInfo.per0100.includes(perReadUsers)">
       <div class="str-units-container">
         <el-tree
+            ref="treeRef"
             :data="treeData"
             :props="props"
             @node-click="handleNodeClick"
             :expand-on-click-node="false"
             :default-expand-all="true"
+            node-key="id"
+            highlight-current
         />
       </div>
       <users-list class="users-container" :users="selectedNodeUsers" :category="selectedNodeCategory" />

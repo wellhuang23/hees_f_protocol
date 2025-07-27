@@ -298,8 +298,6 @@ const updateUserInfo = async (userId: number) => {
 
 const expandedRows = ref<string[]>([])
 const rowClick = (row: UserInfo) => {
-  console.log(row)
-  console.log(isEditing.value)
   // If we are currently editing, and the user clicks a different row, cancel the edit.
   if (isEditing.value) {
     cancelEditing();
@@ -312,6 +310,12 @@ const rowClick = (row: UserInfo) => {
     } else {
       expandedRows.value.push(row.userNo)
     }
+  }
+}
+
+const handleExpandChange = () => {
+  if (isEditing.value) {
+    cancelEditing()
   }
 }
 
@@ -332,6 +336,7 @@ onMounted(async () => {
         :expand-row-keys="expandedRows"
         :row-key="(row: UserInfo) => row.userId"
         @row-click="rowClick"
+        @expand-change="handleExpandChange"
         show-overflow-tooltip
       >
         <el-table-column type="expand">
@@ -456,11 +461,15 @@ onMounted(async () => {
                   </div>
                   <div class="edit-actions">
                     <div>
-                      <el-button type="warning" @click="changeUserPwd(props.row.userId)">
+                      <el-button
+                          type="warning"
+                          @click="changeUserPwd(props.row.userId)"
+                          v-if="![0, 1, 2].includes(userInfo.userType)"
+                      >
                         {{ t('user.userList.changePwdBtn') }}
                       </el-button>
                       <el-button
-                          v-if="userInfo.per0001.includes(perDeleteUser)"
+                          v-if="userInfo.per0001.includes(perDeleteUser) && ![0, 1, 2].includes(userInfo.userType)"
                           type="danger"
                           @click="deleteClick(props.row)"
                       >
