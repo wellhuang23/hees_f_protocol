@@ -26,7 +26,7 @@
     </el-form>
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="$emit('update:modelValue', false)">{{ t('general.cancel') }}</el-button>
+        <el-button type="info" @click="$emit('update:modelValue', false)">{{ t('general.cancel') }}</el-button>
         <el-button type="primary" @click="submitForm">
           {{ t('general.confirm') }}
         </el-button>

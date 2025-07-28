@@ -15,7 +15,7 @@
     </el-form>
     <template #footer>
       <div style="flex: auto">
-        <el-button @click="drawer = false">{{ t('general.cancel') }}</el-button>
+        <el-button type="info" @click="drawer = false">{{ t('general.cancel') }}</el-button>
         <el-button type="primary" @click="confirmClick">{{ t('general.confirm') }}</el-button>
       </div>
     </template>
@@ -28,6 +28,7 @@ import {useI18n} from "vue-i18n";
 import { updateSysNotification } from '@/services/oms/bases'
 import {convertToNumber} from "@/utils/conNumber.ts";
 import {ElNotification} from "element-plus";
+import type {Notification} from "@/interfaces";
 
 const { t } = useI18n();
 
@@ -37,7 +38,7 @@ const props = defineProps({
     required: true,
   },
   notice: {
-    type: Object,
+    type: Object as () => Notification | null,
     required: true,
   },
 })

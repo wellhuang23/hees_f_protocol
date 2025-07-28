@@ -143,6 +143,7 @@ const onSubmit = async () => { // Changed to async as validate returns a Promise
             type="text"
             :placeholder="t('logInPage.hintUser')"
             v-model="logInForm.account"
+            @keyup.enter="onSubmit"
         >
           <template #prefix>
             <el-icon class="el-input__icon">
@@ -157,6 +158,7 @@ const onSubmit = async () => { // Changed to async as validate returns a Promise
             :placeholder="t('logInPage.hintPwd')"
             v-model="logInForm.pwd"
             :show-password="true"
+            @keyup.enter="onSubmit"
         >
           <template #prefix>
             <el-icon class="el-input__icon"><Lock /></el-icon>

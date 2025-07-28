@@ -190,7 +190,7 @@ const handleDeleteConfirmed = () => {
       <div class="dialog-footer-actions">
         <el-button v-if="canDelete" type="danger" @click="openDelDialog">{{ t('calendar.deleteEventDialog.delete') }}</el-button>
         <div class="spacer"></div>
-        <el-button @click="closeDialog">{{ t('general.cancel') }}</el-button>
+        <el-button type="info" @click="closeDialog">{{ t('general.cancel') }}</el-button>
         <el-button type="primary" @click="handleConfirm">
           {{ t('calendar.updateEventDialog.update') }}
         </el-button>

@@ -110,7 +110,11 @@ const onToggleAside = () => {
           <img src="/src/assets/icons/solid/user-large.svg" alt="user" class="user" style="width: 20px; height: 20px; margin-right: 8px;"/>
           <span>{{ userInfoStore.userStName }}</span>
         </template>
-        <el-menu-item index="3_1">{{ t('topBar.profile') }}</el-menu-item>
+        <el-menu-item index="3_1">
+          <router-link to="/main/profile" class="white-link">
+            {{ t('topBar.profile') }}
+          </router-link>
+        </el-menu-item>
         <el-menu-item index="3_2" @click="onSyncUser">{{ t('topBar.syncPermission') }}</el-menu-item>
         <el-menu-item index="3_3" @click="onLogOut">{{ t('topBar.logOut') }}</el-menu-item>
       </el-sub-menu>
@@ -154,5 +158,9 @@ const onToggleAside = () => {
       filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(288deg) brightness(102%) contrast(102%);
     }
   }
+}
+.white-link {
+  color: white;
+  text-decoration: none;
 }
 </style>

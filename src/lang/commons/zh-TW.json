@@ -1,10 +1,10 @@
 {
   "logInPage": {
     "title": "歡迎使用 HEEs",
-    "hintUser": "請輸入登入使用者代號或是 E-mail",
+    "hintUser": "請輸入登入 E-mail",
     "hintPwd": "請輸入登入密碼",
     "submitBtn": "登入",
-    "errHintAccount": "請輸入正確的使用者代號或是 E-mail",
+    "errHintAccount": "請輸入正確的 E-mail",
     "errHintPwd": "請輸入正確的密碼"
   },
   "topBar": {
@@ -103,6 +103,31 @@
     "deleteComJobPositionSuccessMsg": "刪除職務成功",
     "deleteComJobPositionNoPerErrorMsg": "您沒有刪除職務的權限，請洽系統管理員",
     "deleteComJobPositionErrorMsg": "刪除職務失敗，請洽系統管理員",
+    "updateUserInfoColsSuccessMsg": "更新成員資訊欄位成功",
+    "updateUserInfoColsNoPerErrorMsg": "您沒有更新成員資訊欄位的權限，請洽系統管理員",
+    "updateUserInfoColsErrorMsg": "更新成員資訊欄位失敗，請洽系統管理員",
+    "deleteUserInfoColSuccessMsg": "刪除成員資訊欄位成功",
+    "deleteUserInfoColNoPerErrorMsg": "您沒有刪除成員資訊欄位的權限，請洽系統管理員",
+    "deleteUserInfoColErrorMsg": "刪除成員資訊欄位失敗，請洽系統管理員",
+    "createUserSuccessMsg": "新增公司成員成功",
+    "createUserNoPerErrorMsg": "您沒有新增公司成員的權限，請洽系統管理員",
+    "createUserErrorMsg": "新增公司成員失敗，請洽系統管理員",
+    "updateGenUserPwdSuccessMsg": "修改公司成員密碼成功",
+    "updateGenUserNoUserErrorMsg": "查無該用戶",
+    "updateGenUserErrorMsg": "修改公司成員密碼錯誤，請洽系統管理員",
+    "updateUserSuccessMsg": "更新公司成員成功",
+    "updateUserNoPerErrorMsg": "您沒有更新公司成員的權限，請洽系統管理員",
+    "updateUserErrorMsg": "更新公司成員失敗，請洽系統管理員",
+    "deleteUserSuccessMsg": "刪除公司成員成功",
+    "deleteUserNoPerErrorMsg": "您沒有刪除公司成員的權限，請洽系統管理員",
+    "deleteUserErrorMsg": "刪除公司成員失敗，請洽系統管理員",
+    "updateProfileBasicSuccessMsg": "更新成員個人基本資料成功",
+    "updateProfileBasicErrorMsg": "更新成員個人基本資料失敗，請洽系統管理員",
+    "updateProfilePwdSuccessMsg": "修改密碼成功",
+    "updateProfileCurrentErrorMsg": "請輸入正確的當前密碼",
+    "updateProfileErrorMsg": "修改密碼錯誤，請洽系統管理員",
+    "updateProfileDetailSuccessMsg": "更新成員個人詳細資料成功",
+    "updateProfileDetailErrorMsg": "更新成員個人詳細資料失敗，請洽系統管理員",
     "systemErrorMsg": "系統錯誤，請聯繫系統管理員"
   },
   "cusSugDetail": {
@@ -151,7 +176,8 @@
       "logIn": "登入",
       "notExist": "頁面不存在",
       "noPermission": "沒有權限",
-      "dashboard": "儀錶板"
+      "dashboard": "儀錶板",
+      "profile": "個人設定"
     },
     "system": {
       "sysPermissions": "系統權限",
@@ -204,11 +230,11 @@
     "perName": "權限名稱",
     "perDesc": "權限描述",
     "perCode": "權限代碼",
-    "users": "使用者",
-    "viewUsers": "查看使用者",
-    "userList": "使用者列表",
-    "userNo": "使用者編號",
-    "userStName": "使用者名稱",
+    "users": "成員",
+    "viewUsers": "查看成員",
+    "userList": "成員列表",
+    "userNo": "成員代號",
+    "userStName": "成員名稱",
     "editMembers": "編輯成員",
     "selected": "已選擇",
     "notSelected": "未選擇",
@@ -287,7 +313,8 @@
   },
   "general": {
     "confirm": "確認",
-    "cancel": "取消"
+    "cancel": "取消",
+    "delete": "刪除"
   },
   "subAddNewGroupConfirm": {
     "title": "管理者的密碼 : "
@@ -448,5 +475,109 @@
     "addJobPosNameLabel": "職務名稱",
     "addJobPosLevelLabel": "職務等階",
     "addJobPosDescLabel": "職務描述"
+  },
+  "userInfoCol": {
+    "title": "成員細節資料欄位設定",
+    "groupDesc": "第 x 個欄位",
+    "colName": "欄位名稱",
+    "colDesc": "欄位描述",
+    "colType": "欄位類別",
+    "colRequire": "欄位要求",
+    "colTypeOption": {
+      "string": "字串",
+      "integer": "整數數字",
+      "float": "浮點數數字",
+      "date": "日期",
+      "datetime": "日期及時間"
+    },
+    "colRequireOption": {
+      "true": "必填",
+      "false": "選填"
+    },
+    "delUserInfoCol": {
+      "title": "刪除資料欄位",
+      "content": "是否確認刪除該資料欄位 ?"
+    }
+  },
+  "user": {
+    "addBtn": "新增",
+    "addTitle": "新增公司成員",
+    "addColumns": {
+      "basicInfo": "基本資料",
+      "userName": "成員姓名",
+      "userStName": "使用者名稱",
+      "userNo": "成員代號",
+      "email": "電子郵件",
+      "orgInfo": "組織資料",
+      "orgStrUnits": "所屬單位",
+      "orgJobPositions": "所屬職務",
+      "detailInfo": "詳細資料"
+    },
+    "addUserConfirm": {
+      "title": "成員的密碼 : "
+    },
+    "userList": {
+      "fullInfo": "完整資料",
+      "basicInfo": "基本資料",
+      "userNo": "成員代號",
+      "userName": "成員姓名",
+      "userStName": "使用者名稱",
+      "email": "電子郵件",
+      "orgInfo": "組織資料",
+      "orgStrUnits": "所屬單位",
+      "orgJobPositions": "所屬職務",
+      "detailInfo": "詳細資料",
+      "changePwdBtn": "修改密碼",
+      "deleteUserBtn": "刪除成員",
+      "updateBtn": "修改",
+      "cancelBtn": "取消",
+      "confirmBtn": "確認",
+      "require": "為必填"
+    },
+    "changeUserConfirm": {
+      "title": "成員的密碼 : "
+    },
+    "deleteUserConfirm": {
+      "title": "刪除公司成員",
+      "content": "是否確認刪除該名公司成員"
+    }
+  },
+  "profile": {
+    "basic": {
+      "title": "基本資料",
+      "colUserName": "成員姓名",
+      "colUserStName": "使用者名稱",
+      "colUserNo": "成員代號",
+      "colUserEmail": "Email",
+      "modifyBtn": "修改"
+    },
+    "org": {
+      "title": "組織資訊",
+      "strUnitTitle": "所屬單位",
+      "strUnitColNo": "單位代號",
+      "strUnitColName": "單位名稱",
+      "strUnitColDesc": "單位描述",
+      "jobPosTitle": "所屬職務",
+      "jobPosLevel": "職務等階",
+      "jobPosName": "職務名稱",
+      "jobPosDesc": "職務描述"
+    },
+    "detail": {
+      "title": "詳細資料",
+      "detailRequire": "為必填"
+    },
+    "pwd": {
+      "title": "密碼設定",
+      "changePwdTitle": "變更密碼",
+      "chPwdCurrentPwd": "當前密碼",
+      "chPwdNewPwd": "新密碼",
+      "chPwdNewPwdConfirm": "確認新密碼",
+      "chPwdCurrentPwdTip": "請輸入當前密碼",
+      "chPwdNewPwdTip": "請輸入您的新密碼",
+      "chPwdNewPwdConfirmTip": "請再次輸入您的新密碼",
+      "chPwdNewPwdConfirmSameTip": "兩次輸入的密碼不一致",
+      "chPwdSameTip": "新密碼不得與當前密碼相同",
+      "confirm": "確認"
+    }
   }
 }

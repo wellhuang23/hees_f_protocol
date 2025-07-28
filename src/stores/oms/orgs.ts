@@ -14,6 +14,11 @@ import type {
     GetComStrUnitResParams,
     GetComJobPositionResParams,
     ComJobPosition,
+    UserInfoCol,
+    GetUserInfoColResParams,
+    StrUnitUser,
+    GetStrUnitUsersResParams,
+    ProfileResParams,
 } from '@/interfaces'
 import {
     SUB_ITEMS,
@@ -21,6 +26,9 @@ import {
     COM_INFO,
     COM_STR_UNIT,
     COM_JOB_POS,
+    USER_INFO_COLS,
+    STR_UNIT_USER_INFO,
+    PROFILE,
 } from '@/global/contstants'
 
 const useSubItemsStore = defineStore(SUB_ITEMS, {
@@ -168,12 +176,10 @@ const useComStrUnitStore = defineStore(COM_STR_UNIT, {
     actions: {
         setComStrUnits(data: GetComStrUnitResParams) {
             const comStrUnits: ComStrUnit[] = []
-            for (const row of data.comStrUnit ?? []) {
-                comStrUnits.push(row)
-            }
-
             const allComStrUnits: ComStrUnit[] = []
             for (const row of data.comStrUnit ?? []) {
+                comStrUnits.push(row)
+
                 allComStrUnits.push({
                     strUnitId: row.strUnitId,
                     strUnitName: row.strUnitName,
@@ -207,6 +213,10 @@ const useComStrUnitStore = defineStore(COM_STR_UNIT, {
                     parentStrUnitId: row.parentStrUnitId,
                     children: []
                 })
+
+                if (row.children.length > 0) {
+                    result.push(...this._getChildren(row.children))
+                }
             }
 
             return result
@@ -234,10 +244,68 @@ const useComJobPositionStore = defineStore(COM_JOB_POS, {
     }
 })
 
+const useUserInfoColsStore = defineStore(USER_INFO_COLS, {
+    state:() => ({
+        userInfoCols: sessionCache.getCache(USER_INFO_COLS)?.userInfoCols ?? [] as UserInfoCol[],
+    }),
+    actions: {
+        setUserInfoCols(data: GetUserInfoColResParams) {
+            const userInfoCols: UserInfoCol[] = []
+            for (const row of data.userInfoCols ?? []) {
+                userInfoCols.push(row)
+            }
+
+            this.userInfoCols = userInfoCols
+
+            sessionCache.setCache(USER_INFO_COLS, {
+                userInfoCols: userInfoCols
+            })
+        },
+    }
+})
+
+const useStrUnitUsersStore = defineStore(STR_UNIT_USER_INFO, {
+    state:() => ({
+        strUnitUsers: sessionCache.getCache(STR_UNIT_USER_INFO)?.strUnitUsers ?? [] as StrUnitUser[],
+    }),
+    actions: {
+        setStrUnitUser(data: GetStrUnitUsersResParams) {
+            const strUnitUsers: StrUnitUser[] = []
+            for (const row of data.strUnitUsers ?? []) {
+                strUnitUsers.push(row)
+            }
+
+            this.strUnitUsers = strUnitUsers
+
+            sessionCache.setCache(STR_UNIT_USER_INFO, {
+                strUnitUsers: strUnitUsers
+            })
+        },
+    }
+})
+
+const useProfileStore = defineStore(PROFILE, {
+    state:() => ({
+        profile: localCache.getCache(PROFILE)?.profile ?? {},
+    }),
+    actions: {
+        setProfile(data: ProfileResParams) {
+            this.profile = data.profile
+
+            localCache.setCache(PROFILE, {
+                profile: data.profile
+            })
+        },
+    }
+})
+
 export {
     useSubItemsStore,
     useValidComStore,
     useComInfoStore,
     useComStrUnitStore,
     useComJobPositionStore,
+    useUserInfoColsStore,
+    useStrUnitUsersStore,
+    useProfileStore,
 }

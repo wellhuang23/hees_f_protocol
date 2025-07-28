@@ -140,7 +140,6 @@ const handleConfirm = async () => {
     </el-form>
     <template #footer>
       <span class="dialog-footer">
-        <el-button type="info" @click="handleCancel">{{ t('general.cancel') }}</el-button>
         <el-button type="primary" @click="handleConfirm">{{ t('general.confirm') }}</el-button>
       </span>
     </template>
@@ -164,5 +163,10 @@ const handleConfirm = async () => {
   padding: 0 5px;
   font-size: 14px;
   color: #606266;
+}
+
+.dialog-footer {
+  text-align: center;
+  display: block;
 }
 </style>
