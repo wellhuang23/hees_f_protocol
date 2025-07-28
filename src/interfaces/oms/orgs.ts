@@ -351,6 +351,9 @@ export interface UserDetailInfo {
     // Column Name
     colName?: string;
 
+    // Column Description
+    colDesc?: string;
+
     // Column Type
     colType?: number;
 
@@ -425,4 +428,36 @@ export interface CreateGenUserResParams extends GeneralResParam {
 export interface ChangeUserPwdResParams extends GeneralResParam {
     // General User Password
     userNewPwd?: string;
+}
+
+// Profile
+export interface Profile {
+    // User ID
+    userId: number;
+
+    // User Name
+    userName: string;
+
+    // User Short Name
+    userStName: string;
+
+    // User No.
+    userNo: string;
+
+    // User Email
+    email: string;
+
+    // Job Positions
+    jobPositions: UserJobPosition[]
+
+    // Structure Units
+    strUnits: UserStrUnit[];
+
+    // User Detail Information
+    detailInfo: UserDetailInfo[];
+}
+
+// Get User Profile Response Parameters
+export interface ProfileResParams extends GeneralResParam {
+    profile?: Profile;
 }

@@ -18,6 +18,7 @@ import type {
     GetUserInfoColResParams,
     StrUnitUser,
     GetStrUnitUsersResParams,
+    ProfileResParams,
 } from '@/interfaces'
 import {
     SUB_ITEMS,
@@ -27,6 +28,7 @@ import {
     COM_JOB_POS,
     USER_INFO_COLS,
     STR_UNIT_USER_INFO,
+    PROFILE,
 } from '@/global/contstants'
 
 const useSubItemsStore = defineStore(SUB_ITEMS, {
@@ -282,6 +284,21 @@ const useStrUnitUsersStore = defineStore(STR_UNIT_USER_INFO, {
     }
 })
 
+const useProfileStore = defineStore(PROFILE, {
+    state:() => ({
+        profile: localCache.getCache(PROFILE)?.profile ?? {},
+    }),
+    actions: {
+        setProfile(data: ProfileResParams) {
+            this.profile = data.profile
+
+            localCache.setCache(PROFILE, {
+                profile: data.profile
+            })
+        },
+    }
+})
+
 export {
     useSubItemsStore,
     useValidComStore,
@@ -290,4 +307,5 @@ export {
     useComJobPositionStore,
     useUserInfoColsStore,
     useStrUnitUsersStore,
+    useProfileStore,
 }

@@ -28,6 +28,7 @@ import type {
     UserDetailInfo,
     CreateGenUserResParams,
     ChangeUserPwdResParams,
+    ProfileResParams,
 } from '@/interfaces'
 import request from '@/utils/requests'
 import { convertToNumber } from '@/utils/conNumber'
@@ -625,7 +626,7 @@ class OMSOrgsAPI {
         });
     }
 
-    // API for Getting Company Job Positions
+    // API for Getting Users & Categorized by Structure Units
     async getStrUnitUsers(token: string, comId: number): Promise<GetStrUnitUsersResParams> {
         const params = {
             'com_id': comId,
@@ -831,7 +832,7 @@ class OMSOrgsAPI {
         });
     }
 
-    // API for Changing general User Password
+    // API for Changing general User Password by Administrator
     async changeUserPwd(userId: number, token: string): Promise<ChangeUserPwdResParams> {
         const params = {
             'user_id': userId,
@@ -850,6 +851,163 @@ class OMSOrgsAPI {
                     errno: response.data.errno,
                     desc: response.data.desc,
                     userNewPwd: response.data.new_pwd
+                }
+            }
+            return {
+                errno: response.data.errno,
+                desc: response.data.desc,
+            }
+        });
+    }
+
+    // API for Getting User Profile
+    async getProfile(token: string): Promise<ProfileResParams> {
+        return request<any, any>({
+            url: ORGS_API + '/profile/info/get',
+            method: 'GET',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+        }).then((response): ProfileResParams => {
+            if (response.data.errno === '00000') {
+                const jobPositions: UserJobPosition[] = []
+                for (const jpRelation of response.data.data.jp_relations) {
+                    jobPositions.push({
+                        jobPosId: (convertToNumber(jpRelation.jp_id) ?? 0),
+                        jobPosName: jpRelation.jp_name,
+                        jobPosEngName: jpRelation.jp_eng_name,
+                        jobPosLevel: jpRelation.jp_level
+                    })
+                }
+
+                const strUnits: UserStrUnit[] = []
+                for (const suRelation of response.data.data.su_relations) {
+                    strUnits.push({
+                        strUnitId: (convertToNumber(suRelation.str_unit_id) ?? 0),
+                        strUnitName: suRelation.str_unit_name,
+                        strUnitEngName: suRelation.str_unit_eng_name,
+                        strUnitNo: suRelation.str_unit_no
+                    })
+                }
+
+                const details: UserDetailInfo[] = []
+                for (const detail of response.data.data.details) {
+                    details.push({
+                        userDataId: (convertToNumber(detail.user_data_id) ?? 0),
+                        data: detail.data,
+                        colId: (convertToNumber(detail.user_col_id) ?? 0),
+                        colName: detail.col_name,
+                        colDesc: detail.col_desc,
+                        colType: detail.col_type,
+                        colRequire: detail.col_require,
+                    })
+                }
+
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                    profile: {
+                        userId: (convertToNumber(response.data.data.user_data_id) ?? 0),
+                        userName: response.data.data.user_name,
+                        userStName: response.data.data.user_st_name,
+                        userNo: response.data.data.user_no,
+                        email: response.data.data.email,
+                        jobPositions: jobPositions,
+                        strUnits: strUnits,
+                        detailInfo: details,
+                    }
+                }
+            } else {
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                }
+            }
+        });
+    }
+
+    // API for Updating User Basic Information
+    async updateBasicProfile(userStName: string, token: string): Promise<GeneralResParam> {
+        const params = {
+            user_st_name: userStName,
+        }
+
+        return request<any, any>({
+            url: ORGS_API + '/profile/basic/update',
+            method: 'POST',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            data: params,
+        }).then((response): GeneralResParam => {
+            if (response.data.errno === '00000') {
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                }
+            }
+            return {
+                errno: response.data.errno,
+                desc: response.data.desc,
+            }
+        });
+    }
+
+    // API for Updating User Detail Information
+    async updateDetailProfile(userDetailInfo: UserDetailInfo[], token: string): Promise<GeneralResParam> {
+        const details = []
+        for (const info of userDetailInfo) {
+            details.push({
+                user_col_id: info.colId,
+                user_data_id: info.userDataId,
+                data: info.data,
+            })
+        }
+
+        const params = {
+            user_info_details: details,
+        }
+
+        return request<any, any>({
+            url: ORGS_API + '/profile/detail/update',
+            method: 'POST',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            data: params,
+        }).then((response): GeneralResParam => {
+            if (response.data.errno === '00000') {
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                }
+            }
+            return {
+                errno: response.data.errno,
+                desc: response.data.desc,
+            }
+        });
+    }
+
+    // API for Updating User Password by Self
+    async updateSelfPwd(originPwd: string, newPwd: string, token: string): Promise<GeneralResParam> {
+        const params = {
+            origin_pwd: originPwd,
+            new_pwd: newPwd,
+        }
+
+        return request<any, any>({
+            url: ORGS_API + '/profile/pwd/change',
+            method: 'POST',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            data: params,
+        }).then((response): GeneralResParam => {
+            if (response.data.errno === '00000') {
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
                 }
             }
             return {

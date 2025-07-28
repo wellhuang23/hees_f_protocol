@@ -20,6 +20,7 @@ import type {
     UserInfo,
     ChangeUserPwdResParams,
     CreateGenUserResParams,
+    ProfileResParams, UserDetailInfo,
 } from '@/interfaces'
 import {
     useDeviceInfoStore,
@@ -30,6 +31,7 @@ import {
     useComJobPositionStore,
     useUserInfoColsStore,
     useStrUnitUsersStore,
+    useProfileStore,
 } from '@/stores'
 import { updateToken } from '@/services'
 
@@ -41,6 +43,7 @@ const comStrUnitStore = useComStrUnitStore()
 const comJobPositionStore = useComJobPositionStore()
 const userInfoColsStore = useUserInfoColsStore()
 const strUnitUsersStore = useStrUnitUsersStore()
+const profileStore = useProfileStore()
 
 export async function getAllSubItems() {
     const token = deviceStore.token
@@ -726,5 +729,126 @@ export async function changeGenUserPwd(userId: number) {
             }
         }
         return res
+    })
+}
+
+export async function getProfile() {
+    const token = deviceStore.token
+    return OMSOrgsAPI.getProfile(token).then(async (res: ProfileResParams)=> {
+        if (res.errno === '00000') {
+            profileStore.setProfile(res)
+            return res.errno
+        } else {
+            if (res.errno === '99005') {
+                const refreshTokenResult = await updateToken().then()
+                if (refreshTokenResult === '00000') {
+                    const refreshToken = deviceStore.token
+                    return OMSOrgsAPI.getProfile(refreshToken).then((refreshRes: ProfileResParams) => {
+                        profileStore.setProfile(refreshRes)
+                        return refreshRes.errno
+                    })
+                }
+            }
+        }
+        return res.errno
+    })
+}
+
+export async function updateProfileBasic(userStName: string) {
+    const token = deviceStore.token
+    return OMSOrgsAPI.updateBasicProfile(userStName, token).then(async (res: GeneralResParam)=> {
+        if (res.errno === '99005') {
+            const refreshTokenResult = await updateToken().then()
+            if (refreshTokenResult === '00000') {
+                const refreshToken = deviceStore.token
+                return OMSOrgsAPI.updateBasicProfile(
+                    userStName,
+                    refreshToken).then((refreshRes: GeneralResParam) => {
+                    if (refreshRes.errno === '00000') {
+                        return OMSOrgsAPI.getProfile(token).then(async (refreshGetRes: ProfileResParams) => {
+                            if (refreshGetRes.errno === '00000') {
+                                profileStore.setProfile(refreshGetRes)
+                            }
+                            return refreshGetRes.errno
+                        })
+                    } else {
+                        return refreshRes.errno
+                    }
+                })
+            }
+        } else {
+            if (res.errno === '00000') {
+                return OMSOrgsAPI.getProfile(token).then(async (getRes: ProfileResParams) => {
+                    if (getRes.errno === '00000') {
+                        profileStore.setProfile(getRes)
+                    }
+                    return getRes.errno
+                })
+            } else {
+                return res.errno
+            }
+        }
+        return res.errno
+    })
+}
+
+export async function updateProfileDetail(detailInfo: UserDetailInfo[]) {
+    const token = deviceStore.token
+    return OMSOrgsAPI.updateDetailProfile(detailInfo, token).then(async (res: GeneralResParam)=> {
+        if (res.errno === '99005') {
+            const refreshTokenResult = await updateToken().then()
+            if (refreshTokenResult === '00000') {
+                const refreshToken = deviceStore.token
+                return OMSOrgsAPI.updateDetailProfile(
+                    detailInfo,
+                    refreshToken).then((refreshRes: GeneralResParam) => {
+                    if (refreshRes.errno === '00000') {
+                        return OMSOrgsAPI.getProfile(token).then(async (refreshGetRes: ProfileResParams) => {
+                            if (refreshGetRes.errno === '00000') {
+                                profileStore.setProfile(refreshGetRes)
+                            }
+                            return refreshGetRes.errno
+                        })
+                    } else {
+                        return refreshRes.errno
+                    }
+                })
+            }
+        } else {
+            if (res.errno === '00000') {
+                return OMSOrgsAPI.getProfile(token).then(async (getRes: ProfileResParams) => {
+                    if (getRes.errno === '00000') {
+                        profileStore.setProfile(getRes)
+                    }
+                    return getRes.errno
+                })
+            } else {
+                return res.errno
+            }
+        }
+        return res.errno
+    })
+}
+
+export async function changeGenUserPwdSelf(originPwd: string, newPwd: string) {
+    const token = deviceStore.token
+    return OMSOrgsAPI.updateSelfPwd(originPwd, newPwd, token).then(async (res: GeneralResParam)=> {
+        if (res.errno === '00000') {
+            return res.errno
+        } else {
+            if (res.errno === '99005') {
+                const refreshTokenResult = await updateToken().then()
+                if (refreshTokenResult === '00000') {
+                    const refreshToken = deviceStore.token
+                    return OMSOrgsAPI.updateSelfPwd(
+                        originPwd,
+                        newPwd,
+                        refreshToken).then((refreshRes: GeneralResParam) => {
+                        return refreshRes.errno
+                    })
+                }
+            }
+        }
+        return res.errno
     })
 }
