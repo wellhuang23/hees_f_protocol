@@ -121,6 +121,13 @@
     "deleteUserSuccessMsg": "刪除公司成員成功",
     "deleteUserNoPerErrorMsg": "您沒有刪除公司成員的權限，請洽系統管理員",
     "deleteUserErrorMsg": "刪除公司成員失敗，請洽系統管理員",
+    "updateProfileBasicSuccessMsg": "更新成員個人基本資料成功",
+    "updateProfileBasicErrorMsg": "更新成員個人基本資料失敗，請洽系統管理員",
+    "updateProfilePwdSuccessMsg": "修改密碼成功",
+    "updateProfileCurrentErrorMsg": "請輸入正確的當前密碼",
+    "updateProfileErrorMsg": "修改密碼錯誤，請洽系統管理員",
+    "updateProfileDetailSuccessMsg": "更新成員個人詳細資料成功",
+    "updateProfileDetailErrorMsg": "更新成員個人詳細資料失敗，請洽系統管理員",
     "systemErrorMsg": "系統錯誤，請聯繫系統管理員"
   },
   "cusSugDetail": {
@@ -169,7 +176,8 @@
       "logIn": "登入",
       "notExist": "頁面不存在",
       "noPermission": "沒有權限",
-      "dashboard": "儀錶板"
+      "dashboard": "儀錶板",
+      "profile": "個人設定"
     },
     "system": {
       "sysPermissions": "系統權限",
@@ -532,6 +540,44 @@
     "deleteUserConfirm": {
       "title": "刪除公司成員",
       "content": "是否確認刪除該名公司成員"
+    }
+  },
+  "profile": {
+    "basic": {
+      "title": "基本資料",
+      "colUserName": "成員姓名",
+      "colUserStName": "使用者名稱",
+      "colUserNo": "成員代號",
+      "colUserEmail": "Email",
+      "modifyBtn": "修改"
+    },
+    "org": {
+      "title": "組織資訊",
+      "strUnitTitle": "所屬單位",
+      "strUnitColNo": "單位代號",
+      "strUnitColName": "單位名稱",
+      "strUnitColDesc": "單位描述",
+      "jobPosTitle": "所屬職務",
+      "jobPosLevel": "職務等階",
+      "jobPosName": "職務名稱",
+      "jobPosDesc": "職務描述"
+    },
+    "detail": {
+      "title": "詳細資料",
+      "detailRequire": "為必填"
+    },
+    "pwd": {
+      "title": "密碼設定",
+      "changePwdTitle": "變更密碼",
+      "chPwdCurrentPwd": "當前密碼",
+      "chPwdNewPwd": "新密碼",
+      "chPwdNewPwdConfirm": "確認新密碼",
+      "chPwdCurrentPwdTip": "請輸入當前密碼",
+      "chPwdNewPwdTip": "請輸入您的新密碼",
+      "chPwdNewPwdConfirmTip": "請再次輸入您的新密碼",
+      "chPwdNewPwdConfirmSameTip": "兩次輸入的密碼不一致",
+      "chPwdSameTip": "新密碼不得與當前密碼相同",
+      "confirm": "確認"
     }
   }
 }

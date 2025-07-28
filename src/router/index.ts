@@ -104,6 +104,13 @@ const routes = [
                 },
                 component: () => import('@/views/dashboard/index.vue'),
             },
+            {
+                path: 'profile',
+                meta: {
+                    title: 'pageTitle.general.profile'
+                },
+                component: () => import('@/views/oms/Profile.vue'),
+            },
             ...dRoutes
         ]
     },

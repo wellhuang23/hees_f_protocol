@@ -315,6 +315,9 @@ export interface UserStrUnit {
     // Structure Unit Name
     strUnitName: string;
 
+    // Structure Unit Description
+    strUnitDesc?: string;
+
     // Structure Unit Name in English
     strUnitEngName: string;
 
@@ -329,6 +332,9 @@ export interface UserJobPosition {
 
     // Job Position Name
     jobPosName: string;
+
+    // Job Position Description
+    jobPosDesc?: string;
 
     // Job Position Name in English
     jobPosEngName: string;

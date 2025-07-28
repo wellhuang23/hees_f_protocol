@@ -114,10 +114,17 @@
     "createUserErrorMsg": "Create User in Company Fail, Please Contact System Manger",
     "updateGenUserPwdSuccessMsg": "Change General Member's Password in Company Successfully",
     "updateGenUserNoUserErrorMsg": "Search No User",
-    "updateGenUserErrorMsg": "Change General Member's Password in Company Password Fail, Please Contact System Manager",
+    "updateGenUserErrorMsg": "Change General Member's Password in Company Fail, Please Contact System Manager",
     "updateUserSuccessMsg": "Update User in Company Successfully",
     "updateUserNoPerErrorMsg": "You don't Have Permission to Update User in Company, Please Contact System Manger",
     "updateUserErrorMsg": "Update User in Company Fail, Please Contact System Manger",
+    "updateProfileBasicSuccessMsg": "Update General Member's Basic Profile Successfully",
+    "updateProfileBasicErrorMsg": "Update General Member's Basic Profile Fail, Please Contact System Manager",
+    "updateProfilePwdSuccessMsg": "Update Password Successfully",
+    "updateProfileCurrentErrorMsg": "Please Input Correct Current Password",
+    "updateProfileErrorMsg": "Update password Fail, Please Contact System Manager",
+    "updateProfileDetailSuccessMsg": "Update General Member's Detail Profile Successfully",
+    "updateProfileDetailErrorMsg": "Update General Member's Detail Profile Fail, Please Contact System Manager",
     "systemErrorMsg": "System Error, Please Contact System Manager"
   },
   "cusSugDetail": {
@@ -166,7 +173,8 @@
       "logIn": "Log In",
       "notExist": "Page Not Exist",
       "noPermission": "No Permission",
-      "dashboard": "Dashboard"
+      "dashboard": "Dashboard",
+      "profile": "Profile"
     },
     "system": {
       "sysPermissions": "System Permission",
@@ -532,6 +540,44 @@
     "deleteUserConfirm": {
       "title": "Delete the Member in Company",
       "content": "Sure for Deleting the Member in Company ?"
+    }
+  },
+  "profile": {
+    "basic": {
+      "title": "Basic",
+      "colUserName": "User Name",
+      "colUserStName": "Username",
+      "colUserNo": "User No.",
+      "colUserEmail": "Email",
+      "modifyBtn": "Modify"
+    },
+    "org": {
+      "title": "Organization",
+      "strUnitTitle": "Structure Units",
+      "strUnitColNo": "Unit No.",
+      "strUnitColName": "Unit Name",
+      "strUnitColDesc": "Unit Description",
+      "jobPosTitle": "Job Positions",
+      "jobPosLevel": "Job Position Level",
+      "jobPosName": "Job Position Name",
+      "jobPosDesc": "Job Position Description"
+    },
+    "detail": {
+      "title": "Detail",
+      "detailRequire": " is Required"
+    },
+    "pwd": {
+      "title": "Password",
+      "changePwdTitle": "Change Password",
+      "chPwdCurrentPwd": "Current Password",
+      "chPwdNewPwd": "New Password",
+      "chPwdNewPwdConfirm": "Confirm New Password",
+      "chPwdCurrentPwdTip": "Please Input Current Password",
+      "chPwdNewPwdTip": "Please Input Your New Password",
+      "chPwdNewPwdConfirmTip": "Please Input Your New Password Again",
+      "chPwdNewPwdConfirmSameTip": "The Passwords You Entered Twice do not Match",
+      "chPwdSameTip": "New Password could not be Same with Current Password",
+      "confirm": "Confirm"
     }
   }
 }

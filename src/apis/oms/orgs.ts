@@ -875,6 +875,7 @@ class OMSOrgsAPI {
                     jobPositions.push({
                         jobPosId: (convertToNumber(jpRelation.jp_id) ?? 0),
                         jobPosName: jpRelation.jp_name,
+                        jobPosDesc: jpRelation.jp_desc,
                         jobPosEngName: jpRelation.jp_eng_name,
                         jobPosLevel: jpRelation.jp_level
                     })
@@ -885,6 +886,7 @@ class OMSOrgsAPI {
                     strUnits.push({
                         strUnitId: (convertToNumber(suRelation.str_unit_id) ?? 0),
                         strUnitName: suRelation.str_unit_name,
+                        strUnitDesc: suRelation.str_unit_desc,
                         strUnitEngName: suRelation.str_unit_eng_name,
                         strUnitNo: suRelation.str_unit_no
                     })
