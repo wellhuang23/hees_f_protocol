@@ -19,6 +19,7 @@ import type {
     StrUnitUser,
     GetStrUnitUsersResParams,
     ProfileResParams,
+    Profile
 } from '@/interfaces'
 import {
     SUB_ITEMS,
@@ -33,8 +34,8 @@ import {
 
 const useSubItemsStore = defineStore(SUB_ITEMS, {
     state:() => ({
-        subItems: sessionCache.getCache(SUB_ITEMS)?.subItems ?? [] as Sub[],
-        groupSubs: sessionCache.getCache(SUB_ITEMS)?.groupSubs ?? [] as GroupCompanies[],
+        subItems: [] as Sub[],
+        groupSubs: [] as GroupCompanies[],
     }),
     actions: {
         setSubItems(subItems: Sub[]) {
@@ -50,11 +51,6 @@ const useSubItemsStore = defineStore(SUB_ITEMS, {
                 })
             }
             this.subItems = data
-
-            sessionCache.setCache(SUB_ITEMS, {
-                subItems: data,
-                groupSubs: this.groupSubs,
-            })
         },
 
         setGroupSubs(groups: GroupCompanies[]) {
@@ -67,18 +63,11 @@ const useSubItemsStore = defineStore(SUB_ITEMS, {
                 })
             }
             this.groupSubs = data
-
-            sessionCache.setCache(SUB_ITEMS, {
-                subItems: this.subItems,
-                groupSubs: data,
-            })
         },
 
         clearSubItems() {
             this.subItems = []
             this.groupSubs = []
-
-            sessionCache.removeCache(SUB_ITEMS)
         }
     }
 })
@@ -170,7 +159,7 @@ const useComInfoStore = defineStore(COM_INFO, {
 
 const useComStrUnitStore = defineStore(COM_STR_UNIT, {
     state:() => ({
-        comStrUnits: sessionCache.getCache(COM_STR_UNIT)?.comStrUnits ?? [] as ComStrUnit[],
+        comStrUnits: [] as ComStrUnit[],
         allComStrUnits: [] as ComStrUnit[]
     }),
     actions: {
@@ -196,10 +185,6 @@ const useComStrUnitStore = defineStore(COM_STR_UNIT, {
 
             this.comStrUnits = comStrUnits
             this.allComStrUnits = allComStrUnits
-
-            sessionCache.setCache(COM_STR_UNIT, {
-                comStrUnits: comStrUnits ?? {}
-            })
         },
 
         _getChildren(data: ComStrUnit[]) {
@@ -226,7 +211,7 @@ const useComStrUnitStore = defineStore(COM_STR_UNIT, {
 
 const useComJobPositionStore = defineStore(COM_JOB_POS, {
     state:() => ({
-        comJobPositions: sessionCache.getCache(COM_JOB_POS)?.comJobPositions ?? [] as ComJobPosition[],
+        comJobPositions: [] as ComJobPosition[],
     }),
     actions: {
         setComJobPositions(data: GetComJobPositionResParams) {
@@ -236,17 +221,13 @@ const useComJobPositionStore = defineStore(COM_JOB_POS, {
             }
 
             this.comJobPositions = comJobPositions
-
-            sessionCache.setCache(COM_JOB_POS, {
-                comJobPositions: comJobPositions
-            })
         },
     }
 })
 
 const useUserInfoColsStore = defineStore(USER_INFO_COLS, {
     state:() => ({
-        userInfoCols: sessionCache.getCache(USER_INFO_COLS)?.userInfoCols ?? [] as UserInfoCol[],
+        userInfoCols: [] as UserInfoCol[],
     }),
     actions: {
         setUserInfoCols(data: GetUserInfoColResParams) {
@@ -256,17 +237,13 @@ const useUserInfoColsStore = defineStore(USER_INFO_COLS, {
             }
 
             this.userInfoCols = userInfoCols
-
-            sessionCache.setCache(USER_INFO_COLS, {
-                userInfoCols: userInfoCols
-            })
         },
     }
 })
 
 const useStrUnitUsersStore = defineStore(STR_UNIT_USER_INFO, {
     state:() => ({
-        strUnitUsers: sessionCache.getCache(STR_UNIT_USER_INFO)?.strUnitUsers ?? [] as StrUnitUser[],
+        strUnitUsers: [] as StrUnitUser[],
     }),
     actions: {
         setStrUnitUser(data: GetStrUnitUsersResParams) {
@@ -276,21 +253,28 @@ const useStrUnitUsersStore = defineStore(STR_UNIT_USER_INFO, {
             }
 
             this.strUnitUsers = strUnitUsers
-
-            sessionCache.setCache(STR_UNIT_USER_INFO, {
-                strUnitUsers: strUnitUsers
-            })
         },
     }
 })
 
 const useProfileStore = defineStore(PROFILE, {
     state:() => ({
-        profile: localCache.getCache(PROFILE)?.profile ?? {},
+        profile: {} as Profile,
     }),
     actions: {
         setProfile(data: ProfileResParams) {
-            this.profile = data.profile
+            const _mask: Profile = {
+                userId: 0,
+                userName: '',
+                userStName: '',
+                userNo: '',
+                email: '',
+                jobPositions: [],
+                strUnits: [],
+                detailInfo: [],
+            }
+
+            this.profile = data?.profile ?? _mask
 
             localCache.setCache(PROFILE, {
                 profile: data.profile

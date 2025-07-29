@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 import { localCache } from '@/utils/storages'
-import { sessionCache } from '@/utils/storages'
 import type {
     LogInResParams,
     GenTokenResParams,
@@ -119,9 +118,9 @@ const useDeviceInfoStore = defineStore(DEVICE_INFO, {
 
 const useSysPerRoleStore = defineStore(SYS_PER_ROLE, {
     state:() => ({
-        sysRoles: sessionCache.getCache(SYS_PER_ROLE)?.sysRoles ?? [] as SysRole[],
-        sysRoleUsers: sessionCache.getCache(SYS_PER_ROLE)?.sysRoleUsers ?? [] as SysRoleUsers[],
-        sysUsers: sessionCache.getCache(SYS_PER_ROLE)?.sysUsers ?? [] as SysRoleUser[],
+        sysRoles: [] as SysRole[],
+        sysRoleUsers: [] as SysRoleUsers[],
+        sysUsers: [] as SysRoleUser[],
     }),
     actions: {
         setSysRole(sysRoles: SysRole[]) {
@@ -137,12 +136,6 @@ const useSysPerRoleStore = defineStore(SYS_PER_ROLE, {
                 })
             }
             this.sysRoles = data
-
-            sessionCache.setCache(SYS_PER_ROLE, {
-                sysRoles: data,
-                sysRoleUsers: this.sysRoleUsers,
-                sysUsers: this.sysUsers,
-            })
         },
 
         setSysRoleUsers(sysRoleUsers: SysRoleUsers[]) {
@@ -156,12 +149,6 @@ const useSysPerRoleStore = defineStore(SYS_PER_ROLE, {
                 })
             }
             this.sysRoleUsers = data
-
-            sessionCache.setCache(SYS_PER_ROLE, {
-                sysRoles: this.sysRoles,
-                sysRoleUsers: data,
-                sysUsers: this.sysUsers,
-            })
         },
 
         setSysUsers(sysUsers: SysRoleUser[]) {
@@ -174,72 +161,34 @@ const useSysPerRoleStore = defineStore(SYS_PER_ROLE, {
                 })
             }
             this.sysUsers = data
-
-            sessionCache.setCache(SYS_PER_ROLE, {
-                sysRoles: this.sysRoles,
-                sysRoleUsers: this.sysRoleUsers,
-                sysUsers: data
-            })
         }
     }
 })
 
 const useComPerRoleStore = defineStore(COM_PER_ROLE, {
     state:() => ({
-        defRoles: sessionCache.getCache(COM_PER_ROLE)?.defRoles ?? [] as ComRole[],
-        cusRoles: sessionCache.getCache(COM_PER_ROLE)?.cusRoles ?? [] as ComRole[],
-        comRoleUsers: sessionCache.getCache(COM_PER_ROLE)?.comRoleUsers ?? [] as ComRoleUsers[],
-        subComPermissions: sessionCache.getCache(COM_PER_ROLE)?.subComPermissions ?? [] as SubComPermissions[],
-        groupUsers: sessionCache.getCache(COM_PER_ROLE)?.groupUsers ?? [] as GroupUsers[],
+        defRoles: [] as ComRole[],
+        cusRoles: [] as ComRole[],
+        comRoleUsers: [] as ComRoleUsers[],
+        subComPermissions: [] as SubComPermissions[],
+        groupUsers: [] as GroupUsers[],
     }),
     actions: {
         setComRoles(comRoles: GetComRoleResParams) {
             this.defRoles = comRoles.defRoles
             this.cusRoles = comRoles.cusRoles
-
-            sessionCache.setCache(COM_PER_ROLE, {
-                defRoles: comRoles.defRoles,
-                cusRoles: comRoles.cusRoles,
-                comRoleUsers: this.comRoleUsers,
-                subComPermissions: this.subComPermissions,
-                groupUsers: this.groupUsers,
-            })
         },
 
         setComRoleUsers(res: GetComRoleUsersResParams) {
             this.comRoleUsers = res.comRoleUsers
-
-            sessionCache.setCache(COM_PER_ROLE, {
-                defRoles: this.defRoles,
-                cusRoles: this.cusRoles,
-                comRoleUsers: res.comRoleUsers,
-                subComPermissions: this.subComPermissions,
-                groupUsers: this.groupUsers,
-            })
         },
 
         setComPermissions(res: GetSubComPerResParams) {
             this.subComPermissions = res.subComPermissions
-
-            sessionCache.setCache(COM_PER_ROLE, {
-                defRoles: this.defRoles,
-                cusRoles: this.cusRoles,
-                comRoleUsers: this.comRoleUsers,
-                subComPermissions: res.subComPermissions,
-                groupUsers: this.groupUsers,
-            })
         },
 
         setGroupUsers(res: GetGroupUsersResParams) {
             this.groupUsers = res.groupUsers
-
-            sessionCache.setCache(COM_PER_ROLE, {
-                defRoles: this.defRoles,
-                cusRoles: this.cusRoles,
-                comRoleUsers: this.comRoleUsers,
-                subComPermissions: this.subComPermissions,
-                groupUsers: res.groupUsers,
-            })
         }
     }
 })
