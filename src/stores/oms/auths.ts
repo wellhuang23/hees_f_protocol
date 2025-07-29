@@ -7,11 +7,20 @@ import type {
     SysRole,
     SysRoleUsers,
     SysRoleUser,
+    ComRole,
+    GetComRoleResParams,
+    ComRoleUsers,
+    GetComRoleUsersResParams,
+    GroupUsers,
+    GetGroupUsersResParams,
+    SubComPermissions,
+    GetSubComPerResParams,
 } from '@/interfaces'
 import {
     USER_INFO,
     DEVICE_INFO,
-    SYS_PER_ROLE
+    SYS_PER_ROLE,
+    COM_PER_ROLE,
 } from '@/global/contstants'
 
 const useUserInfoStore = defineStore(USER_INFO, {
@@ -175,8 +184,69 @@ const useSysPerRoleStore = defineStore(SYS_PER_ROLE, {
     }
 })
 
+const useComPerRoleStore = defineStore(COM_PER_ROLE, {
+    state:() => ({
+        defRoles: sessionCache.getCache(COM_PER_ROLE)?.defRoles ?? [] as ComRole[],
+        cusRoles: sessionCache.getCache(COM_PER_ROLE)?.cusRoles ?? [] as ComRole[],
+        comRoleUsers: sessionCache.getCache(COM_PER_ROLE)?.comRoleUsers ?? [] as ComRoleUsers[],
+        subComPermissions: sessionCache.getCache(COM_PER_ROLE)?.subComPermissions ?? [] as SubComPermissions[],
+        groupUsers: sessionCache.getCache(COM_PER_ROLE)?.groupUsers ?? [] as GroupUsers[],
+    }),
+    actions: {
+        setComRoles(comRoles: GetComRoleResParams) {
+            this.defRoles = comRoles.defRoles
+            this.cusRoles = comRoles.cusRoles
+
+            sessionCache.setCache(COM_PER_ROLE, {
+                defRoles: comRoles.defRoles,
+                cusRoles: comRoles.cusRoles,
+                comRoleUsers: this.comRoleUsers,
+                subComPermissions: this.subComPermissions,
+                groupUsers: this.groupUsers,
+            })
+        },
+
+        setComRoleUsers(res: GetComRoleUsersResParams) {
+            this.comRoleUsers = res.comRoleUsers
+
+            sessionCache.setCache(COM_PER_ROLE, {
+                defRoles: this.defRoles,
+                cusRoles: this.cusRoles,
+                comRoleUsers: res.comRoleUsers,
+                subComPermissions: this.subComPermissions,
+                groupUsers: this.groupUsers,
+            })
+        },
+
+        setComPermissions(res: GetSubComPerResParams) {
+            this.subComPermissions = res.subComPermissions
+
+            sessionCache.setCache(COM_PER_ROLE, {
+                defRoles: this.defRoles,
+                cusRoles: this.cusRoles,
+                comRoleUsers: this.comRoleUsers,
+                subComPermissions: res.subComPermissions,
+                groupUsers: this.groupUsers,
+            })
+        },
+
+        setGroupUsers(res: GetGroupUsersResParams) {
+            this.groupUsers = res.groupUsers
+
+            sessionCache.setCache(COM_PER_ROLE, {
+                defRoles: this.defRoles,
+                cusRoles: this.cusRoles,
+                comRoleUsers: this.comRoleUsers,
+                subComPermissions: this.subComPermissions,
+                groupUsers: res.groupUsers,
+            })
+        }
+    }
+})
+
 export {
     useUserInfoStore,
     useDeviceInfoStore,
-    useSysPerRoleStore
+    useSysPerRoleStore,
+    useComPerRoleStore,
 }

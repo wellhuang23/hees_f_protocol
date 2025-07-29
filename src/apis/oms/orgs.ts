@@ -29,6 +29,8 @@ import type {
     CreateGenUserResParams,
     ChangeUserPwdResParams,
     ProfileResParams,
+    GetGroupUsersResParams,
+    GroupUsers,
 } from '@/interfaces'
 import request from '@/utils/requests'
 import { convertToNumber } from '@/utils/conNumber'
@@ -1015,6 +1017,84 @@ class OMSOrgsAPI {
             return {
                 errno: response.data.errno,
                 desc: response.data.desc,
+            }
+        });
+    }
+
+    // API for Getting Group Users & Categorized by Structure Units
+    async getGroupUsers(token: string): Promise<GetGroupUsersResParams> {
+        return request<any, any>({
+            url: ORGS_API + '/users/info/get',
+            method: 'GET',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+        }).then((response): GetGroupUsersResParams => {
+            if (response.data.errno === '00000') {
+                const groups: GroupUsers[] = []
+                for (const group of response.data.data) {
+                    const strUnitUsers: StrUnitUser[] = []
+                    for (const row of group.str_units) {
+                        const children: StrUnitUser[] = []
+                        if (row.children.length > 0) {
+                            this._resortStrUnitUserChildren(row.children).then(res => {
+                                children.push(...res)
+                            })
+                        }
+
+                        const users: UserInfo[] = []
+                        for (const user of row.users) {
+                            const strUnits: UserStrUnit[] = []
+                            for (const strUnit of user.str_units) {
+                                strUnits.push({
+                                    strUnitId: (convertToNumber(strUnit.str_unit_id) ?? 0),
+                                    strUnitName: strUnit.str_unit_name,
+                                    strUnitEngName: strUnit.str_unit_eng_name,
+                                    strUnitNo: strUnit.str_unit_no,
+                                })
+                            }
+
+                            users.push({
+                                userId: (convertToNumber(user.user_id) ?? 0),
+                                userNo: user.user_no,
+                                userName: user.user_name,
+                                userStName: user.user_st_name,
+                                userType: 3,
+                                email: '',
+                                strUnits: strUnits,
+                                jobPositions: [],
+                                detailInfo: []
+                            })
+                        }
+
+                        strUnitUsers.push({
+                            strUnitId: (convertToNumber(row.str_unit_id) ?? 0),
+                            strUnitName: row.str_unit_name,
+                            strUnitEngName: row.str_unit_eng_name,
+                            strUnitNo: row.str_unit_no,
+                            children: children,
+                            users: users
+                        })
+                    }
+
+                    groups.push({
+                        groupId: group.group_id,
+                        groupName: group.group_name,
+                        strUnitUsers: strUnitUsers
+                    })
+                }
+
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                    groupUsers: groups
+                }
+            } else {
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                    groupUsers: []
+                }
             }
         });
     }

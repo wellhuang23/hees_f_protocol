@@ -20,7 +20,9 @@ import type {
     UserInfo,
     ChangeUserPwdResParams,
     CreateGenUserResParams,
-    ProfileResParams, UserDetailInfo,
+    ProfileResParams,
+    UserDetailInfo,
+    GetGroupUsersResParams,
 } from '@/interfaces'
 import {
     useDeviceInfoStore,
@@ -32,6 +34,7 @@ import {
     useUserInfoColsStore,
     useStrUnitUsersStore,
     useProfileStore,
+    useComPerRoleStore,
 } from '@/stores'
 import { updateToken } from '@/services'
 
@@ -44,6 +47,7 @@ const comJobPositionStore = useComJobPositionStore()
 const userInfoColsStore = useUserInfoColsStore()
 const strUnitUsersStore = useStrUnitUsersStore()
 const profileStore = useProfileStore()
+const comPerRoleStore = useComPerRoleStore()
 
 export async function getAllSubItems() {
     const token = deviceStore.token
@@ -850,5 +854,24 @@ export async function changeGenUserPwdSelf(originPwd: string, newPwd: string) {
             }
         }
         return res.errno
+    })
+}
+
+export async function getGroupUsers() {
+    const token = deviceStore.token
+    return OMSOrgsAPI.getGroupUsers(token).then(async (res: GetGroupUsersResParams)=> {
+        if (res.errno === '00000') {
+            comPerRoleStore.setGroupUsers(res)
+        } else {
+            if (res.errno === '99005') {
+                const refreshTokenResult = await updateToken().then()
+                if (refreshTokenResult === '00000') {
+                    const refreshToken = deviceStore.token
+                    return OMSOrgsAPI.getGroupUsers(refreshToken).then((refreshRes: GetGroupUsersResParams) => {
+                        comPerRoleStore.setGroupUsers(refreshRes)
+                    })
+                }
+            }
+        }
     })
 }

@@ -467,3 +467,20 @@ export interface Profile {
 export interface ProfileResParams extends GeneralResParam {
     profile?: Profile;
 }
+
+// Get Users in Group
+export interface GroupUsers {
+    // Group ID
+    groupId: number;
+
+    // Group Name
+    groupName: string;
+
+    // Structure Units
+    strUnitUsers: StrUnitUser[];
+}
+
+// Get Group Users Categorized Structure Units Response Parameters
+export interface GetGroupUsersResParams extends GeneralResParam {
+    groupUsers: GroupUsers[];
+}
