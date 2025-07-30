@@ -579,5 +579,29 @@
       "chPwdSameTip": "New Password could not be Same with Current Password",
       "confirm": "Confirm"
     }
+  },
+  "comPerRoles": {
+    "defRoles": {
+      "title": "Default Roles",
+      "permissionHint": "Permissions of ",
+      "roleName": "Role Name",
+      "roleDesc": "Role Description",
+      "perName": "Permission Name",
+      "perDesc": "Permission Description",
+      "perCode": "Permission Code",
+      "users": "Members",
+      "viewUsers": "View Members"
+    },
+    "cusRoles": {
+      "title": "Customize Roles",
+      "permissionHint": "Permissions of ",
+      "roleName": "Role Name",
+      "roleDesc": "Role Description",
+      "perName": "Permission Name",
+      "perDesc": "Permission Description",
+      "perCode": "Permission Code",
+      "users": "Members",
+      "viewUsers": "View Members"
+    }
   }
 }

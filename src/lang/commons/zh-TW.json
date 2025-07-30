@@ -579,5 +579,29 @@
       "chPwdSameTip": "新密碼不得與當前密碼相同",
       "confirm": "確認"
     }
+  },
+  "comPerRoles": {
+    "defRoles": {
+      "title": "預設角色",
+      "permissionHint": "的權限",
+      "roleName": "角色名稱",
+      "roleDesc": "角色描述",
+      "perName": "權限名稱",
+      "perDesc": "權限描述",
+      "perCode": "權限代碼",
+      "users": "成員",
+      "viewUsers": "查看成員"
+    },
+    "cusRoles": {
+      "title": "自定義角色",
+      "permissionHint": "的權限",
+      "roleName": "角色名稱",
+      "roleDesc": "角色描述",
+      "perName": "權限名稱",
+      "perDesc": "權限描述",
+      "perCode": "權限代碼",
+      "users": "成員",
+      "viewUsers": "查看成員"
+    }
   }
 }
