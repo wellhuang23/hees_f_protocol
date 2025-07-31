@@ -470,13 +470,16 @@ export interface ProfileResParams extends GeneralResParam {
 
 // Get Users in Group
 export interface GroupUsers {
-    // Group ID
-    groupId: number;
+    // Company ID
+    comId: number;
 
-    // Group Name
-    groupName: string;
+    // Company Short Name
+    comStName: string;
 
-    // Structure Units
+    // Company Tax No.
+    comTaxNo: string;
+
+    // Users in Structure Units
     strUnitUsers: StrUnitUser[];
 }
 

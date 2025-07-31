@@ -4,6 +4,7 @@ import { storeToRefs } from 'pinia'
 import { useComPerRoleStore, useUserInfoStore, useValidComStore } from '@/stores'
 import type { ComRole } from '@/interfaces'
 import {computed, ref} from 'vue'
+import PerRoleDefUsers from '@/components/oms/PerRolesDefUsers.vue'
 
 const { t, locale } = useI18n()
 
@@ -11,11 +12,13 @@ const comPerRoleStore = useComPerRoleStore()
 const userInfoStore = useUserInfoStore()
 const validComStore = useValidComStore()
 const { defRoles } = storeToRefs(comPerRoleStore)
-const { per0100, } = storeToRefs(userInfoStore)
+const { per0100, per0010 } = storeToRefs(userInfoStore)
 
 const comTaxNo = validComStore.currentCom.comTaxNo
 const perReadRolesUsers = comTaxNo + '-oms-003-0100'
+const perUpdateRolesUsers = comTaxNo + '-oms-003-0010'
 const canViewUsers = computed(() => per0100.value.includes(perReadRolesUsers))
+const canEditUsers = computed(() => per0010.value.includes(perUpdateRolesUsers))
 
 const usersColumnWidth = computed(() => (locale.value === 'en-US' ? 150 : 120))
 
@@ -84,7 +87,7 @@ const showUsers = (row: ComRole) => {
 </script>
 
 <template>
-  <h3>{{ t('comPerRoles.defRoles.title') }}</h3>
+<!--  <h3>{{ t('comPerRoles.defRoles.title') }}</h3>-->
   <el-table
       :data="defRoles"
       stripe
@@ -129,6 +132,12 @@ const showUsers = (row: ComRole) => {
       </template>
     </el-table-column>
   </el-table>
+  <per-role-def-users
+      v-if="selectedRole"
+      v-model="drawerVisible"
+      :role="selectedRole"
+      :can-edit="canEditUsers"
+  />
 </template>
 
 <style scoped lang="scss">

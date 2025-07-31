@@ -1024,7 +1024,7 @@ class OMSOrgsAPI {
     // API for Getting Group Users & Categorized by Structure Units
     async getGroupUsers(token: string): Promise<GetGroupUsersResParams> {
         return request<any, any>({
-            url: ORGS_API + '/users/info/get',
+            url: ORGS_API + '/group/users/get',
             method: 'GET',
             headers: {
                 Authorization: `HEEsToken ${token}`,
@@ -1032,9 +1032,10 @@ class OMSOrgsAPI {
         }).then((response): GetGroupUsersResParams => {
             if (response.data.errno === '00000') {
                 const groups: GroupUsers[] = []
-                for (const group of response.data.data) {
+                console.log(response.data.data)
+                for (const com of response.data.data) {
                     const strUnitUsers: StrUnitUser[] = []
-                    for (const row of group.str_units) {
+                    for (const row of com.str_units) {
                         const children: StrUnitUser[] = []
                         if (row.children.length > 0) {
                             this._resortStrUnitUserChildren(row.children).then(res => {
@@ -1078,8 +1079,9 @@ class OMSOrgsAPI {
                     }
 
                     groups.push({
-                        groupId: group.group_id,
-                        groupName: group.group_name,
+                        comId: com.com_id,
+                        comStName: com.com_st_name,
+                        comTaxNo: com.com_tax_no,
                         strUnitUsers: strUnitUsers
                     })
                 }
@@ -1135,13 +1137,15 @@ class OMSOrgsAPI {
             const users: UserInfo[] = []
             for (const user of child.users) {
                 const jobPositions: UserJobPosition[] = []
-                for (const jobPosition of user.job_positions) {
-                    jobPositions.push({
-                        jobPosId: (convertToNumber(jobPosition.jp_id) ?? 0),
-                        jobPosName: jobPosition.jp_name,
-                        jobPosEngName: jobPosition.jp_eng_name,
-                        jobPosLevel: jobPosition.jp_level,
-                    })
+                if ('job_positions' in user) {
+                    for (const jobPosition of user.job_positions) {
+                        jobPositions.push({
+                            jobPosId: (convertToNumber(jobPosition.jp_id) ?? 0),
+                            jobPosName: jobPosition.jp_name,
+                            jobPosEngName: jobPosition.jp_eng_name,
+                            jobPosLevel: jobPosition.jp_level,
+                        })
+                    }
                 }
                 const strUnits: UserStrUnit[] = []
                 for (const strUnit of user.str_units) {
@@ -1154,15 +1158,17 @@ class OMSOrgsAPI {
                 }
 
                 const detailInfo: UserDetailInfo[] = []
-                for (const detail of user.details) {
-                    detailInfo.push({
-                        userDataId: (convertToNumber(detail.user_data_id) ?? 0),
-                        data: detail.data,
-                        colId: (convertToNumber(detail.user_col_id) ?? 0),
-                        colName: detail.col_name,
-                        colType: (convertToNumber(detail.col_type) ?? 0),
-                        colRequire: detail.col_require
-                    })
+                if ('details' in user) {
+                    for (const detail of user.details) {
+                        detailInfo.push({
+                            userDataId: (convertToNumber(detail.user_data_id) ?? 0),
+                            data: detail.data,
+                            colId: (convertToNumber(detail.user_col_id) ?? 0),
+                            colName: detail.col_name,
+                            colType: (convertToNumber(detail.col_type) ?? 0),
+                            colRequire: detail.col_require
+                        })
+                    }
                 }
 
                 users.push({

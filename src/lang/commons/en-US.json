@@ -590,7 +590,11 @@
       "perDesc": "Permission Description",
       "perCode": "Permission Code",
       "users": "Members",
-      "viewUsers": "View Members"
+      "viewUsers": "View Members",
+      "userList": "Member List",
+      "userNo": "Member No.",
+      "userStName": "Member Name",
+      "editMembers": "Edit Members"
     },
     "cusRoles": {
       "title": "Customize Roles",
@@ -601,7 +605,11 @@
       "perDesc": "Permission Description",
       "perCode": "Permission Code",
       "users": "Members",
-      "viewUsers": "View Members"
+      "viewUsers": "View Members",
+      "userList": "Member List",
+      "userNo": "Member No.",
+      "userStName": "Member Name",
+      "editMembers": "Edit Members"
     }
   }
 }
