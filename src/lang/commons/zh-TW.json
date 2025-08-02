@@ -234,7 +234,7 @@
     "viewUsers": "查看成員",
     "userList": "成員列表",
     "userNo": "成員代號",
-    "userStName": "成員名稱",
+    "userStName": "成員",
     "editMembers": "編輯成員",
     "selected": "已選擇",
     "notSelected": "未選擇",
@@ -593,8 +593,13 @@
       "viewUsers": "查看成員",
       "userList": "成員列表",
       "userNo": "成員代號",
-      "userStName": "成員名稱",
-      "editMembers": "編輯成員"
+      "userStName": "成員",
+      "editMembers": "編輯成員",
+      "assignMembers": {
+        "colStrUnitName": "所屬單位",
+        "colUserStName": "成員",
+        "colUserNo": "成員代號"
+      }
     },
     "cusRoles": {
       "title": "自定義角色",
@@ -608,8 +613,13 @@
       "viewUsers": "查看成員",
       "userList": "成員列表",
       "userNo": "成員代號",
-      "userStName": "成員名稱",
-      "editMembers": "編輯成員"
+      "userStName": "成員",
+      "editMembers": "編輯成員",
+      "assignMembers": {
+        "colStrUnitName": "所屬單位",
+        "colUserStName": "成員",
+        "colUserNo": "成員代號"
+      }
     }
   }
 }

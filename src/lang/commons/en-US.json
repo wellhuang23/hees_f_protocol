@@ -231,7 +231,7 @@
     "viewUsers": "View Members",
     "userList": "Member List",
     "userNo": "Member No.",
-    "userStName": "Member Name",
+    "userStName": "Username",
     "editMembers": "Edit Members",
     "selected": "Selected",
     "notSelected": "Not Selected",
@@ -593,8 +593,13 @@
       "viewUsers": "View Members",
       "userList": "Member List",
       "userNo": "Member No.",
-      "userStName": "Member Name",
-      "editMembers": "Edit Members"
+      "userStName": "Username",
+      "editMembers": "Edit Members",
+      "assignMembers": {
+        "colStrUnitName": "Structure Unit",
+        "colUserStName": "Member",
+        "colUserNo": "Member NO."
+      }
     },
     "cusRoles": {
       "title": "Customize Roles",
@@ -608,8 +613,13 @@
       "viewUsers": "View Members",
       "userList": "Member List",
       "userNo": "Member No.",
-      "userStName": "Member Name",
-      "editMembers": "Edit Members"
+      "userStName": "Username",
+      "editMembers": "Edit Members",
+      "assignMembers": {
+        "colStrUnitName": "Structure Unit",
+        "colUserStName": "Member",
+        "colUserNo": "Member NO."
+      }
     }
   }
 }

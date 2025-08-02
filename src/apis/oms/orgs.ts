@@ -1051,7 +1051,8 @@ class OMSOrgsAPI {
                             userId: (convertToNumber(row.user_id) ?? 0),
                             userStName: row.user_st_name,
                             userNo: row.user_no,
-                            children: children
+                            children: children,
+                            rowKey: `${row.str_unit_id}-${row.user_id}`
                         })
                     }
 
@@ -1192,7 +1193,8 @@ class OMSOrgsAPI {
                 userId: (convertToNumber(child.user_id) ?? 0),
                 userStName: child.user_st_name,
                 userNo: child.user_no,
-                children: _children
+                children: _children,
+                rowKey: `${child.str_unit_id}-${child.user_id}`
             })
         }
 

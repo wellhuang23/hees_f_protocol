@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {useI18n} from 'vue-i18n'
 import type {UserDetailInfo} from '@/interfaces'
-import {onMounted, reactive, toRaw} from 'vue'
+import {onMounted, reactive} from 'vue'
 import {ElNotification, type FormRules} from "element-plus";
 import { QuestionFilled } from '@element-plus/icons-vue'
 import { updateProfileDetail } from '@/services'

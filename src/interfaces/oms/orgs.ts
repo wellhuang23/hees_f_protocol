@@ -491,7 +491,11 @@ export interface RolePerUser {
     // User No.
     userNo: string;
 
+    // Children
     children: RolePerUser[];
+
+    // Key for Showing
+    rowKey: string;
 }
 
 // Get Users in Group
