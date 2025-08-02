@@ -55,7 +55,6 @@ const handleInputChange = (value: any, item: any) => {
 }
 
 const confirmChanges = async () => {
-  console.log(toRaw(dynamicData))
   const modifiedData: UserDetailInfo[] = []
   for (const info of props.details) {
     modifiedData.push({

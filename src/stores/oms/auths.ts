@@ -10,7 +10,7 @@ import type {
     GetComRoleResParams,
     ComRoleUsers,
     GetComRoleUsersResParams,
-    GroupUsers,
+    ComUsers,
     GetGroupUsersResParams,
     SubComPermissions,
     GetSubComPerResParams,
@@ -171,7 +171,7 @@ const useComPerRoleStore = defineStore(COM_PER_ROLE, {
         cusRoles: [] as ComRole[],
         comRoleUsers: [] as ComRoleUsers[],
         subComPermissions: [] as SubComPermissions[],
-        groupUsers: [] as GroupUsers[],
+        groupUsers: [] as ComUsers[],
     }),
     actions: {
         setComRoles(comRoles: GetComRoleResParams) {
@@ -188,7 +188,7 @@ const useComPerRoleStore = defineStore(COM_PER_ROLE, {
         },
 
         setGroupUsers(res: GetGroupUsersResParams) {
-            this.groupUsers = res.groupUsers
+            this.groupUsers = res.companies
         }
     }
 })

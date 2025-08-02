@@ -468,8 +468,34 @@ export interface ProfileResParams extends GeneralResParam {
     profile?: Profile;
 }
 
+// Group User for Assigning Permission Roles
+export interface RolePerUser {
+    // Structure Unit ID
+    strUnitId: number;
+
+    // Structure Unit Name
+    strUnitName: string;
+
+    // Structure Unit Name in English
+    strUnitEngName: string;
+
+    // Structure Unit No.
+    strUnitNo: string;
+
+    // User ID
+    userId: number;
+
+    // User Short Name
+    userStName: string;
+
+    // User No.
+    userNo: string;
+
+    children: RolePerUser[];
+}
+
 // Get Users in Group
-export interface GroupUsers {
+export interface ComUsers {
     // Company ID
     comId: number;
 
@@ -480,10 +506,10 @@ export interface GroupUsers {
     comTaxNo: string;
 
     // Users in Structure Units
-    strUnitUsers: StrUnitUser[];
+    users: RolePerUser[];
 }
 
 // Get Group Users Categorized Structure Units Response Parameters
 export interface GetGroupUsersResParams extends GeneralResParam {
-    groupUsers: GroupUsers[];
+    companies: ComUsers[];
 }

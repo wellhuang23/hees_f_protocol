@@ -30,7 +30,8 @@ import type {
     ChangeUserPwdResParams,
     ProfileResParams,
     GetGroupUsersResParams,
-    GroupUsers,
+    ComUsers,
+    RolePerUser,
 } from '@/interfaces'
 import request from '@/utils/requests'
 import { convertToNumber } from '@/utils/conNumber'
@@ -1031,71 +1032,47 @@ class OMSOrgsAPI {
             },
         }).then((response): GetGroupUsersResParams => {
             if (response.data.errno === '00000') {
-                const groups: GroupUsers[] = []
-                console.log(response.data.data)
+                const companies: ComUsers[] = []
                 for (const com of response.data.data) {
-                    const strUnitUsers: StrUnitUser[] = []
-                    for (const row of com.str_units) {
-                        const children: StrUnitUser[] = []
+                    const users: RolePerUser[] = []
+                    for (const row of com.users) {
+                        const children: RolePerUser[] = []
                         if (row.children.length > 0) {
-                            this._resortStrUnitUserChildren(row.children).then(res => {
+                            this._resortPerRoleUserChildren(row.children).then(res => {
                                 children.push(...res)
                             })
                         }
 
-                        const users: UserInfo[] = []
-                        for (const user of row.users) {
-                            const strUnits: UserStrUnit[] = []
-                            for (const strUnit of user.str_units) {
-                                strUnits.push({
-                                    strUnitId: (convertToNumber(strUnit.str_unit_id) ?? 0),
-                                    strUnitName: strUnit.str_unit_name,
-                                    strUnitEngName: strUnit.str_unit_eng_name,
-                                    strUnitNo: strUnit.str_unit_no,
-                                })
-                            }
-
-                            users.push({
-                                userId: (convertToNumber(user.user_id) ?? 0),
-                                userNo: user.user_no,
-                                userName: user.user_name,
-                                userStName: user.user_st_name,
-                                userType: 3,
-                                email: '',
-                                strUnits: strUnits,
-                                jobPositions: [],
-                                detailInfo: []
-                            })
-                        }
-
-                        strUnitUsers.push({
+                        users.push({
                             strUnitId: (convertToNumber(row.str_unit_id) ?? 0),
                             strUnitName: row.str_unit_name,
                             strUnitEngName: row.str_unit_eng_name,
                             strUnitNo: row.str_unit_no,
-                            children: children,
-                            users: users
+                            userId: (convertToNumber(row.user_id) ?? 0),
+                            userStName: row.user_st_name,
+                            userNo: row.user_no,
+                            children: children
                         })
                     }
 
-                    groups.push({
+                    companies.push({
                         comId: com.com_id,
                         comStName: com.com_st_name,
                         comTaxNo: com.com_tax_no,
-                        strUnitUsers: strUnitUsers
+                        users: users
                     })
                 }
 
                 return {
                     errno: response.data.errno,
                     desc: response.data.desc,
-                    groupUsers: groups
+                    companies: companies
                 }
             } else {
                 return {
                     errno: response.data.errno,
                     desc: response.data.desc,
-                    groupUsers: []
+                    companies: []
                 }
             }
         });
@@ -1127,10 +1104,10 @@ class OMSOrgsAPI {
     async _resortStrUnitUserChildren(children: Array<any>): Promise<StrUnitUser[]> {
         const result: Array<StrUnitUser> = []
         for (const child of children) {
-            let children: StrUnitUser[] = []
+            let _children: StrUnitUser[] = []
             if (child.children.length > 0) {
                 this._resortStrUnitUserChildren(child.children).then(res => {
-                    children.push(...res)
+                    _children.push(...res)
                 })
             }
 
@@ -1189,8 +1166,33 @@ class OMSOrgsAPI {
                 strUnitName: child.str_unit_name,
                 strUnitEngName: child.str_unit_eng_name,
                 strUnitNo: child.str_unit_no,
-                children: children,
+                children: _children,
                 users: users
+            })
+        }
+
+        return result
+    }
+
+    async _resortPerRoleUserChildren(children: Array<any>): Promise<RolePerUser[]> {
+        const result: Array<RolePerUser> = []
+        for (const child of children) {
+            let _children: RolePerUser[] = []
+            if (child.children.length > 0) {
+                this._resortPerRoleUserChildren(child.children).then(res => {
+                    _children.push(...res)
+                })
+            }
+
+            result.push({
+                strUnitId: (convertToNumber(child.str_unit_id) ?? 0),
+                strUnitName: child.str_unit_name,
+                strUnitEngName: child.str_unit_eng_name,
+                strUnitNo: child.str_unit_no,
+                userId: (convertToNumber(child.user_id) ?? 0),
+                userStName: child.user_st_name,
+                userNo: child.user_no,
+                children: _children
             })
         }
 
