@@ -130,6 +130,12 @@
     "createComCusRoleSuccessMsg": "Create Customize Role Successfully",
     "createComCusRoleNoPerErrorMsg": "You don't Have Permission to Create Customize Role, Please Contact System Manger",
     "createComCusRoleErrorMsg": "Create Customize Role Fail, Please Contact System Manger",
+    "updateComCusRoleSuccessMsg": "Update Customize Role Successfully",
+    "updateComCusRoleNoPerErrorMsg": "You don't Have Permission to Update Customize Role, Please Contact System Manger",
+    "updateComCusRoleErrorMsg": "Update Customize Role Fail, Please Contact System Manger",
+    "deleteComCusRoleSuccessMsg": "Delete Customize Role Successfully",
+    "deleteComCusRoleNoPerErrorMsg": "You don't Have Permission to Delete Customize Role, Please Contact System Manger",
+    "deleteComCusRoleErrorMsg": "Delete Customize Role Fail, Please Contact System Manger",
     "updateComPerRoleUsersFailMsg": "Update Members in Company Permission Role Fail, Please Contact System Manager"
   },
   "cusSugDetail": {
@@ -148,7 +154,7 @@
     "title": "Update Suggestion",
     "response": "Response",
     "remarks": "Remarks",
-    "updateBtn": "Update",
+    "updateBtn": "Modify",
     "statusOptions": {
       "new": "New Suggestion",
       "processing": "In Processing",
@@ -642,6 +648,23 @@
         "status": "Status",
         "selected": "Selected",
         "notSelected": "Not Selected"
+      },
+      "updateCusRole": {
+        "updateBtn": "Modify",
+        "title": "Update Customize Role",
+        "roleName": "Role Name",
+        "roleDesc": "Role Description",
+        "colPerCode": "Permission No.",
+        "colPerName": "Permission Name",
+        "colPerDesc": "Permission Description",
+        "status": "Status",
+        "selected": "Selected",
+        "notSelected": "Not Selected"
+      },
+      "deleteCusRole": {
+        "deleteBtn": "Delete",
+        "title": "Delete Customize Role",
+        "content": "Sure for Deleting the Customize Role ?"
       }
     }
   }

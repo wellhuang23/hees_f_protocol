@@ -2,10 +2,12 @@
 import { useI18n } from 'vue-i18n'
 import { storeToRefs } from 'pinia'
 import { useComPerRoleStore, useUserInfoStore, useValidComStore } from '@/stores'
-import type { ComRole } from '@/interfaces'
+import type {ComRole} from '@/interfaces'
 import {computed, ref} from 'vue'
 import PerRolesCusAddRole from "@/components/oms/PerRolesCusAddRole.vue";
 import PerRoleCusUsers from "@/components/oms/PerRolesCusUsers.vue";
+import PerRolesCusDelRole from '@/components/oms/PerRolesCusDelRole.vue'
+import PerRolesCusUpRole from "@/components/oms/PerRolesCusUpRole.vue";
 
 const { t, locale } = useI18n()
 
@@ -13,17 +15,26 @@ const comPerRoleStore = useComPerRoleStore()
 const userInfoStore = useUserInfoStore()
 const validComStore = useValidComStore()
 const { cusRoles } = storeToRefs(comPerRoleStore)
-const { per1000, per0100, per0010 } = storeToRefs(userInfoStore)
+const { per1000, per0100, per0010, per0001 } = storeToRefs(userInfoStore)
 
 const comTaxNo = validComStore.currentCom.comTaxNo
 const perCreateRole = comTaxNo + '-oms-002-1000'
 const canCreateRole = computed(() => per1000.value.includes(perCreateRole))
+const perUpdateRole = comTaxNo + '-oms-002-0010'
+const canUpdateRole = computed(() => per0010.value.includes(perUpdateRole))
+const perDeleteRole = comTaxNo + '-oms-002-0001'
+const canDeleteRole = computed(() => per0001.value.includes(perDeleteRole))
 const perReadRolesUsers = comTaxNo + '-oms-003-0100'
 const canViewUsers = computed(() => per0100.value.includes(perReadRolesUsers))
 const perUpdateRolesUsers = comTaxNo + '-oms-003-0010'
 const canEditUsers = computed(() => per0010.value.includes(perUpdateRolesUsers))
 
 const usersColumnWidth = computed(() => (locale.value === 'en-US' ? 150 : 120))
+
+const isUpCusRoleDrawerVisible = ref(false);
+const isDelCusRoleDialogVisible = ref(false);
+const selectedCusRoleId = ref<number>(0);
+const selectedCusRole = ref<ComRole | null>(null);
 
 const getRowKey = (row: ComRole) => {
   return String(row.comRoleId)
@@ -95,6 +106,16 @@ const showUsers = (row: ComRole) => {
   selectedRole.value = row
   drawerVisible.value = true
 }
+
+const updateClick = (row: ComRole) => {
+  selectedCusRole.value = row;
+  isUpCusRoleDrawerVisible.value = true;
+};
+
+const deleteClick = (comRoleId: number) => {
+  selectedCusRoleId.value = comRoleId;
+  isDelCusRoleDialogVisible.value = true;
+};
 </script>
 
 <template>
@@ -121,6 +142,25 @@ const showUsers = (row: ComRole) => {
     <el-table-column type="expand">
       <template #default="props">
         <div class="permission-details">
+          <el-row justify="space-between" align="middle" class="page-header">
+            <el-col :span="20"></el-col>
+            <el-col :span="4" style="text-align: right;">
+              <el-button
+                  v-if="canUpdateRole"
+                  type="warning"
+                  @click="updateClick(props.row)"
+              >
+                {{ t('comPerRoles.cusRoles.updateCusRole.updateBtn') }}
+              </el-button>
+              <el-button
+                  v-if="canDeleteRole"
+                  type="danger"
+                  @click="deleteClick(props.row.comRoleId)"
+              >
+                {{ t('comPerRoles.cusRoles.deleteCusRole.deleteBtn') }}
+              </el-button>
+            </el-col>
+          </el-row>
           <h4>{{ getRoleName(props.row) }} {{ t('comPerRoles.cusRoles.permissionHint') }}</h4>
           <el-table :data="props.row.comPermissions" border>
             <el-table-column
@@ -160,6 +200,16 @@ const showUsers = (row: ComRole) => {
       v-model="drawerVisible"
       :role="selectedRole"
       :can-edit="canEditUsers"
+  />
+  <per-roles-cus-up-role
+      v-if="isUpCusRoleDrawerVisible"
+      v-model="isUpCusRoleDrawerVisible"
+      :role="selectedCusRole"
+  />
+  <per-roles-cus-del-role
+      v-if="isDelCusRoleDialogVisible"
+      v-model="isDelCusRoleDialogVisible"
+      :com-role-id="selectedCusRoleId"
   />
 </template>
 

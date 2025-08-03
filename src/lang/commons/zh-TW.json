@@ -133,6 +133,12 @@
     "createComCusRoleSuccessMsg": "新增自定義角色成功",
     "createComCusRoleNoPerErrorMsg": "您沒有新增自定義角色的權限，請洽系統管理員",
     "createComCusRoleErrorMsg": "新增自定義角色失敗，請洽系統管理員",
+    "updateComCusRoleSuccessMsg": "更新自定義角色成功",
+    "updateComCusRoleNoPerErrorMsg": "您沒有更新自定義角色的權限，請洽系統管理員",
+    "updateComCusRoleErrorMsg": "更新自定義角色失敗，請洽系統管理員",
+    "deleteComCusRoleSuccessMsg": "刪除自定義角色成功",
+    "deleteComCusRoleNoPerErrorMsg": "您沒有刪除自定義角色的權限，請洽系統管理員",
+    "deleteComCusRoleErrorMsg": "刪除自定義角色失敗，請洽系統管理員",
     "systemErrorMsg": "系統錯誤，請聯繫系統管理員"
   },
   "cusSugDetail": {
@@ -151,7 +157,7 @@
     "title": "更新建議",
     "response": "回覆",
     "remarks": "備註",
-    "updateBtn": "更新",
+    "updateBtn": "修改",
     "statusOptions": {
       "new": "新建議",
       "processing": "處理中",
@@ -367,7 +373,7 @@
     },
     "deleteEventDialog": {
       "title": "刪除事件",
-      "content": "是否確認刪除事件",
+      "content": "是否確認刪除事件 ?",
       "delete": "刪除"
     }
   },
@@ -642,6 +648,23 @@
         "status": "狀態",
         "selected": "已選擇",
         "notSelected": "未選擇"
+      },
+      "updateCusRole": {
+        "updateBtn": "修改",
+        "title": "更新自定義角色",
+        "roleName": "角色名稱",
+        "roleDesc": "角色描述",
+        "colPerCode": "權限代碼",
+        "colPerName": "權限名稱",
+        "colPerDesc": "權限描述",
+        "status": "狀態",
+        "selected": "已選擇",
+        "notSelected": "未選擇"
+      },
+      "deleteCusRole": {
+        "deleteBtn": "刪除",
+        "title": "刪除自定義角色",
+        "content": "是否確認刪除自定義角色 ?"
       }
     }
   }
