@@ -58,12 +58,11 @@ const handleConfirm = async () => {
       sysRoleId: props.role.sysRoleId,
       userIds: selectedUserIds.value.filter((id): id is number => id !== undefined)
     })
-    handleClose()
-
     if (errno === '00000') {
-      await getSysRole()
-      await getSysRoleUsers()
-      await getSysUsers()
+      handleClose()
+      // await getSysRole()
+      // await getSysRoleUsers()
+      // await getSysUsers()
 
       ElNotification({
         title: t('notice.noticeTitle'),

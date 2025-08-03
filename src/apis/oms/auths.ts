@@ -418,7 +418,7 @@ class OMSAuthsAPI {
             'com_id': comId,
         }
         return request<any, any>({
-            url: AUTH_API + '/sys/per/role/users',
+            url: AUTH_API + '/com/per/role/users',
             method: 'GET',
             headers: {
                 Authorization: `HEEsToken ${token}`,
@@ -438,9 +438,9 @@ class OMSAuthsAPI {
                     }
 
                     roles.push({
-                        comRoleId: convertToNumber(role.def_role_id),
-                        comRoleName: role.def_role_name,
-                        comRoleEngName: role.def_role_eng_name,
+                        comRoleId: convertToNumber(role.com_role_id),
+                        comRoleName: role.com_role_name,
+                        comRoleEngName: role.com_role_eng_name,
                         comRoleUsers: comRoleUsers
                     })
                 }

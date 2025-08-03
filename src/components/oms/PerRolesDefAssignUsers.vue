@@ -1,9 +1,15 @@
 <script setup lang="ts">
-import {computed, reactive} from 'vue'
-import {useI18n} from 'vue-i18n'
-import type {ComRole, ComRoleUser, RolePerUser} from '@/interfaces'
-import {useComPerRoleStore} from '@/stores'
-import type { ElTable } from 'element-plus'
+import { computed, reactive, ref, watchEffect } from 'vue'
+import { useI18n } from 'vue-i18n'
+import type { ComRole, ComRoleUser, RolePerUser } from '@/interfaces'
+import { useComPerRoleStore } from '@/stores'
+import {ElNotification, type ElTable} from 'element-plus'
+import {
+  assignUsersComPerRole,
+  getComRoles,
+  getComRoleUsers,
+  getGroupUsers,
+} from '@/services'
 
 const { t, locale } = useI18n()
 
@@ -19,13 +25,6 @@ const emit = defineEmits(['update:modelValue'])
 
 const roleName = computed(() => (locale.value === 'zh-TW' ? props.role.comRoleName : props.role.comRoleEngName))
 
-const handleClose = () => {
-  emit('update:modelValue', false)
-}
-
-const handleConfirm = async () => {
-}
-
 const treeProps = reactive({
   checkStrictly: false,
 })
@@ -36,6 +35,54 @@ const strUnitName = (row: RolePerUser) => {
     return name + '(' + row.strUnitNo + ')'
   } else {
     return ''
+  }
+}
+
+const selectedUserIds = ref<(number | undefined)[]>([])
+
+watchEffect(() => {
+  selectedUserIds.value = props.users.map(u => u.userId)
+})
+
+const isSelected = (user: ComRoleUser) => {
+  return selectedUserIds.value.includes(user.userId)
+}
+
+const toggleSelection = (user: ComRoleUser) => {
+  const index = selectedUserIds.value.indexOf(user.userId)
+  if (index > -1) {
+    selectedUserIds.value.splice(index, 1)
+  } else {
+    selectedUserIds.value.push(user.userId)
+  }
+}
+
+const handleClose = () => {
+  emit('update:modelValue', false)
+}
+
+const handleConfirm = async () => {
+  const errno = await assignUsersComPerRole({
+    comRoleId: props.role.comRoleId ?? 0,
+    userIds: selectedUserIds.value.filter((id): id is number => id !== undefined)
+  })
+  if (errno === '00000') {
+    handleClose()
+    await getComRoles()
+    await getComRoleUsers()
+    await getGroupUsers()
+
+    ElNotification({
+      title: t('notice.noticeTitle'),
+      message: t('notice.updateComPerRoleUsersSuccessMsg'),
+      type: 'success'
+    })
+  } else {
+    ElNotification({
+      title: t('notice.noticeTitle'),
+      message: t('notice.updateComPerRoleUsersFailMsg'),
+      type: 'error'
+    })
   }
 }
 </script>
@@ -59,13 +106,30 @@ const strUnitName = (row: RolePerUser) => {
           row-key="rowKey"
           :default-expand-all="true"
       >
-        <el-table-column :label="t('comPerRoles.defRoles.assignMembers.colStrUnitName')" >
+        <el-table-column
+            :label="t('comPerRoles.defRoles.assignMembers.colStrUnitName')"
+            width="300px"
+        >
           <template #default="props">
             {{ strUnitName(props.row) }}
           </template>
         </el-table-column>
         <el-table-column prop="userStName" :label="t('comPerRoles.defRoles.assignMembers.colUserStName')" />
         <el-table-column prop="userNo" :label="t('comPerRoles.defRoles.assignMembers.colUserNo')" />
+        <el-table-column :label="t('comPerRoles.defRoles.assignMembers.status')">
+          <template #default="scope">
+            <el-button
+                v-if="scope.row.userId !== 0"
+                :type="isSelected(scope.row) ? 'success' : 'info'"
+                plain
+                @click="toggleSelection(scope.row)"
+            >
+              {{ isSelected(scope.row)
+                ? t('comPerRoles.defRoles.assignMembers.selected')
+                : t('comPerRoles.defRoles.assignMembers.notSelected') }}
+            </el-button>
+          </template>
+        </el-table-column>
       </el-table>
     </div>
     <template #footer>

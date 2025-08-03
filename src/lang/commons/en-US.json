@@ -28,8 +28,8 @@
     "logOutErrorMsg": "Error Occur when Log Out, Empty Local Data Already, Please Contact System Manager",
     "updatePerSuccessMsg": "Update Permissions to the Latest Already",
     "updatePerErrorMsg": "Error Occur when Update Permissions, Please Contact System Manager",
-    "updateSysPerRoleUsersSuccessMsg": "Update Users in System Permission Role Successfully",
-    "updateSysPerRoleUsersFailMsg": "Update Users in System Permission Role Fail, Please Contact System Manager",
+    "updateSysPerRoleUsersSuccessMsg": "Update Members in System Permission Role Successfully",
+    "updateSysPerRoleUsersFailMsg": "Update Members in System Permission Role Fail, Please Contact System Manager",
     "getSysLogsSuccessMsg": "Request System Logs Successfully",
     "getSysLogsTimeErrorMsg": "Please Input Start Time & End Time",
     "getSysLogsPerErrorMsg": "You Don't have Permission to Search Server Logs",
@@ -125,7 +125,9 @@
     "updateProfileErrorMsg": "Update password Fail, Please Contact System Manager",
     "updateProfileDetailSuccessMsg": "Update General Member's Detail Profile Successfully",
     "updateProfileDetailErrorMsg": "Update General Member's Detail Profile Fail, Please Contact System Manager",
-    "systemErrorMsg": "System Error, Please Contact System Manager"
+    "systemErrorMsg": "System Error, Please Contact System Manager",
+    "updateComPerRoleUsersSuccessMsg": "Update Members in Company Permission Role Successfully",
+    "updateComPerRoleUsersFailMsg": "Update Members in Company Permission Role Fail, Please Contact System Manager"
   },
   "cusSugDetail": {
     "title": "Suggestion Details",
@@ -598,7 +600,10 @@
       "assignMembers": {
         "colStrUnitName": "Structure Unit",
         "colUserStName": "Member",
-        "colUserNo": "Member NO."
+        "colUserNo": "Member NO.",
+        "status": "Status",
+        "selected": "Selected",
+        "notSelected": "Not Selected"
       }
     },
     "cusRoles": {
@@ -618,7 +623,10 @@
       "assignMembers": {
         "colStrUnitName": "Structure Unit",
         "colUserStName": "Member",
-        "colUserNo": "Member NO."
+        "colUserNo": "Member NO.",
+        "status": "Status",
+        "selected": "Selected",
+        "notSelected": "Not Selected"
       }
     }
   }
