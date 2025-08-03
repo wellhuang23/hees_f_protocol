@@ -2,12 +2,12 @@
 import { computed } from 'vue'
 import { usePersonalSetting } from '@/stores'
 import { useI18n } from 'vue-i18n'
-import { getAsideBarItems } from '@/services/general/AsideBarItems.ts'
+import { getAsideBarSysItems } from '@/services/general/AsideBarItems.ts'
 
 const { t } = useI18n()
 
 const personalSetting = usePersonalSetting()
-const asideBarItems = computed(() => getAsideBarItems())
+const asideBarItems = computed(() => getAsideBarSysItems())
 </script>
 
 <template>
@@ -42,7 +42,7 @@ const asideBarItems = computed(() => getAsideBarItems())
 
 <style scoped lang="scss">
 .asides {
-  width: 200px;
+  width: 240px;
   background-color: #142334;
   color: white;
   transition: width 0.3s;

@@ -1,10 +1,10 @@
 <template>
   <el-drawer
-    :model-value="visible"
+    :model-value="modelValue"
     :title="t('cusSugDetail.title')"
     direction="rtl"
     size="50%"
-    @update:model-value="$emit('update:visible', $event)"
+    @update:model-value="$emit('update:modelValue', $event)"
   >
     <div v-if="suggestion" class="detail-container">
       <div class="detail-item">
@@ -50,18 +50,23 @@
       </div>
     </template>
   </el-drawer>
+  <CusDelSug
+    v-if="isDelSugDialogVisible"
+    v-model="isDelSugDialogVisible"
+    :event="suggestion"
+    @delete-confirmed="handleDeleteConfirmed"
+  />
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import type { CusSugMsg } from '@/interfaces/oms/bases';
 import { useUserInfoStore } from '@/stores/oms/auths';
-import {deleteCusSuggestion} from "@/services";
-import {ElNotification} from "element-plus";
+import CusDelSug from './CusDelSug.vue';
 
 const props = defineProps({
-  visible: {
+  modelValue: {
     type: Boolean,
     required: true,
   },
@@ -71,10 +76,11 @@ const props = defineProps({
   },
 });
 
-defineEmits(['update:visible']);
+const emit = defineEmits(['update:modelValue']);
 
 const { t, locale } = useI18n();
 const userInfo = useUserInfoStore();
+const isDelSugDialogVisible = ref(false);
 
 const subscriptionName = computed(() => {
   if (!props.suggestion?.cusSugSub) return '';
@@ -100,31 +106,12 @@ const statusText = computed(() => {
   }
 });
 
-const handleDelete = async () => {
-  console.log('Delete Suggestion Info:', props.suggestion);
-  const deleteRes = await deleteCusSuggestion({
-    cusSugId: props.suggestion?.cusSugId,
-  })
-  if (deleteRes === '00000') {
-    ElNotification({
-      title: t('notice.noticeTitle'),
-      message: t('notice.deleteCusSuggestionSuccessMsg'),
-      type: 'success'
-    });
-    location.reload(); // Consider updating data without a full reload
-  } else if (deleteRes === '99006') {
-    ElNotification({
-      title: t('notice.noticeTitle'),
-      message: t('notice.deleteCusSuggestionNoPerErrorMsg'),
-      type: 'error'
-    });
-  } else {
-    ElNotification({
-      title: t('notice.noticeTitle'),
-      message: t('notice.deleteCusSuggestionErrorMsg'),
-      type: 'error'
-    });
-  }
+const handleDelete = () => {
+  isDelSugDialogVisible.value = true;
+};
+
+const handleDeleteConfirmed = () => {
+  emit('update:modelValue', false);
 };
 </script>
 

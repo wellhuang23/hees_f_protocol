@@ -32,33 +32,31 @@ const handleConfirm = async () => {
     if (deleteRes === '00000') {
       ElNotification({
         title: t('notice.noticeTitle'),
-        message: t('notice.deleteSysNotificationSuccessMsg'),
+        message: t('notice.deleteNotificationSuccessMsg'),
         type: 'success'
       });
-      location.reload(); // Consider updating data without a full reload
+      closeDialog();
     } else if (deleteRes === '99006') {
       ElNotification({
         title: t('notice.noticeTitle'),
-        message: t('notice.deleteSysNotificationNoPerErrorMsg'),
+        message: t('notice.deleteNotificationNoPerErrorMsg'),
         type: 'error'
       });
     } else {
       ElNotification({
         title: t('notice.noticeTitle'),
-        message: t('notice.deleteSysNotificationErrorMsg'),
+        message: t('notice.deleteNotificationErrorMsg'),
         type: 'error'
       });
     }
   }
-
-  closeDialog();
 };
 </script>
 
 <template>
   <el-dialog
     v-model="isVisible"
-    :title="t('notiDelNotice.title')"
+    :title="t('notiDelNotice.sysTitle')"
     width="400px"
     :close-on-click-modal="true"
     @close="closeDialog"

@@ -2,7 +2,6 @@
 import {computed, ref, watchEffect} from 'vue'
 import {useI18n} from 'vue-i18n'
 import {useSysPerRoleStore} from '@/stores'
-import {storeToRefs} from 'pinia'
 import type {SysRole, SysRoleUser} from '@/interfaces'
 import {assignUsersSysPerRole} from '@/services'
 import {
@@ -23,16 +22,9 @@ const props = defineProps<{
 const emit = defineEmits(['update:modelValue'])
 
 const sysPerRoleStore = useSysPerRoleStore()
-const { sysRoleUsers } = storeToRefs(sysPerRoleStore)
 
 const allUsers = computed(() => {
-  const all = sysRoleUsers.value.flatMap(role => role.sysRoleUsers)
-  return all.reduce((acc, user) => {
-    if (user.userId !== undefined && !acc.some(u => u.userId === user.userId)) {
-      acc.push(user)
-    }
-    return acc
-  }, [] as SysRoleUser[])
+  return sysPerRoleStore.sysUsers
 })
 
 const roleName = computed(() => (locale.value === 'zh-TW' ? props.role.sysRoleName : props.role.sysRoleEngName))
@@ -66,9 +58,8 @@ const handleConfirm = async () => {
       sysRoleId: props.role.sysRoleId,
       userIds: selectedUserIds.value.filter((id): id is number => id !== undefined)
     })
-    handleClose()
-
     if (errno === '00000') {
+      handleClose()
       await getSysRole()
       await getSysRoleUsers()
       await getSysUsers()
@@ -78,8 +69,6 @@ const handleConfirm = async () => {
         message: t('notice.updateSysPerRoleUsersSuccessMsg'),
         type: 'success'
       })
-      location.reload()
-
     } else {
       ElNotification({
         title: t('notice.noticeTitle'),
@@ -118,7 +107,6 @@ const handleConfirm = async () => {
     </el-table>
     <template #footer>
       <div class="dialog-footer">
-        <el-button @click="handleClose">{{ t('general.cancel') }}</el-button>
         <el-button type="primary" @click="handleConfirm">
           {{ t('general.confirm') }}
         </el-button>

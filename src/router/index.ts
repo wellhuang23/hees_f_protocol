@@ -9,20 +9,42 @@ import {
     checkPermission
 } from '@/utils/permissions'
 import { i18n } from '@/lang'
-import routerItems from '@/router/commons/asideBarItems.json'
+import routerSysItems from '@/router/commons/sysItems.json'
+import routerOmsItems from '@/router/commons/omsItems.json'
 import { localCache } from '@/utils/storages.ts'
-import { USER_INFO } from '@/global/contstants.ts'
+import {USER_INFO, VALID_COM} from '@/global/contstants.ts'
 
 const per0100 = localCache.getCache(USER_INFO)?.per0100 ?? [] as string[]
+const comTaxNo = localCache.getCache(VALID_COM)?.currentCom.comTaxNo ?? 'xxxxxxxx'
 const modules = import.meta.glob('/src/views/**/**.vue')
 
 function loadRouteItems() {
     let routes = []
     let appendedPath: string[] = []
-    for (const item of routerItems) {
+    // Append Path about System Manage
+    for (const item of routerSysItems) {
         for (const perCode of item.meta.perCodes) {
             if (!appendedPath.includes(item.path)) {
                 if (per0100.includes(perCode)) {
+                    routes.push({
+                        path: item.path,
+                        meta: {
+                            title: item.meta.title,
+                            perCodes: item.meta.perCodes,
+                        },
+                        component: modules[`/src/views/${item.component}.vue`]
+                    })
+
+                    appendedPath.push(item.path)
+                }
+            }
+        }
+    }
+    // Append Path about Organization Manage
+    for (const item of routerOmsItems) {
+        for (const perCode of item.meta.perCodes) {
+            if (!appendedPath.includes(item.path)) {
+                if (per0100.includes(perCode.replace('xxxxxxxx', comTaxNo))) {
                     routes.push({
                         path: item.path,
                         meta: {
@@ -50,7 +72,7 @@ const routes = [
     {
         path: '/logIn',
         meta: {
-            title: 'pageTitle.logIn'
+            title: 'pageTitle.general.logIn'
         },
         component: () => import('@/views/logIn/index.vue')
     },
@@ -64,23 +86,30 @@ const routes = [
             {
                 path: '404',
                 meta: {
-                    title: 'pageTitle.notExist'
+                    title: 'pageTitle.general.notExist'
                 },
                 component: () => import('@/views/excepts/NotFound.vue'),
             },
             {
                 path: '401',
                 meta: {
-                    title: 'pageTitle.noPermission'
+                    title: 'pageTitle.general.noPermission'
                 },
                 component: () => import('@/views/excepts/NoPermission.vue'),
             },
             {
                 path: 'dashboard',
                 meta: {
-                    title: 'pageTitle.dashboard'
+                    title: 'pageTitle.general.dashboard'
                 },
                 component: () => import('@/views/dashboard/index.vue'),
+            },
+            {
+                path: 'profile',
+                meta: {
+                    title: 'pageTitle.general.profile'
+                },
+                component: () => import('@/views/oms/Profile.vue'),
             },
             ...dRoutes
         ]

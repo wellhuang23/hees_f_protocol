@@ -35,7 +35,6 @@ const refreshHoliday = async () => {
         message: t('notice.syncCalendarSuccessMsg'),
         type: 'success'
       });
-      location.reload(); // Consider updating data without a full reload
     } else if (refreshRes === '99006') {
       ElNotification({
         title: t('notice.noticeTitle'),

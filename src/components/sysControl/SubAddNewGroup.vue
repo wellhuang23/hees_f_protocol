@@ -27,7 +27,7 @@ const form = ref({
 })
 
 const showConfirmDialog = ref(false)
-const groupAdminPwd = ref('')
+const adminPwd = ref('')
 
 const subItemsStore = useSubItemsStore()
 const { subItems } = storeToRefs(subItemsStore)
@@ -117,7 +117,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
             message: t('notice.createNewGroupSuccessMsg'),
             type: 'success'
           })
-          groupAdminPwd.value = res.groupAdminPwd as string
+          adminPwd.value = res.adminPwd as string
           showConfirmDialog.value = true
         } else if (res.errno === '99006') {
           ElNotification({
@@ -161,7 +161,7 @@ const submitForm = (formEl: FormInstance | undefined) => {
 }
 
 const handleReloadPage = () => {
-  location.reload()
+  emit('update:modelValue', false)
 }
 
 </script>
@@ -176,19 +176,19 @@ const handleReloadPage = () => {
   >
     <el-form :model="form" :rules="rules" ref="formRef" label-width="auto">
       <el-form-item :label="t('subAddNewGroup.groupName')" prop="groupName">
-        <el-input v-model="form.groupName" />
+        <el-input v-model="form.groupName" :maxlength="30" show-word-limit />
       </el-form-item>
       <el-form-item :label="t('subAddNewGroup.comTaxNo')" prop="comTaxNo">
-        <el-input v-model="form.comTaxNo" />
+        <el-input v-model="form.comTaxNo" :maxlength="8" show-word-limit />
       </el-form-item>
       <el-form-item :label="t('subAddNewGroup.comName')" prop="comName">
-        <el-input v-model="form.comName" />
+        <el-input v-model="form.comName" :maxlength="30" show-word-limit />
       </el-form-item>
       <el-form-item :label="t('subAddNewGroup.comStName')" prop="comStName">
-        <el-input v-model="form.comStName" />
+        <el-input v-model="form.comStName" :maxlength="10" show-word-limit />
       </el-form-item>
       <el-form-item :label="t('subAddNewGroup.comEngName')" prop="comEngName">
-        <el-input v-model="form.comEngName" />
+        <el-input v-model="form.comEngName" :maxlength="100" show-word-limit />
       </el-form-item>
       <el-form-item
         v-for="(subscription, index) in subscriptions"
@@ -223,7 +223,7 @@ const handleReloadPage = () => {
 
   <SubAddNewGroupConfirm
     v-if="showConfirmDialog"
-    :group-admin-pwd="groupAdminPwd"
+    :adminPwd="adminPwd"
     @confirm="handleReloadPage()"
   />
 </template>

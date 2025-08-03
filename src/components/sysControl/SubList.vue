@@ -4,7 +4,7 @@ import { storeToRefs } from 'pinia'
 import { useI18n } from 'vue-i18n'
 import SubAddNewGroup from './SubAddNewGroup.vue'
 import SubAddNewCom from './SubAddNewCom.vue'
-import SubChangeGroupAdminPwdConfirm from './SubChangeGroupAdminPwdConfirm.vue'
+import SubChangeGroupAdminPwdConfirm from './SubChangeAdminPwdConfirm.vue'
 import { useSubItemsStore } from '@/stores/oms/orgs'
 import { getAllGroupSubs, changeGroupAdminPwd } from '@/services/oms/orgs'
 import { getAllSubItems } from '@/services/oms/orgs'
@@ -24,7 +24,7 @@ const { per1000, per0010 } = storeToRefs(userInfoStore)
 const showAddGroupDialog = ref(false)
 const showAddComDialog = ref(false)
 const showChangePwdDialog = ref(false)
-const newGroupAdminPwd = ref('')
+const adminPwd = ref('')
 const selectedGroup = ref<GroupCompanies | null>(null)
 
 const loading = ref(false)
@@ -73,10 +73,10 @@ const openAddCompanyDialog = (group: GroupCompanies) => {
   showAddComDialog.value = true
 }
 
-const handleChangePassword = async (group: GroupCompanies) => {
-  const res = await changeGroupAdminPwd({ groupId: group.groupId })
+const handleChangePassword = async (row: ComSubs) => {
+  const res = await changeGroupAdminPwd({ comId: row.comId })
   if (res.errno === '00000') {
-    newGroupAdminPwd.value = res.groupAdminNewPwd ?? ''
+    adminPwd.value = res.adminNewPwd ?? ''
     showChangePwdDialog.value = true
 
     ElNotification({
@@ -171,7 +171,7 @@ onMounted(() => {
     </div>
     <SubAddNewGroup v-if="showAddGroupDialog" v-model="showAddGroupDialog" />
     <SubAddNewCom v-if="showAddComDialog" v-model="showAddComDialog" :group="selectedGroup" />
-    <SubChangeGroupAdminPwdConfirm v-if="showChangePwdDialog" v-model="showChangePwdDialog" :group-admin-pwd="newGroupAdminPwd" />
+    <SubChangeGroupAdminPwdConfirm v-if="showChangePwdDialog" v-model="showChangePwdDialog" :adminPwd="adminPwd" />
   <el-table
     :data="groupSubs"
     stripe
@@ -231,6 +231,13 @@ onMounted(() => {
                 </span>
               </template>
             </el-table-column>
+            <el-table-column v-if="showActionsColumn" :label="t('subList.actions')" width="240">
+              <template #default="scope">
+                <el-button type="warning" v-if="canChangePassword" @click.stop="handleChangePassword(scope.row)">
+                  {{ t('subList.changePwd') }}
+                </el-button>
+              </template>
+            </el-table-column>
           </el-table>
         </div>
       </template>
@@ -245,9 +252,6 @@ onMounted(() => {
       <template #default="scope">
         <el-button v-if="canCreateSubscription" @click.stop="openAddCompanyDialog(scope.row)">
           {{ t('subList.add') }}
-        </el-button>
-        <el-button type="warning" v-if="canChangePassword" @click.stop="handleChangePassword(scope.row)">
-          {{ t('subList.changePwd') }}
         </el-button>
       </template>
     </el-table-column>

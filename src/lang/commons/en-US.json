@@ -1,10 +1,10 @@
 {
   "logInPage": {
     "title": "Welcome to HEEs",
-    "hintUser": "Please Input Log In User No. or Email",
+    "hintUser": "Please Input Log In Email",
     "hintPwd": "Please Input Log In Password",
     "submitBtn": "Log In",
-    "errHintAccount": "Please Input correct User No. or Email",
+    "errHintAccount": "Please Input correct or Email",
     "errHintPwd": "Please Input Correct Password"
   },
   "topBar": {
@@ -28,8 +28,8 @@
     "logOutErrorMsg": "Error Occur when Log Out, Empty Local Data Already, Please Contact System Manager",
     "updatePerSuccessMsg": "Update Permissions to the Latest Already",
     "updatePerErrorMsg": "Error Occur when Update Permissions, Please Contact System Manager",
-    "updateSysPerRoleUsersSuccessMsg": "Update Users in System Permission Role Successfully",
-    "updateSysPerRoleUsersFailMsg": "Update Users in System Permission Role Fail, Please Contact System Manager",
+    "updateSysPerRoleUsersSuccessMsg": "Update Members in System Permission Role Successfully",
+    "updateSysPerRoleUsersFailMsg": "Update Members in System Permission Role Fail, Please Contact System Manager",
     "getSysLogsSuccessMsg": "Request System Logs Successfully",
     "getSysLogsTimeErrorMsg": "Please Input Start Time & End Time",
     "getSysLogsPerErrorMsg": "You Don't have Permission to Search Server Logs",
@@ -70,16 +70,73 @@
     "deleteCusSuggestionSuccessMsg": "Delete Customer Suggestion Successfully",
     "deleteCusSuggestionNoPerErrorMsg": "You don't Have Permission to Delete Customer Suggestion, Please Contact System Manger",
     "deleteCusSuggestionErrorMsg": "Delete Customer Suggestion Fail, Please Contact System Manger",
-    "createSysNotificationSuccessMsg": "Create System Notification Successfully",
-    "createSysNotificationNoPerErrorMsg": "You don't Have Permission to Create System Notification, Please Contact System Manger",
-    "createSysNotificationErrorMsg": "Create System Notification Fail, Please Contact System Manger",
-    "updateSysNotificationSuccessMsg": "Update System Notification Successfully",
-    "updateSysNotificationNoPerErrorMsg": "You don't Have Permission to Update System Notification, Please Contact System Manger",
-    "updateSysNotificationErrorMsg": "Update System Notification Fail, Please Contact System Manger",
-    "deleteSysNotificationSuccessMsg": "Delete System Notification Successfully",
-    "deleteSysNotificationNoPerErrorMsg": "You don't Have Permission to Delete System Notification, Please Contact System Manger",
-    "deleteSysNotificationErrorMsg": "Delete System Notification Fail, Please Contact System Manger",
-    "systemErrorMsg": "System Error, Please Contact System Manager"
+    "createNotificationSuccessMsg": "Create Notification Successfully",
+    "createNotificationNoPerErrorMsg": "You don't Have Permission to Create Notification, Please Contact System Manger",
+    "createNotificationErrorMsg": "Create Notification Fail, Please Contact System Manger",
+    "updateNotificationSuccessMsg": "Update Notification Successfully",
+    "updateNotificationNoPerErrorMsg": "You don't Have Permission to Update Notification, Please Contact System Manger",
+    "updateNotificationErrorMsg": "Update Notification Fail, Please Contact System Manger",
+    "deleteNotificationSuccessMsg": "Delete Notification Successfully",
+    "deleteNotificationNoPerErrorMsg": "You don't Have Permission to Delete Notification, Please Contact System Manger",
+    "deleteNotificationErrorMsg": "Delete Notification Fail, Please Contact System Manger",
+    "updateGroupInfoSuccessMsg": "Update Group Information Successfully",
+    "updateGroupInfoNoPerErrorMsg": "You don't Have Permission to Update Group Information, Please Contact System Manger",
+    "updateGroupInfoErrorMsg": "Update Group Information Fail, Please Contact System Manger",
+    "updateComInfoSuccessMsg": "Update Company Information Successfully",
+    "updateComInfoNoPerErrorMsg": "You don't Have Permission to Update Company Information, Please Contact System Manger",
+    "updateComInfoErrorMsg": "Update Company Information Fail, Please Contact System Manger",
+    "createComStrUnitSuccessMsg": "Create Structure Unit in Company Successfully",
+    "createComStrUnitNoPerErrorMsg": "You don't Have Permission to Create Structure Unit in Company, Please Contact System Manger",
+    "createComStrUnitErrorMsg": "Create Structure Unit in Company Fail, Please Contact System Manger",
+    "updateComStrUnitSuccessMsg": "Update Structure Unit in Company Successfully",
+    "updateComStrUnitNoPerErrorMsg": "You don't Have Permission to Update Structure Unit in Company, Please Contact System Manger",
+    "updateComStrUnitErrorMsg": "Update Structure Unit in Company Fail, Please Contact System Manger",
+    "deleteComStrUnitSuccessMsg": "Delete Structure Unit in Company Successfully",
+    "deleteComStrUnitNoPerErrorMsg": "You don't Have Permission to Delete Structure Unit in Company, Please Contact System Manger",
+    "deleteComStrUnitErrorMsg": "Delete Structure Unit in Company Fail, Please Contact System Manger",
+    "createComJobPositionSuccessMsg": "Create Job Position in Company Successfully",
+    "createComJobPositionNoPerErrorMsg": "You don't Have Permission to Create Job Position in Company, Please Contact System Manger",
+    "createComJobPositionErrorMsg": "Create Job Position in Company Fail, Please Contact System Manger",
+    "updateComJobPositionSuccessMsg": "Update Job Position in Company Successfully",
+    "updateComJobPositionNoPerErrorMsg": "You don't Have Permission to Update Job Position in Company, Please Contact System Manger",
+    "updateComJobPositionErrorMsg": "Update Job Position in Company Fail, Please Contact System Manger",
+    "deleteComJobPositionSuccessMsg": "Delete Job Position in Company Successfully",
+    "deleteComJobPositionNoPerErrorMsg": "You don't Have Permission to Delete Job Position in Company, Please Contact System Manger",
+    "deleteComJobPositionErrorMsg": "Delete Job Position in Company Fail, Please Contact System Manger",
+    "updateUserInfoColsSuccessMsg": "Update Information Columns for Member in Company Successfully",
+    "updateUserInfoColsNoPerErrorMsg": "You don't Have Permission to Update Information Columns for Member in Company, Please Contact System Manger",
+    "updateUserInfoColsErrorMsg": "Update Information Columns for Member in Company Fail, Please Contact System Manger",
+    "deleteUserInfoColSuccessMsg": "Delete Information Column for Member in Company Successfully",
+    "deleteUserInfoColNoPerErrorMsg": "You don't Have Permission to Delete Information Column for Member in Company, Please Contact System Manger",
+    "deleteUserInfoColErrorMsg": "Delete Information Column for Member in Company Fail, Please Contact System Manger",
+    "createUserSuccessMsg": "Create User in Company Successfully",
+    "createUserNoPerErrorMsg": "You don't Have Permission to Create User in Company, Please Contact System Manger",
+    "createUserErrorMsg": "Create User in Company Fail, Please Contact System Manger",
+    "updateGenUserPwdSuccessMsg": "Change General Member's Password in Company Successfully",
+    "updateGenUserNoUserErrorMsg": "Search No User",
+    "updateGenUserErrorMsg": "Change General Member's Password in Company Fail, Please Contact System Manager",
+    "updateUserSuccessMsg": "Update User in Company Successfully",
+    "updateUserNoPerErrorMsg": "You don't Have Permission to Update User in Company, Please Contact System Manger",
+    "updateUserErrorMsg": "Update User in Company Fail, Please Contact System Manger",
+    "updateProfileBasicSuccessMsg": "Update General Member's Basic Profile Successfully",
+    "updateProfileBasicErrorMsg": "Update General Member's Basic Profile Fail, Please Contact System Manager",
+    "updateProfilePwdSuccessMsg": "Update Password Successfully",
+    "updateProfileCurrentErrorMsg": "Please Input Correct Current Password",
+    "updateProfileErrorMsg": "Update password Fail, Please Contact System Manager",
+    "updateProfileDetailSuccessMsg": "Update General Member's Detail Profile Successfully",
+    "updateProfileDetailErrorMsg": "Update General Member's Detail Profile Fail, Please Contact System Manager",
+    "systemErrorMsg": "System Error, Please Contact System Manager",
+    "updateComPerRoleUsersSuccessMsg": "Update Members in Company Permission Role Successfully",
+    "createComCusRoleSuccessMsg": "Create Customize Role Successfully",
+    "createComCusRoleNoPerErrorMsg": "You don't Have Permission to Create Customize Role, Please Contact System Manger",
+    "createComCusRoleErrorMsg": "Create Customize Role Fail, Please Contact System Manger",
+    "updateComCusRoleSuccessMsg": "Update Customize Role Successfully",
+    "updateComCusRoleNoPerErrorMsg": "You don't Have Permission to Update Customize Role, Please Contact System Manger",
+    "updateComCusRoleErrorMsg": "Update Customize Role Fail, Please Contact System Manger",
+    "deleteComCusRoleSuccessMsg": "Delete Customize Role Successfully",
+    "deleteComCusRoleNoPerErrorMsg": "You don't Have Permission to Delete Customize Role, Please Contact System Manger",
+    "deleteComCusRoleErrorMsg": "Delete Customize Role Fail, Please Contact System Manger",
+    "updateComPerRoleUsersFailMsg": "Update Members in Company Permission Role Fail, Please Contact System Manager"
   },
   "cusSugDetail": {
     "title": "Suggestion Details",
@@ -97,7 +154,7 @@
     "title": "Update Suggestion",
     "response": "Response",
     "remarks": "Remarks",
-    "updateBtn": "Update",
+    "updateBtn": "Modify",
     "statusOptions": {
       "new": "New Suggestion",
       "processing": "In Processing",
@@ -123,19 +180,33 @@
     "sub": "Subscription"
   },
   "pageTitle": {
-    "logIn": "Log In",
-    "notExist": "Page Not Exist",
-    "noPermission": "No Permission",
-    "dashboard": "Dashboard",
-    "sysPermissions": "System Permission",
-    "sysLogs": "System Logs",
-    "subManage": "Subscriptions",
-    "cusServices": "Customer Services",
-    "calendar": "Calendar",
-    "sysNotification": "System Notification"
+    "general": {
+      "logIn": "Log In",
+      "notExist": "Page Not Exist",
+      "noPermission": "No Permission",
+      "dashboard": "Dashboard",
+      "profile": "Profile"
+    },
+    "system": {
+      "sysPermissions": "System Permission",
+      "sysLogs": "System Logs",
+      "subManage": "Subscriptions",
+      "cusServices": "Customer Services",
+      "calendar": "Calendar",
+      "sysNotification": "System Notification"
+    },
+    "oms": {
+      "comPermissions": "Permission Management",
+      "comInformation": "Company Information",
+      "comStructure": "Company Structure",
+      "comJobPosition": "Company Job Position",
+      "comMember": "Company Member",
+      "notifications": "Enterprise Notification"
+    }
   },
   "asideBarCategory": {
-    "sysManage": "System Manage"
+    "sysManage": "System Manage",
+    "omsSubscription": "Organization Manage"
   },
   "copyright": {
     "title": "Copyright",
@@ -167,11 +238,11 @@
     "perName": "Permission Name",
     "perDesc": "Permission Description",
     "perCode": "Permission Code",
-    "users": "Users",
-    "viewUsers": "View Users",
-    "userList": "User List",
-    "userNo": "User No.",
-    "userStName": "User Name",
+    "users": "Members",
+    "viewUsers": "View Members",
+    "userList": "Member List",
+    "userNo": "Member No.",
+    "userStName": "Username",
     "editMembers": "Edit Members",
     "selected": "Selected",
     "notSelected": "Not Selected",
@@ -250,15 +321,20 @@
   },
   "general": {
     "confirm": "Confirm",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "delete": "Delete"
   },
   "subAddNewGroupConfirm": {
     "title": "Group Administrator's Password : ",
     "passwordLabel": "Group Administrator's Password :"
   },
+  "subAddNewComConfirm": {
+    "title": "Company Administrator's Password : ",
+    "passwordLabel": "Company Administrator's Password :"
+  },
   "subChangeGroupAdminPwdConfirm": {
-    "title": "Group Administrator's New Password : ",
-    "passwordLabel": "Group Administrator's New Password :"
+    "title": "Administrator's New Password : ",
+    "passwordLabel": "Administrator's New Password :"
   },
   "calendar": {
     "today": "Today",
@@ -305,7 +381,7 @@
     "cancel": "Cancel",
     "delete": "Delete"
   },
-  "sysNoti": {
+  "notices": {
     "notiName": "Notice Title",
     "creator": "Posted by",
     "company": "Company",
@@ -317,23 +393,279 @@
     "deleteBtn": "Delete",
     "releaseTime": "Release Time",
     "updateTime": "Latest Update Time",
-    "addNotiTitle": "Add System Notice"
+    "addSysNotiTitle": "Add System Notice",
+    "addGroupNotiTitle": "Add Group Notice",
+    "addComNotiTitle": "Add Company Notice"
   },
   "notiUpNotice": {
-    "title": "Update System Notice",
+    "sysTitle": "Update System Notice",
+    "groupTitle": "Update Group Notice",
+    "comTitle": "Update Company Notice",
     "notiName": "Notice Title",
     "notiDesc": "Notice Content"
   },
   "notiDelNotice": {
-    "title": "Delete System Notice",
-    "content": "Sure for Deleting the System Notice ?"
+    "sysTitle": "Delete System Notice",
+    "groupTitle": "Delete Group Notice",
+    "comTitle": "Delete Company Notice",
+    "content": "Sure for Deleting the Notice ?"
   },
   "cusDelSug": {
     "title": "Delete Suggestion",
     "content": "Sure for Deleting the Customer Suggestion ?"
   },
   "dashboard": {
-    "sysNotice": "System notices",
+    "sysNotice": "System Notices",
+    "groupNotice": "Group Notices",
+    "comNotice": "Company Notices",
     "more": "More >>>"
+  },
+  "entNotifications": {
+    "labelGroup": "Group Notices",
+    "labelCompany": "Company Notices"
+  },
+  "comInfo": {
+    "groupInfo": {
+      "title": "Group Information",
+      "groupName": "Group Name :",
+      "groupDesc": "Group Description :",
+      "modify": "Modify Group Information",
+      "cancel": "Cancel",
+      "confirm": "Confirm"
+    },
+    "comInfo": {
+      "title": "Company Information",
+      "comName": "Company Name :",
+      "comStName": "Company Short Name :",
+      "comTaxNo": "Company Tax No. :",
+      "comLeader": "Person in Charge :",
+      "comPhone": "Company Phone :",
+      "comAddr": "Company Address :",
+      "comDesc": "Company Description :",
+      "comEngName": "Company English Name :",
+      "comEngAddr": "Company English Address :",
+      "modify": "Modify Company Information",
+      "cancel": "Cancel",
+      "confirm": "Confirm"
+    }
+  },
+  "comStr": {
+    "download": "Download",
+    "add": "Add",
+    "addUnitTitle": "Add New units in Structure",
+    "parentUnit": "Parent Unit",
+    "noParentUnit": "No Parent Unit",
+    "addGroupDesc": "Unit x",
+    "unitName": "Unit Name",
+    "unitDesc": "Unit description",
+    "unitNo": "Unit No.",
+    "unitDetail": "Unit Detail",
+    "unitNameLabel": "Unit Name :",
+    "unitNoLabel": "Unit No. :",
+    "unitDescLabel": "Unit Description :",
+    "upUnitTitle": "Update Unit",
+    "parentUnitLabel": "Parent Unit :"
+  },
+  "comStrDelUnit": {
+    "title": "Delete Unit",
+    "content": "Sure for Deleting the Unit ?"
+  },
+  "comJP": {
+    "jpNameLabel": "Job Position Name",
+    "jpLevelLabel": "Job Position Level",
+    "jpDescLabel": "Job Position Description",
+    "operationLabel": "Actions",
+    "addBtn": "Add",
+    "modifyBtn": "Modify",
+    "deleteBtn": "Delete",
+    "saveBtn": "Confirm",
+    "cancelBtn": "Cancel",
+    "deleteTitle": "Delete Job Position",
+    "deleteContent": "Sure for Deleting the Job Position ?",
+    "addJobPositionTitle": "Add New Job Position",
+    "addJobPosNameLabel": "Job Position Name",
+    "addJobPosLevelLabel": "Job Position Level",
+    "addJobPosDescLabel": "Job Position Description"
+  },
+  "userInfoCol": {
+    "title": "Column Setting about Member Information",
+    "groupDesc": "Column x",
+    "colName": "Column Name",
+    "colDesc": "Column Description",
+    "colType": "Column Type",
+    "colRequire": "Column Require",
+    "colTypeOption": {
+      "string": "String",
+      "integer": "Integer",
+      "float": "Float",
+      "date": "Date",
+      "datetime": "Datetime"
+    },
+    "colRequireOption": {
+      "true": "Require",
+      "false": "Option"
+    },
+    "delUserInfoCol": {
+      "title": "Delete Column Setting",
+      "content": "Sure for Deleting the Column Setting about Member Information ?"
+    }
+  },
+  "user": {
+    "addBtn": "Add",
+    "addTitle": "Add Member in Company",
+    "addColumns": {
+      "basicInfo": "Basic Information",
+      "userName": "Member Name",
+      "userStName": "Username",
+      "userNo": "Member No.",
+      "email": "Email",
+      "orgInfo": "Organization Information",
+      "orgStrUnits": "Structure Units",
+      "orgJobPositions": "Job Positions",
+      "detailInfo": "Detail Information"
+    },
+    "addUserConfirm": {
+      "title": "Member's Password : "
+    },
+    "userList": {
+      "fullInfo": "Information",
+      "basicInfo": "Basic Information",
+      "userNo": "Member No.",
+      "userName": "Member Name",
+      "userStName": "Username",
+      "email": "Email",
+      "orgInfo": "Organization Information",
+      "orgStrUnits": "Structure Units",
+      "orgJobPositions": "Job Positions",
+      "detailInfo": "Detail Information",
+      "changePwdBtn": "Change password",
+      "deleteUserBtn": "Delete Member",
+      "updateBtn": "Modify",
+      "cancelBtn": "Cancel",
+      "confirmBtn": "Confirm",
+      "require": " is Required"
+    },
+    "changeUserConfirm": {
+      "title": "成員的密碼 : "
+    },
+    "deleteUserConfirm": {
+      "title": "Delete the Member in Company",
+      "content": "Sure for Deleting the Member in Company ?"
+    }
+  },
+  "profile": {
+    "basic": {
+      "title": "Basic",
+      "colUserName": "User Name",
+      "colUserStName": "Username",
+      "colUserNo": "User No.",
+      "colUserEmail": "Email",
+      "modifyBtn": "Modify"
+    },
+    "org": {
+      "title": "Organization",
+      "strUnitTitle": "Structure Units",
+      "strUnitColNo": "Unit No.",
+      "strUnitColName": "Unit Name",
+      "strUnitColDesc": "Unit Description",
+      "jobPosTitle": "Job Positions",
+      "jobPosLevel": "Job Position Level",
+      "jobPosName": "Job Position Name",
+      "jobPosDesc": "Job Position Description"
+    },
+    "detail": {
+      "title": "Detail",
+      "detailRequire": " is Required"
+    },
+    "pwd": {
+      "title": "Password",
+      "changePwdTitle": "Change Password",
+      "chPwdCurrentPwd": "Current Password",
+      "chPwdNewPwd": "New Password",
+      "chPwdNewPwdConfirm": "Confirm New Password",
+      "chPwdCurrentPwdTip": "Please Input Current Password",
+      "chPwdNewPwdTip": "Please Input Your New Password",
+      "chPwdNewPwdConfirmTip": "Please Input Your New Password Again",
+      "chPwdNewPwdConfirmSameTip": "The Passwords You Entered Twice do not Match",
+      "chPwdSameTip": "New Password could not be Same with Current Password",
+      "confirm": "Confirm"
+    }
+  },
+  "comPerRoles": {
+    "defRoles": {
+      "title": "Default Roles",
+      "permissionHint": "Permissions of ",
+      "roleName": "Role Name",
+      "roleDesc": "Role Description",
+      "perName": "Permission Name",
+      "perDesc": "Permission Description",
+      "perCode": "Permission Code",
+      "users": "Members",
+      "viewUsers": "View Members",
+      "userList": "Member List",
+      "userNo": "Member No.",
+      "userStName": "Username",
+      "editMembers": "Edit Members",
+      "assignMembers": {
+        "colStrUnitName": "Structure Unit",
+        "colUserStName": "Member",
+        "colUserNo": "Member NO.",
+        "status": "Status",
+        "selected": "Selected",
+        "notSelected": "Not Selected"
+      }
+    },
+    "cusRoles": {
+      "title": "Customize Roles",
+      "permissionHint": "Permissions of ",
+      "roleName": "Role Name",
+      "roleDesc": "Role Description",
+      "perName": "Permission Name",
+      "perDesc": "Permission Description",
+      "perCode": "Permission Code",
+      "users": "Members",
+      "viewUsers": "View Members",
+      "userList": "Member List",
+      "userNo": "Member No.",
+      "userStName": "Username",
+      "editMembers": "Edit Members",
+      "assignMembers": {
+        "colStrUnitName": "Structure Unit",
+        "colUserStName": "Member",
+        "colUserNo": "Member NO.",
+        "status": "Status",
+        "selected": "Selected",
+        "notSelected": "Not Selected"
+      },
+      "addCusRole": {
+        "addBtn": "Add",
+        "title": "Add Customize Role",
+        "roleName": "Role Name",
+        "roleDesc": "Role Description",
+        "colPerCode": "Permission No.",
+        "colPerName": "Permission Name",
+        "colPerDesc": "Permission Description",
+        "status": "Status",
+        "selected": "Selected",
+        "notSelected": "Not Selected"
+      },
+      "updateCusRole": {
+        "updateBtn": "Modify",
+        "title": "Update Customize Role",
+        "roleName": "Role Name",
+        "roleDesc": "Role Description",
+        "colPerCode": "Permission No.",
+        "colPerName": "Permission Name",
+        "colPerDesc": "Permission Description",
+        "status": "Status",
+        "selected": "Selected",
+        "notSelected": "Not Selected"
+      },
+      "deleteCusRole": {
+        "deleteBtn": "Delete",
+        "title": "Delete Customize Role",
+        "content": "Sure for Deleting the Customize Role ?"
+      }
+    }
   }
 }

@@ -2,10 +2,10 @@
   <div class="noti-list-container">
     <el-row justify="space-between" align="middle" class="page-header">
       <el-col :span="20">
-        <p>{{ t('pageTitle.sysNotification') }}</p>
+        <p>{{ t('pageTitle.system.sysNotification') }}</p>
       </el-col>
       <el-col :span="4" style="text-align: right;">
-        <el-button v-if="userInfo.per1000.includes('sys-006-1000')" type="success" @click="addNoti">{{ t('sysNoti.addBtn') }}</el-button>
+        <el-button v-if="userInfo.per1000.includes('sys-006-1000')" type="success" @click="addNoti">{{ t('notices.addBtn') }}</el-button>
       </el-col>
     </el-row>
 
@@ -21,51 +21,57 @@
         <template #default="props">
           <div class="noti-details">
             <div class="detail-item">
-              <span class="label">{{ t('sysNoti.creator') }}:</span>
+              <span class="label">{{ t('notices.creator') }}:</span>
               <span class="value">{{ props.row.creator.userStName }}</span>
             </div>
             <div class="detail-item">
-              <span class="label">{{ t('sysNoti.company') }}:</span>
+              <span class="label">{{ t('notices.company') }}:</span>
               <span class="value">{{ props.row.creator.comStName }}</span>
             </div>
             <div class="detail-item">
-              <span class="label">{{ t('sysNoti.group') }}:</span>
+              <span class="label">{{ t('notices.group') }}:</span>
               <span class="value">{{ props.row.creator.groupName }}</span>
             </div>
             <div class="detail-item">
-              <span class="label">{{ t('sysNoti.releaseTime') }}:</span>
+              <span class="label">{{ t('notices.releaseTime') }}:</span>
               <span class="value">{{ props.row.createTime }}</span>
             </div>
             <div class="detail-item">
-              <span class="label">{{ t('sysNoti.updateTime') }}:</span>
+              <span class="label">{{ t('notices.updateTime') }}:</span>
               <span class="value">{{ props.row.updateTime }}</span>
             </div>
             <div class="detail-item">
-              <span class="label">{{ t('sysNoti.notiDesc') }}:</span>
+              <span class="label">{{ t('notices.notiDesc') }}:</span>
               <span class="value">{{ props.row.notiDesc }}</span>
             </div>
           </div>
         </template>
       </el-table-column>
-      <el-table-column prop="notiName" :label="t('sysNoti.notiName')"></el-table-column>
-      <el-table-column :label="t('sysNoti.actions')" align="center" width="180px">
-      <template #default="scope">
-        <el-button
-          type="warning"
-          size="small"
-          @click="updateClick(scope.row)"
-        >
-          {{ t('sysNoti.modifyBtn') }}
-        </el-button>
-        <el-button
-          type="danger"
-          size="small"
-          @click="deleteClick(scope.row)"
-        >
-          {{ t('sysNoti.deleteBtn') }}
-        </el-button>
-      </template>
-    </el-table-column>
+      <el-table-column prop="notiName" :label="t('notices.notiName')"></el-table-column>
+      <el-table-column
+          :label="t('notices.actions')"
+          v-if="userInfo.per0010.includes('sys-006-0010') || userInfo.per0001.includes('sys-006-0001')"
+          align="center" width="180px"
+      >
+        <template #default="scope">
+          <el-button
+              v-if="userInfo.per0010.includes('sys-006-0010')"
+              type="warning"
+              size="small"
+              @click="updateClick(scope.row)"
+          >
+            {{ t('notices.modifyBtn') }}
+          </el-button>
+          <el-button
+              v-if="userInfo.per0001.includes('sys-006-0001')"
+              type="danger"
+              size="small"
+              @click="deleteClick(scope.row)"
+          >
+            {{ t('notices.deleteBtn') }}
+          </el-button>
+        </template>
+      </el-table-column>
     </el-table>
 
     <div class="pagination-container">
@@ -94,16 +100,18 @@ import { useNotificationStore } from '@/stores/oms/bases';
 import { useUserInfoStore } from '@/stores/oms/auths';
 import { getSysNotification } from '@/services/oms/bases';
 import type { Notification } from '@/interfaces/oms/bases';
-import { useRouter } from 'vue-router';
-import NotiAddNotice from './NotiAddNotice.vue';
-import NotiUpNotice from './NotiUpNotice.vue';
-import NotiDelNotice from './NotiDelNotice.vue';
+import { useRouter, useRoute } from 'vue-router';
+import NotiAddNotice from '@/components/sysControl/NotiAddNotice.vue';
+import NotiUpNotice from '@/components/sysControl/NotiUpNotice.vue';
+import NotiDelNotice from '@/components/sysControl/NotiDelNotice.vue';
+import {convertToNumber} from "@/utils/conNumber.ts";
 
 const { t } = useI18n();
 const notificationStore = useNotificationStore();
 const { sysNotification: notifications } = storeToRefs(notificationStore);
 const userInfo = useUserInfoStore();
 const router = useRouter();
+const route = useRoute();
 
 const expandedRowKeys = ref<number[]>([]);
 const currentPage = ref(1);
@@ -163,9 +171,14 @@ const deleteClick = (row: Notification) => {
 
 onMounted(async () => {
   if (!userInfo.per0100.includes('sys-006-0100')) {
-    router.push({ name: 'NoPermission' });
+    await router.push('/main/401');
   }
   await getSysNotification();
+
+  const rowKey: number = convertToNumber(route.query?.notiId) ?? 0
+  if (rowKey !== 0) {
+    expandedRowKeys.value = [rowKey];
+  }
 });
 </script>
 

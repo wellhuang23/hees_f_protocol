@@ -99,7 +99,7 @@ const handleConfirm = async () => {
           message: t('notice.updateCalendarSuccessMsg'),
           type: 'success'
         });
-        location.reload(); // Consider updating data without a full reload
+        isVisible.value = false;
       } else if (updateRes === '99006') {
         ElNotification({
           title: t('notice.noticeTitle'),
@@ -119,6 +119,10 @@ const handleConfirm = async () => {
 
 const openDelDialog = () => {
   isDelDialogVisible.value = true;
+};
+
+const handleDeleteConfirmed = () => {
+  isVisible.value = false;
 };
 </script>
 
@@ -186,14 +190,14 @@ const openDelDialog = () => {
       <div class="dialog-footer-actions">
         <el-button v-if="canDelete" type="danger" @click="openDelDialog">{{ t('calendar.deleteEventDialog.delete') }}</el-button>
         <div class="spacer"></div>
-        <el-button @click="closeDialog">{{ t('general.cancel') }}</el-button>
+        <el-button type="info" @click="closeDialog">{{ t('general.cancel') }}</el-button>
         <el-button type="primary" @click="handleConfirm">
           {{ t('calendar.updateEventDialog.update') }}
         </el-button>
       </div>
     </template>
   </el-dialog>
-  <cal-del-event v-model="isDelDialogVisible" :event="event" />
+  <cal-del-event v-model="isDelDialogVisible" :event="event" @delete-confirmed="handleDeleteConfirmed" />
 </template>
 
 <style scoped lang="scss">

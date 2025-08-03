@@ -6,7 +6,7 @@ import { ElDialog, ElButton } from 'element-plus'
 const { t } = useI18n()
 
 const props = defineProps<{
-  groupAdminPwd: string
+  adminPwd: string
 }>()
 
 const emit = defineEmits(['confirm'])
@@ -35,7 +35,7 @@ const handleConfirm = () => {
       </div>
     </template>
     <div class="dialog-content">
-      <p>{{ groupAdminPwd }}</p>
+      <p>{{ props.adminPwd }}</p>
     </div>
     <template #footer>
       <span class="dialog-footer">

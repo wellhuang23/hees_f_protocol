@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Notifications from '@/components/sysControl/NotiList.vue'
+import Notifications from '@/components/sysControl/NotiSysList.vue'
 </script>
 
 <template>

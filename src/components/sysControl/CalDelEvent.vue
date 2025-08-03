@@ -10,7 +10,7 @@ const props = defineProps<{
   modelValue: boolean;
   event: CalEvent | null;
 }>();
-const emit = defineEmits(['update:modelValue']);
+const emit = defineEmits(['update:modelValue', 'delete-confirmed']);
 
 const { t } = useI18n();
 
@@ -32,25 +32,25 @@ const handleConfirm = async () => {
     if (deleteRes === '00000') {
       ElNotification({
         title: t('notice.noticeTitle'),
-        message: t('notice.updateCalendarSuccessMsg'),
+        message: t('notice.deleteCalendarSuccessMsg'),
         type: 'success'
       });
-      location.reload(); // Consider updating data without a full reload
+      emit('delete-confirmed');
+      isVisible.value = false;
     } else if (deleteRes === '99006') {
       ElNotification({
         title: t('notice.noticeTitle'),
-        message: t('notice.updateCalendarNoPerErrorMsg'),
+        message: t('notice.deleteCalendarNoPerErrorMsg'),
         type: 'error'
       });
     } else {
       ElNotification({
         title: t('notice.noticeTitle'),
-        message: t('notice.updateCalendarErrorMsg'),
+        message: t('notice.deleteCalendarErrorMsg'),
         type: 'error'
       });
     }
   }
-  closeDialog();
 };
 </script>
 

@@ -1,10 +1,10 @@
 {
   "logInPage": {
     "title": "歡迎使用 HEEs",
-    "hintUser": "請輸入登入使用者代號或是 E-mail",
+    "hintUser": "請輸入登入 E-mail",
     "hintPwd": "請輸入登入密碼",
     "submitBtn": "登入",
-    "errHintAccount": "請輸入正確的使用者代號或是 E-mail",
+    "errHintAccount": "請輸入正確的 E-mail",
     "errHintPwd": "請輸入正確的密碼"
   },
   "topBar": {
@@ -28,8 +28,8 @@
     "logOutErrorMsg": "登出時發生錯誤，已清空本地資料，請聯繫系統管理員",
     "updatePerSuccessMsg": "已將權限更新至最新",
     "updatePerErrorMsg": "更新權限時發生錯誤，請聯繫系統管理員",
-    "updateSysPerRoleUsersSuccessMsg": "更新系統權限角色使用者成功",
-    "updateSysPerRoleUsersFailMsg": "更新系統權限角色使用者失敗，請聯繫系統管理員",
+    "updateSysPerRoleUsersSuccessMsg": "更新系統權限角色成員成功",
+    "updateSysPerRoleUsersFailMsg": "更新系統權限角色成員失敗，請聯繫系統管理員",
     "getSysLogsSuccessMsg": "查詢系統日誌成功",
     "getSysLogsTimeErrorMsg": "請輸入開始時間與結束時間",
     "getSysLogsPerErrorMsg": "您沒有權限查詢伺服器日誌",
@@ -70,15 +70,75 @@
     "deleteCusSuggestionSuccessMsg": "刪除顧客建議成功",
     "deleteCusSuggestionNoPerErrorMsg": "您沒有刪除顧客建議的權限，請洽系統管理員",
     "deleteCusSuggestionErrorMsg": "刪除顧客建議失敗，請洽系統管理員",
-    "createSysNotificationSuccessMsg": "新增系統通知成功",
-    "createSysNotificationNoPerErrorMsg": "您沒有新增系統通知的權限，請洽系統管理員",
-    "createSysNotificationErrorMsg": "新增系統通知失敗，請洽系統管理員",
-    "updateSysNotificationSuccessMsg": "更新系統通知成功",
-    "updateSysNotificationNoPerErrorMsg": "您沒有更新系統通知的權限，請洽系統管理員",
-    "updateSysNotificationErrorMsg": "更新系統通知失敗，請洽系統管理員",
-    "deleteSysNotificationSuccessMsg": "刪除系統通知成功",
-    "deleteSysNotificationNoPerErrorMsg": "您沒有刪除系統通知的權限，請洽系統管理員",
-    "deleteSysNotificationErrorMsg": "刪除系統通知失敗，請洽系統管理員",
+    "createNotificationSuccessMsg": "新增公告成功",
+    "createNotificationNoPerErrorMsg": "您沒有新增公告的權限，請洽系統管理員",
+    "createNotificationErrorMsg": "新增公告失敗，請洽系統管理員",
+    "updateNotificationSuccessMsg": "更新公告成功",
+    "updateNotificationNoPerErrorMsg": "您沒有更新公告的權限，請洽系統管理員",
+    "updateNotificationErrorMsg": "更新公告失敗，請洽系統管理員",
+    "deleteNotificationSuccessMsg": "刪除公告成功",
+    "deleteNotificationNoPerErrorMsg": "您沒有刪除公告的權限，請洽系統管理員",
+    "deleteNotificationErrorMsg": "刪除公告失敗，請洽系統管理員",
+    "updateGroupInfoSuccessMsg": "更新集團資訊成功",
+    "updateGroupInfoNoPerErrorMsg": "您沒有更新集團資訊的權限，請洽系統管理員",
+    "updateGroupInfoErrorMsg": "更新集團資訊失敗，請洽系統管理員",
+    "updateComInfoSuccessMsg": "更新公司資訊成功",
+    "updateComInfoNoPerErrorMsg": "您沒有更新公司資訊的權限，請洽系統管理員",
+    "updateComInfoErrorMsg": "更新公司資訊失敗，請洽系統管理員",
+    "createComStrUnitSuccessMsg": "新增單位成功",
+    "createComStrUnitNoPerErrorMsg": "您沒有新增單位的權限，請洽系統管理員",
+    "createComStrUnitErrorMsg": "新增單位失敗，請洽系統管理員",
+    "updateComStrUnitSuccessMsg": "更新單位成功",
+    "updateComStrUnitNoPerErrorMsg": "您沒有更新單位的權限，請洽系統管理員",
+    "updateComStrUnitErrorMsg": "更新單位失敗，請洽系統管理員",
+    "deleteComStrUnitSuccessMsg": "刪除單位成功",
+    "deleteComStrUnitNoPerErrorMsg": "您沒有刪除單位的權限，請洽系統管理員",
+    "deleteComStrUnitErrorMsg": "刪除單位失敗，請洽系統管理員",
+    "createComJobPositionSuccessMsg": "新增職務成功",
+    "createComJobPositionNoPerErrorMsg": "您沒有新增職務的權限，請洽系統管理員",
+    "createComJobPositionErrorMsg": "新增職務失敗，請洽系統管理員",
+    "updateComJobPositionSuccessMsg": "更新職務成功",
+    "updateComJobPositionNoPerErrorMsg": "您沒有更新職務的權限，請洽系統管理員",
+    "updateComJobPositionErrorMsg": "更新職務失敗，請洽系統管理員",
+    "deleteComJobPositionSuccessMsg": "刪除職務成功",
+    "deleteComJobPositionNoPerErrorMsg": "您沒有刪除職務的權限，請洽系統管理員",
+    "deleteComJobPositionErrorMsg": "刪除職務失敗，請洽系統管理員",
+    "updateUserInfoColsSuccessMsg": "更新成員資訊欄位成功",
+    "updateUserInfoColsNoPerErrorMsg": "您沒有更新成員資訊欄位的權限，請洽系統管理員",
+    "updateUserInfoColsErrorMsg": "更新成員資訊欄位失敗，請洽系統管理員",
+    "deleteUserInfoColSuccessMsg": "刪除成員資訊欄位成功",
+    "deleteUserInfoColNoPerErrorMsg": "您沒有刪除成員資訊欄位的權限，請洽系統管理員",
+    "deleteUserInfoColErrorMsg": "刪除成員資訊欄位失敗，請洽系統管理員",
+    "createUserSuccessMsg": "新增公司成員成功",
+    "createUserNoPerErrorMsg": "您沒有新增公司成員的權限，請洽系統管理員",
+    "createUserErrorMsg": "新增公司成員失敗，請洽系統管理員",
+    "updateGenUserPwdSuccessMsg": "修改公司成員密碼成功",
+    "updateGenUserNoUserErrorMsg": "查無該用戶",
+    "updateGenUserErrorMsg": "修改公司成員密碼錯誤，請洽系統管理員",
+    "updateUserSuccessMsg": "更新公司成員成功",
+    "updateUserNoPerErrorMsg": "您沒有更新公司成員的權限，請洽系統管理員",
+    "updateUserErrorMsg": "更新公司成員失敗，請洽系統管理員",
+    "deleteUserSuccessMsg": "刪除公司成員成功",
+    "deleteUserNoPerErrorMsg": "您沒有刪除公司成員的權限，請洽系統管理員",
+    "deleteUserErrorMsg": "刪除公司成員失敗，請洽系統管理員",
+    "updateProfileBasicSuccessMsg": "更新成員個人基本資料成功",
+    "updateProfileBasicErrorMsg": "更新成員個人基本資料失敗，請洽系統管理員",
+    "updateProfilePwdSuccessMsg": "修改密碼成功",
+    "updateProfileCurrentErrorMsg": "請輸入正確的當前密碼",
+    "updateProfileErrorMsg": "修改密碼錯誤，請洽系統管理員",
+    "updateProfileDetailSuccessMsg": "更新成員個人詳細資料成功",
+    "updateProfileDetailErrorMsg": "更新成員個人詳細資料失敗，請洽系統管理員",
+    "updateComPerRoleUsersSuccessMsg": "更新公司權限角色成員成功",
+    "updateComPerRoleUsersFailMsg": "更新公司權限角色成員失敗，請聯繫系統管理員",
+    "createComCusRoleSuccessMsg": "新增自定義角色成功",
+    "createComCusRoleNoPerErrorMsg": "您沒有新增自定義角色的權限，請洽系統管理員",
+    "createComCusRoleErrorMsg": "新增自定義角色失敗，請洽系統管理員",
+    "updateComCusRoleSuccessMsg": "更新自定義角色成功",
+    "updateComCusRoleNoPerErrorMsg": "您沒有更新自定義角色的權限，請洽系統管理員",
+    "updateComCusRoleErrorMsg": "更新自定義角色失敗，請洽系統管理員",
+    "deleteComCusRoleSuccessMsg": "刪除自定義角色成功",
+    "deleteComCusRoleNoPerErrorMsg": "您沒有刪除自定義角色的權限，請洽系統管理員",
+    "deleteComCusRoleErrorMsg": "刪除自定義角色失敗，請洽系統管理員",
     "systemErrorMsg": "系統錯誤，請聯繫系統管理員"
   },
   "cusSugDetail": {
@@ -97,7 +157,7 @@
     "title": "更新建議",
     "response": "回覆",
     "remarks": "備註",
-    "updateBtn": "更新",
+    "updateBtn": "修改",
     "statusOptions": {
       "new": "新建議",
       "processing": "處理中",
@@ -123,19 +183,33 @@
     "sub": "訂閱項目"
   },
   "pageTitle": {
-    "logIn": "登入",
-    "notExist": "頁面不存在",
-    "noPermission": "沒有權限",
-    "dashboard": "儀錶板",
-    "sysPermissions": "系統權限",
-    "sysLogs": "系統日誌",
-    "subManage": "訂閱管理",
-    "cusServices": "客戶服務",
-    "calendar": "行事曆",
-    "sysNotification": "系統通知"
+    "general": {
+      "logIn": "登入",
+      "notExist": "頁面不存在",
+      "noPermission": "沒有權限",
+      "dashboard": "儀錶板",
+      "profile": "個人設定"
+    },
+    "system": {
+      "sysPermissions": "系統權限",
+      "sysLogs": "系統日誌",
+      "subManage": "訂閱管理",
+      "cusServices": "客戶服務",
+      "calendar": "行事曆",
+      "sysNotification": "系統公告"
+    },
+    "oms": {
+      "comPermissions": "權限管理",
+      "comInformation": "公司資訊",
+      "comStructure": "公司架構",
+      "comJobPosition": "公司職務",
+      "comMember": "公司成員",
+      "notifications": "企業公告"
+    }
   },
   "asideBarCategory": {
-    "sysManage": "系統管理"
+    "sysManage": "系統管理",
+    "omsSubscription": "組織管理"
   },
   "copyright": {
     "title": "版權所有",
@@ -167,11 +241,11 @@
     "perName": "權限名稱",
     "perDesc": "權限描述",
     "perCode": "權限代碼",
-    "users": "使用者",
-    "viewUsers": "查看使用者",
-    "userList": "使用者列表",
-    "userNo": "使用者編號",
-    "userStName": "使用者名稱",
+    "users": "成員",
+    "viewUsers": "查看成員",
+    "userList": "成員列表",
+    "userNo": "成員代號",
+    "userStName": "成員",
     "editMembers": "編輯成員",
     "selected": "已選擇",
     "notSelected": "未選擇",
@@ -250,13 +324,17 @@
   },
   "general": {
     "confirm": "確認",
-    "cancel": "取消"
+    "cancel": "取消",
+    "delete": "刪除"
   },
   "subAddNewGroupConfirm": {
-    "title": "集團管理者的密碼 : "
+    "title": "管理者的密碼 : "
+  },
+  "subAddNewComConfirm": {
+    "title": "管理者的密碼 : "
   },
   "subChangeGroupAdminPwdConfirm": {
-    "title": "集團管理者的密碼 : "
+    "title": "管理者的密碼 : "
   },
   "calendar": {
     "today": "今天",
@@ -295,7 +373,7 @@
     },
     "deleteEventDialog": {
       "title": "刪除事件",
-      "content": "是否確認刪除事件",
+      "content": "是否確認刪除事件 ?",
       "delete": "刪除"
     }
   },
@@ -303,35 +381,291 @@
     "cancel": "取消",
     "delete": "刪除"
   },
-  "sysNoti": {
-    "notiName": "通知標題",
+  "notices": {
+    "notiName": "公告標題",
     "creator": "發佈人",
     "company": "發佈公司",
     "group": "發布集團",
-    "notiDesc": "通知內容",
+    "notiDesc": "公告內容",
     "addBtn": "新增",
     "actions": "操作",
     "modifyBtn": "修改",
     "deleteBtn": "刪除",
     "releaseTime": "發布時間",
     "updateTime": "最後更新時間",
-    "addNotiTitle": "新增系統通知"
+    "addSysNotiTitle": "新增系統公告",
+    "addGroupNotiTitle": "新增集團公告",
+    "addComNotiTitle": "新增公司公告"
   },
   "notiUpNotice": {
-    "title": "更新系統通知",
-    "notiName": "通知標題",
-    "notiDesc": "通知內容"
+    "sysTitle": "更新系統公告",
+    "groupTitle": "更新集團公告",
+    "comTitle": "更新公司公告",
+    "notiName": "公告標題",
+    "notiDesc": "公告內容"
   },
   "notiDelNotice": {
-    "title": "刪除系統通知",
-    "content": "是否確認刪除系統通知 ?"
+    "sysTitle": "刪除系統公告",
+    "groupTitle": "刪除集團公告",
+    "comTitle": "刪除公司公告",
+    "content": "是否確認刪除公告 ?"
   },
   "cusDelSug": {
     "title": "刪除建議",
     "content": "是否確認刪除客戶建議 ?"
   },
   "dashboard": {
-    "sysNotice": "系統通知",
+    "sysNotice": "系統公告",
+    "groupNotice": "集團公告",
+    "comNotice": "公司公告",
     "more": "更多 >>>"
+  },
+  "entNotifications": {
+    "labelGroup": "集團公告",
+    "labelCompany": "公司公告"
+  },
+  "comInfo": {
+    "groupInfo": {
+      "title": "集團資訊",
+      "groupName": "集團名稱 :",
+      "groupDesc": "集團描述 :",
+      "modify": "修改集團資訊",
+      "cancel": "取消",
+      "confirm": "確認"
+    },
+    "comInfo": {
+      "title": "公司資訊",
+      "comName": "公司名稱 :",
+      "comStName": "公司簡稱 :",
+      "comTaxNo": "公司統編 :",
+      "comLeader": "公司負責人 :",
+      "comPhone": "公司電話 :",
+      "comAddr": "公司地址 :",
+      "comDesc": "公司描述 :",
+      "comEngName": "公司英文名稱 :",
+      "comEngAddr": "公司英文地址 :",
+      "modify": "修改公司資訊",
+      "cancel": "取消",
+      "confirm": "確認"
+    }
+  },
+  "comStr": {
+    "download": "下載",
+    "add": "新增",
+    "addUnitTitle": "建立架構中的單位",
+    "parentUnit": "上層單位",
+    "noParentUnit": "無上層單位",
+    "addGroupDesc": "第 x 個單位",
+    "unitName": "單位名稱",
+    "unitDesc": "單位描述",
+    "unitNo": "單位代號",
+    "unitDetail": "單位詳情",
+    "unitNameLabel": "單位名稱 :",
+    "unitNoLabel": "單位代號 :",
+    "unitDescLabel": "單位描述 :",
+    "upUnitTitle": "修改單位",
+    "parentUnitLabel": "上層單位 :"
+  },
+  "comStrDelUnit": {
+    "title": "刪除單位",
+    "content": "是否確認刪除該單位 ?"
+  },
+  "comJP": {
+    "jpNameLabel": "職務名稱",
+    "jpLevelLabel": "職務等階",
+    "jpDescLabel": "職務描述",
+    "operationLabel": "操作",
+    "addBtn": "新增",
+    "modifyBtn": "修改",
+    "deleteBtn": "刪除",
+    "saveBtn": "確認",
+    "cancelBtn": "取消",
+    "deleteTitle": "刪除職務",
+    "deleteContent": "是否確認刪除該職務 ?",
+    "addJobPositionTitle": "新增職務",
+    "addJobPosNameLabel": "職務名稱",
+    "addJobPosLevelLabel": "職務等階",
+    "addJobPosDescLabel": "職務描述"
+  },
+  "userInfoCol": {
+    "title": "成員細節資料欄位設定",
+    "groupDesc": "第 x 個欄位",
+    "colName": "欄位名稱",
+    "colDesc": "欄位描述",
+    "colType": "欄位類別",
+    "colRequire": "欄位要求",
+    "colTypeOption": {
+      "string": "字串",
+      "integer": "整數數字",
+      "float": "浮點數數字",
+      "date": "日期",
+      "datetime": "日期及時間"
+    },
+    "colRequireOption": {
+      "true": "必填",
+      "false": "選填"
+    },
+    "delUserInfoCol": {
+      "title": "刪除資料欄位",
+      "content": "是否確認刪除該資料欄位 ?"
+    }
+  },
+  "user": {
+    "addBtn": "新增",
+    "addTitle": "新增公司成員",
+    "addColumns": {
+      "basicInfo": "基本資料",
+      "userName": "成員姓名",
+      "userStName": "使用者名稱",
+      "userNo": "成員代號",
+      "email": "電子郵件",
+      "orgInfo": "組織資料",
+      "orgStrUnits": "所屬單位",
+      "orgJobPositions": "所屬職務",
+      "detailInfo": "詳細資料"
+    },
+    "addUserConfirm": {
+      "title": "成員的密碼 : "
+    },
+    "userList": {
+      "fullInfo": "完整資料",
+      "basicInfo": "基本資料",
+      "userNo": "成員代號",
+      "userName": "成員姓名",
+      "userStName": "使用者名稱",
+      "email": "電子郵件",
+      "orgInfo": "組織資料",
+      "orgStrUnits": "所屬單位",
+      "orgJobPositions": "所屬職務",
+      "detailInfo": "詳細資料",
+      "changePwdBtn": "修改密碼",
+      "deleteUserBtn": "刪除成員",
+      "updateBtn": "修改",
+      "cancelBtn": "取消",
+      "confirmBtn": "確認",
+      "require": "為必填"
+    },
+    "changeUserConfirm": {
+      "title": "成員的密碼 : "
+    },
+    "deleteUserConfirm": {
+      "title": "刪除公司成員",
+      "content": "是否確認刪除該名公司成員"
+    }
+  },
+  "profile": {
+    "basic": {
+      "title": "基本資料",
+      "colUserName": "成員姓名",
+      "colUserStName": "使用者名稱",
+      "colUserNo": "成員代號",
+      "colUserEmail": "Email",
+      "modifyBtn": "修改"
+    },
+    "org": {
+      "title": "組織資訊",
+      "strUnitTitle": "所屬單位",
+      "strUnitColNo": "單位代號",
+      "strUnitColName": "單位名稱",
+      "strUnitColDesc": "單位描述",
+      "jobPosTitle": "所屬職務",
+      "jobPosLevel": "職務等階",
+      "jobPosName": "職務名稱",
+      "jobPosDesc": "職務描述"
+    },
+    "detail": {
+      "title": "詳細資料",
+      "detailRequire": "為必填"
+    },
+    "pwd": {
+      "title": "密碼設定",
+      "changePwdTitle": "變更密碼",
+      "chPwdCurrentPwd": "當前密碼",
+      "chPwdNewPwd": "新密碼",
+      "chPwdNewPwdConfirm": "確認新密碼",
+      "chPwdCurrentPwdTip": "請輸入當前密碼",
+      "chPwdNewPwdTip": "請輸入您的新密碼",
+      "chPwdNewPwdConfirmTip": "請再次輸入您的新密碼",
+      "chPwdNewPwdConfirmSameTip": "兩次輸入的密碼不一致",
+      "chPwdSameTip": "新密碼不得與當前密碼相同",
+      "confirm": "確認"
+    }
+  },
+  "comPerRoles": {
+    "defRoles": {
+      "title": "預設角色",
+      "permissionHint": "的權限",
+      "roleName": "角色名稱",
+      "roleDesc": "角色描述",
+      "perName": "權限名稱",
+      "perDesc": "權限描述",
+      "perCode": "權限代碼",
+      "users": "成員",
+      "viewUsers": "查看成員",
+      "userList": "成員列表",
+      "userNo": "成員代號",
+      "userStName": "成員",
+      "editMembers": "編輯成員",
+      "assignMembers": {
+        "colStrUnitName": "所屬單位",
+        "colUserStName": "成員",
+        "colUserNo": "成員代號",
+        "status": "狀態",
+        "selected": "已選擇",
+        "notSelected": "未選擇"
+      }
+    },
+    "cusRoles": {
+      "title": "自定義角色",
+      "permissionHint": "的權限",
+      "roleName": "角色名稱",
+      "roleDesc": "角色描述",
+      "perName": "權限名稱",
+      "perDesc": "權限描述",
+      "perCode": "權限代碼",
+      "users": "成員",
+      "viewUsers": "查看成員",
+      "userList": "成員列表",
+      "userNo": "成員代號",
+      "userStName": "成員",
+      "editMembers": "編輯成員",
+      "assignMembers": {
+        "colStrUnitName": "所屬單位",
+        "colUserStName": "成員",
+        "colUserNo": "成員代號",
+        "status": "狀態",
+        "selected": "已選擇",
+        "notSelected": "未選擇"
+      },
+      "addCusRole": {
+        "addBtn": "新增",
+        "title": "新增自定義角色",
+        "roleName": "角色名稱",
+        "roleDesc": "角色描述",
+        "colPerCode": "權限代碼",
+        "colPerName": "權限名稱",
+        "colPerDesc": "權限描述",
+        "status": "狀態",
+        "selected": "已選擇",
+        "notSelected": "未選擇"
+      },
+      "updateCusRole": {
+        "updateBtn": "修改",
+        "title": "更新自定義角色",
+        "roleName": "角色名稱",
+        "roleDesc": "角色描述",
+        "colPerCode": "權限代碼",
+        "colPerName": "權限名稱",
+        "colPerDesc": "權限描述",
+        "status": "狀態",
+        "selected": "已選擇",
+        "notSelected": "未選擇"
+      },
+      "deleteCusRole": {
+        "deleteBtn": "刪除",
+        "title": "刪除自定義角色",
+        "content": "是否確認刪除自定義角色 ?"
+      }
+    }
   }
 }

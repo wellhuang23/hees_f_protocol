@@ -1,15 +1,15 @@
 <template>
   <el-dialog
     :model-value="visible"
-    :title="t('sysNoti.addNotiTitle')"
+    :title="t('notices.addSysNotiTitle')"
     @close="closeDialog"
     width="500px"
   >
     <el-form :model="form" :rules="rules" ref="formRef" label-position="top">
-      <el-form-item :label="t('sysNoti.notiName')" prop="title">
-        <el-input v-model="form.title"></el-input>
+      <el-form-item :label="t('notices.notiName')" prop="title">
+        <el-input v-model="form.title" :maxlength="50" show-word-limit></el-input>
       </el-form-item>
-      <el-form-item :label="t('sysNoti.notiDesc')" prop="content">
+      <el-form-item :label="t('notices.notiDesc')" prop="content">
         <el-input v-model="form.content" type="textarea" :rows="4"></el-input>
       </el-form-item>
     </el-form>
@@ -70,20 +70,20 @@ const submitForm = async () => {
       if (createRes === '00000') {
         ElNotification({
           title: t('notice.noticeTitle'),
-          message: t('notice.createSysNotificationSuccessMsg'),
+          message: t('notice.createNotificationSuccessMsg'),
           type: 'success'
         });
-        location.reload(); // Consider updating data without a full reload
+        closeDialog()
       } else if (createRes === '99006') {
         ElNotification({
           title: t('notice.noticeTitle'),
-          message: t('notice.createSysNotificationNoPerErrorMsg'),
+          message: t('notice.createNotificationNoPerErrorMsg'),
           type: 'error'
         });
       } else {
         ElNotification({
           title: t('notice.noticeTitle'),
-          message: t('notice.createSysNotificationErrorMsg'),
+          message: t('notice.createNotificationErrorMsg'),
           type: 'error'
         });
       }

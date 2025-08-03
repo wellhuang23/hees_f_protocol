@@ -1,21 +1,21 @@
 <template>
   <el-drawer
     v-model="drawer"
-    :title="t('notiUpNotice.title')"
+    :title="t('notiUpNotice.sysTitle')"
     direction="rtl"
     size="50%"
   >
     <el-form :model="form" label-width="120px">
       <el-form-item :label="t('notiUpNotice.notiName')">
-        <el-input v-model="form.notiName" />
+        <el-input v-model="form.notiName" :maxlength="50" show-word-limit />
       </el-form-item>
       <el-form-item :label="t('notiUpNotice.notiDesc')">
-        <el-input v-model="form.notiDesc" type="textarea" :rows="5" />
+        <el-input v-model="form.notiDesc" type="textarea" :rows="20" />
       </el-form-item>
     </el-form>
     <template #footer>
       <div style="flex: auto">
-        <el-button @click="drawer = false">{{ t('general.cancel') }}</el-button>
+        <el-button type="info" @click="drawer = false">{{ t('general.cancel') }}</el-button>
         <el-button type="primary" @click="confirmClick">{{ t('general.confirm') }}</el-button>
       </div>
     </template>
@@ -28,6 +28,7 @@ import {useI18n} from "vue-i18n";
 import { updateSysNotification } from '@/services/oms/bases'
 import {convertToNumber} from "@/utils/conNumber.ts";
 import {ElNotification} from "element-plus";
+import type {Notification} from "@/interfaces";
 
 const { t } = useI18n();
 
@@ -37,7 +38,7 @@ const props = defineProps({
     required: true,
   },
   notice: {
-    type: Object,
+    type: Object as () => Notification | null,
     required: true,
   },
 })
@@ -64,20 +65,18 @@ watch(drawer, (val) => {
 watch(() => props.notice, (val) => {
   if (val) {
     form.value = {
-      notiId: val.notiId,
-      notiName: val.notiName,
-      notiDesc: val.notiDesc,
+      notiId: val.notiId ?? 0,
+      notiName: val.notiName ?? '',
+      notiDesc: val.notiDesc ?? '',
     }
   }
 }, { immediate: true, deep: true })
 
+const closeDrawer = () => {
+  emit('update:modelValue', false)
+}
 
 const confirmClick = async () => {
-  console.log({
-    notiId: form.value.notiId,
-    notiName: form.value.notiName,
-    notiDesc: form.value.notiDesc,
-  })
   const updateRes = await updateSysNotification({
     notiId: convertToNumber(form.value.notiId) ?? 0,
     notiName: form.value.notiName,
@@ -86,20 +85,20 @@ const confirmClick = async () => {
   if (updateRes === '00000') {
     ElNotification({
       title: t('notice.noticeTitle'),
-      message: t('notice.updateSysNotificationSuccessMsg'),
+      message: t('notice.updateNotificationSuccessMsg'),
       type: 'success'
     });
-    location.reload(); // Consider updating data without a full reload
+    closeDrawer()
   } else if (updateRes === '99006') {
     ElNotification({
       title: t('notice.noticeTitle'),
-      message: t('notice.updateSysNotificationNoPerErrorMsg'),
+      message: t('notice.updateNotificationNoPerErrorMsg'),
       type: 'error'
     });
   } else {
     ElNotification({
       title: t('notice.noticeTitle'),
-      message: t('notice.updateSysNotificationErrorMsg'),
+      message: t('notice.updateNotificationErrorMsg'),
       type: 'error'
     });
   }

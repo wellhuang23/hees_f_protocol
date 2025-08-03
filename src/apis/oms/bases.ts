@@ -18,8 +18,14 @@ import type {
 } from '@/interfaces'
 import request from '@/utils/requests'
 import { convertToNumber } from '@/utils/conNumber'
+import {
+    useUserInfoStore,
+    useValidComStore,
+} from '@/stores'
 
 const BASE_API = '/oms/bases'
+const userInfoStore = useUserInfoStore()
+const validComStore = useValidComStore()
 
 class OMSBasesAPI {
     // API for Checking OMS Services Alive
@@ -575,6 +581,232 @@ class OMSBasesAPI {
 
         return request<any, any>({
             url: BASE_API + '/noti/sys/delete',
+            method: 'POST',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            data: params,
+        }).then((response): GeneralResParam => {
+            return {
+                errno: response.data.errno,
+                desc: response.data.desc,
+            }
+        });
+    }
+
+    // API for Getting Group Notifications
+    async getGroupNotifications(token: string): Promise<GetNotificationResParams> {
+        const groupId = userInfoStore.groupId
+        const params = {
+            group_id: groupId,
+        }
+        return request<any, any>({
+            url: BASE_API + '/noti/group/get',
+            method: 'GET',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            params: params,
+        }).then((response): GetNotificationResParams => {
+            if (response.data.errno === '00000') {
+                const notifications: Notification[] = []
+                for (const notification of response.data.data) {
+                    notifications.push({
+                        notiId: (convertToNumber(notification.noti_id) ?? 0),
+                        notiName: notification.noti_name,
+                        notiDesc: notification.noti_desc,
+                        notiType: (convertToNumber(notification.noti_type) ?? 0),
+                        createTime: notification.create_time,
+                        updateTime: notification.update_time,
+                        creator: {
+                            userId: (convertToNumber(notification.creator.user_id) ?? 0),
+                            userStName: notification.creator.user_st_name,
+                            comStName: notification.creator.com_st_name,
+                            groupName: notification.creator.group_name,
+                        },
+                    })
+                }
+
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                    notifications: notifications,
+                }
+            } else {
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                }
+            }
+        });
+    }
+
+    // API for Creating New Group Notification
+    async createNewGroupNotification(data: NotificationReqParams, token: string): Promise<GeneralResParam> {
+        const params = {
+            'noti_name': data.notiName ?? '',
+            'noti_desc': data.notiDesc ?? '',
+        }
+
+        return request<any, any>({
+            url: BASE_API + '/noti/group/create',
+            method: 'POST',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            data: params,
+        }).then((response): GeneralResParam => {
+            return {
+                errno: response.data.errno,
+                desc: response.data.desc,
+            }
+        });
+    }
+
+    // API for Updating Group Notification
+    async updateGroupNotification(data: NotificationReqParams, token: string): Promise<GeneralResParam> {
+        const params = {
+            'noti_id': data.notiId ?? 0,
+            'noti_name': data.notiName ?? '',
+            'noti_desc': data.notiDesc ?? '',
+        }
+
+        return request<any, any>({
+            url: BASE_API + '/noti/group/update',
+            method: 'POST',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            data: params,
+        }).then((response): GeneralResParam => {
+            return {
+                errno: response.data.errno,
+                desc: response.data.desc,
+            }
+        });
+    }
+
+    // API for Deleting Group Notification
+    async deleteGroupNotification(data: NotificationReqParams, token: string): Promise<GeneralResParam> {
+        const params = {
+            'noti_id': data.notiId ?? 0,
+        }
+
+        return request<any, any>({
+            url: BASE_API + '/noti/group/delete',
+            method: 'POST',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            data: params,
+        }).then((response): GeneralResParam => {
+            return {
+                errno: response.data.errno,
+                desc: response.data.desc,
+            }
+        });
+    }
+
+    // API for Getting Company Notifications
+    async getComNotifications(token: string): Promise<GetNotificationResParams> {
+        const comId = validComStore.currentCom.comId
+        const params = {
+            com_id: comId,
+        }
+        return request<any, any>({
+            url: BASE_API + '/noti/com/get',
+            method: 'GET',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            params: params,
+        }).then((response): GetNotificationResParams => {
+            if (response.data.errno === '00000') {
+                const notifications: Notification[] = []
+                for (const notification of response.data.data) {
+                    notifications.push({
+                        notiId: (convertToNumber(notification.noti_id) ?? 0),
+                        notiName: notification.noti_name,
+                        notiDesc: notification.noti_desc,
+                        notiType: (convertToNumber(notification.noti_type) ?? 0),
+                        createTime: notification.create_time,
+                        updateTime: notification.update_time,
+                        creator: {
+                            userId: (convertToNumber(notification.creator.user_id) ?? 0),
+                            userStName: notification.creator.user_st_name,
+                            comStName: notification.creator.com_st_name,
+                            groupName: notification.creator.group_name,
+                        },
+                    })
+                }
+
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                    notifications: notifications,
+                }
+            } else {
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                }
+            }
+        });
+    }
+
+    // API for Creating New Company Notification
+    async createNewComNotification(data: NotificationReqParams, token: string): Promise<GeneralResParam> {
+        const params = {
+            'noti_name': data.notiName ?? '',
+            'noti_desc': data.notiDesc ?? '',
+        }
+
+        return request<any, any>({
+            url: BASE_API + '/noti/com/create',
+            method: 'POST',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            data: params,
+        }).then((response): GeneralResParam => {
+            return {
+                errno: response.data.errno,
+                desc: response.data.desc,
+            }
+        });
+    }
+
+    // API for Updating Company Notification
+    async updateComNotification(data: NotificationReqParams, token: string): Promise<GeneralResParam> {
+        const params = {
+            'noti_id': data.notiId ?? 0,
+            'noti_name': data.notiName ?? '',
+            'noti_desc': data.notiDesc ?? '',
+        }
+
+        return request<any, any>({
+            url: BASE_API + '/noti/com/update',
+            method: 'POST',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            data: params,
+        }).then((response): GeneralResParam => {
+            return {
+                errno: response.data.errno,
+                desc: response.data.desc,
+            }
+        });
+    }
+
+    // API for Deleting Company Notification
+    async deleteComNotification(data: NotificationReqParams, token: string): Promise<GeneralResParam> {
+        const params = {
+            'noti_id': data.notiId ?? 0,
+        }
+
+        return request<any, any>({
+            url: BASE_API + '/noti/com/delete',
             method: 'POST',
             headers: {
                 Authorization: `HEEsToken ${token}`,

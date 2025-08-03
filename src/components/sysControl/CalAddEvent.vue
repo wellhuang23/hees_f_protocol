@@ -75,7 +75,7 @@ const handleConfirm = async () => {
           message: t('notice.createCalendarSuccessMsg'),
           type: 'success'
         });
-        location.reload(); // Consider updating data without a full reload
+        isVisible.value = false;
       } else if (createRes === '99006') {
         ElNotification({
           title: t('notice.noticeTitle'),
@@ -156,7 +156,6 @@ const handleConfirm = async () => {
     </el-form>
     <template #footer>
       <span class="dialog-footer">
-        <el-button @click="closeDialog">{{ t('general.cancel') }}</el-button>
         <el-button type="primary" @click="handleConfirm">
           {{ t('general.confirm') }}
         </el-button>
@@ -168,5 +167,9 @@ const handleConfirm = async () => {
 <style scoped lang="scss">
 .add-event-form {
   padding: 20px;
+}
+.dialog-footer {
+  text-align: center;
+  display: block;
 }
 </style>
