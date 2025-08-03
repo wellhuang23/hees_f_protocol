@@ -5,6 +5,7 @@ import { useComPerRoleStore, useUserInfoStore, useValidComStore } from '@/stores
 import type { ComRole } from '@/interfaces'
 import {computed, ref} from 'vue'
 import PerRolesCusAddRole from "@/components/oms/PerRolesCusAddRole.vue";
+import PerRoleCusUsers from "@/components/oms/PerRolesCusUsers.vue";
 
 const { t, locale } = useI18n()
 
@@ -12,13 +13,15 @@ const comPerRoleStore = useComPerRoleStore()
 const userInfoStore = useUserInfoStore()
 const validComStore = useValidComStore()
 const { cusRoles } = storeToRefs(comPerRoleStore)
-const { per1000, per0100 } = storeToRefs(userInfoStore)
+const { per1000, per0100, per0010 } = storeToRefs(userInfoStore)
 
 const comTaxNo = validComStore.currentCom.comTaxNo
 const perCreateRole = comTaxNo + '-oms-002-1000'
 const canCreateRole = computed(() => per1000.value.includes(perCreateRole))
 const perReadRolesUsers = comTaxNo + '-oms-003-0100'
 const canViewUsers = computed(() => per0100.value.includes(perReadRolesUsers))
+const perUpdateRolesUsers = comTaxNo + '-oms-003-0010'
+const canEditUsers = computed(() => per0010.value.includes(perUpdateRolesUsers))
 
 const usersColumnWidth = computed(() => (locale.value === 'en-US' ? 150 : 120))
 
@@ -152,6 +155,12 @@ const showUsers = (row: ComRole) => {
     </el-table-column>
   </el-table>
   <per-roles-cus-add-role :visible="isAddRoleDialogVisible" @close="closeAddNewRoleDialog" />
+  <per-role-cus-users
+      v-if="selectedRole"
+      v-model="drawerVisible"
+      :role="selectedRole"
+      :can-edit="canEditUsers"
+  />
 </template>
 
 <style scoped lang="scss">

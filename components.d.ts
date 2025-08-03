@@ -77,6 +77,7 @@ declare module 'vue' {
     PerRoles: typeof import('./src/components/oms/PerRoles.vue')['default']
     PerRolesCus: typeof import('./src/components/oms/PerRolesCus.vue')['default']
     PerRolesCusAddRole: typeof import('./src/components/oms/PerRolesCusAddRole.vue')['default']
+    PerRolesCusUsers: typeof import('./src/components/oms/PerRolesCusUsers.vue')['default']
     PerRolesDef: typeof import('./src/components/oms/PerRolesDef.vue')['default']
     PerRolesDefAssignUsers: typeof import('./src/components/oms/PerRolesDefAssignUsers.vue')['default']
     PerRolesDefUsers: typeof import('./src/components/oms/PerRolesDefUsers.vue')['default']
