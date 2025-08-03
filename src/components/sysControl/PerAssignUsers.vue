@@ -58,9 +58,8 @@ const handleConfirm = async () => {
       sysRoleId: props.role.sysRoleId,
       userIds: selectedUserIds.value.filter((id): id is number => id !== undefined)
     })
-    handleClose()
-
     if (errno === '00000') {
+      handleClose()
       await getSysRole()
       await getSysRoleUsers()
       await getSysUsers()

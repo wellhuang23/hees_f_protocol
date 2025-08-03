@@ -57,6 +57,23 @@ const handleNodeClick = (node: any) => {
   selectedNodeCategory.value = locale.value === 'zh-TW' ? node.strUnitName : node.strUnitEngName
 }
 
+const refreshData = async () => {
+  const currentKey = treeRef.value?.getCurrentKey()
+  await getStrUnitUsers()
+  await nextTick()
+  if (currentKey) {
+    treeRef.value?.setCurrentKey(currentKey)
+    const currentNode = treeRef.value?.getNode(currentKey)
+    if (currentNode) {
+      handleNodeClick(currentNode.data)
+    }
+  } else if (treeData.value.length > 0) {
+    const firstNode = treeData.value[0];
+    treeRef.value?.setCurrentKey(firstNode.id)
+    handleNodeClick(firstNode)
+  }
+}
+
 onMounted(async () => {
   await getStrUnitUsers()
   await nextTick()
@@ -100,7 +117,7 @@ onMounted(async () => {
             highlight-current
         />
       </div>
-      <users-list class="users-container" :users="selectedNodeUsers" :category="selectedNodeCategory" />
+      <users-list class="users-container" :users="selectedNodeUsers" :category="selectedNodeCategory" @refresh-users="refreshData" />
     </div>
     <user-up-info-col v-model:drawerVisible="showUserInfoCols" />
     <user-add-member :visible="isAddMemberDialogVisible" @close="closeAddMemberDialog" />

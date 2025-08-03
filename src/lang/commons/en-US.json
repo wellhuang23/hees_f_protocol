@@ -28,8 +28,8 @@
     "logOutErrorMsg": "Error Occur when Log Out, Empty Local Data Already, Please Contact System Manager",
     "updatePerSuccessMsg": "Update Permissions to the Latest Already",
     "updatePerErrorMsg": "Error Occur when Update Permissions, Please Contact System Manager",
-    "updateSysPerRoleUsersSuccessMsg": "Update Users in System Permission Role Successfully",
-    "updateSysPerRoleUsersFailMsg": "Update Users in System Permission Role Fail, Please Contact System Manager",
+    "updateSysPerRoleUsersSuccessMsg": "Update Members in System Permission Role Successfully",
+    "updateSysPerRoleUsersFailMsg": "Update Members in System Permission Role Fail, Please Contact System Manager",
     "getSysLogsSuccessMsg": "Request System Logs Successfully",
     "getSysLogsTimeErrorMsg": "Please Input Start Time & End Time",
     "getSysLogsPerErrorMsg": "You Don't have Permission to Search Server Logs",
@@ -125,7 +125,18 @@
     "updateProfileErrorMsg": "Update password Fail, Please Contact System Manager",
     "updateProfileDetailSuccessMsg": "Update General Member's Detail Profile Successfully",
     "updateProfileDetailErrorMsg": "Update General Member's Detail Profile Fail, Please Contact System Manager",
-    "systemErrorMsg": "System Error, Please Contact System Manager"
+    "systemErrorMsg": "System Error, Please Contact System Manager",
+    "updateComPerRoleUsersSuccessMsg": "Update Members in Company Permission Role Successfully",
+    "createComCusRoleSuccessMsg": "Create Customize Role Successfully",
+    "createComCusRoleNoPerErrorMsg": "You don't Have Permission to Create Customize Role, Please Contact System Manger",
+    "createComCusRoleErrorMsg": "Create Customize Role Fail, Please Contact System Manger",
+    "updateComCusRoleSuccessMsg": "Update Customize Role Successfully",
+    "updateComCusRoleNoPerErrorMsg": "You don't Have Permission to Update Customize Role, Please Contact System Manger",
+    "updateComCusRoleErrorMsg": "Update Customize Role Fail, Please Contact System Manger",
+    "deleteComCusRoleSuccessMsg": "Delete Customize Role Successfully",
+    "deleteComCusRoleNoPerErrorMsg": "You don't Have Permission to Delete Customize Role, Please Contact System Manger",
+    "deleteComCusRoleErrorMsg": "Delete Customize Role Fail, Please Contact System Manger",
+    "updateComPerRoleUsersFailMsg": "Update Members in Company Permission Role Fail, Please Contact System Manager"
   },
   "cusSugDetail": {
     "title": "Suggestion Details",
@@ -143,7 +154,7 @@
     "title": "Update Suggestion",
     "response": "Response",
     "remarks": "Remarks",
-    "updateBtn": "Update",
+    "updateBtn": "Modify",
     "statusOptions": {
       "new": "New Suggestion",
       "processing": "In Processing",
@@ -231,7 +242,7 @@
     "viewUsers": "View Members",
     "userList": "Member List",
     "userNo": "Member No.",
-    "userStName": "Member Name",
+    "userStName": "Username",
     "editMembers": "Edit Members",
     "selected": "Selected",
     "notSelected": "Not Selected",
@@ -578,6 +589,83 @@
       "chPwdNewPwdConfirmSameTip": "The Passwords You Entered Twice do not Match",
       "chPwdSameTip": "New Password could not be Same with Current Password",
       "confirm": "Confirm"
+    }
+  },
+  "comPerRoles": {
+    "defRoles": {
+      "title": "Default Roles",
+      "permissionHint": "Permissions of ",
+      "roleName": "Role Name",
+      "roleDesc": "Role Description",
+      "perName": "Permission Name",
+      "perDesc": "Permission Description",
+      "perCode": "Permission Code",
+      "users": "Members",
+      "viewUsers": "View Members",
+      "userList": "Member List",
+      "userNo": "Member No.",
+      "userStName": "Username",
+      "editMembers": "Edit Members",
+      "assignMembers": {
+        "colStrUnitName": "Structure Unit",
+        "colUserStName": "Member",
+        "colUserNo": "Member NO.",
+        "status": "Status",
+        "selected": "Selected",
+        "notSelected": "Not Selected"
+      }
+    },
+    "cusRoles": {
+      "title": "Customize Roles",
+      "permissionHint": "Permissions of ",
+      "roleName": "Role Name",
+      "roleDesc": "Role Description",
+      "perName": "Permission Name",
+      "perDesc": "Permission Description",
+      "perCode": "Permission Code",
+      "users": "Members",
+      "viewUsers": "View Members",
+      "userList": "Member List",
+      "userNo": "Member No.",
+      "userStName": "Username",
+      "editMembers": "Edit Members",
+      "assignMembers": {
+        "colStrUnitName": "Structure Unit",
+        "colUserStName": "Member",
+        "colUserNo": "Member NO.",
+        "status": "Status",
+        "selected": "Selected",
+        "notSelected": "Not Selected"
+      },
+      "addCusRole": {
+        "addBtn": "Add",
+        "title": "Add Customize Role",
+        "roleName": "Role Name",
+        "roleDesc": "Role Description",
+        "colPerCode": "Permission No.",
+        "colPerName": "Permission Name",
+        "colPerDesc": "Permission Description",
+        "status": "Status",
+        "selected": "Selected",
+        "notSelected": "Not Selected"
+      },
+      "updateCusRole": {
+        "updateBtn": "Modify",
+        "title": "Update Customize Role",
+        "roleName": "Role Name",
+        "roleDesc": "Role Description",
+        "colPerCode": "Permission No.",
+        "colPerName": "Permission Name",
+        "colPerDesc": "Permission Description",
+        "status": "Status",
+        "selected": "Selected",
+        "notSelected": "Not Selected"
+      },
+      "deleteCusRole": {
+        "deleteBtn": "Delete",
+        "title": "Delete Customize Role",
+        "content": "Sure for Deleting the Customize Role ?"
+      }
     }
   }
 }

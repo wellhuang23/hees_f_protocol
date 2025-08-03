@@ -1,17 +1,25 @@
 import { defineStore } from 'pinia'
 import { localCache } from '@/utils/storages'
-import { sessionCache } from '@/utils/storages'
 import type {
     LogInResParams,
     GenTokenResParams,
     SysRole,
     SysRoleUsers,
     SysRoleUser,
+    ComRole,
+    GetComRoleResParams,
+    ComRoleUsers,
+    GetComRoleUsersResParams,
+    ComUsers,
+    GetGroupUsersResParams,
+    SubComPermissions,
+    GetSubComPerResParams,
 } from '@/interfaces'
 import {
     USER_INFO,
     DEVICE_INFO,
-    SYS_PER_ROLE
+    SYS_PER_ROLE,
+    COM_PER_ROLE,
 } from '@/global/contstants'
 
 const useUserInfoStore = defineStore(USER_INFO, {
@@ -110,9 +118,9 @@ const useDeviceInfoStore = defineStore(DEVICE_INFO, {
 
 const useSysPerRoleStore = defineStore(SYS_PER_ROLE, {
     state:() => ({
-        sysRoles: sessionCache.getCache(SYS_PER_ROLE)?.sysRoles ?? [] as SysRole[],
-        sysRoleUsers: sessionCache.getCache(SYS_PER_ROLE)?.sysRoleUsers ?? [] as SysRoleUsers[],
-        sysUsers: sessionCache.getCache(SYS_PER_ROLE)?.sysUsers ?? [] as SysRoleUser[],
+        sysRoles: [] as SysRole[],
+        sysRoleUsers: [] as SysRoleUsers[],
+        sysUsers: [] as SysRoleUser[],
     }),
     actions: {
         setSysRole(sysRoles: SysRole[]) {
@@ -128,12 +136,6 @@ const useSysPerRoleStore = defineStore(SYS_PER_ROLE, {
                 })
             }
             this.sysRoles = data
-
-            sessionCache.setCache(SYS_PER_ROLE, {
-                sysRoles: data,
-                sysRoleUsers: this.sysRoleUsers,
-                sysUsers: this.sysUsers,
-            })
         },
 
         setSysRoleUsers(sysRoleUsers: SysRoleUsers[]) {
@@ -147,12 +149,6 @@ const useSysPerRoleStore = defineStore(SYS_PER_ROLE, {
                 })
             }
             this.sysRoleUsers = data
-
-            sessionCache.setCache(SYS_PER_ROLE, {
-                sysRoles: this.sysRoles,
-                sysRoleUsers: data,
-                sysUsers: this.sysUsers,
-            })
         },
 
         setSysUsers(sysUsers: SysRoleUser[]) {
@@ -165,12 +161,34 @@ const useSysPerRoleStore = defineStore(SYS_PER_ROLE, {
                 })
             }
             this.sysUsers = data
+        }
+    }
+})
 
-            sessionCache.setCache(SYS_PER_ROLE, {
-                sysRoles: this.sysRoles,
-                sysRoleUsers: this.sysRoleUsers,
-                sysUsers: data
-            })
+const useComPerRoleStore = defineStore(COM_PER_ROLE, {
+    state:() => ({
+        defRoles: [] as ComRole[],
+        cusRoles: [] as ComRole[],
+        comRoleUsers: [] as ComRoleUsers[],
+        subComPermissions: [] as SubComPermissions[],
+        groupUsers: [] as ComUsers[],
+    }),
+    actions: {
+        setComRoles(comRoles: GetComRoleResParams) {
+            this.defRoles = comRoles.defRoles
+            this.cusRoles = comRoles.cusRoles
+        },
+
+        setComRoleUsers(res: GetComRoleUsersResParams) {
+            this.comRoleUsers = res.comRoleUsers
+        },
+
+        setComPermissions(res: GetSubComPerResParams) {
+            this.subComPermissions = res.subComPermissions
+        },
+
+        setGroupUsers(res: GetGroupUsersResParams) {
+            this.groupUsers = res.companies
         }
     }
 })
@@ -178,5 +196,6 @@ const useSysPerRoleStore = defineStore(SYS_PER_ROLE, {
 export {
     useUserInfoStore,
     useDeviceInfoStore,
-    useSysPerRoleStore
+    useSysPerRoleStore,
+    useComPerRoleStore,
 }

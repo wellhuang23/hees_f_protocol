@@ -8,6 +8,11 @@ import type {
     GetSysRoleUsersResParams,
     GetSysUsersResParams,
     AssignUserSysPerRoleReqParams,
+    GetComRoleResParams,
+    GetComRoleUsersResParams,
+    AssignUserComPerRoleReqParams,
+    ComCusRoleOperationReqParams,
+    GetSubComPerResParams,
 } from '@/interfaces'
 import {
     useUserInfoStore,
@@ -15,14 +20,15 @@ import {
     useSysPerRoleStore,
     useSubItemsStore,
     useValidComStore,
+    useComPerRoleStore
 } from '@/stores'
-
 
 const userInfoStore = useUserInfoStore()
 const deviceStore = useDeviceInfoStore()
 const sysPerRoleStore = useSysPerRoleStore()
 const subItemsStore = useSubItemsStore()
 const validComStore = useValidComStore()
+const comPerRoleStore = useComPerRoleStore()
 
 export async function logInAction(logInInfo: LogInReqParams){
     return OMSAuthsAPI.logIn(logInInfo).then((res: LogInResParams): string => {
@@ -180,6 +186,206 @@ export async function assignUsersSysPerRole(assignUsersParams: AssignUserSysPerR
                             return refreshRes.errno
                     })
                 }
+            }
+        }
+        return res.errno
+    })
+}
+
+export async function getComRoles() {
+    const token = deviceStore.token
+    const comId = validComStore.currentCom.comId
+    return OMSAuthsAPI.getComPerRoles(comId, token).then(async (res: GetComRoleResParams)=> {
+        if (res.errno === '00000') {
+            comPerRoleStore.setComRoles(res)
+        } else {
+            if (res.errno === '99005') {
+                const refreshTokenResult = await updateToken().then()
+                if (refreshTokenResult === '00000') {
+                    const refreshToken = deviceStore.token
+                    return OMSAuthsAPI.getComPerRoles(comId, refreshToken).then((refreshRes: GetComRoleResParams) => {
+                        comPerRoleStore.setComRoles(refreshRes)
+                    })
+                }
+            }
+        }
+    })
+}
+
+export async function getComRoleUsers() {
+    const token = deviceStore.token
+    const comId = validComStore.currentCom.comId
+    return OMSAuthsAPI.getComPerRoleUsers(comId, token).then(async (res: GetComRoleUsersResParams)=> {
+        if (res.errno === '00000') {
+            comPerRoleStore.setComRoleUsers(res)
+        } else {
+            if (res.errno === '99005') {
+                const refreshTokenResult = await updateToken().then()
+                if (refreshTokenResult === '00000') {
+                    const refreshToken = deviceStore.token
+                    return OMSAuthsAPI.getComPerRoleUsers(comId, refreshToken).then((refreshRes: GetComRoleUsersResParams) => {
+                        comPerRoleStore.setComRoleUsers(refreshRes)
+                    })
+                }
+            }
+        }
+    })
+}
+
+export async function getSubComPermissions() {
+    const token = deviceStore.token
+    const comId = validComStore.currentCom.comId
+    return OMSAuthsAPI.getSubComPermissions(comId, token).then(async (res: GetSubComPerResParams)=> {
+        if (res.errno === '00000') {
+            comPerRoleStore.setComPermissions(res)
+        } else {
+            if (res.errno === '99005') {
+                const refreshTokenResult = await updateToken().then()
+                if (refreshTokenResult === '00000') {
+                    const refreshToken = deviceStore.token
+                    return OMSAuthsAPI.getSubComPermissions(comId, refreshToken).then((refreshRes: GetSubComPerResParams) => {
+                        comPerRoleStore.setComPermissions(refreshRes)
+                    })
+                }
+            }
+        }
+    })
+}
+
+export async function assignUsersComPerRole(assignUsersParams: AssignUserComPerRoleReqParams) {
+    const token = deviceStore.token
+    return OMSAuthsAPI.assignUserComPerRole(assignUsersParams, token).then(async (res: GeneralResParam)=> {
+        if (res.errno === '00000') {
+            return res.errno
+        } else {
+            if (res.errno === '99005') {
+                const refreshTokenResult = await updateToken().then()
+                if (refreshTokenResult === '00000') {
+                    const refreshToken = deviceStore.token
+                    return OMSAuthsAPI.assignUserComPerRole(
+                        assignUsersParams,
+                        refreshToken).then((refreshRes: GeneralResParam) => {
+                        return refreshRes.errno
+                    })
+                }
+            }
+        }
+        return res.errno
+    })
+}
+
+export async function createComCusRole(reqParams: ComCusRoleOperationReqParams) {
+    const token = deviceStore.token
+    const comId = validComStore.currentCom.comId
+    return OMSAuthsAPI.createComCusRole(reqParams, comId, token).then(async (res: GeneralResParam)=> {
+        if (res.errno === '99005') {
+            const refreshTokenResult = await updateToken().then()
+            if (refreshTokenResult === '00000') {
+                const refreshToken = deviceStore.token
+                return OMSAuthsAPI.createComCusRole(
+                    reqParams,
+                    comId,
+                    refreshToken).then((refreshRes: GeneralResParam) => {
+                    if (refreshRes.errno === '00000') {
+                        return OMSAuthsAPI.getComPerRoles(comId, token).then(async (refreshGetRes: GetComRoleResParams) => {
+                            if (refreshGetRes.errno === '00000') {
+                                comPerRoleStore.setComRoles(refreshGetRes)
+                            }
+                            return refreshGetRes.errno
+                        })
+                    } else {
+                        return refreshRes.errno
+                    }
+                })
+            }
+        } else {
+            if (res.errno === '00000') {
+                return OMSAuthsAPI.getComPerRoles(comId, token).then(async (getRes: GetComRoleResParams) => {
+                    if (getRes.errno === '00000') {
+                        comPerRoleStore.setComRoles(getRes)
+                    }
+                    return getRes.errno
+                })
+            } else {
+                return res.errno
+            }
+        }
+        return res.errno
+    })
+}
+
+export async function updateComCusRole(reqParams: ComCusRoleOperationReqParams) {
+    const token = deviceStore.token
+    const comId = validComStore.currentCom.comId
+    return OMSAuthsAPI.updateComCusRole(reqParams, token).then(async (res: GeneralResParam)=> {
+        if (res.errno === '99005') {
+            const refreshTokenResult = await updateToken().then()
+            if (refreshTokenResult === '00000') {
+                const refreshToken = deviceStore.token
+                return OMSAuthsAPI.updateComCusRole(
+                    reqParams,
+                    refreshToken).then((refreshRes: GeneralResParam) => {
+                    if (refreshRes.errno === '00000') {
+                        return OMSAuthsAPI.getComPerRoles(comId, token).then(async (refreshGetRes: GetComRoleResParams) => {
+                            if (refreshGetRes.errno === '00000') {
+                                comPerRoleStore.setComRoles(refreshGetRes)
+                            }
+                            return refreshGetRes.errno
+                        })
+                    } else {
+                        return refreshRes.errno
+                    }
+                })
+            }
+        } else {
+            if (res.errno === '00000') {
+                return OMSAuthsAPI.getComPerRoles(comId, token).then(async (getRes: GetComRoleResParams) => {
+                    if (getRes.errno === '00000') {
+                        comPerRoleStore.setComRoles(getRes)
+                    }
+                    return getRes.errno
+                })
+            } else {
+                return res.errno
+            }
+        }
+        return res.errno
+    })
+}
+
+export async function deleteComCusRole(reqParams: ComCusRoleOperationReqParams) {
+    const token = deviceStore.token
+    const comId = validComStore.currentCom.comId
+    return OMSAuthsAPI.deleteComCusRole(reqParams, token).then(async (res: GeneralResParam)=> {
+        if (res.errno === '99005') {
+            const refreshTokenResult = await updateToken().then()
+            if (refreshTokenResult === '00000') {
+                const refreshToken = deviceStore.token
+                return OMSAuthsAPI.deleteComCusRole(
+                    reqParams,
+                    refreshToken).then((refreshRes: GeneralResParam) => {
+                    if (refreshRes.errno === '00000') {
+                        return OMSAuthsAPI.getComPerRoles(comId, token).then(async (refreshGetRes: GetComRoleResParams) => {
+                            if (refreshGetRes.errno === '00000') {
+                                comPerRoleStore.setComRoles(refreshGetRes)
+                            }
+                            return refreshGetRes.errno
+                        })
+                    } else {
+                        return refreshRes.errno
+                    }
+                })
+            }
+        } else {
+            if (res.errno === '00000') {
+                return OMSAuthsAPI.getComPerRoles(comId, token).then(async (getRes: GetComRoleResParams) => {
+                    if (getRes.errno === '00000') {
+                        comPerRoleStore.setComRoles(getRes)
+                    }
+                    return getRes.errno
+                })
+            } else {
+                return res.errno
             }
         }
         return res.errno

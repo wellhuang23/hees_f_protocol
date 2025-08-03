@@ -1,9 +1,9 @@
 <script setup lang="ts">
-
+import PerRoles from '@/components/oms/PerRoles.vue'
 </script>
 
 <template>
-  <div>PERMISSION CONTROL</div>
+  <per-roles />
 </template>
 
 <style scoped lang="scss">

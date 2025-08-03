@@ -47,6 +47,7 @@ const props = defineProps({
 
 const { t, locale } = useI18n()
 
+const emit = defineEmits(['refresh-users']);
 const editForm = reactive({
   userName: '',
   userNo: '',
@@ -281,6 +282,7 @@ const updateUserInfo = async (userId: number) => {
       type: 'success'
     });
     isEditing.value = false
+    emit('refresh-users');
   } else if (updateRes === '99006') {
     ElNotification({
       title: t('notice.noticeTitle'),

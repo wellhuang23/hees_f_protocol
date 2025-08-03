@@ -13,6 +13,16 @@ import type {
     GetSysUsersResParams,
     AssignUserSysPerRoleReqParams,
     ValidCom,
+    GetComRoleResParams,
+    ComPermission,
+    ComRole,
+    GetComRoleUsersResParams,
+    ComRoleUsers,
+    ComRoleUser,
+    AssignUserComPerRoleReqParams,
+    GetSubComPerResParams,
+    SubComPermissions,
+    ComCusRoleOperationReqParams,
 } from '@/interfaces'
 import request from '@/utils/requests'
 import { convertToNumber } from '@/utils/conNumber'
@@ -223,7 +233,7 @@ class OMSAuthsAPI {
         });
     }
 
-    // API for Getting Users in  System Permission Roles
+    // API for Getting Users in System Permission Roles
     async getSysPerRoleUsers(token: string): Promise<GetSysRoleUsersResParams> {
         return request<any, any>({
             url: AUTH_API + '/sys/per/role/users',
@@ -267,7 +277,7 @@ class OMSAuthsAPI {
         });
     }
 
-    // API for Getting Users in  System Permission Roles
+    // API for Getting Users in System Permission Roles
     async getSysUsers(token: string): Promise<GetSysUsersResParams> {
         return request<any, any>({
             url: AUTH_API + '/sys/users',
@@ -310,6 +320,278 @@ class OMSAuthsAPI {
 
         return request<any, any>({
             url: AUTH_API + '/sys/per/role/assign',
+            method: 'POST',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            data: params,
+        }).then((response): GeneralResParam => {
+            return {
+                errno: response.data.errno,
+                desc: response.data.desc,
+            }
+        });
+    }
+
+    // API for Getting Company Permission Roles
+    async getComPerRoles(comId: number, token: string): Promise<GetComRoleResParams> {
+        const params = {
+            'com_id': comId,
+        }
+        return request<any, any>({
+            url: AUTH_API + '/com/per/roles',
+            method: 'GET',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            params: params,
+        }).then((response): GetComRoleResParams => {
+            if (response.data.errno === '00000') {
+                const defRoles: ComRole[] = []
+                for (const defRole of response.data.data.def_roles) {
+                    const comPermissions: ComPermission[] = []
+                    for (const per of defRole.permissions) {
+                        comPermissions.push({
+                            comPerId: convertToNumber(per.com_per_id),
+                            comPerNo: per.com_per_no,
+                            comPerName: per.com_per_name,
+                            comPerDesc: per.com_per_desc,
+                            comPerEngName: per.com_per_eng_name,
+                            comPerEngDesc: per.com_per_eng_desc,
+                        })
+                    }
+
+                    defRoles.push({
+                        comRoleId: convertToNumber(defRole.com_role_id),
+                        comRoleName: defRole.com_role_name,
+                        comRoleDesc: defRole.com_role_desc,
+                        comRoleEngName: defRole.com_role_eng_name,
+                        comRoleEngDesc: defRole.com_role_eng_desc,
+                        comPermissions: comPermissions
+                    })
+                }
+
+                const cusRoles: ComRole[] = []
+                for (const cusRole of response.data.data.cus_roles) {
+                    const comPermissions: ComPermission[] = []
+                    for (const per of cusRole.permissions) {
+                        comPermissions.push({
+                            comPerId: convertToNumber(per.com_per_id),
+                            comPerNo: per.com_per_no,
+                            comPerName: per.com_per_name,
+                            comPerDesc: per.com_per_desc,
+                            comPerEngName: per.com_per_eng_name,
+                            comPerEngDesc: per.com_per_eng_desc,
+                        })
+                    }
+
+                    cusRoles.push({
+                        comRoleId: convertToNumber(cusRole.com_role_id),
+                        comRoleName: cusRole.com_role_name,
+                        comRoleDesc: cusRole.com_role_desc,
+                        comRoleEngName: cusRole.com_role_eng_name,
+                        comRoleEngDesc: cusRole.com_role_eng_desc,
+                        comPermissions: comPermissions
+                    })
+                }
+
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                    defRoles: defRoles,
+                    cusRoles: cusRoles,
+                }
+            } else {
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                    defRoles: [],
+                    cusRoles: [],
+                }
+            }
+        });
+    }
+
+    // API for Getting Users in Company Permission Roles
+    async getComPerRoleUsers(comId: number, token: string): Promise<GetComRoleUsersResParams> {
+        const params = {
+            'com_id': comId,
+        }
+        return request<any, any>({
+            url: AUTH_API + '/com/per/role/users',
+            method: 'GET',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            params: params,
+        }).then((response): GetComRoleUsersResParams => {
+            if (response.data.errno === '00000') {
+                const roles: ComRoleUsers[] = []
+                for (const role of response.data.data) {
+                    const comRoleUsers: ComRoleUser[] = []
+                    for (const user of role.users) {
+                        comRoleUsers.push({
+                            userId: convertToNumber(user.user_id),
+                            userNo: user.user_no,
+                            userStName: user.user_st_name,
+                        })
+                    }
+
+                    roles.push({
+                        comRoleId: convertToNumber(role.com_role_id),
+                        comRoleName: role.com_role_name,
+                        comRoleEngName: role.com_role_eng_name,
+                        comRoleUsers: comRoleUsers
+                    })
+                }
+
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                    comRoleUsers: roles
+                }
+            } else {
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                    comRoleUsers: []
+                }
+            }
+        });
+    }
+
+    // API for Assigning User to Company Permission Role
+    async assignUserComPerRole(data: AssignUserComPerRoleReqParams, token: string): Promise<GeneralResParam> {
+        const params = {
+            'com_role_id': data.comRoleId,
+            'user_ids': data.userIds,
+        }
+
+        return request<any, any>({
+            url: AUTH_API + '/com/per/role/assign',
+            method: 'POST',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            data: params,
+        }).then((response): GeneralResParam => {
+            return {
+                errno: response.data.errno,
+                desc: response.data.desc,
+            }
+        });
+    }
+
+    // API for Getting Company Permissions Categorized by Subscriptions
+    async getSubComPermissions(comId: number, token: string): Promise<GetSubComPerResParams> {
+        const params = {
+            'com_id': comId,
+        }
+        return request<any, any>({
+            url: AUTH_API + '/com/per/all',
+            method: 'GET',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            params: params,
+        }).then((response): GetSubComPerResParams => {
+            if (response.data.errno === '00000') {
+                const subs: SubComPermissions[] = []
+                for (const sub of response.data.data) {
+                    const comPermissions: ComPermission[] = []
+                    for (const permission of sub.permissions) {
+                        comPermissions.push({
+                            comPerId: convertToNumber(permission.com_per_id),
+                            comPerNo: permission.com_per_no,
+                            comPerName: permission.com_per_name,
+                            comPerDesc: permission.com_per_desc,
+                            comPerEngName: permission.com_per_eng_name,
+                            comPerEngDesc: permission.com_per_eng_desc,
+                        })
+                    }
+
+                    subs.push({
+                        subId: convertToNumber(sub.sub_id),
+                        subNo: sub.sub_no,
+                        subName: sub.sub_name,
+                        subDesc: sub.sub_desc,
+                        subEngName: sub.sub_eng_name,
+                        subEngDesc: sub.sub_eng_desc,
+                        comPermissions: comPermissions,
+                    })
+                }
+
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                    subComPermissions: subs
+                }
+            } else {
+                return {
+                    errno: response.data.errno,
+                    desc: response.data.desc,
+                    subComPermissions: []
+                }
+            }
+        });
+    }
+
+    // API for Creating Company Customize Role
+    async createComCusRole(data: ComCusRoleOperationReqParams, comId: number, token: string): Promise<GeneralResParam> {
+        const params = {
+            'com_id': comId,
+            'com_role_name': data.comRoleName,
+            'com_role_desc': data.comRoleDesc,
+            'com_per_ids': data.comPerIds,
+        }
+
+        return request<any, any>({
+            url: AUTH_API + '/com/per/role/create',
+            method: 'POST',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            data: params,
+        }).then((response): GeneralResParam => {
+            return {
+                errno: response.data.errno,
+                desc: response.data.desc,
+            }
+        });
+    }
+
+    // API for Updating Company Customize Role
+    async updateComCusRole(data: ComCusRoleOperationReqParams, token: string): Promise<GeneralResParam> {
+        const params = {
+            'com_role_id': data.comRoleId,
+            'com_role_name': data.comRoleName,
+            'com_role_desc': data.comRoleDesc,
+            'com_per_ids': data.comPerIds,
+        }
+
+        return request<any, any>({
+            url: AUTH_API + '/com/per/role/update',
+            method: 'POST',
+            headers: {
+                Authorization: `HEEsToken ${token}`,
+            },
+            data: params,
+        }).then((response): GeneralResParam => {
+            return {
+                errno: response.data.errno,
+                desc: response.data.desc,
+            }
+        });
+    }
+
+    // API for Deleting Company Customize Role
+    async deleteComCusRole(data: ComCusRoleOperationReqParams, token: string): Promise<GeneralResParam> {
+        const params = {
+            'com_role_id': data.comRoleId,
+        }
+
+        return request<any, any>({
+            url: AUTH_API + '/com/per/role/delete',
             method: 'POST',
             headers: {
                 Authorization: `HEEsToken ${token}`,
