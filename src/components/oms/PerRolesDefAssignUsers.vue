@@ -91,7 +91,7 @@ const handleConfirm = async () => {
   <el-dialog
       :model-value="modelValue"
       :title="t('comPerRoles.defRoles.editMembers')"
-      width="800"
+      width="800px"
       center
       @close="handleClose"
   >

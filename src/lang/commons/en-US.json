@@ -127,6 +127,9 @@
     "updateProfileDetailErrorMsg": "Update General Member's Detail Profile Fail, Please Contact System Manager",
     "systemErrorMsg": "System Error, Please Contact System Manager",
     "updateComPerRoleUsersSuccessMsg": "Update Members in Company Permission Role Successfully",
+    "createComCusRoleSuccessMsg": "Create Customize Role Successfully",
+    "createComCusRoleNoPerErrorMsg": "You don't Have Permission to Create Customize Role, Please Contact System Manger",
+    "createComCusRoleErrorMsg": "Create Customize Role Fail, Please Contact System Manger",
     "updateComPerRoleUsersFailMsg": "Update Members in Company Permission Role Fail, Please Contact System Manager"
   },
   "cusSugDetail": {
@@ -624,6 +627,18 @@
         "colStrUnitName": "Structure Unit",
         "colUserStName": "Member",
         "colUserNo": "Member NO.",
+        "status": "Status",
+        "selected": "Selected",
+        "notSelected": "Not Selected"
+      },
+      "addCusRole": {
+        "addBtn": "Add",
+        "title": "Add Customize Role",
+        "roleName": "Role Name",
+        "roleDesc": "Role Description",
+        "colPerCode": "Permission No.",
+        "colPerName": "Permission Name",
+        "colPerDesc": "Permission Description",
         "status": "Status",
         "selected": "Selected",
         "notSelected": "Not Selected"

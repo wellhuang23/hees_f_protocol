@@ -130,6 +130,9 @@
     "updateProfileDetailErrorMsg": "更新成員個人詳細資料失敗，請洽系統管理員",
     "updateComPerRoleUsersSuccessMsg": "更新公司權限角色成員成功",
     "updateComPerRoleUsersFailMsg": "更新公司權限角色成員失敗，請聯繫系統管理員",
+    "createComCusRoleSuccessMsg": "新增自定義角色成功",
+    "createComCusRoleNoPerErrorMsg": "您沒有新增自定義角色的權限，請洽系統管理員",
+    "createComCusRoleErrorMsg": "新增自定義角色失敗，請洽系統管理員",
     "systemErrorMsg": "系統錯誤，請聯繫系統管理員"
   },
   "cusSugDetail": {
@@ -624,6 +627,18 @@
         "colStrUnitName": "所屬單位",
         "colUserStName": "成員",
         "colUserNo": "成員代號",
+        "status": "狀態",
+        "selected": "已選擇",
+        "notSelected": "未選擇"
+      },
+      "addCusRole": {
+        "addBtn": "新增",
+        "title": "新增自定義角色",
+        "roleName": "角色名稱",
+        "roleDesc": "角色描述",
+        "colPerCode": "權限代碼",
+        "colPerName": "權限名稱",
+        "colPerDesc": "權限描述",
         "status": "狀態",
         "selected": "已選擇",
         "notSelected": "未選擇"

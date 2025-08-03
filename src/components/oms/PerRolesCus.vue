@@ -4,6 +4,7 @@ import { storeToRefs } from 'pinia'
 import { useComPerRoleStore, useUserInfoStore, useValidComStore } from '@/stores'
 import type { ComRole } from '@/interfaces'
 import {computed, ref} from 'vue'
+import PerRolesCusAddRole from "@/components/oms/PerRolesCusAddRole.vue";
 
 const { t, locale } = useI18n()
 
@@ -11,9 +12,11 @@ const comPerRoleStore = useComPerRoleStore()
 const userInfoStore = useUserInfoStore()
 const validComStore = useValidComStore()
 const { cusRoles } = storeToRefs(comPerRoleStore)
-const { per0100, } = storeToRefs(userInfoStore)
+const { per1000, per0100 } = storeToRefs(userInfoStore)
 
 const comTaxNo = validComStore.currentCom.comTaxNo
+const perCreateRole = comTaxNo + '-oms-002-1000'
+const canCreateRole = computed(() => per1000.value.includes(perCreateRole))
 const perReadRolesUsers = comTaxNo + '-oms-003-0100'
 const canViewUsers = computed(() => per0100.value.includes(perReadRolesUsers))
 
@@ -26,6 +29,7 @@ const getRowKey = (row: ComRole) => {
 const selectedRole = ref<ComRole | null>(null)
 const drawerVisible = ref(false)
 const expandedRowKeys = ref<string[]>([])
+const isAddRoleDialogVisible = ref(false);
 
 // Handle row click to expand/collapse
 const handleRowClick = (row: ComRole) => {
@@ -38,6 +42,13 @@ const handleRowClick = (row: ComRole) => {
     expandedRowKeys.value = [rowKey]
   }
 }
+
+const addNewRoleDialog = () => {
+  isAddRoleDialogVisible.value = true;
+};
+const closeAddNewRoleDialog = () => {
+  isAddRoleDialogVisible.value = false;
+};
 
 const getRoleName = (row: ComRole) => {
   return locale.value === 'zh-TW' ? row.comRoleName : row.comRoleEngName
@@ -84,7 +95,18 @@ const showUsers = (row: ComRole) => {
 </script>
 
 <template>
-<!--  <h3>{{ t('comPerRoles.cusRoles.title') }}</h3>-->
+  <el-row justify="space-between" align="middle" class="page-header">
+    <el-col :span="20"></el-col>
+    <el-col :span="4" style="text-align: right;">
+      <el-button
+          v-if="canCreateRole"
+          type="success"
+          @click="addNewRoleDialog"
+      >
+        {{ t('comPerRoles.cusRoles.addCusRole.addBtn') }}
+      </el-button>
+    </el-col>
+  </el-row>
   <el-table
       :data="cusRoles"
       stripe
@@ -129,6 +151,7 @@ const showUsers = (row: ComRole) => {
       </template>
     </el-table-column>
   </el-table>
+  <per-roles-cus-add-role :visible="isAddRoleDialogVisible" @close="closeAddNewRoleDialog" />
 </template>
 
 <style scoped lang="scss">

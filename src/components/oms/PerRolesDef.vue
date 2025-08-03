@@ -87,7 +87,6 @@ const showUsers = (row: ComRole) => {
 </script>
 
 <template>
-<!--  <h3>{{ t('comPerRoles.defRoles.title') }}</h3>-->
   <el-table
       :data="defRoles"
       stripe
