@@ -60,9 +60,9 @@ const handleConfirm = async () => {
     })
     if (errno === '00000') {
       handleClose()
-      // await getSysRole()
-      // await getSysRoleUsers()
-      // await getSysUsers()
+      await getSysRole()
+      await getSysRoleUsers()
+      await getSysUsers()
 
       ElNotification({
         title: t('notice.noticeTitle'),
