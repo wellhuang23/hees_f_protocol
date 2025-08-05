@@ -18,6 +18,7 @@ const strUnitUsersStore = useStrUnitUsersStore()
 
 const comTaxNo = validComStore.currentCom.comTaxNo
 const perReadUserInfoCols = comTaxNo + '-oms-007-0100'
+const perUpdateUserInfoCol = comTaxNo + '-oms-007-0010'
 const perReadUsers = comTaxNo + '-oms-008-0100'
 const perCreateUser = comTaxNo + '-oms-008-1000'
 
@@ -90,7 +91,7 @@ onMounted(async () => {
   <div class="user-list-wrapper">
     <div class="refresh-button-container">
       <el-button
-          v-if="userInfo.per0100.includes(perReadUserInfoCols)"
+          v-if="userInfo.per0100.includes(perReadUserInfoCols) && userInfo.per0010.includes(perUpdateUserInfoCol)"
           class="refresh-button"
           @click="showUserInfoCols = true"
       >

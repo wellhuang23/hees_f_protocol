@@ -17,16 +17,6 @@ const { t } = useI18n()
 
 const drawerVisible = defineModel<boolean>('drawerVisible', { required: true })
 
-// Define a type for a unit group
-interface InfoColGroup {
-  colId: number;
-  colName: string;
-  colDesc: string;
-  colType: number;
-  colTypeName: string;
-  colRequire: boolean;
-}
-
 const userInfo = useUserInfoStore()
 const userInfoColsStore = useUserInfoColsStore()
 const validComStore = useValidComStore()
@@ -35,12 +25,12 @@ const comTaxNo = validComStore.currentCom.comTaxNo
 const perUpdateUserInfoCol = comTaxNo + '-oms-007-0010'
 const perDeleteUserInfoCol = comTaxNo + '-oms-007-0001'
 
-const { userInfoCols: infoCols } = storeToRefs(userInfoColsStore)
+const { userInfoCols } = storeToRefs(userInfoColsStore)
 
 const isDelSugDialogVisible = ref(false);
 
 // Reactive array for the unit groups
-const infoColGroups = ref<InfoColGroup[]>(infoCols.value);
+const infoColGroups = ref<UserInfoCol[]>(userInfoCols.value);
 
 const emits = defineEmits(['update:modelValue'])
 
@@ -97,7 +87,7 @@ const requireOptions = [
 // Reset fields on cancel
 const handleCancel = () => {
   drawerVisible.value = false
-  infoColGroups.value = infoCols.value
+  infoColGroups.value = userInfoCols.value
 }
 
 const deleteColId = ref<number>(0);
@@ -127,7 +117,7 @@ const handleConfirm = async () => {
       message: t('notice.updateUserInfoColsSuccessMsg'),
       type: 'success'
     });
-    infoColGroups.value = infoCols.value
+    infoColGroups.value = userInfoCols
     // drawerVisible.value = false
   } else if (res === '99006') {
     ElNotification({
@@ -205,7 +195,12 @@ onMounted(async () => {
           {{ t('general.delete') }}
         </el-button>
       </div>
-      <el-button type="default" @click="addUserInfoColGroup" style="width: 100%;">
+      <el-button
+          v-if="userInfo.per0001.includes(perUpdateUserInfoCol)"
+          type="default"
+          @click="addUserInfoColGroup"
+          style="width: 100%;"
+      >
         <el-icon :size="20">
           <img :src="PlusIcon" alt="AddGroup" style="width: 1em; height: 1em;" />
         </el-icon>
