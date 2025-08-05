@@ -1,4 +1,4 @@
-import { useUserInfoStore } from '@/stores'
+import {useUserInfoStore, useValidComStore} from '@/stores'
 import { storeToRefs } from 'pinia'
 import routerSysItems from '@/router/commons/sysItems.json'
 import routerOmsItems from '@/router/commons/omsItems.json'
@@ -10,7 +10,9 @@ interface AsideBarItem {
 
 export function getAsideBarSysItems() {
     const userInfoStore = useUserInfoStore()
-    const { per0100, comTaxNo } = storeToRefs(userInfoStore)
+    const { per0100 } = storeToRefs(userInfoStore)
+    const validComStore = useValidComStore()
+    const { currentCom } = storeToRefs(validComStore)
 
     const sysItem: {
         index: string,
@@ -53,7 +55,7 @@ export function getAsideBarSysItems() {
     for (const item of routerOmsItems) {
         for (const perCode of item.meta.perCodes) {
             if (!appendedOmsItemTitle.includes(item.meta.title)) {
-                if (per0100.value.includes(perCode.replace('xxxxxxxx', comTaxNo.value))) {
+                if (per0100.value.includes(perCode.replace('xxxxxxxx', currentCom.value.comTaxNo))) {
                     omsItem.children.push({
                         title: item.meta.title,
                         index: `/main/${item.path}`,
